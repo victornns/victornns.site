@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #f9fafb;
-  --foreground: #212121;
+  --background: #ffffff;
+  --foreground: #000000;
 }
 
 body {
@@ -12,13 +12,18 @@ body {
   background: var(--background);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: underline;
+}
+
+/* Remove dark mode preference */
 @media (prefers-color-scheme: dark) {
   body {
     color: var(--foreground) !important;
     background: var(--background) !important;
   }
-}
-
-html {
-  scroll-behavior: smooth;
 }

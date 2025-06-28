@@ -6,7 +6,7 @@ import "./globals.scss";
 const redHatDisplaySans = Red_Hat_Display({
   variable: "--font-red-hat-display",
   subsets: ["latin"],
-  weight: ["400", "600"]
+  weight: ["400", "600"],
 });
 
 export const metadata: Metadata = {
@@ -20,10 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" className={`${redHatDisplaySans.variable} antialiased`}>
-      <body>
-        {children}
-      </body>
+    <html lang="pt-BR" className={`${redHatDisplaySans.variable} antialiased`}>
+      <body>{children}</body>
     </html>
   );
 }
