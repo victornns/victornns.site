@@ -1,5 +1,11 @@
 import { Project } from '@/types/project';
 
+// Partners constants
+const AZA8_AGENCY = { name: 'Aza8 Agência Criativa 360', url: 'https://www.aza8.com.br/' };
+const GOOD_SPINE = { name: 'GoodSpine', url: 'https://loja.goodspine.com.br/' };
+const CAVE_DIGITAL = { name: 'Cave Digital', url: 'https://www.cavedigital.com' };
+const L4U_AGENCY = { name: 'Agência L4U', url: 'https://www.l4u.com.br' };
+
 export const projects: Project[] = [
   {
     slug: 'm2b-pro',
@@ -7,7 +13,7 @@ export const projects: Project[] = [
     description: 'CMS institucional desenvolvido com React e Strapi para a M2B.',
     tags: ['React.js', 'Next.js', 'TypeScript', 'Tailwind', 'Strapi', 'Node.js', 'AWS', 'Git', 'Clean Architecture'],
     link: 'https://www.m2bpro.com.br',
-    partner: { name: 'Aza8 Agência Criativa 360', url: 'https://www.aza8.com.br/' },
+    partner: AZA8_AGENCY,
     type: ['CMS', 'Website', 'Headless', 'Corporate Site'],
     date: '2021-08',
     thumbnail: '/projects/images/m2bpro-thumb.png',
@@ -19,7 +25,7 @@ export const projects: Project[] = [
     description: 'Site corporativo com CMS customizado em Vue.js e Strapi.',
     tags: ['Vue.js', 'TypeScript', 'Strapi', 'Tailwind', 'Node.js', 'Git', 'Performance', 'Clean Code'],
     link: 'https://www.kt.arq.br',
-    partner: { name: 'Aza8 Agência Criativa 360', url: 'https://www.aza8.com.br/' },
+    partner: AZA8_AGENCY,
     type: ['CMS', 'Corporate Site', 'Headless'],
     date: '2021-06',
     thumbnail: '/projects/images/kt-thumb.png',
@@ -31,7 +37,7 @@ export const projects: Project[] = [
     description: 'Landing page promocional focada em vendas de travesseiros ortopédicos.',
     tags: ['Vue.js', 'TypeScript', 'Tailwind', 'Sass', 'Git', 'UX', 'SEO', 'Landing Page'],
     link: 'https://travesseiro.goodspine.com.br',
-    partner: { name: 'Good Spine' },
+    partner: GOOD_SPINE,
     type: ['Landing Page', 'E-commerce', 'Performance'],
     date: '2021-04',
     thumbnail: '/projects/images/goodspine-thumb.png',
@@ -43,7 +49,7 @@ export const projects: Project[] = [
     description: 'Site institucional em WordPress com theme customizado.',
     tags: ['WordPress', 'PHP', 'JavaScript', 'Sass', 'Git', 'SEO', 'Responsive Design'],
     link: 'https://www.loopa.digital',
-    partner: { name: 'Cave Digital', url: 'https://www.cavedigital.com' },
+    partner: CAVE_DIGITAL,
     type: ['CMS', 'Website', 'Corporate Site'],
     date: '2019-03',
     thumbnail: '/projects/images/loopa-thumb.png',
@@ -55,7 +61,7 @@ export const projects: Project[] = [
     description: 'Site institucional com CMS em WordPress para um dos ícones de SP.',
     tags: ['WordPress', 'PHP', 'JavaScript', 'Sass', 'SEO', 'Performance', 'Accessibility'],
     link: 'https://www.galeriadorock.com.br',
-    partner: { name: 'Cave Digital', url: 'https://www.cavedigital.com' },
+    partner: CAVE_DIGITAL,
     type: ['CMS', 'Website', 'Corporate Site'],
     date: '2019-02',
     thumbnail: '/projects/images/galeria-rock-thumb.png',
@@ -67,7 +73,7 @@ export const projects: Project[] = [
     description: 'Blog autoral com layout elegante e responsivo em WordPress.',
     tags: ['WordPress', 'PHP', 'JavaScript', 'Sass', 'SEO', 'Performance', 'Blog', 'Accessibility'],
     link: 'https://www.juliaocoelho.com.br',
-    partner: { name: 'Cave Digital', url: 'https://www.cavedigital.com' },
+    partner: CAVE_DIGITAL,
     type: ['Blog', 'CMS', 'Personal Branding'],
     date: '2018-11',
     thumbnail: '/projects/images/juliao-coelho-thumb.png',
@@ -78,7 +84,7 @@ export const projects: Project[] = [
     title: 'Covabra Supermercados',
     description: 'Landing page promocional para rede de supermercados Covabra.',
     tags: ['JavaScript', 'Node.js', 'Gulp', 'Sass', 'BemCSS', 'Git', 'Performance', 'Landing Page'],
-    partner: { name: 'Cave Digital', url: 'https://www.cavedigital.com' },
+    partner: CAVE_DIGITAL,
     type: ['Landing Page', 'Campaign Site'],
     date: '2018-09',
     thumbnail: '/projects/images/covabra-supermercados-thumb.png',
@@ -90,7 +96,7 @@ export const projects: Project[] = [
     description: 'Landing page corporativa para serviços corporativos da UNIC.',
     tags: ['JavaScript', 'Node.js', 'Gulp', 'Sass', 'BemCSS', 'Git', 'Performance', 'UX'],
     link: 'https://www.unic-corporativos.com.br',
-    partner: { name: 'Cave Digital', url: 'https://www.cavedigital.com' },
+    partner: CAVE_DIGITAL,
     type: ['Landing Page', 'Corporate Site'],
     date: '2018-08',
     thumbnail: '/projects/images/unic-thumb.png',
@@ -102,7 +108,7 @@ export const projects: Project[] = [
     description: 'Landing page dinâmica com animações e foco em performance.',
     tags: ['Vue.js', 'Node.js', 'Pug.js', 'CSS animations', 'Webpack', 'Git', 'UX', 'Performance'],
     link: 'https://www.metlycs.com.br',
-    partner: { name: 'Agência L4U', url: 'https://www.l4u.com.br' },
+    partner: L4U_AGENCY,
     type: ['Landing Page', 'Animated Site', 'Campaign Site'],
     date: '2018-03',
     thumbnail: '/projects/images/metlycs-thumb.png',
@@ -114,7 +120,7 @@ export const projects: Project[] = [
     description: 'Website institucional desenvolvido para Constelação DVL.',
     tags: ['JavaScript', 'Node.js', 'Heroku', 'Sass', 'BemCSS', 'Git', 'SEO', 'Performance'],
     link: 'https://www.constelacaodvl.com.br',
-    partner: { name: 'Agência L4U', url: 'https://www.l4u.com.br' },
+    partner: L4U_AGENCY,
     type: ['Website', 'Corporate Site'],
     date: '2018-01',
     thumbnail: '/projects/images/constelacao-dvl-thumb.png',
@@ -126,7 +132,7 @@ export const projects: Project[] = [
     description: 'Portal em WordPress para divulgação de franquias.',
     tags: ['WordPress', 'PHP', 'JavaScript', 'Sass', 'SEO', 'Performance', 'CMS'],
     link: 'https://www.franquiadia.com.br',
-    partner: { name: 'Agência L4U', url: 'https://www.l4u.com.br' },
+    partner: L4U_AGENCY,
     type: ['CMS', 'Corporate Site'],
     date: '2017-10',
     thumbnail: '/projects/images/franquia-dia-thumb.png',

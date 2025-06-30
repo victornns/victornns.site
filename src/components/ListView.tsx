@@ -9,11 +9,13 @@ interface ListViewProps {
 export function ListView({ title, description, children }: ListViewProps) {
   return (
     <section>
-      <header>
-        <h2>{title}</h2>
-        {description && <p>{description}</p>}
-      </header>
-      <ul className="flex flex-col gap-5">{children}</ul>
+      <div className="container">
+        <header className="mb-10">
+          <h2 className="text-5xl font-bold mb-3">{title}</h2>
+          {description && <p>{description}</p>}
+        </header>
+        <ul>{children}</ul>
+      </div>
     </section>
   );
 }

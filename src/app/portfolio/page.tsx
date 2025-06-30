@@ -3,27 +3,43 @@ import { ListView } from "@/components/ListView";
 import { projects } from "@/data/projects";
 import { ProjectItem } from "@/components/ProjectItem";
 
+import { experiences } from "@/data/experiences";
+import { ExperienceItem } from "@/components/ExperienceItem";
+
 export default function Portfolio() {
   return (
-    <>
-      <div className="container">
-        <section className="mb-10">
-          <h1 className="mb-5">Front-end Developer | 8+ anos em Web | React, Next.js, Vue, TypeScript, Tailwind | SSR/SSG, APIs, UI Thinking e Performance</h1>
-          <div>
-            <p>Desenvolvedor front-end e entusiasta da criação de experiências digitais.</p>
-            <p>8+ anos de experiência em projetos web, atuo na construção de interfaces performáticas e alinhadas ao produto, além de colaborar em decisões técnicas e arquitetura.</p>
-            <p>Também atuo como full-stack freelancer, conduzindo projetos sob demanda do levantamento de requisitos à entrega final, com autonomia técnica e colaboração com parceiros e equipes externas.</p>
+    <main className="flex flex-col gap-16 py-16">
+      <section>
+        <div className="container">
+          <header className="mb-5">
+            <h1 className="text-2xl">
+              Victor Nascimento,
+              <br />
+              desenvolvedor front-end com 8+ anos de experiência em projetos web.
+            </h1>
+          </header>
+          <div className="text-xl">
+            <p>Atuo na construção de interfaces web, além de colaborar em decisões técnicas e arquitetura.</p>
+            <p>Também atuo como full-stack freelancer, conduzindo projetos sob demanda com parceiros e equipes externas.</p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <ListView title="Projetos" description="Magni facere officia ad ut, sequi nulla eius vero, sunt expedita deleniti esse hic fugit exercitationem iure laborum rerum, rem id vel.">
-          {projects.map((project) => (
-            <li key={project.slug}>
-              <ProjectItem data={project} />
-            </li>
-          ))}
-        </ListView>
-      </div>
-    </>
+      <ListView title="Experiência" description="Histórico profissional">
+        {experiences.map((experience) => (
+          <li key={experience.slug}>
+            <ExperienceItem data={experience} />
+          </li>
+        ))}
+      </ListView>
+
+      <ListView title="Trabalhos Recentes" description="Uma seleção de projetos">
+        {projects.map((project) => (
+          <li key={project.slug}>
+            <ProjectItem data={project} />
+          </li>
+        ))}
+      </ListView>
+    </main>
   );
 }
