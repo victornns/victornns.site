@@ -8,20 +8,18 @@ import { ExperienceItem } from "@/components/ExperienceItem";
 
 export default function Portfolio() {
   return (
-    <main className="flex flex-col gap-16 py-16">
+    <main className="flex flex-col gap-16 py-16 px-6 md:px-12">
       <section>
-        <div className="container">
-          <header className="mb-5">
-            <h1 className="text-2xl">
-              Victor Nascimento,
-              <br />
-              desenvolvedor front-end com 8+ anos de experiência em projetos web.
-            </h1>
-          </header>
-          <div className="text-xl">
-            <p>Atuo na construção de interfaces web, além de colaborar em decisões técnicas e arquitetura.</p>
-            <p>Também atuo como full-stack freelancer, conduzindo projetos sob demanda com parceiros e equipes externas.</p>
-          </div>
+        <header className="mb-5">
+          <h1 className="text-2xl">
+            Victor Nascimento,
+            <br />
+            desenvolvedor front-end com 8+ anos de experiência em projetos web.
+          </h1>
+        </header>
+        <div className="text-xl">
+          <p>Atuo na construção de interfaces web, além de colaborar em decisões técnicas e arquitetura.</p>
+          <p>Também atuo como full-stack freelancer, conduzindo projetos sob demanda com parceiros e equipes externas.</p>
         </div>
       </section>
 
