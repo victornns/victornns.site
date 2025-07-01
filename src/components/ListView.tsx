@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
+import { UISectionHeader } from "./ui/UISectionHeader";
 
 interface ListViewProps {
-  title: string;
+  title?: string;
   description?: string;
   children: ReactNode;
 }
@@ -9,10 +10,7 @@ interface ListViewProps {
 export function ListView({ title, description, children }: ListViewProps) {
   return (
     <section>
-      <header className="mb-8">
-        <h2 className="text-5xl font-bold mb-3">{title}</h2>
-        {description && <p>{description}</p>}
-      </header>
+      <UISectionHeader title={title} description={description} />
       <ul>{children}</ul>
     </section>
   );

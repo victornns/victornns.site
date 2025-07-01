@@ -1,5 +1,5 @@
 import { Experience } from "@/types/experience";
-import { UIDate, UITitle, UICompany, UIDescription } from "@/components/ui";
+import { UIDate, UITitle, UIDescription } from "@/components/ui";
 
 interface ExperienceItemProps {
   data: Experience;
@@ -7,10 +7,13 @@ interface ExperienceItemProps {
 
 export function ExperienceItem({ data }: ExperienceItemProps) {
   return (
-    <div className="flex flex-col">
+    <div>
       <UIDate date={data.date} />
-      <UITitle title={data.title} />
-      <UICompany company={data.company} />
+      <div>
+        <UITitle title={data.title} />
+        <span className="mx-1 inline-block">@</span>
+        <UITitle title={data.company.name} link={data.company.url} />
+      </div>
       {data.description && <UIDescription description={data.description} />}
     </div>
   );
