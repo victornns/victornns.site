@@ -7,27 +7,38 @@
   --foreground: #000000;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  @screen lg {
+    html {
+      font-size: 18px;
+    }
+  }
 
-a {
-  text-decoration: underline;
-}
+  @screen 2xl {
+    html {
+      font-size: 20px;
+    }
+  }
 
-li {
-  @apply border-b-[1px] py-4;
-}
-
-/* Remove dark mode preference */
-@media (prefers-color-scheme: dark) {
   body {
-    color: var(--foreground) !important;
-    background: var(--background) !important;
+    color: var(--foreground);
+    background: var(--background);
+  }
+
+  li {
+    @apply border-b-[1px] py-4;
+  }
+
+  /* Remove dark mode preference */
+  @media (prefers-color-scheme: dark) {
+    body {
+      color: var(--foreground) !important;
+      background: var(--background) !important;
+    }
   }
 }
