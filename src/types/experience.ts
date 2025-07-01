@@ -1,8 +1,10 @@
 export interface Experience {
   slug: string;
   title: string;
-  company: string;
+  company: {
+    name: string;
+    url?: string;
+  };
   date: string;
-  endDate?: string;
   description?: string;
 }
