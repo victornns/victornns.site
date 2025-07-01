@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { UILink } from "./UILink";
 
 interface UITitleProps {
   title: string;
@@ -6,15 +6,5 @@ interface UITitleProps {
 }
 
 export function UITitle({ title, link }: UITitleProps) {
-  const titleElement = <h3 className="font-medium text-lg">{title}</h3>;
-
-  if (link) {
-    return (
-      <Link href={link} target="_blank" rel="noopener noreferrer">
-        {titleElement}
-      </Link>
-    );
-  }
-
-  return titleElement;
+  return <UILink displayName={title} link={link} className="font-semibold" />;
 }

@@ -3,5 +3,5 @@ interface UIDescriptionProps {
 }
 
 export function UIDescription({ description }: UIDescriptionProps) {
-  return <p className="text-base max-w-screen-lg">{description}</p>;
+  return <p className="max-w-screen-lg text-sm">{description}</p>;
 }

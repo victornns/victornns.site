@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { UILink } from "./UILink";
 
 interface UIPartnerProps {
   name: string;
@@ -10,14 +10,7 @@ interface UIPartnerProps {
 export function UIPartner({ name, url, prefix = "Parceiro:", className }: UIPartnerProps) {
   return (
     <p className={className}>
-      {prefix}{" "}
-      {url ? (
-        <Link href={url} target="_blank" rel="noopener noreferrer">
-          {name}
-        </Link>
-      ) : (
-        name
-      )}
+      {prefix} {url ? <UILink displayName={name} link={url} /> : name}
     </p>
   );
 }

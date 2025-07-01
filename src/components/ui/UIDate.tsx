@@ -3,5 +3,5 @@ interface UIDateProps {
 }
 
 export function UIDate({ date }: UIDateProps) {
-  return <p className="lowercase text-sm font-light">{date}</p>;
+  return <p className="lowercase font-light text-xs">{date}</p>;
 }
