@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${redHatDisplaySans.variable} antialiased font-`}>
+    <html lang="pt-BR" className={`${redHatDisplaySans.variable} antialiased`}>
       <body>{children}</body>
     </html>
   );
