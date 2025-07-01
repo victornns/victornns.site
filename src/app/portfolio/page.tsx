@@ -16,8 +16,8 @@ export default function Portfolio() {
     <main className="flex flex-col gap-16 py-16 px-6 md:px-12">
       <section>
         <UISectionHeader title="Victor Nascimento" description="Desenvolvedor front-end com 8+ anos de experiência em projetos web." />
-        <p>Atuo na construção de interfaces web, além de colaborar em decisões técnicas e arquitetura.</p>
-        <p>Também atuo como full-stack freelancer, conduzindo projetos sob demanda com parceiros e equipes externas.</p>
+        <p className="italic">Atuo na construção de interfaces web, além de colaborar em decisões técnicas e arquitetura.</p>
+        <p className="italic">Também atuo como full-stack freelancer, conduzindo projetos sob demanda com parceiros e equipes externas.</p>
       </section>
 
       <ListView title="Experiências" description="Histórico profissional">
