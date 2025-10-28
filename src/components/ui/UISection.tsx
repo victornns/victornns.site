@@ -4,7 +4,7 @@ type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
 interface HeadingSectionProps {
   level: HeadingLevel;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 function HeadingSection({ level, children }: HeadingSectionProps) {
@@ -28,7 +28,7 @@ interface UISectionProps {
 export function UISection({ title, headingLevel = 2, description, children }: UISectionProps) {
   return (
     <section>
-      <header className="mb-8">
+      <header className={children ? "mb-8" : ""}>
         <HeadingSection level={headingLevel}>{title}</HeadingSection>
         {description && <p>{description}</p>}
       </header>

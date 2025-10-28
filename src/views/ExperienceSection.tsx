@@ -11,7 +11,7 @@ export function ExperienceSection() {
           <li key={experience.id}>
             <UICard.Root>
               <UICard.Label>
-                {experience.period.start} {experience.period.end && `- ${experience.period.start}`}
+                {experience.period.start} {experience.period.end && `- ${experience.period.end}`}
               </UICard.Label>
               <UICard.Title>
                 {experience.role} @ {experience.organizationId}
