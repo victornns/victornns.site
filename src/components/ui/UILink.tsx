@@ -8,7 +8,7 @@ interface UILinkProps extends LinkProps {
 
 export function UILink({ children, href, target = "_blank", ...linkProps }: UILinkProps) {
   return (
-    <Link href={href} target={target} {...linkProps}>
+    <Link href={href} target={target} rel={target === "_blank" ? "noopener noreferrer" : undefined} {...linkProps}>
       <span className="underline bg-gray-100">{children}</span>
     </Link>
   );

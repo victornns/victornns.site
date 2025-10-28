@@ -4,7 +4,7 @@ export type OrganizationType = {
     full: string;
     display: string;
   };
-  link?: string;
+  link: string;
 };
 
 export const organizations = [
@@ -20,7 +20,7 @@ export const organizations = [
     id: "aza8-agency",
     name: {
       full: "Aza8 Agência Criativa 360",
-      display: "Aza8",
+      display: "Agência Aza8",
     },
     link: "https://www.aza8.com.br/",
   },
@@ -28,7 +28,7 @@ export const organizations = [
     id: "one-digital-agency",
     name: {
       full: "Agência One Digital",
-      display: "One Digital",
+      display: "Agência One Digital",
     },
     link: "https://www.one.com.br/",
   },
@@ -36,7 +36,7 @@ export const organizations = [
     id: "cave-digital-agency",
     name: {
       full: "Agência Cave Digital",
-      display: "Cave Digital",
+      display: "Agência Cave Digital",
     },
     link: "https://www.cavedigital.com",
   },
@@ -44,7 +44,7 @@ export const organizations = [
     id: "profit-e-agency",
     name: {
       full: "Agência Profit-e E-commerce Solutions",
-      display: "Profit-e",
+      display: "Agência Profit-e",
     },
     link: "https://www.profite.com.br/",
   },
@@ -52,7 +52,7 @@ export const organizations = [
     id: "l4u-agency",
     name: {
       full: "Agência L4U - Loading For You",
-      display: "L4U",
+      display: "Agência L4U",
     },
     link: "https://www.l4u.com.br/",
   },

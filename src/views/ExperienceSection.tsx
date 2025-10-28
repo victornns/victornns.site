@@ -2,6 +2,7 @@ import { experiences } from "@/content/experiences";
 
 import { UISection } from "@/components/ui/UISection";
 import { UICard } from "@/components/ui/UICard";
+import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
 
 export function ExperienceSection() {
   return (
@@ -14,7 +15,7 @@ export function ExperienceSection() {
                 {experience.period.start} {experience.period.end && `- ${experience.period.end}`}
               </UICard.Label>
               <UICard.Title>
-                {experience.role} @ {experience.organizationId}
+                {experience.role} @ <OrganizationDisplayName id={experience.organizationId} />
               </UICard.Title>
               <p className="max-w-screen-lg text-sm">{experience.summary}</p>
             </UICard.Root>
