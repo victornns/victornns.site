@@ -17,10 +17,6 @@
     background: var(--background);
   }
 
-  li {
-    @apply border-b-[1px] py-4;
-  }
-
   /* Remove dark mode preference */
   @media (prefers-color-scheme: dark) {
     body {

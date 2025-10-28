@@ -1,0 +1,26 @@
+import { experiences } from "@/content/experiences";
+
+import { UISection } from "@/components/ui/UISection";
+import { UICard } from "@/components/ui/UICard";
+
+export function ExperienceSection() {
+  return (
+    <UISection title="Experiências" description="Histórico profissional">
+      <ul>
+        {experiences.map((experience) => (
+          <li key={experience.id}>
+            <UICard.Root>
+              <UICard.Label>
+                {experience.period.start} {experience.period.end && `- ${experience.period.start}`}
+              </UICard.Label>
+              <UICard.Title>
+                {experience.role} @ {experience.organizationId}
+              </UICard.Title>
+              <p className="max-w-screen-lg text-sm">{experience.summary}</p>
+            </UICard.Root>
+          </li>
+        ))}
+      </ul>
+    </UISection>
+  );
+}
