@@ -1,5 +1,8 @@
 import { UISection } from "@/components/ui/UISection";
+import { TOKENS } from "@/lib/constants";
 
 export function AboutSection() {
-  return <UISection title="Dev" headingLevel={1} description="Desenvolvedor front-end • 10+ anos em Web • São Paulo, Brasil • Remoto" />;
+  const details = ["Victor Nascimento N. Silva", "Desde 1995", "São Paulo, Brasil", "Full-Stack Web Developer", "10+ anos em Web", "Remoto"].join(TOKENS.separator.weak);
+
+  return <UISection title="Dev" headingLevel={1} description={details} />;
 }

@@ -1,4 +1,5 @@
 import { experiences } from "@/content/experiences";
+import { TOKENS } from "@/lib/constants";
 
 import { UISection } from "@/components/ui/UISection";
 import { UICard } from "@/components/ui/UICard";
@@ -12,7 +13,13 @@ export function ExperienceSection() {
           <li key={experience.id}>
             <UICard.Root>
               <UICard.Label>
-                {experience.period.start} {experience.period.end && `- ${experience.period.end}`}
+                {experience.period.start}
+                {experience.period.end && (
+                  <>
+                    {TOKENS.separator.default}
+                    {experience.period.end}
+                  </>
+                )}
               </UICard.Label>
               <UICard.Title>
                 {experience.role} @ <OrganizationDisplayName id={experience.organizationId} />

@@ -1,4 +1,5 @@
 import { projects } from "@/content/projects";
+import { TOKENS } from "@/lib/constants";
 
 import { UISection } from "@/components/ui/UISection";
 import { UICard } from "@/components/ui/UICard";
@@ -13,10 +14,12 @@ export function ProjectsSection() {
           <li key={project.id}>
             <UICard.Root>
               <UICard.Label>
-                {project.date}{" "}
+                {project.date}
                 {project.organizationId && (
                   <>
-                    Design: <OrganizationDisplayName id={project.organizationId} />
+                    {TOKENS.separator.default}
+                    {"Design: "}
+                    <OrganizationDisplayName id={project.organizationId} />
                   </>
                 )}
               </UICard.Label>

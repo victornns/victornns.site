@@ -12,8 +12,8 @@ export const contacts: Contact[] = [
     id: "email",
     label: "E-mail",
     link: {
-      display: "contato@victornns.com",
-      href: "mailto:contato@victornns.com",
+      display: "victor.nascimento.ns@gmail.com",
+      href: "mailto:victor.nascimento.ns@gmail.com",
     },
   },
   {
