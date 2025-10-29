@@ -1,11 +1,6 @@
-import type { Metadata } from "next";
-
 import "./globals.scss";
 
-export const metadata: Metadata = {
-  title: "",
-  description: "",
-};
+export { metadata } from "@/content/metadata";
 
 export default function RootLayout({
   children,
