@@ -1,8 +1,11 @@
 export const TOKENS = {
   separator: {
     default: " / ",
-    strong: " | ",
-    weak: " • ",
+    bullet: " • ",
     list: ", ",
+    dash: " - ",
   },
-};
+  layout: {
+    maxWidth: "1440px",
+  },
+} as const;

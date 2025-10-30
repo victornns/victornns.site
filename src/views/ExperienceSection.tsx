@@ -1,9 +1,22 @@
-import { experiences } from "@/content/experiences";
+import { experiences, Experience } from "@/content/experiences";
 import { TOKENS } from "@/lib/constants";
 
 import { UISection } from "@/components/ui/UISection";
 import { UICard } from "@/components/ui/UICard";
 import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
+
+const formatPeriod = (period: Experience["period"]) => {
+  const startDate = period.start;
+  const endDate = period.end || "Atualmente";
+  const separator = TOKENS.separator.dash;
+
+  return `${startDate}${separator}${endDate}`;
+};
+
+const renderTechnologies = (technologies: Experience["technologies"]) => {
+  const technologiesList = technologies.join(TOKENS.separator.list);
+  return <p className="text-xs mt-4">Principais tecnologias: {technologiesList}</p>;
+};
 
 export function ExperienceSection() {
   return (
@@ -12,19 +25,12 @@ export function ExperienceSection() {
         {experiences.map((experience) => (
           <li key={experience.id}>
             <UICard.Root>
-              <UICard.Label>
-                {experience.period.start}
-                {experience.period.end && (
-                  <>
-                    {TOKENS.separator.default}
-                    {experience.period.end}
-                  </>
-                )}
-              </UICard.Label>
+              <UICard.Label>{formatPeriod(experience.period)}</UICard.Label>
               <UICard.Title>
-                {experience.role} @ <OrganizationDisplayName id={experience.organizationId} />
+                {experience.role} @ <OrganizationDisplayName id={experience.organizationId} className="italic" />
               </UICard.Title>
-              <p className="max-w-screen-lg text-sm">{experience.summary}</p>
+              <UICard.Paragraphs data={experience.summary} />
+              {renderTechnologies(experience.technologies)}
             </UICard.Root>
           </li>
         ))}

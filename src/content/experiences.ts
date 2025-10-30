@@ -20,7 +20,10 @@ export const experiences: Experience[] = [
     period: {
       start: "Out.2023",
     },
-    summary: ["Desenvolvimento no time de front-end da Bespoke One.bra (Leo Burnett), alocado diretamente no cliente Bradesco, com responsabilidade para a construção de sistemas de componentes e padronização técnica."],
+    summary: [
+      "Desenvolvimento no time de front-end da Bespoke One.bra (Leo Burnett), alocado diretamente no cliente Bradesco, com responsabilidade para a construção de sistemas de componentes e padronização técnica.",
+      "Contribuição direta na criação de um design system para e-mails do Bradesco, definindo padrões de codificação, estrutura visual e testes de renderização entre diferentes dispositivos e clientes.",
+    ],
     technologies: ["SSR/SSG", "TypeScript", "React.js", "Next.js", "Node.js", "ES6+", "Design System", "Tailwind CSS", "Figma", "GraphQL", "API REST", "Vue.js", "Acessibilidade digital", "Web Performance"],
   },
   {
@@ -31,7 +34,10 @@ export const experiences: Experience[] = [
       start: "Jun.2019",
       end: "Out.2023",
     },
-    summary: ["Atuei no time de interface com foco em performance, responsividade, acessibilidade e fidelidade visual (pixel perfect). Desenvolvi sites institucionais, landing pages, e-mails marketing e CMSs personalizados para diferentes clientes da agência."],
+    summary: [
+      "Atuei no time de interface com foco em performance, responsividade, acessibilidade e fidelidade visual (pixel perfect). Desenvolvi sites institucionais, landing pages, e-mails marketing e CMSs personalizados para diferentes clientes da agência.",
+      "Trabalhei em times ágeis com CI/CD já estruturado, contribuindo na organização de componentes, integração com APIs e na entrega de soluções digitais.",
+    ],
     technologies: ["SSR/SSG", "Vue.js", "Nuxt.js", "Node.js", "JavaScript (ES6+)", "React.js", "Next.js", "Tailwind CSS", "API REST", "GraphQL", "Strapi CMS", "PostgreSQL", "E-mails em HTML", "Axios", "Web Performance", "Figma"],
   },
   {
@@ -61,10 +67,10 @@ export const experiences: Experience[] = [
     role: "Front-end Developer Jr. | Sites, E-mails e Plataforma Web",
     organizationId: "l4u-agency",
     period: {
-      start: "2016",
-      end: "2018",
+      start: "Set.2016",
+      end: "Abr.2018",
     },
-    summary: ["Criação de sites institucionais, e-mails marketing e landing pages. Também trabalhei em projetos legados e na plataforma Metlycs, realizando testes, ajustes e melhorias contínuas."],
+    summary: ["Criação de sites institucionais, e-mails marketing e landing pages. Também trabalhei em projetos legados e na plataforma Metlycs, realizando testes, ajustes e melhorias contínuas.", "Envolvimento direto com ferramentas de versionamento e containers para desenvolvimento e deploy."],
     technologies: ["HTML5", "CSS3", "CSS Animations", "SASS", "BEMCSS", "OOCSS", "JavaScript", "WordPress", "Node.js", "Servidor Apache", "Docker", "Git", "GitLab", "Heroku", "Linux (Debian-based)"],
   },
 ];

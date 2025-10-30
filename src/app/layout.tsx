@@ -1,3 +1,5 @@
+import { TOKENS } from "@/lib/constants";
+
 import "./globals.scss";
 
 export { metadata } from "@/content/metadata";
@@ -9,7 +11,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className="antialiased">
-      <body>{children}</body>
+      <body style={{ maxWidth: TOKENS.layout.maxWidth }}>{children}</body>
     </html>
   );
 }

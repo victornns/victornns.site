@@ -1,13 +1,17 @@
 import { organizationsById, type OrganizationId } from "@/content/organizations";
-import { UILink } from "./ui/UILink";
 
 type OrganizationDisplayNameProps = {
   id: OrganizationId;
+  className?: string;
 };
 
-export function OrganizationDisplayName({ id }: OrganizationDisplayNameProps) {
-  const org = organizationsById[id];
-  if (!org) return null;
-
-  return <UILink href={org.link}>{org.name.display}</UILink>;
+export function OrganizationDisplayName({ id, className }: OrganizationDisplayNameProps) {
+  const organization = organizationsById[id];
+  return (
+    organization && (
+      <>
+        <span className={className}>{organization.name.display}</span>
+      </>
+    )
+  );
 }

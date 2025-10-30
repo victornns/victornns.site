@@ -7,6 +7,6 @@ const APP_DOMAIN = "https://www.victornns.com/";
 
 export const metadata: Metadata = {
   title: DEV_NAME,
-  description: about.description.join(TOKENS.separator.weak),
+  description: about.description.join(TOKENS.separator.bullet),
   metadataBase: new URL(APP_DOMAIN),
 };

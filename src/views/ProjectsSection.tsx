@@ -1,10 +1,21 @@
-import { projects } from "@/content/projects";
+import { projects, Project } from "@/content/projects";
 import { TOKENS } from "@/lib/constants";
 
 import { UISection } from "@/components/ui/UISection";
 import { UICard } from "@/components/ui/UICard";
 import { UILink } from "@/components/ui/UILink";
 import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
+
+function renderDesignCredit(organizationId?: Project["organizationId"]) {
+  const separator = TOKENS.separator.default;
+  return (
+    organizationId && (
+      <>
+        {separator} Design: <OrganizationDisplayName id={organizationId} />
+      </>
+    )
+  );
+}
 
 export function ProjectsSection() {
   return (
@@ -15,18 +26,12 @@ export function ProjectsSection() {
             <UICard.Root>
               <UICard.Label>
                 {project.date}
-                {project.organizationId && (
-                  <>
-                    {TOKENS.separator.default}
-                    {"Design: "}
-                    <OrganizationDisplayName id={project.organizationId} />
-                  </>
-                )}
+                {renderDesignCredit(project.organizationId)}
               </UICard.Label>
               <UICard.Title>
                 <UILink href={project.link}>{project.title}</UILink>
               </UICard.Title>
-              <p className="max-w-screen-lg text-sm">{project.summary}</p>
+              <UICard.Paragraphs data={project.summary} />
             </UICard.Root>
           </li>
         ))}
