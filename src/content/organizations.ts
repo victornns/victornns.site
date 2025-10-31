@@ -25,6 +25,14 @@ export const organizations = [
     link: "https://www.aza8.com.br/",
   },
   {
+    id: "ministerio-publico-sp",
+    name: {
+      full: "Ministério Público do Estado de São Paulo",
+      display: "Ministério Público SP",
+    },
+    link: "https://www.mpsp.mp.br/",
+  },
+  {
     id: "one-digital-agency",
     name: {
       full: "Agência One Digital",
