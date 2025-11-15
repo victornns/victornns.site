@@ -5,5 +5,5 @@ interface UICardRootProps {
 }
 
 export const UICardRoot = function ({ children }: UICardRootProps) {
-  return <div className="border-b-[1px] py-4">{children}</div>;
+  return <div className="border-b-[1px] py-5">{children}</div>;
 };
