@@ -15,7 +15,7 @@ const formatPeriod = (period: Experience["period"]) => {
 
 const renderTechnologies = (technologies: Experience["technologies"]) => {
   const technologiesList = technologies.join(TOKENS.separator.list);
-  return <p className="text-xs">Principais tecnologias: {technologiesList}</p>;
+  return <p className="text-xs mt-6">Principais tecnologias: {technologiesList}</p>;
 };
 
 export function ExperienceSection() {
@@ -29,6 +29,7 @@ export function ExperienceSection() {
               <UICard.Title>
                 {experience.role} @ <OrganizationDisplayName id={experience.organizationId} className="italic" />
               </UICard.Title>
+              <UICard.Paragraphs data={experience.summary} />
               {renderTechnologies(experience.technologies)}
             </UICard.Root>
           </li>

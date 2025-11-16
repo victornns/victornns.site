@@ -10,7 +10,7 @@ export function ContactsSection() {
       <ul>
         {contacts.map((contact) => (
           <li key={contact.id}>
-            <UICard.Root>
+            <UICard.Root spacing="compact">
               <span>{contact.label}: </span>
               <UILink href={contact.link.href}>{contact.link.display}</UILink>
             </UICard.Root>

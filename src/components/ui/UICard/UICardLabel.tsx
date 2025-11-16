@@ -5,5 +5,5 @@ interface UICardLabelProps {
 }
 
 export const UICardLabel = function ({ children }: UICardLabelProps) {
-  return <p className="capitalize font-light text-sm">{children}</p>;
+  return <p className="font-light text-xs">{children}</p>;
 };
