@@ -15,7 +15,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: "one-bra-frontend-developer",
-    role: "Frontend Developer Pl. | UI Architecture, Design Systems e Performance Web",
+    role: "Frontend Developer | UI Architecture, Design Systems e Performance Web",
     organizationId: "one-bra-agency",
     period: {
       start: "Out.2023",
@@ -25,7 +25,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "one-digital-frontend-developer",
-    role: "Front-end Developer Pl. | Projetos Web, CMS e Performance",
+    role: "Front-end Developer | Projetos Web, CMS e Performance",
     organizationId: "one-digital-agency",
     period: {
       start: "Jun.2019",
@@ -36,7 +36,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "cave-digital-frontend-developer",
-    role: "Front-end Developer Jr. | Aplicações híbridas e CMS customizados",
+    role: "Front-end Developer | Aplicações híbridas e CMS customizados",
     organizationId: "cave-digital-agency",
     period: {
       start: "Ago.2018",
@@ -47,7 +47,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "profit-e-frontend-developer",
-    role: "Front-end Developer Jr. | E-commerce em VTEX",
+    role: "Front-end Developer | E-commerce em VTEX",
     organizationId: "profit-e-agency",
     period: {
       start: "Jun.2018",
@@ -58,7 +58,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "l4u-frontend-developer",
-    role: "Front-end Developer Jr. | Sites, E-mails e Plataforma Web",
+    role: "Front-end Developer | Sites, E-mails e Plataforma Web",
     organizationId: "l4u-agency",
     period: {
       start: "Set.2016",
