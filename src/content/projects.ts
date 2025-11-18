@@ -20,6 +20,7 @@ export interface Project {
   technologies?: string[];
   type?: ProjectKind[];
   featured?: boolean;
+  highlight?: boolean;
 }
 
 export const projects: Project[] = [
@@ -45,6 +46,7 @@ export const projects: Project[] = [
     summary: ["Landing page institucional com Vue.js, focada em SEO, performance e responsividade."],
     technologies: ["Vue.js", "JavaScript", "Sass", "Node.js", "Git", "SEO", "Performance", "Responsive Design"],
     type: ["Landing Page", "Site Institucional"],
+    highlight: true,
   },
   {
     id: "landing-page-vpl-protecao-veicular",
@@ -65,6 +67,7 @@ export const projects: Project[] = [
     summary: ["Site corporativo desenvolvido em React e Next.js, com múltiplas páginas institucionais, foco em performance, acessibilidade e SEO."],
     technologies: ["React.js", "Next.js", "TypeScript", "Tailwind", "Node.js", "Vercel", "Git", "SEO", "Accessibility", "Performance"],
     type: ["Site Corporativo", "CMS"],
+    highlight: true,
   },
   {
     id: "cms-artec-revestimentos",
@@ -75,6 +78,7 @@ export const projects: Project[] = [
     summary: ["CMS corporativo em Vue.js, Nuxt e Strapi com catálogo de produtos, blog e painel administrativo headless."],
     technologies: ["Vue.js", "Nuxt.js", "TypeScript", "Tailwind", "Strapi", "Node.js", "API REST", "Git", "Performance"],
     type: ["CMS", "Site Corporativo", "Headless CMS"],
+    highlight: true,
   },
   {
     id: "cms-institucional-para-m2b-pro",
@@ -86,6 +90,7 @@ export const projects: Project[] = [
     technologies: ["React.js", "Next.js", "TypeScript", "Tailwind", "Strapi", "Node.js", "AWS", "Git", "Clean Architecture"],
     type: ["CMS", "Site Corporativo", "Headless CMS"],
     featured: true,
+    highlight: true,
   },
   {
     id: "site-corporativo-kt-retailing",
@@ -96,6 +101,7 @@ export const projects: Project[] = [
     summary: ["Site institucional com CMS customizado em Vue.js e Strapi, destacando performance e conteúdo dinâmico."],
     technologies: ["Vue.js", "TypeScript", "Strapi", "Tailwind", "Node.js", "Git", "Performance", "Clean Code"],
     type: ["CMS", "Site Corporativo", "Headless CMS"],
+    highlight: true,
   },
   {
     id: "site-estatico-casa-cortinas-persianas",
@@ -116,6 +122,7 @@ export const projects: Project[] = [
     summary: ["Site institucional voluntário desenvolvido em Vue.js e Nuxt, com foco em acessibilidade e integração de conteúdo dinâmico."],
     technologies: ["Vue.js", "Nuxt.js", "JavaScript", "Sass", "Node.js", "Git", "Responsive Design", "Accessibility"],
     type: ["Site Institucional", "CMS"],
+    highlight: true,
   },
   {
     id: "landing-page-promocional-good-spine",
@@ -125,6 +132,7 @@ export const projects: Project[] = [
     summary: ["Landing page focada em conversão para venda de produtos ortopédicos, otimizada para SEO e performance."],
     technologies: ["Vue.js", "Nuxt.js", "TypeScript", "Tailwind", "Sass", "Git", "UX", "SEO", "Landing Page"],
     type: ["Landing Page"],
+    highlight: true,
   },
   {
     id: "site-institucional-loopa-digital",
@@ -145,6 +153,7 @@ export const projects: Project[] = [
     summary: ["Site institucional em WordPress para a Galeria do Rock, ícone cultural de São Paulo."],
     technologies: ["WordPress", "PHP", "JavaScript", "Sass", "SEO", "Performance", "Accessibility"],
     type: ["CMS", "Site Institucional"],
+    highlight: true,
   },
   {
     id: "blog-autoral-juliao-coelho",
@@ -184,6 +193,7 @@ export const projects: Project[] = [
     summary: ["Landing page dinâmica com animações e interações, desenvolvida para campanhas promocionais."],
     technologies: ["Vue.js", "Node.js", "Pug.js", "CSS animations", "Webpack", "Git", "UX", "Performance"],
     type: ["Landing Page", "One Page"],
+    highlight: true,
   },
   {
     id: "site-institucional-dvl",
@@ -204,5 +214,6 @@ export const projects: Project[] = [
     summary: ["Portal em WordPress para apresentação e captação de franquias da marca DIA."],
     technologies: ["WordPress", "PHP", "JavaScript", "Sass", "SEO", "Performance", "CMS"],
     type: ["CMS", "Portal"],
+    highlight: true,
   },
 ];
