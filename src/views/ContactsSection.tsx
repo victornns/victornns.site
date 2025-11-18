@@ -6,7 +6,7 @@ import { UILink } from "@/components/ui/UILink";
 
 export function ContactsSection() {
   return (
-    <UISection title="Contatos">
+    <UISection title="Contato">
       <ul>
         {contacts.map((contact) => (
           <li key={contact.id}>

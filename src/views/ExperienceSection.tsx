@@ -20,7 +20,7 @@ const renderTechnologies = (technologies: Experience["technologies"]) => {
 
 export function ExperienceSection() {
   return (
-    <UISection title="Experiências" description="Histórico profissional">
+    <UISection title="Experiência" description="Histórico profissional">
       <ul>
         {experiences.map((experience) => (
           <li key={experience.id}>
