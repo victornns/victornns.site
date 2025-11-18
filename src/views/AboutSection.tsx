@@ -8,7 +8,11 @@ export function AboutSection({ children }: { children?: React.ReactNode }) {
 
   return (
     <>
-      <UISection title={about.title} headingLevel={1} description={details}>
+      <UISection
+        title={about.title}
+        headingLevel={1}
+        description={details}
+      >
         <p>Desenvolvedor front-end com 10+ anos de experiência em interfaces, performance e arquitetura web.</p>
         <p>Também atuo como freelancer full-stack, conduzindo projetos end-to-end sob demanda.</p>
 

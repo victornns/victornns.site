@@ -7,11 +7,5 @@ type OrganizationDisplayNameProps = {
 
 export function OrganizationDisplayName({ id, className }: OrganizationDisplayNameProps) {
   const organization = organizationsById[id];
-  return (
-    organization && (
-      <>
-        <span className={className}>{organization.name.display}</span>
-      </>
-    )
-  );
+  return organization && <span className={className}>{organization.name.display}</span>;
 }

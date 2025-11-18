@@ -20,14 +20,21 @@ const renderTechnologies = (technologies: Experience["technologies"]) => {
 
 export function ExperienceSection() {
   return (
-    <UISection title="Experiência" description="Histórico profissional">
+    <UISection
+      title="Experiência"
+      description="Histórico profissional"
+    >
       <ul>
         {experiences.map((experience) => (
           <li key={experience.id}>
             <UICard.Root>
               <UICard.Label>{formatPeriod(experience.period)}</UICard.Label>
               <UICard.Title>
-                {experience.role} @ <OrganizationDisplayName id={experience.organizationId} className="italic" />
+                {experience.role} @{" "}
+                <OrganizationDisplayName
+                  id={experience.organizationId}
+                  className="italic"
+                />
               </UICard.Title>
               <UICard.Paragraphs data={experience.summary} />
               {renderTechnologies(experience.technologies)}

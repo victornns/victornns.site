@@ -11,7 +11,10 @@ export default function RootLayout({
 }>) {
   const mainClasses = "flex flex-col gap-16 py-16 px-6 md:px-12";
   return (
-    <html lang="pt-BR" className="antialiased">
+    <html
+      lang="pt-BR"
+      className="antialiased"
+    >
       <body style={{ maxWidth: TOKENS.layout.maxWidth }}>
         <main className={mainClasses}>{children}</main>
       </body>

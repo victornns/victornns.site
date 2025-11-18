@@ -68,7 +68,10 @@ function ProjectItem({ project }: ProjectItemProps) {
 
 export function ProjectsSection() {
   return (
-    <UISection title="Projetos" description="Seleção de blogs, websites, campanhas, CMS e soluções web desenvolvidas">
+    <UISection
+      title="Projetos"
+      description="Seleção de blogs, websites, campanhas, CMS e soluções web desenvolvidas"
+    >
       <ul>
         {projects.map((project) => (
           <li key={project.id}>
