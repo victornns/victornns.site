@@ -15,10 +15,11 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: "one-bra-frontend-developer",
-    role: "Frontend Developer | UI Architecture, Design Systems e Performance Web",
+    role: "Front-end Developer | UI Architecture, Design Systems e Performance Web",
     organizationId: "one-bra-agency",
     period: {
       start: "Out.2023",
+      end: "Fev.2026",
     },
     summary: ["Atuação no time de front-end da Bespoke One.bra (Leo Burnett), alocado diretamente no Bradesco, com foco na padronização técnica, definição de padrões de codificação e desenvolvimento de páginas e e-mails das campanhas do banco."],
     technologies: ["SSR/SSG", "TypeScript", "React.js", "Next.js", "Node.js", "ES6+", "Design System", "Tailwind CSS", "Figma", "GraphQL", "API REST", "Vue.js", "Acessibilidade digital", "Web Performance"],
