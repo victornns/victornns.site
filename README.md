@@ -1,3 +1,5 @@
+[![Generate CV PDF](https://github.com/victornns/victornns.site/actions/workflows/generate-cv-pdf.yml/badge.svg?branch=main)](https://github.com/victornns/victornns.site/actions/workflows/generate-cv-pdf.yml)
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Running locally in development mode
