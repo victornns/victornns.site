@@ -6,9 +6,13 @@ import path from "node:path";
 
 const PORT = process.env.PORT || 3000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
-const ROUTE = "/curriculo";
 const OUTPUT_DIR = path.join(process.cwd(), "public", "pdf");
-const OUTPUT_PATH = path.join(OUTPUT_DIR, "victor-nascimento-cv.pdf");
+const SITE_WIDTH = 1440;
+
+const CV_TARGETS = [
+  { route: "/curriculo", filename: "victor-nascimento-curriculo.pdf" },
+  { route: "/en/resume", filename: "victor-nascimento-resume.pdf" },
+];
 
 function pingServer(url) {
   return new Promise((resolve) => {
@@ -38,8 +42,33 @@ function waitForServer(url, timeoutMs = 60000) {
   });
 }
 
+async function generatePdf(browser, target) {
+  const targetUrl = `${BASE_URL}${target.route}`;
+  const outputPath = path.join(OUTPUT_DIR, target.filename);
+
+  const context = await browser.newContext({
+    viewport: { width: SITE_WIDTH, height: 1080 },
+  });
+  const page = await context.newPage();
+  await page.goto(targetUrl, { waitUntil: "networkidle" });
+  const contentHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+  await page.pdf({
+    path: outputPath,
+    printBackground: true,
+    width: `${SITE_WIDTH}px`,
+    height: `${contentHeight}px`,
+    margin: {
+      top: "0px",
+      right: "0px",
+      bottom: "0px",
+      left: "0px",
+    },
+  });
+  await context.close();
+  console.log(`✅ PDF gerado com sucesso em: ${outputPath}`);
+}
+
 async function main() {
-  const targetUrl = `${BASE_URL}${ROUTE}`;
   let serverProcess = null;
   const alreadyRunning = await pingServer(BASE_URL);
 
@@ -49,36 +78,18 @@ async function main() {
       stdio: "inherit",
       shell: true,
     });
-    await waitForServer(targetUrl);
+    await waitForServer(`${BASE_URL}${CV_TARGETS[0].route}`);
   } else {
     console.log(`Servidor local já em execução em ${BASE_URL}`);
   }
 
   mkdirSync(OUTPUT_DIR, { recursive: true });
 
-  const SITE_WIDTH = 1440;
-
   const browser = await chromium.launch();
   try {
-    const context = await browser.newContext({
-      viewport: { width: SITE_WIDTH, height: 1080 },
-    });
-    const page = await context.newPage();
-    await page.goto(targetUrl, { waitUntil: "networkidle" });
-    const contentHeight = await page.evaluate(() => document.documentElement.scrollHeight);
-    await page.pdf({
-      path: OUTPUT_PATH,
-      printBackground: true,
-      width: `${SITE_WIDTH}px`,
-      height: `${contentHeight}px`,
-      margin: {
-        top: "0px",
-        right: "0px",
-        bottom: "0px",
-        left: "0px",
-      },
-    });
-    console.log(`✅ PDF gerado com sucesso em: ${OUTPUT_PATH}`);
+    for (const target of CV_TARGETS) {
+      await generatePdf(browser, target);
+    }
   } finally {
     await browser.close();
     if (serverProcess) {
@@ -91,3 +102,4 @@ main().catch((error) => {
   console.error("❌ Erro ao gerar PDF do currículo:", error);
   process.exitCode = 1;
 });
+
