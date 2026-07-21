@@ -1,11 +1,18 @@
-import { projects, type Project } from "@/content/projects";
+import { getContent } from "@/content";
+import type { Project } from "@/content/projects";
 import { TOKENS } from "@/lib/constants";
 import { sanitizeUrlForDisplay } from "@/lib/utils";
+
+import type { Locale } from "@/i18n/config";
 
 import { UISection } from "@/components/ui/UISection";
 import { UICard } from "@/components/ui/UICard";
 import { UILink } from "@/components/ui/UILink";
 import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
+
+type ProjectsSectionProps = {
+  locale: Locale;
+};
 
 type ProjectItemProps = {
   project: Project;
@@ -66,14 +73,16 @@ function ProjectItem({ project }: ProjectItemProps) {
   );
 }
 
-export function ProjectsSection() {
+export function ProjectsSection({ locale }: ProjectsSectionProps) {
+  const { projects } = getContent(locale);
+
   return (
     <UISection
-      title="Projetos"
-      description="Seleção de blogs, websites, campanhas, CMS e soluções web desenvolvidas"
+      title={projects.title}
+      description={projects.description}
     >
       <ul>
-        {projects.map((project) => (
+        {projects.items.map((project) => (
           <li key={project.id}>
             <ProjectItem project={project} />
           </li>
