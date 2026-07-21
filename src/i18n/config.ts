@@ -18,6 +18,16 @@ export function getLocale(value?: string | null): Locale {
 }
 
 /**
+ * Builds a public, locale-aware path for a given external slug. The default
+ * locale (pt) has no URL prefix; other locales (e.g. en) are prefixed, e.g.
+ * `getLocalizedPath("pt", "projetos")` -> "/projetos",
+ * `getLocalizedPath("en", "projects")` -> "/en/projects".
+ */
+export function getLocalizedPath(locale: Locale, slug: string): string {
+  return locale === defaultLocale ? `/${slug}` : `/${locale}/${slug}`;
+}
+
+/**
  * Maps a locale-specific external path segment to the internal route segment
  * (the folder name under `src/app/[locale]/`). Only needed when a locale uses
  * a different external name than the internal folder, e.g. English "resume"

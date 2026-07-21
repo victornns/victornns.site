@@ -19,15 +19,19 @@ function HeadingSection({ level, children }: HeadingSectionProps) {
 }
 
 interface UISectionProps {
+  id?: string;
   title: string;
   headingLevel?: HeadingLevel;
   description?: ReactNode;
   children?: ReactNode;
 }
 
-export function UISection({ title, headingLevel = 2, description, children }: UISectionProps) {
+export function UISection({ id, title, headingLevel = 2, description, children }: UISectionProps) {
   return (
-    <section>
+    <section
+      id={id}
+      className={id ? "scroll-mt-24" : undefined}
+    >
       <header className={children ? "mb-8" : ""}>
         <HeadingSection level={headingLevel}>{title}</HeadingSection>
         {description && <p>{description}</p>}

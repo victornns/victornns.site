@@ -14,7 +14,10 @@ export function ContactsSection({ locale }: ContactsSectionProps) {
   const { contacts } = getContent(locale);
 
   return (
-    <UISection title={contacts.title}>
+    <UISection
+      id="contact"
+      title={contacts.title}
+    >
       <ul>
         {contacts.items.map((contact) => (
           <li key={contact.id}>

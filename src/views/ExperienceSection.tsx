@@ -34,6 +34,7 @@ export function ExperienceSection({ locale }: ExperienceSectionProps) {
 
   return (
     <UISection
+      id="experience"
       title={experiences.title}
       description={experiences.description}
     >

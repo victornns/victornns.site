@@ -17,6 +17,7 @@ export function AboutSection({ locale, children }: AboutSectionProps) {
   return (
     <>
       <UISection
+        id="about"
         title={about.title}
         headingLevel={1}
         description={details}

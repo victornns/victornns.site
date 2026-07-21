@@ -78,6 +78,7 @@ export function ProjectsSection({ locale }: ProjectsSectionProps) {
 
   return (
     <UISection
+      id="projects"
       title={projects.title}
       description={projects.description}
     >
