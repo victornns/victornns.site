@@ -39,21 +39,23 @@ jobs:
       - name: Sync latest branch
         run: git pull --rebase origin main
 
-      - name: Generate curriculo PDF
+      - name: Generate curriculo PDFs
         run: npm run generate:cv-pdf
 
-      - name: Verify generated PDF
-        run: test -f public/pdf/victor-nascimento-cv.pdf
-
-      - name: Commit updated PDF
+      - name: Verify generated PDFs
         run: |
-          git add public/pdf/victor-nascimento-cv.pdf
+          test -f public/pdf/victor-nascimento-curriculo.pdf
+          test -f public/pdf/victor-nascimento-resume.pdf
 
-          if git diff --cached --quiet -- public/pdf/victor-nascimento-cv.pdf; then
-            echo "PDF não foi alterado. Nenhum commit necessário."
+      - name: Commit updated PDFs
+        run: |
+          git add public/pdf/victor-nascimento-curriculo.pdf public/pdf/victor-nascimento-resume.pdf
+
+          if git diff --cached --quiet -- public/pdf/victor-nascimento-curriculo.pdf public/pdf/victor-nascimento-resume.pdf; then
+            echo "PDFs não foram alterados. Nenhum commit necessário."
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git commit -m "chore: update curriculo pdf [skip pdf]"
+            git commit -m "chore: update curriculo pdfs [skip pdf]"
             git push
           fi
