@@ -1,33 +1,23 @@
+# Developer site & resume
+
 [![Generate CV PDF](https://github.com/victornns/victornns.site/actions/workflows/generate-cv-pdf.yml/badge.svg?branch=main)](https://github.com/victornns/victornns.site/actions/workflows/generate-cv-pdf.yml)
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Personal site built with Next.js.
 
-## Running locally in development mode
+You can preview my resume here: [victor-nascimento-cv.pdf](https://www.victornns.com/pdf/victor-nascimento-cv.pdf)
 
-To get started, just clone the repository and run `npm install && npm run dev`:
+## Development
 
-```bash
+\```bash
 npm install
 npm run dev
-```
+\```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/*.tsx`. The page auto-updates as you edit the file.
+## Production
 
-## Building and deploying in production
-
-```bash
-npm install
+\```bash
 npm run build
 npm start
-```
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js)
+\```
