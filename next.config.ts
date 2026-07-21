@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         destination: "/portfolio",
         permanent: true,
       },
+      {
+        source: "/pt/:path*",
+        destination: "/:path*",
+        permanent: true,
+      },
     ];
   },
 };
