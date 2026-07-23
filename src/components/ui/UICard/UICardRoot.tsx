@@ -6,11 +6,19 @@ interface UICardRootProps {
   spacing?: "compact" | "default";
 }
 
-export const UICardRoot = function ({ children, className = "", spacing = "default" }: UICardRootProps) {
+export const UICardRoot = function ({
+  children,
+  className = "",
+  spacing = "default",
+}: UICardRootProps) {
   const spacingClasses = {
     compact: "py-4",
     default: "py-6",
   };
 
-  return <div className={`border-b-[1px] ${spacingClasses[spacing]} ${className}`}>{children}</div>;
+  return (
+    <div className={`border-b ${spacingClasses[spacing]} ${className}`}>
+      {children}
+    </div>
+  );
 };

@@ -31,7 +31,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     notFound();
   }
 
-  const mainClasses = "flex flex-col gap-16 py-16 px-6 md:px-12";
+  const mainClasses = "flex flex-col gap-16 pt-28 pb-16 px-6 md:px-12";
 
   return (
     <html
