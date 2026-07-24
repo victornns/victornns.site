@@ -14,6 +14,7 @@ import type { Locale } from "@/i18n/config";
 import { defaultLocale, getLocalizedPath, isValidLocale } from "@/i18n/config";
 
 import { useState } from "react";
+import type { MouseEvent } from "react";
 
 export type { SectionId };
 
@@ -38,6 +39,19 @@ const DESKTOP_LINK_CLASSNAME = `
   after:transition-transform after:duration-200
   hover:after:scale-x-100
 `;
+
+const SKIP_SECTION_SCROLL_ANIMATION_KEY = "skipSectionScrollAnimation";
+
+function isPlainLeftClick(event: MouseEvent<HTMLAnchorElement>) {
+  return !(
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  );
+}
 
 const RESUME_PDF_URL_BY_LOCALE: Record<Locale, string> = {
   pt: "https://www.victornns.com/pdf/victor-nascimento-curriculo.pdf",
@@ -97,6 +111,14 @@ export function Navbar({ locale, items }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  function handleLocaleSwitchClick(event: MouseEvent<HTMLAnchorElement>) {
+    if (!isPlainLeftClick(event)) {
+      return;
+    }
+
+    window.sessionStorage.setItem(SKIP_SECTION_SCROLL_ANIMATION_KEY, "1");
+  }
+
   const resumeHref = RESUME_PDF_URL_BY_LOCALE[locale];
   const logoLabel = locale === "pt" ? "Portfólio" : "Portfolio";
   const portfolioHref = getLocalizedPath(locale, "portfolio");
@@ -140,6 +162,7 @@ export function Navbar({ locale, items }: NavbarProps) {
               <Link
                 href={localeHref.pt}
                 aria-label={labels.switchToPortuguese}
+                onClick={handleLocaleSwitchClick}
                 className={
                   locale === "pt"
                     ? "inline-flex min-w-9 items-center justify-center border border-black bg-black px-2 py-1 text-xs font-medium leading-none text-white"
@@ -152,6 +175,7 @@ export function Navbar({ locale, items }: NavbarProps) {
               <Link
                 href={localeHref.en}
                 aria-label={labels.switchToEnglish}
+                onClick={handleLocaleSwitchClick}
                 className={
                   locale === "en"
                     ? "inline-flex min-w-9 items-center justify-center border border-black bg-black px-2 py-1 text-xs font-medium leading-none text-white"
