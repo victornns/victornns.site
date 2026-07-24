@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { getContent } from "@/content";
 import type { Project } from "@/content/projects";
@@ -10,6 +10,10 @@ import { sanitizeUrlForDisplay } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
 
 import { ProjectDetailsDrawer } from "@/components/projects/ProjectDetailsDrawer";
+import {
+  getProjectPath,
+  getProjectsSectionPath,
+} from "@/components/projects/projectRoutes";
 import { UISection } from "@/components/ui/UISection";
 import { UICard } from "@/components/ui/UICard";
 import { UILink } from "@/components/ui/UILink";
@@ -17,6 +21,8 @@ import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
 
 type ProjectsSectionProps = {
   locale: Locale;
+  /** Initially selected project, set when landing on a friendly project URL. */
+  activeProjectId?: string;
 };
 
 type ProjectItemProps = {
@@ -95,23 +101,66 @@ function ProjectItem({ project, onOpenDetails, openLabel }: ProjectItemProps) {
   );
 }
 
-export function ProjectsSection({ locale }: ProjectsSectionProps) {
+export function ProjectsSection({
+  locale,
+  activeProjectId,
+}: ProjectsSectionProps) {
   const { common, projects } = getContent(locale);
   const [selectedProjectId, setSelectedProjectId] = useState<
     Project["id"] | null
-  >(null);
-  const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(false);
+  >(activeProjectId ?? null);
+  const [isProjectDrawerOpen, setIsProjectDrawerOpen] = useState(
+    Boolean(activeProjectId),
+  );
 
   const activeProject =
     projects.items.find((project) => project.id === selectedProjectId) ?? null;
 
+  // Keeps the drawer in sync with the URL: the browser's back/forward
+  // buttons should open/close it the same way clicking a project does.
+  useEffect(() => {
+    function handlePopState() {
+      const { pathname } = window.location;
+      const matchedProject = projects.items.find(
+        (project) => pathname === getProjectPath(locale, project),
+      );
+
+      if (matchedProject) {
+        setSelectedProjectId(matchedProject.id);
+        setIsProjectDrawerOpen(true);
+        return;
+      }
+
+      setIsProjectDrawerOpen(false);
+    }
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [locale, projects.items]);
+
   function handleOpenDetails(projectId: Project["id"]) {
+    const project = projects.items.find((item) => item.id === projectId);
+
     setSelectedProjectId(projectId);
     setIsProjectDrawerOpen(true);
+
+    if (project) {
+      const nextPath = getProjectPath(locale, project);
+      if (window.location.pathname !== nextPath) {
+        window.history.pushState(null, "", nextPath);
+      }
+    }
   }
 
   function handleOpenChange(open: boolean) {
     setIsProjectDrawerOpen(open);
+
+    if (!open) {
+      const sectionPath = getProjectsSectionPath(locale);
+      if (window.location.pathname !== sectionPath) {
+        window.history.pushState(null, "", sectionPath);
+      }
+    }
   }
 
   function navigateProject(direction: "previous" | "next") {
@@ -130,8 +179,14 @@ export function ProjectsSection({ locale }: ProjectsSectionProps) {
     const offset = direction === "next" ? 1 : -1;
     const nextIndex =
       (activeIndex + offset + projects.items.length) % projects.items.length;
+    const nextProject = projects.items[nextIndex];
 
-    setSelectedProjectId(projects.items[nextIndex].id);
+    setSelectedProjectId(nextProject.id);
+
+    const nextPath = getProjectPath(locale, nextProject);
+    if (window.location.pathname !== nextPath) {
+      window.history.replaceState(null, "", nextPath);
+    }
   }
 
   return (

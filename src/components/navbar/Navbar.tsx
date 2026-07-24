@@ -91,7 +91,11 @@ function toTargetLocalePath(
     }
 
     const targetSectionSlug = getSectionSlug(targetLocale, sectionId);
-    return getLocalizedPath(targetLocale, `portfolio/${targetSectionSlug}`);
+    const restSlug = rest.length > 0 ? `/${rest.join("/")}` : "";
+    return getLocalizedPath(
+      targetLocale,
+      `portfolio/${targetSectionSlug}${restSlug}`,
+    );
   }
 
   if (root === "curriculo" || root === "resume") {
