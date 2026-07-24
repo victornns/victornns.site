@@ -3,15 +3,19 @@
 import Link from "next/link";
 
 import { Drawer } from "@/components/drawer/Drawer";
+import { LocaleSwitchLinks } from "@/components/LocaleSwitchLinks";
 import { NavbarLink } from "@/components/navbar/NavbarLink";
 
 import type { NavbarItem } from "@/components/navbar/Navbar";
+import type { Locale } from "@/i18n/config";
 
 interface MobileMenuDrawerLabels {
   close: string;
   menu: string;
   navigation: string;
   resume: string;
+  switchToPortuguese: string;
+  switchToEnglish: string;
 }
 
 interface MobileMenuDrawerProps {
@@ -20,6 +24,9 @@ interface MobileMenuDrawerProps {
   items: NavbarItem[];
   resumeHref: string;
   labels: MobileMenuDrawerLabels;
+  locale: Locale;
+  localeHref: Record<Locale, string>;
+  skipEnterAnimation?: boolean;
 }
 
 export function MobileMenuDrawer({
@@ -28,6 +35,9 @@ export function MobileMenuDrawer({
   items,
   resumeHref,
   labels,
+  locale,
+  localeHref,
+  skipEnterAnimation,
 }: MobileMenuDrawerProps) {
   function closeDrawer() {
     onOpenChange(false);
@@ -41,12 +51,23 @@ export function MobileMenuDrawer({
       closeLabel={labels.close}
       contentClassName="[--drawer-panel-width:82vw] max-w-sm pt-20"
       showCloseButton={false}
+      skipEnterAnimation={skipEnterAnimation}
     >
       <div className="flex min-h-full flex-col gap-10">
         <header className="space-y-2">
-          <p className="text-xs uppercase tracking-[0.24em] text-neutral-500">
-            {labels.navigation}
-          </p>
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-xs uppercase tracking-[0.24em] text-neutral-500">
+              {labels.navigation}
+            </p>
+
+            <LocaleSwitchLinks
+              locale={locale}
+              localeHref={localeHref}
+              switchToPortuguese={labels.switchToPortuguese}
+              switchToEnglish={labels.switchToEnglish}
+              reopenMobileMenu
+            />
+          </div>
           <h2 className="text-3xl font-semibold leading-none">{labels.menu}</h2>
         </header>
 

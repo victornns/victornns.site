@@ -36,6 +36,7 @@ export function Navbar({ locale, items }: NavbarProps) {
   const {
     isMobileMenuOpen,
     setIsMobileMenuOpen,
+    skipMobileMenuEnterAnimation,
     logo,
     resumeHref,
     portfolioHref,
@@ -69,6 +70,7 @@ export function Navbar({ locale, items }: NavbarProps) {
                 href={localeHref.pt}
                 aria-label={labels.switchToPortuguese}
                 onClick={handleLocaleSwitchClick}
+                scroll={false}
                 className={
                   locale === "pt"
                     ? "inline-flex min-w-9 items-center justify-center border border-black bg-black px-2 py-1 text-xs font-medium leading-none text-white"
@@ -82,6 +84,7 @@ export function Navbar({ locale, items }: NavbarProps) {
                 href={localeHref.en}
                 aria-label={labels.switchToEnglish}
                 onClick={handleLocaleSwitchClick}
+                scroll={false}
                 className={
                   locale === "en"
                     ? "inline-flex min-w-9 items-center justify-center border border-black bg-black px-2 py-1 text-xs font-medium leading-none text-white"
@@ -156,6 +159,9 @@ export function Navbar({ locale, items }: NavbarProps) {
           items={items}
           resumeHref={resumeHref}
           labels={labels}
+          locale={locale}
+          localeHref={localeHref}
+          skipEnterAnimation={skipMobileMenuEnterAnimation}
         />
       </div>
     </>

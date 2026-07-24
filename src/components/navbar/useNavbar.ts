@@ -1,13 +1,16 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import type { MouseEvent } from "react";
+import { useLayoutEffect, useState } from "react";
 
 import {
   getSectionIdFromSlug,
   getSectionSlug,
 } from "@/components/navbar/navigation";
+import {
+  consumeShouldReopenMobileMenu,
+  prepareLocaleSwitch,
+} from "@/components/navbar/localeSwitchState";
 import { getTranslatedProjectSlug } from "@/components/projects/projectRoutes";
 import { navbarLabels, switchLocaleLabel } from "@/content/navbar";
 import { commonContent } from "@/content/common";
@@ -17,19 +20,6 @@ import {
   isValidLocale,
   type Locale,
 } from "@/i18n/config";
-
-const SKIP_SECTION_SCROLL_ANIMATION_KEY = "skipSectionScrollAnimation";
-
-function isPlainLeftClick(event: MouseEvent<HTMLAnchorElement>) {
-  return !(
-    event.defaultPrevented ||
-    event.button !== 0 ||
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey ||
-    event.altKey
-  );
-}
 
 function toTargetLocalePath(
   pathname: string,
@@ -92,16 +82,28 @@ function toTargetLocalePath(
 }
 
 export function useNavbar(locale: Locale) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpenState, setIsMobileMenuOpenState] = useState(false);
+  const [skipMobileMenuEnterAnimation, setSkipMobileMenuEnterAnimation] =
+    useState(false);
   const pathname = usePathname();
 
-  function handleLocaleSwitchClick(event: MouseEvent<HTMLAnchorElement>) {
-    if (!isPlainLeftClick(event)) {
-      return;
-    }
-
-    window.sessionStorage.setItem(SKIP_SECTION_SCROLL_ANIMATION_KEY, "1");
+  // Any deliberate open/close (hamburger button, close button, nav link)
+  // should always animate normally — only the one-time reopen below skips it.
+  function setIsMobileMenuOpen(next: boolean | ((current: boolean) => boolean)) {
+    setSkipMobileMenuEnterAnimation(false);
+    setIsMobileMenuOpenState(next);
   }
+
+  // Runs before paint so a menu reopened after a locale switch (see
+  // localeSwitchState) doesn't flash closed first. Bypasses the wrapper above
+  // so the entrance animation is skipped for this specific reopen: the menu
+  // was already open right before the switch, so nothing is visibly "opening".
+  useLayoutEffect(() => {
+    if (consumeShouldReopenMobileMenu()) {
+      setSkipMobileMenuEnterAnimation(true);
+      setIsMobileMenuOpenState(true);
+    }
+  }, []);
 
   const nav = navbarLabels[locale];
 
@@ -116,8 +118,9 @@ export function useNavbar(locale: Locale) {
   };
 
   return {
-    isMobileMenuOpen,
+    isMobileMenuOpen: isMobileMenuOpenState,
     setIsMobileMenuOpen,
+    skipMobileMenuEnterAnimation,
     logo: nav.logo,
     resumeHref: nav.resumeUrl,
     portfolioHref: getLocalizedPath(locale, "portfolio"),
@@ -126,6 +129,6 @@ export function useNavbar(locale: Locale) {
       en: toTargetLocalePath(pathname, locale, "en"),
     },
     labels,
-    handleLocaleSwitchClick,
+    handleLocaleSwitchClick: prepareLocaleSwitch,
   };
 }

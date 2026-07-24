@@ -11,8 +11,12 @@ export function getProjectsSectionPath(locale: Locale): string {
   );
 }
 
+export function getProjectPathBySlug(locale: Locale, slug: string): string {
+  return `${getProjectsSectionPath(locale)}/${slug}`;
+}
+
 export function getProjectPath(locale: Locale, project: Project): string {
-  return `${getProjectsSectionPath(locale)}/${project.slug}`;
+  return getProjectPathBySlug(locale, project.slug);
 }
 
 export function getProjectBySlug(
@@ -46,6 +50,39 @@ export function getTranslatedProjectSlug(
   );
 
   return targetProject?.slug;
+}
+
+/**
+ * Builds the pt/en hrefs for the currently active project (or the bare
+ * projects section when none is active), so the drawer's own locale switch
+ * keeps pointing at the same project — matched by `id`, not the slug, since
+ * slugs differ per locale.
+ */
+export function getProjectLocaleLinks(
+  locale: Locale,
+  activeProject: Project | null,
+): Record<Locale, string> {
+  const otherLocale: Locale = locale === "pt" ? "en" : "pt";
+
+  if (!activeProject) {
+    return {
+      [locale]: getProjectsSectionPath(locale),
+      [otherLocale]: getProjectsSectionPath(otherLocale),
+    } as Record<Locale, string>;
+  }
+
+  const translatedSlug = getTranslatedProjectSlug(
+    locale,
+    otherLocale,
+    activeProject.slug,
+  );
+
+  return {
+    [locale]: getProjectPath(locale, activeProject),
+    [otherLocale]: translatedSlug
+      ? getProjectPathBySlug(otherLocale, translatedSlug)
+      : getProjectsSectionPath(otherLocale),
+  } as Record<Locale, string>;
 }
 
 export function getProjectIndex(

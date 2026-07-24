@@ -1,9 +1,11 @@
 "use client";
 
 import { Drawer } from "@/components/drawer/Drawer";
+import { LocaleSwitchLinks } from "@/components/LocaleSwitchLinks";
 import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
 import { useProjectDetails } from "@/components/projects/useProjectDetails";
 import { UILink } from "@/components/ui/UILink";
+import { switchLocaleLabel } from "@/content/navbar";
 import { TOKENS } from "@/lib/constants";
 import { sanitizeUrlForDisplay } from "@/lib/utils";
 
@@ -18,6 +20,7 @@ interface ProjectDetailsDrawerProps {
   onOpenChange: (open: boolean) => void;
   onPrevious: () => void;
   onNext: () => void;
+  skipEnterAnimation?: boolean;
 }
 
 function NavButton({
@@ -66,6 +69,7 @@ export function ProjectDetailsDrawer({
   onOpenChange,
   onPrevious,
   onNext,
+  skipEnterAnimation,
 }: ProjectDetailsDrawerProps) {
   const {
     common,
@@ -77,6 +81,7 @@ export function ProjectDetailsDrawer({
     primaryUrl,
     officialUrl,
     showPreviewAction,
+    localeLinks,
   } = useProjectDetails({
     locale,
     projects,
@@ -97,6 +102,7 @@ export function ProjectDetailsDrawer({
       title={`${common.projectDetails}: ${project.title}`}
       closeLabel={common.close}
       contentClassName="[--drawer-panel-width:90vw] md:[--drawer-panel-width:70vw] lg:[--drawer-panel-width:50vw] max-w-4xl"
+      skipEnterAnimation={skipEnterAnimation}
     >
       <div className="flex min-h-full flex-col gap-10">
         <header className="flex items-start justify-between gap-6 pr-12">
@@ -118,6 +124,13 @@ export function ProjectDetailsDrawer({
               {currentIndex + 1}/{totalProjects}
             </p>
           </div>
+
+          <LocaleSwitchLinks
+            locale={locale}
+            localeHref={localeLinks}
+            switchToPortuguese={switchLocaleLabel.pt}
+            switchToEnglish={switchLocaleLabel.en}
+          />
         </header>
 
         <div className="space-y-8">

@@ -2,7 +2,10 @@
 
 import { useEffect } from "react";
 
-import { getProjectIndex } from "@/components/projects/projectRoutes";
+import {
+  getProjectIndex,
+  getProjectLocaleLinks,
+} from "@/components/projects/projectRoutes";
 import { TOKENS } from "@/lib/constants";
 import { getContent } from "@/content";
 
@@ -79,5 +82,6 @@ export function useProjectDetails({
     primaryUrl,
     officialUrl: activeProject.links?.official?.url,
     showPreviewAction: Boolean(previewUrl && previewUrl !== primaryUrl),
+    localeLinks: getProjectLocaleLinks(locale, activeProject),
   } as const;
 }

@@ -26,11 +26,12 @@ export function PortfolioPage({
   activeProjectId,
 }: PortfolioPageProps) {
   const navbarItems = getNavbarItems(locale);
+  const scrollIdentity = activeProjectId ?? activeSectionId ?? "portfolio";
 
   return (
     <>
       <Navbar locale={locale} items={navbarItems} />
-      {activeSectionId && <SectionScrollTarget sectionId={activeSectionId} />}
+      <SectionScrollTarget sectionId={activeSectionId} identity={scrollIdentity} />
 
       <AboutSection locale={locale} />
       <ContactsSection locale={locale} />

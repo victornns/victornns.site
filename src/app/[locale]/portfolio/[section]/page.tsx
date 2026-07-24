@@ -1,6 +1,6 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
-import { getLocale } from "@/i18n/config";
+import { getLocale, getLocalizedPath, locales } from "@/i18n/config";
 import { getSectionIdFromSlug } from "@/components/navbar";
 
 import { PortfolioPage } from "../PortfolioPage";
@@ -14,14 +14,20 @@ export default async function PortfolioSectionPage({ params }: PortfolioSectionP
   const locale = getLocale(rawLocale);
 
   const sectionId = getSectionIdFromSlug(locale, section);
-  if (!sectionId) {
-    notFound();
+  if (sectionId) {
+    return <PortfolioPage locale={locale} activeSectionId={sectionId} />;
   }
 
-  return (
-    <PortfolioPage
-      locale={locale}
-      activeSectionId={sectionId}
-    />
+  // `section` might be another locale's own word for it (e.g. the URL
+  // dropped its locale prefix but kept that locale's section slug) — redirect
+  // to the fully-qualified URL for the locale it actually belongs to.
+  const matchedLocale = locales.find(
+    (candidate) => candidate !== locale && getSectionIdFromSlug(candidate, section),
   );
+
+  if (matchedLocale) {
+    redirect(getLocalizedPath(matchedLocale, `portfolio/${section}`));
+  }
+
+  notFound();
 }

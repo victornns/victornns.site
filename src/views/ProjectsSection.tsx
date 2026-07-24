@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { getContent } from "@/content";
 import type { Project } from "@/content/projects";
@@ -122,6 +122,12 @@ export function ProjectsSection({
     Boolean(activeProjectId),
   );
 
+  // Captured once: true when the drawer was already open on the very first
+  // render (a direct link or a post-locale-switch reload), as opposed to a
+  // later click — used to skip the entrance animation, since nothing is
+  // visibly "opening" from the reader's perspective in that case.
+  const openedFromInitialLoadRef = useRef(Boolean(activeProjectId));
+
   const activeProject =
     projects.items.find((project) => project.id === selectedProjectId) ?? null;
 
@@ -230,6 +236,7 @@ export function ProjectsSection({
         onOpenChange={handleOpenChange}
         onPrevious={() => navigateProject("previous")}
         onNext={() => navigateProject("next")}
+        skipEnterAnimation={openedFromInitialLoadRef.current}
       />
     </>
   );
