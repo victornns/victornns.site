@@ -1,5 +1,6 @@
 import { getLocalizedPath, type Locale } from "@/i18n/config";
-import { getSectionSlug } from "@/components/navbar";
+import { getSectionSlug } from "@/components/navbar/navigation";
+import { getContent } from "@/content";
 
 import type { Project } from "@/content/projects";
 
@@ -19,6 +20,32 @@ export function getProjectBySlug(
   slug: string,
 ): Project | undefined {
   return projects.find((project) => project.slug === slug);
+}
+
+/**
+ * Resolves the same project's slug in another locale, matched by its stable
+ * `id` (slugs themselves are derived per-locale from the title and can
+ * differ). Returns `undefined` when the slug or its counterpart can't be
+ * resolved, so callers can fall back to a safe URL.
+ */
+export function getTranslatedProjectSlug(
+  sourceLocale: Locale,
+  targetLocale: Locale,
+  slug: string,
+): string | undefined {
+  const sourceProject = getProjectBySlug(
+    getContent(sourceLocale).projects.items,
+    slug,
+  );
+  if (!sourceProject) {
+    return undefined;
+  }
+
+  const targetProject = getContent(targetLocale).projects.items.find(
+    (project) => project.id === sourceProject.id,
+  );
+
+  return targetProject?.slug;
 }
 
 export function getProjectIndex(

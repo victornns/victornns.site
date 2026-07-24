@@ -34,16 +34,26 @@ export interface ProjectsContent {
 /** Raw project entry: `slug` is optional here and resolved (with dedupe) by `withUniqueSlugs`. */
 type ProjectInput = Omit<Project, "slug"> & { slug?: string };
 
+function slugify(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 /**
- * Resolves each project's public slug, defaulting to its `id`. Manual slugs
- * are respected as-is; only real duplicates get an incremental suffix (e.g.
- * `meu-projeto-2`), keeping slugs unique within each locale.
+ * Resolves each project's public slug from its localized `title` (so pt items
+ * get a pt slug, en items get an en slug). Manual slugs are respected as-is;
+ * only real duplicates get an incremental suffix (e.g. `meu-projeto-2`),
+ * keeping slugs unique within each locale.
  */
 function withUniqueSlugs(items: ProjectInput[]): Project[] {
   const usedSlugs = new Set<string>();
 
   return items.map((item) => {
-    const baseSlug = item.slug ?? item.id;
+    const baseSlug = item.slug ?? slugify(item.title);
     let slug = baseSlug;
     let attempt = 2;
 

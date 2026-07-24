@@ -8,6 +8,7 @@ import {
   getSectionIdFromSlug,
   getSectionSlug,
 } from "@/components/navbar/navigation";
+import { getTranslatedProjectSlug } from "@/components/projects/projectRoutes";
 import { navbarLabels, switchLocaleLabel } from "@/content/navbar";
 import { commonContent } from "@/content/common";
 import {
@@ -63,11 +64,18 @@ function toTargetLocalePath(
     }
 
     const targetSectionSlug = getSectionSlug(targetLocale, sectionId);
-    const restSlug = rest.length > 0 ? `/${rest.join("/")}` : "";
-    return getLocalizedPath(
-      targetLocale,
-      `portfolio/${targetSectionSlug}${restSlug}`,
-    );
+    const [projectSlug] = rest;
+
+    const translatedProjectSlug =
+      sectionId === "projects" && projectSlug
+        ? getTranslatedProjectSlug(sourceLocale, targetLocale, projectSlug)
+        : undefined;
+
+    const targetSlug = translatedProjectSlug
+      ? `portfolio/${targetSectionSlug}/${translatedProjectSlug}`
+      : `portfolio/${targetSectionSlug}`;
+
+    return getLocalizedPath(targetLocale, targetSlug);
   }
 
   if (
