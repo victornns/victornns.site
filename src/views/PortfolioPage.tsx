@@ -1,6 +1,11 @@
 import type { Locale } from "@/i18n/config";
 
-import { getNavbarItems, Navbar, SectionScrollTarget, type SectionId } from "@/components/navbar";
+import {
+  getNavbarItems,
+  Navbar,
+  SectionScrollTarget,
+  type SectionId,
+} from "@/components/navbar";
 
 import { AboutSection } from "@/views/AboutSection";
 import { ContactsSection } from "@/views/ContactsSection";
@@ -18,7 +23,7 @@ export function PortfolioPage({ locale, activeSectionId }: PortfolioPageProps) {
 
   return (
     <>
-      <Navbar items={navbarItems} />
+      <Navbar locale={locale} items={navbarItems} />
       {activeSectionId && <SectionScrollTarget sectionId={activeSectionId} />}
 
       <AboutSection locale={locale} />

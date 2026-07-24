@@ -4,6 +4,7 @@ export type {
   NavbarItem,
   SectionId,
 } from "@/components/navbar/Navbar";
+export { NavbarLink } from "@/components/navbar/NavbarLink";
 export {
   getNavbarItems,
   getSectionIdFromSlug,
