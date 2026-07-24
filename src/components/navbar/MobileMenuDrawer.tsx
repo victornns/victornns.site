@@ -66,6 +66,8 @@ export function MobileMenuDrawer({
 
         <Link
           href={resumeHref}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex w-full items-center justify-center bg-black px-5 py-4 text-sm font-medium uppercase tracking-[0.18em] text-white transition hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
           onClick={closeDrawer}
         >

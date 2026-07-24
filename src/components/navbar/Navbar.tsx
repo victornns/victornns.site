@@ -1,12 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { MobileMenuDrawer } from "@/components/navbar/MobileMenuDrawer";
 import { NavbarLink } from "@/components/navbar/NavbarLink";
+import {
+  getSectionIdFromSlug,
+  getSectionSlug,
+} from "@/components/navbar/navigation";
 import type { SectionId } from "@/content/navbar";
 import type { Locale } from "@/i18n/config";
-import { getLocalizedPath } from "@/i18n/config";
+import { defaultLocale, getLocalizedPath, isValidLocale } from "@/i18n/config";
 
 import { useState } from "react";
 
@@ -34,20 +39,81 @@ const DESKTOP_LINK_CLASSNAME = `
   hover:after:scale-x-100
 `;
 
+const RESUME_PDF_URL_BY_LOCALE: Record<Locale, string> = {
+  pt: "https://www.victornns.com/pdf/victor-nascimento-curriculo.pdf",
+  en: "https://www.victornns.com/pdf/victor-nascimento-resume.pdf",
+};
+
+function toTargetLocalePath(
+  pathname: string,
+  locale: Locale,
+  targetLocale: Locale,
+): string {
+  const segments = pathname.split("/").filter(Boolean);
+  const firstSegment = segments[0];
+
+  const sourceLocale: Locale = isValidLocale(firstSegment)
+    ? firstSegment
+    : locale;
+  const pathWithoutLocale = isValidLocale(firstSegment)
+    ? segments.slice(1)
+    : segments;
+
+  if (pathWithoutLocale.length === 0) {
+    return getLocalizedPath(targetLocale, "portfolio");
+  }
+
+  const [root, maybeSection, ...rest] = pathWithoutLocale;
+
+  if (root === "portfolio") {
+    if (!maybeSection) {
+      return getLocalizedPath(targetLocale, "portfolio");
+    }
+
+    const sectionId = getSectionIdFromSlug(sourceLocale, maybeSection);
+    if (!sectionId) {
+      const fallbackSlug = ["portfolio", maybeSection, ...rest].join("/");
+      return getLocalizedPath(targetLocale, fallbackSlug);
+    }
+
+    const targetSectionSlug = getSectionSlug(targetLocale, sectionId);
+    return getLocalizedPath(targetLocale, `portfolio/${targetSectionSlug}`);
+  }
+
+  if (root === "curriculo" || root === "resume") {
+    return getLocalizedPath(
+      targetLocale,
+      targetLocale === "en" ? "resume" : "curriculo",
+    );
+  }
+
+  const fallbackPath = pathWithoutLocale.join("/");
+  return targetLocale === defaultLocale
+    ? `/${fallbackPath}`
+    : `/${targetLocale}/${fallbackPath}`;
+}
+
 export function Navbar({ locale, items }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-  const resumeHref = getLocalizedPath(
-    locale,
-    locale === "en" ? "resume" : "curriculo",
-  );
+  const resumeHref = RESUME_PDF_URL_BY_LOCALE[locale];
+  const logoLabel = locale === "pt" ? "Portfólio" : "Portfolio";
+  const portfolioHref = getLocalizedPath(locale, "portfolio");
+
+  const localeHref = {
+    pt: toTargetLocalePath(pathname, locale, "pt"),
+    en: toTargetLocalePath(pathname, locale, "en"),
+  };
 
   const labels = {
     close: locale === "pt" ? "Fechar menu" : "Close menu",
     menu: locale === "pt" ? "Menu" : "Menu",
     navigation: locale === "pt" ? "Navegacao" : "Navigation",
-    resume: "Resume",
+    resume: locale === "pt" ? "Currículo" : "Resume",
     openMenu: locale === "pt" ? "Abrir menu" : "Open menu",
+    switchToEnglish: "Switch to English",
+    switchToPortuguese: "Trocar para português",
   };
 
   return (
@@ -62,12 +128,40 @@ export function Navbar({ locale, items }: NavbarProps) {
             border-b border-neutral-200 py-3
           "
         >
-          <Link
-            href="/"
-            className="shrink-0 font-semibold uppercase leading-none"
-          >
-            Portfolio
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href={portfolioHref}
+              className="shrink-0 font-semibold uppercase leading-none"
+            >
+              {logoLabel}
+            </Link>
+
+            <div className="flex items-center gap-2">
+              <Link
+                href={localeHref.pt}
+                aria-label={labels.switchToPortuguese}
+                className={
+                  locale === "pt"
+                    ? "inline-flex min-w-9 items-center justify-center border border-black bg-black px-2 py-1 text-xs font-medium leading-none text-white"
+                    : "inline-flex min-w-9 items-center justify-center border border-neutral-300 px-2 py-1 text-xs font-medium leading-none text-black transition-colors hover:border-black"
+                }
+              >
+                PT
+              </Link>
+
+              <Link
+                href={localeHref.en}
+                aria-label={labels.switchToEnglish}
+                className={
+                  locale === "en"
+                    ? "inline-flex min-w-9 items-center justify-center border border-black bg-black px-2 py-1 text-xs font-medium leading-none text-white"
+                    : "inline-flex min-w-9 items-center justify-center border border-neutral-300 px-2 py-1 text-xs font-medium leading-none text-black transition-colors hover:border-black"
+                }
+              >
+                EN
+              </Link>
+            </div>
+          </div>
 
           <div className="hidden md:flex items-center gap-8">
             <ul className="flex items-center gap-8">
@@ -82,6 +176,8 @@ export function Navbar({ locale, items }: NavbarProps) {
 
             <Link
               href={resumeHref}
+              target="_blank"
+              rel="noopener noreferrer"
               className="shrink-0 bg-black px-5 py-3 leading-none text-white"
             >
               {labels.resume}
