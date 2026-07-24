@@ -1,20 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 import { MobileMenuDrawer } from "@/components/navbar/MobileMenuDrawer";
 import { NavbarLink } from "@/components/navbar/NavbarLink";
-import {
-  getSectionIdFromSlug,
-  getSectionSlug,
-} from "@/components/navbar/navigation";
+import { useNavbar } from "@/components/navbar/useNavbar";
 import type { SectionId } from "@/content/navbar";
 import type { Locale } from "@/i18n/config";
-import { defaultLocale, getLocalizedPath, isValidLocale } from "@/i18n/config";
-
-import { useState } from "react";
-import type { MouseEvent } from "react";
 
 export type { SectionId };
 
@@ -40,107 +32,17 @@ const DESKTOP_LINK_CLASSNAME = `
   hover:after:scale-x-100
 `;
 
-const SKIP_SECTION_SCROLL_ANIMATION_KEY = "skipSectionScrollAnimation";
-
-function isPlainLeftClick(event: MouseEvent<HTMLAnchorElement>) {
-  return !(
-    event.defaultPrevented ||
-    event.button !== 0 ||
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey ||
-    event.altKey
-  );
-}
-
-const RESUME_PDF_URL_BY_LOCALE: Record<Locale, string> = {
-  pt: "https://www.victornns.com/pdf/victor-nascimento-curriculo.pdf",
-  en: "https://www.victornns.com/pdf/victor-nascimento-resume.pdf",
-};
-
-function toTargetLocalePath(
-  pathname: string,
-  locale: Locale,
-  targetLocale: Locale,
-): string {
-  const segments = pathname.split("/").filter(Boolean);
-  const firstSegment = segments[0];
-
-  const sourceLocale: Locale = isValidLocale(firstSegment)
-    ? firstSegment
-    : locale;
-  const pathWithoutLocale = isValidLocale(firstSegment)
-    ? segments.slice(1)
-    : segments;
-
-  if (pathWithoutLocale.length === 0) {
-    return getLocalizedPath(targetLocale, "portfolio");
-  }
-
-  const [root, maybeSection, ...rest] = pathWithoutLocale;
-
-  if (root === "portfolio") {
-    if (!maybeSection) {
-      return getLocalizedPath(targetLocale, "portfolio");
-    }
-
-    const sectionId = getSectionIdFromSlug(sourceLocale, maybeSection);
-    if (!sectionId) {
-      const fallbackSlug = ["portfolio", maybeSection, ...rest].join("/");
-      return getLocalizedPath(targetLocale, fallbackSlug);
-    }
-
-    const targetSectionSlug = getSectionSlug(targetLocale, sectionId);
-    const restSlug = rest.length > 0 ? `/${rest.join("/")}` : "";
-    return getLocalizedPath(
-      targetLocale,
-      `portfolio/${targetSectionSlug}${restSlug}`,
-    );
-  }
-
-  if (root === "curriculo" || root === "resume") {
-    return getLocalizedPath(
-      targetLocale,
-      targetLocale === "en" ? "resume" : "curriculo",
-    );
-  }
-
-  const fallbackPath = pathWithoutLocale.join("/");
-  return targetLocale === defaultLocale
-    ? `/${fallbackPath}`
-    : `/${targetLocale}/${fallbackPath}`;
-}
-
 export function Navbar({ locale, items }: NavbarProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
-
-  function handleLocaleSwitchClick(event: MouseEvent<HTMLAnchorElement>) {
-    if (!isPlainLeftClick(event)) {
-      return;
-    }
-
-    window.sessionStorage.setItem(SKIP_SECTION_SCROLL_ANIMATION_KEY, "1");
-  }
-
-  const resumeHref = RESUME_PDF_URL_BY_LOCALE[locale];
-  const logoLabel = locale === "pt" ? "Portfólio" : "Portfolio";
-  const portfolioHref = getLocalizedPath(locale, "portfolio");
-
-  const localeHref = {
-    pt: toTargetLocalePath(pathname, locale, "pt"),
-    en: toTargetLocalePath(pathname, locale, "en"),
-  };
-
-  const labels = {
-    close: locale === "pt" ? "Fechar menu" : "Close menu",
-    menu: locale === "pt" ? "Menu" : "Menu",
-    navigation: locale === "pt" ? "Navegacao" : "Navigation",
-    resume: locale === "pt" ? "Currículo" : "Resume",
-    openMenu: locale === "pt" ? "Abrir menu" : "Open menu",
-    switchToEnglish: "Switch to English",
-    switchToPortuguese: "Trocar para português",
-  };
+  const {
+    isMobileMenuOpen,
+    setIsMobileMenuOpen,
+    logo,
+    resumeHref,
+    portfolioHref,
+    localeHref,
+    labels,
+    handleLocaleSwitchClick,
+  } = useNavbar(locale);
 
   return (
     <>
@@ -159,7 +61,7 @@ export function Navbar({ locale, items }: NavbarProps) {
               href={portfolioHref}
               className="shrink-0 font-semibold uppercase leading-none"
             >
-              {logoLabel}
+              {logo}
             </Link>
 
             <div className="flex items-center gap-2">

@@ -3,15 +3,6 @@ import { getSectionSlug } from "@/components/navbar";
 
 import type { Project } from "@/content/projects";
 
-/**
- * The project's `id` doubles as its public URL slug: it's already a unique,
- * kebab-case identifier shared across locales, so no separate slug field is
- * needed to build friendly, localized project URLs.
- */
-export function getProjectSlug(project: Project): string {
-  return project.id;
-}
-
 export function getProjectsSectionPath(locale: Locale): string {
   return getLocalizedPath(
     locale,
@@ -20,12 +11,35 @@ export function getProjectsSectionPath(locale: Locale): string {
 }
 
 export function getProjectPath(locale: Locale, project: Project): string {
-  return `${getProjectsSectionPath(locale)}/${getProjectSlug(project)}`;
+  return `${getProjectsSectionPath(locale)}/${project.slug}`;
 }
 
 export function getProjectBySlug(
   projects: Project[],
   slug: string,
 ): Project | undefined {
-  return projects.find((project) => getProjectSlug(project) === slug);
+  return projects.find((project) => project.slug === slug);
+}
+
+export function getProjectIndex(
+  projects: Project[],
+  id: Project["id"],
+): number {
+  return projects.findIndex((project) => project.id === id);
+}
+
+export function getAdjacentProject(
+  projects: Project[],
+  currentId: Project["id"],
+  direction: "previous" | "next",
+): Project | undefined {
+  const currentIndex = getProjectIndex(projects, currentId);
+  if (currentIndex === -1) {
+    return undefined;
+  }
+
+  const offset = direction === "next" ? 1 : -1;
+  const nextIndex = (currentIndex + offset + projects.length) % projects.length;
+
+  return projects[nextIndex];
 }

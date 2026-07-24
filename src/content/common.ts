@@ -11,6 +11,9 @@ export interface CommonContent {
   preview: string;
   projectDetails: string;
   stack: string;
+  design: string;
+  /** Public URL slug for the resume/curriculo route (external word, not the internal folder name). */
+  resumeSlug: string;
 }
 
 export const commonContent: Record<Locale, CommonContent> = {
@@ -25,6 +28,8 @@ export const commonContent: Record<Locale, CommonContent> = {
     preview: "Preview",
     projectDetails: "Detalhes do projeto",
     stack: "Stack",
+    design: "Design",
+    resumeSlug: "curriculo",
   },
   en: {
     viewProject: "View project",
@@ -37,5 +42,7 @@ export const commonContent: Record<Locale, CommonContent> = {
     preview: "Preview",
     projectDetails: "Project details",
     stack: "Stack",
+    design: "Design",
+    resumeSlug: "resume",
   },
 };

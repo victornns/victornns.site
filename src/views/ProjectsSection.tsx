@@ -11,6 +11,8 @@ import type { Locale } from "@/i18n/config";
 
 import { ProjectDetailsDrawer } from "@/components/projects/ProjectDetailsDrawer";
 import {
+  getAdjacentProject,
+  getProjectBySlug,
   getProjectPath,
   getProjectsSectionPath,
 } from "@/components/projects/projectRoutes";
@@ -29,19 +31,21 @@ type ProjectItemProps = {
   project: Project;
   onOpenDetails: (projectId: Project["id"]) => void;
   openLabel: string;
+  designLabel: string;
 };
 
 type DesignCreditProps = {
   organizationId?: Project["organizationId"];
+  label: string;
 };
 
-function DesignCredit({ organizationId }: DesignCreditProps) {
+function DesignCredit({ organizationId, label }: DesignCreditProps) {
   if (!organizationId) return null;
 
   return (
     <>
       {TOKENS.separator.default}
-      Design: <OrganizationDisplayName id={organizationId} />
+      {label}: <OrganizationDisplayName id={organizationId} />
     </>
   );
 }
@@ -72,7 +76,12 @@ function ProjectLink({ project }: { project: Project }) {
   ) : null;
 }
 
-function ProjectItem({ project, onOpenDetails, openLabel }: ProjectItemProps) {
+function ProjectItem({
+  project,
+  onOpenDetails,
+  openLabel,
+  designLabel,
+}: ProjectItemProps) {
   const { date, organizationId, summary } = project;
 
   return (
@@ -80,7 +89,7 @@ function ProjectItem({ project, onOpenDetails, openLabel }: ProjectItemProps) {
       <UICard.Root className="transition-colors group-hover:bg-neutral-50 group-focus-within:bg-neutral-50">
         <UICard.Label>
           {date}
-          <DesignCredit organizationId={organizationId} />
+          <DesignCredit organizationId={organizationId} label={designLabel} />
           <ProjectLink project={project} />
         </UICard.Label>
         <UICard.Title>
@@ -116,14 +125,30 @@ export function ProjectsSection({
   const activeProject =
     projects.items.find((project) => project.id === selectedProjectId) ?? null;
 
+  function syncPath(path: string, mode: "push" | "replace") {
+    if (window.location.pathname === path) {
+      return;
+    }
+
+    if (mode === "replace") {
+      window.history.replaceState(null, "", path);
+    } else {
+      window.history.pushState(null, "", path);
+    }
+  }
+
   // Keeps the drawer in sync with the URL: the browser's back/forward
   // buttons should open/close it the same way clicking a project does.
   useEffect(() => {
     function handlePopState() {
+      const sectionPath = getProjectsSectionPath(locale);
       const { pathname } = window.location;
-      const matchedProject = projects.items.find(
-        (project) => pathname === getProjectPath(locale, project),
-      );
+      const slug = pathname.startsWith(`${sectionPath}/`)
+        ? pathname.slice(sectionPath.length + 1)
+        : null;
+      const matchedProject = slug
+        ? getProjectBySlug(projects.items, slug)
+        : undefined;
 
       if (matchedProject) {
         setSelectedProjectId(matchedProject.id);
@@ -145,10 +170,7 @@ export function ProjectsSection({
     setIsProjectDrawerOpen(true);
 
     if (project) {
-      const nextPath = getProjectPath(locale, project);
-      if (window.location.pathname !== nextPath) {
-        window.history.pushState(null, "", nextPath);
-      }
+      syncPath(getProjectPath(locale, project), "push");
     }
   }
 
@@ -156,10 +178,7 @@ export function ProjectsSection({
     setIsProjectDrawerOpen(open);
 
     if (!open) {
-      const sectionPath = getProjectsSectionPath(locale);
-      if (window.location.pathname !== sectionPath) {
-        window.history.pushState(null, "", sectionPath);
-      }
+      syncPath(getProjectsSectionPath(locale), "push");
     }
   }
 
@@ -168,25 +187,18 @@ export function ProjectsSection({
       return;
     }
 
-    const activeIndex = projects.items.findIndex(
-      (project) => project.id === activeProject.id,
+    const nextProject = getAdjacentProject(
+      projects.items,
+      activeProject.id,
+      direction,
     );
 
-    if (activeIndex === -1) {
+    if (!nextProject) {
       return;
     }
 
-    const offset = direction === "next" ? 1 : -1;
-    const nextIndex =
-      (activeIndex + offset + projects.items.length) % projects.items.length;
-    const nextProject = projects.items[nextIndex];
-
     setSelectedProjectId(nextProject.id);
-
-    const nextPath = getProjectPath(locale, nextProject);
-    if (window.location.pathname !== nextPath) {
-      window.history.replaceState(null, "", nextPath);
-    }
+    syncPath(getProjectPath(locale, nextProject), "replace");
   }
 
   return (
@@ -203,6 +215,7 @@ export function ProjectsSection({
                 project={project}
                 onOpenDetails={handleOpenDetails}
                 openLabel={common.projectDetails}
+                designLabel={common.design}
               />
             </li>
           ))}

@@ -1,13 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
-
 import { Drawer } from "@/components/drawer/Drawer";
 import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
+import { useProjectDetails } from "@/components/projects/useProjectDetails";
 import { UILink } from "@/components/ui/UILink";
 import { TOKENS } from "@/lib/constants";
 import { sanitizeUrlForDisplay } from "@/lib/utils";
-import { getContent } from "@/content";
 
 import type { Project } from "@/content/projects";
 import type { Locale } from "@/i18n/config";
@@ -20,16 +18,6 @@ interface ProjectDetailsDrawerProps {
   onOpenChange: (open: boolean) => void;
   onPrevious: () => void;
   onNext: () => void;
-}
-
-function getPrimaryProjectUrl(project: Project) {
-  const officialLink = project.links?.official;
-
-  if (officialLink && !officialLink.expired) {
-    return officialLink.url;
-  }
-
-  return project.links?.preview?.url ?? null;
 }
 
 function NavButton({
@@ -79,51 +67,34 @@ export function ProjectDetailsDrawer({
   onPrevious,
   onNext,
 }: ProjectDetailsDrawerProps) {
-  const { common } = getContent(locale);
+  const {
+    common,
+    activeProject: project,
+    currentIndex,
+    totalProjects,
+    eyebrow,
+    previewUrl,
+    primaryUrl,
+    officialUrl,
+    showPreviewAction,
+  } = useProjectDetails({
+    locale,
+    projects,
+    activeProject,
+    open,
+    onPrevious,
+    onNext,
+  });
 
-  useEffect(() => {
-    if (!open) {
-      return;
-    }
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        onPrevious();
-      }
-
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        onNext();
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [open, onNext, onPrevious]);
-
-  if (!activeProject) {
+  if (!project) {
     return null;
   }
-
-  const currentIndex = projects.findIndex(
-    (project) => project.id === activeProject.id,
-  );
-  const totalProjects = projects.length;
-  const eyebrow = activeProject.type?.join(TOKENS.separator.bullet);
-  const previewUrl = activeProject.links?.preview?.url;
-  const primaryUrl = getPrimaryProjectUrl(activeProject);
-  const officialUrl = activeProject.links?.official?.url;
-  const showPreviewAction = previewUrl && previewUrl !== primaryUrl;
 
   return (
     <Drawer
       open={open}
       onOpenChange={onOpenChange}
-      title={`${common.projectDetails}: ${activeProject.title}`}
+      title={`${common.projectDetails}: ${project.title}`}
       closeLabel={common.close}
       contentClassName="[--drawer-panel-width:90vw] md:[--drawer-panel-width:70vw] lg:[--drawer-panel-width:50vw] max-w-4xl"
     >
@@ -159,25 +130,23 @@ export function ProjectDetailsDrawer({
 
             <div className="space-y-3">
               <h2 className="max-w-3xl text-4xl font-semibold leading-tight md:text-5xl">
-                {activeProject.title}
+                {project.title}
               </h2>
 
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-neutral-500">
-                <span>{activeProject.date}</span>
-                {activeProject.organizationId && (
+                <span>{project.date}</span>
+                {project.organizationId && (
                   <>
                     <span>{TOKENS.separator.default}</span>
-                    <OrganizationDisplayName
-                      id={activeProject.organizationId}
-                    />
+                    <OrganizationDisplayName id={project.organizationId} />
                   </>
                 )}
               </div>
             </div>
 
-            {activeProject.summary[0] && (
+            {project.summary[0] && (
               <p className="max-w-3xl text-lg leading-8 text-neutral-700">
-                {activeProject.summary[0]}
+                {project.summary[0]}
               </p>
             )}
           </div>
@@ -212,20 +181,20 @@ export function ProjectDetailsDrawer({
               </h3>
 
               <div className="space-y-4 leading-8 text-neutral-700">
-                {activeProject.summary.map((paragraph) => (
+                {project.summary.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
             </div>
 
-            {activeProject.technologies?.length ? (
+            {project.technologies?.length ? (
               <aside className="space-y-4">
                 <h3 className="text-xs uppercase tracking-[0.24em] text-neutral-500">
                   {common.stack}
                 </h3>
 
                 <ul className="flex flex-wrap gap-2">
-                  {activeProject.technologies.map((technology) => (
+                  {project.technologies.map((technology) => (
                     <li
                       key={technology}
                       className="border border-neutral-200 px-3 py-2 text-sm text-neutral-700"

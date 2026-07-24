@@ -24,3 +24,40 @@ export const sectionRoutes: Record<Locale, Record<string, SectionId>> = {
     contact: "contact",
   },
 };
+
+export interface NavbarLabels {
+  logo: string;
+  openMenu: string;
+  closeMenu: string;
+  menu: string;
+  navigation: string;
+  resume: string;
+  resumeUrl: string;
+}
+
+export const navbarLabels: Record<Locale, NavbarLabels> = {
+  pt: {
+    logo: "Portfólio",
+    openMenu: "Abrir menu",
+    closeMenu: "Fechar menu",
+    menu: "Menu",
+    navigation: "Navegacao",
+    resume: "Currículo",
+    resumeUrl: "https://www.victornns.com/pdf/victor-nascimento-curriculo.pdf",
+  },
+  en: {
+    logo: "Portfolio",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    menu: "Menu",
+    navigation: "Navigation",
+    resume: "Resume",
+    resumeUrl: "https://www.victornns.com/pdf/victor-nascimento-resume.pdf",
+  },
+};
+
+/** Aria-label naming the target language, always spoken in that language regardless of the current locale. */
+export const switchLocaleLabel: Record<Locale, string> = {
+  pt: "Trocar para português",
+  en: "Switch to English",
+};

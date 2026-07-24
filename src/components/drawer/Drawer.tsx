@@ -10,7 +10,7 @@ interface DrawerProps {
   title: string;
   children: ReactNode;
   contentClassName?: string;
-  closeLabel?: string;
+  closeLabel: string;
   closeButtonClassName?: string;
   showCloseButton?: boolean;
 }
@@ -25,7 +25,7 @@ export function Drawer({
   title,
   children,
   contentClassName,
-  closeLabel = "Close",
+  closeLabel,
   closeButtonClassName,
   showCloseButton = true,
 }: DrawerProps) {

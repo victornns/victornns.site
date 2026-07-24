@@ -1,4 +1,4 @@
-import { defaultLocale, isValidLocale, type Locale } from "@/i18n/config";
+import { getLocale } from "@/i18n/config";
 
 import { AboutSection } from "@/views/AboutSection";
 import { ContactsSection } from "@/views/ContactsSection";
@@ -10,7 +10,7 @@ type CurriculoPageProps = {
 
 export default async function CurriculoPage({ params }: CurriculoPageProps) {
   const { locale: rawLocale } = await params;
-  const locale: Locale = isValidLocale(rawLocale) ? rawLocale : defaultLocale;
+  const locale = getLocale(rawLocale);
 
   return (
     <>

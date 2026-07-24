@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { defaultLocale, isValidLocale } from "@/i18n/config";
+import { getLocale } from "@/i18n/config";
 
 type LocaleIndexPageProps = {
   params: Promise<{ locale: string }>;
@@ -9,5 +9,5 @@ type LocaleIndexPageProps = {
 export default async function LocaleIndexPage({ params }: LocaleIndexPageProps) {
   const { locale } = await params;
 
-  redirect(`/${isValidLocale(locale) ? locale : defaultLocale}/portfolio`);
+  redirect(`/${getLocale(locale)}/portfolio`);
 }

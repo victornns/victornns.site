@@ -5,6 +5,7 @@ export type ProjectKind = "Site Institucional" | "Site Corporativo" | "Landing P
 
 export interface Project {
   id: string;
+  slug: string;
   title: string;
   organizationId?: OrganizationId;
   date: string;
@@ -30,11 +31,33 @@ export interface ProjectsContent {
   items: Project[];
 }
 
-export const projectsContent: Record<Locale, ProjectsContent> = {
-  pt: {
-    title: "Projetos",
-    description: "Seleção de blogs, websites, campanhas, CMS e soluções web desenvolvidas",
-    items: [
+/** Raw project entry: `slug` is optional here and resolved (with dedupe) by `withUniqueSlugs`. */
+type ProjectInput = Omit<Project, "slug"> & { slug?: string };
+
+/**
+ * Resolves each project's public slug, defaulting to its `id`. Manual slugs
+ * are respected as-is; only real duplicates get an incremental suffix (e.g.
+ * `meu-projeto-2`), keeping slugs unique within each locale.
+ */
+function withUniqueSlugs(items: ProjectInput[]): Project[] {
+  const usedSlugs = new Set<string>();
+
+  return items.map((item) => {
+    const baseSlug = item.slug ?? item.id;
+    let slug = baseSlug;
+    let attempt = 2;
+
+    while (usedSlugs.has(slug)) {
+      slug = `${baseSlug}-${attempt}`;
+      attempt += 1;
+    }
+
+    usedSlugs.add(slug);
+    return { ...item, slug };
+  });
+}
+
+const ptItems: ProjectInput[] = [
       {
         id: "onepage-institucional-aza8",
         title: "One Page institucional Aza8",
@@ -227,12 +250,9 @@ export const projectsContent: Record<Locale, ProjectsContent> = {
         type: ["CMS", "Portal"],
         highlight: true,
       },
-    ],
-  },
-  en: {
-    title: "Projects",
-    description: "Selection of blogs, websites, campaigns, CMS and web solutions developed",
-    items: [
+];
+
+const enItems: ProjectInput[] = [
       {
         id: "onepage-institucional-aza8",
         title: "Aza8 Institutional One-Page Site",
@@ -425,6 +445,17 @@ export const projectsContent: Record<Locale, ProjectsContent> = {
         type: ["CMS", "Portal"],
         highlight: true,
       },
-    ],
+];
+
+export const projectsContent: Record<Locale, ProjectsContent> = {
+  pt: {
+    title: "Projetos",
+    description: "Seleção de blogs, websites, campanhas, CMS e soluções web desenvolvidas",
+    items: withUniqueSlugs(ptItems),
+  },
+  en: {
+    title: "Projects",
+    description: "Selection of blogs, websites, campaigns, CMS and web solutions developed",
+    items: withUniqueSlugs(enItems),
   },
 };
