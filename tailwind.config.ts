@@ -13,12 +13,12 @@ export default {
       },
       keyframes: {
         "drawer-slide-in": {
-          from: { transform: "translateX(100%)" },
-          to: { transform: "translateX(0)" },
+          from: { transform: "translate3d(100%, 0, 0)" },
+          to: { transform: "translate3d(0, 0, 0)" },
         },
         "drawer-slide-out": {
-          from: { transform: "translateX(0)" },
-          to: { transform: "translateX(100%)" },
+          from: { transform: "translate3d(0, 0, 0)" },
+          to: { transform: "translate3d(100%, 0, 0)" },
         },
         "overlay-fade-in": {
           from: { opacity: "0" },
@@ -30,8 +30,10 @@ export default {
         },
       },
       animation: {
-        "drawer-slide-in": "drawer-slide-in 300ms ease-out forwards",
-        "drawer-slide-out": "drawer-slide-out 300ms ease-out forwards",
+        "drawer-slide-in":
+          "drawer-slide-in 280ms cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "drawer-slide-out":
+          "drawer-slide-out 240ms cubic-bezier(0.4, 0, 1, 1) forwards",
         "overlay-fade-in": "overlay-fade-in 200ms ease-out forwards",
         "overlay-fade-out": "overlay-fade-out 200ms ease-out forwards",
       },

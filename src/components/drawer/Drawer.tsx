@@ -32,11 +32,11 @@ export function Drawer({
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-[60] bg-black/18 backdrop-blur-sm data-[state=closed]:animate-overlay-fade-out data-[state=open]:animate-overlay-fade-in" />
+        <Dialog.Overlay className="fixed inset-0 z-[60] bg-black/18 backdrop-blur-[2px] data-[state=closed]:animate-overlay-fade-out data-[state=open]:animate-overlay-fade-in" />
 
         <Dialog.Content
           className={joinClassNames(
-            "fixed inset-y-0 right-0 z-[70] w-[var(--drawer-panel-width,100vw)] max-w-full overflow-y-auto border-l border-neutral-200 bg-white px-6 pb-8 pt-16 shadow-2xl outline-none transform-gpu data-[state=closed]:animate-drawer-slide-out data-[state=open]:animate-drawer-slide-in md:px-8",
+            "fixed inset-y-0 right-0 z-[70] w-[var(--drawer-panel-width,100vw)] max-w-full overflow-y-auto border-l border-neutral-200 bg-white px-6 pb-8 pt-16 shadow-2xl outline-none transform-gpu will-change-transform [backface-visibility:hidden] [contain:paint] data-[state=closed]:animate-drawer-slide-out data-[state=open]:animate-drawer-slide-in md:px-8",
             contentClassName,
           )}
         >
