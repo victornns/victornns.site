@@ -101,6 +101,7 @@ export function ProjectDetailsDrawer({
       onOpenChange={onOpenChange}
       title={`${common.projectDetails}: ${project.title}`}
       closeLabel={common.close}
+      elevated
       contentClassName="[--drawer-panel-width:90vw] md:[--drawer-panel-width:70vw] lg:[--drawer-panel-width:50vw] max-w-4xl"
       skipEnterAnimation={skipEnterAnimation}
     >

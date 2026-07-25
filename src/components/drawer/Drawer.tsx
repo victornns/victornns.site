@@ -15,6 +15,14 @@ interface DrawerProps {
   showCloseButton?: boolean;
   /** Skip the entrance animation for this open (e.g. it was already open on load, so there's nothing "opening" from the reader's perspective). The close animation is unaffected. */
   skipEnterAnimation?: boolean;
+  /**
+   * Raises this drawer above the mobile menu toggle button (z-[80] in
+   * Navbar.tsx). That button normally sits above every drawer's default
+   * z-index so it keeps working as the mobile menu's own close control, but
+   * a drawer with its own close button (like project details) doesn't need
+   * the toggle showing through on top of it.
+   */
+  elevated?: boolean;
 }
 
 function joinClassNames(...parts: Array<string | undefined | false>) {
@@ -31,20 +39,26 @@ export function Drawer({
   closeButtonClassName,
   showCloseButton = true,
   skipEnterAnimation = false,
+  elevated = false,
 }: DrawerProps) {
+  const overlayZIndexClassName = elevated ? "z-[85]" : "z-[60]";
+  const contentZIndexClassName = elevated ? "z-[90]" : "z-[70]";
+
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay
           className={joinClassNames(
-            "fixed inset-0 z-[60] bg-black/18 backdrop-blur-[2px] data-[state=closed]:animate-overlay-fade-out",
+            "fixed inset-0 bg-black/25 backdrop-blur-[2px] data-[state=closed]:animate-overlay-fade-out",
+            overlayZIndexClassName,
             !skipEnterAnimation && "data-[state=open]:animate-overlay-fade-in",
           )}
         />
 
         <Dialog.Content
           className={joinClassNames(
-            "fixed inset-y-0 right-0 z-[70] w-[var(--drawer-panel-width,100vw)] max-w-full overflow-y-auto border-l border-neutral-200 bg-white px-6 pb-8 pt-16 shadow-2xl outline-none transform-gpu will-change-transform [backface-visibility:hidden] [contain:paint] data-[state=closed]:animate-drawer-slide-out",
+            "fixed inset-y-0 right-0 w-[var(--drawer-panel-width,100vw)] max-w-full overflow-y-auto border-l border-neutral-200 bg-white px-6 pb-8 pt-16 shadow-2xl outline-none transform-gpu will-change-transform [backface-visibility:hidden] [contain:paint] data-[state=closed]:animate-drawer-slide-out",
+            contentZIndexClassName,
             !skipEnterAnimation && "data-[state=open]:animate-drawer-slide-in",
             contentClassName,
           )}
