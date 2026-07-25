@@ -45,6 +45,7 @@ export function MobileMenuDrawer({
 
   return (
     <Drawer
+      id="mobile-menu-drawer"
       open={open}
       onOpenChange={onOpenChange}
       title={labels.menu}

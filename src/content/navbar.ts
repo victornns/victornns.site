@@ -5,7 +5,7 @@ import type { Locale } from "@/i18n/config";
  * DOM element (for scrolling) and the folder name of the corresponding
  * route under `src/app/[locale]/` (e.g. `src/app/[locale]/projects/`).
  */
-export type SectionId = "experience" | "projects" | "contact";
+export type SectionId = "experience" | "projects" | "contact" | "stack";
 
 /**
  * Maps the localized public URL slug for a section to its stable internal
@@ -17,11 +17,13 @@ export const sectionRoutes: Record<Locale, Record<string, SectionId>> = {
     projetos: "projects",
     experiencia: "experience",
     contato: "contact",
+    tecnologias: "stack",
   },
   en: {
     projects: "projects",
     experience: "experience",
     contact: "contact",
+    stack: "stack",
   },
 };
 

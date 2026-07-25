@@ -152,18 +152,16 @@ export function Navbar({ locale, items }: NavbarProps) {
         </span>
       </button>
 
-      <div id="mobile-menu-drawer">
-        <MobileMenuDrawer
-          open={isMobileMenuOpen}
-          onOpenChange={setIsMobileMenuOpen}
-          items={items}
-          resumeHref={resumeHref}
-          labels={labels}
-          locale={locale}
-          localeHref={localeHref}
-          skipEnterAnimation={skipMobileMenuEnterAnimation}
-        />
-      </div>
+      <MobileMenuDrawer
+        open={isMobileMenuOpen}
+        onOpenChange={setIsMobileMenuOpen}
+        items={items}
+        resumeHref={resumeHref}
+        labels={labels}
+        locale={locale}
+        localeHref={localeHref}
+        skipEnterAnimation={skipMobileMenuEnterAnimation}
+      />
     </>
   );
 }

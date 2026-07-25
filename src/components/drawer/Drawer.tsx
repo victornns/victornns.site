@@ -9,6 +9,8 @@ interface DrawerProps {
   onOpenChange: (open: boolean) => void;
   title: string;
   children: ReactNode;
+  /** Applied to the dialog content itself, e.g. so a toggle button elsewhere can reference it via aria-controls. */
+  id?: string;
   contentClassName?: string;
   closeLabel: string;
   closeButtonClassName?: string;
@@ -34,6 +36,7 @@ export function Drawer({
   onOpenChange,
   title,
   children,
+  id,
   contentClassName,
   closeLabel,
   closeButtonClassName,
@@ -56,6 +59,7 @@ export function Drawer({
         />
 
         <Dialog.Content
+          id={id}
           className={joinClassNames(
             "fixed inset-y-0 right-0 w-[var(--drawer-panel-width,100vw)] max-w-full overflow-y-auto border-l border-neutral-200 bg-white px-6 pb-8 pt-16 shadow-2xl outline-none transform-gpu will-change-transform [backface-visibility:hidden] [contain:paint] data-[state=closed]:animate-drawer-slide-out",
             contentZIndexClassName,

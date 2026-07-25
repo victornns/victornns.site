@@ -3,6 +3,7 @@ import { aboutContent } from "@/content/about";
 import { contactsContent } from "@/content/contacts";
 import { experiencesContent } from "@/content/experiences";
 import { projectsContent } from "@/content/projects";
+import { techStackContent } from "@/content/techStack";
 
 import type { Locale } from "@/i18n/config";
 
@@ -13,5 +14,6 @@ export function getContent(locale: Locale) {
     contacts: contactsContent[locale],
     experiences: experiencesContent[locale],
     projects: projectsContent[locale],
+    techStack: techStackContent[locale],
   };
 }

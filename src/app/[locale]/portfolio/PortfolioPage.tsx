@@ -11,6 +11,7 @@ import { AboutSection } from "@/views/AboutSection";
 import { ContactsSection } from "@/views/ContactsSection";
 import { ExperienceSection } from "@/views/ExperienceSection";
 import { ProjectsSection } from "@/views/ProjectsSection";
+import { TechStackSection } from "@/views/TechStackSection";
 
 type PortfolioPageProps = {
   locale: Locale;
@@ -36,6 +37,7 @@ export function PortfolioPage({
       <AboutSection locale={locale} />
       <ContactsSection locale={locale} />
       <ExperienceSection locale={locale} />
+      <TechStackSection locale={locale} />
       <ProjectsSection locale={locale} activeProjectId={activeProjectId} />
     </>
   );
