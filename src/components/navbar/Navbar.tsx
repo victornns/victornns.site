@@ -21,8 +21,11 @@ export interface NavbarProps {
   items: NavbarItem[];
 }
 
-const MOBILE_MENU_BUTTON_CLASSNAME =
-  "fixed right-6 top-3 z-[80] inline-flex h-8 w-8 items-center justify-center pointer-events-auto text-black transition-opacity duration-200 hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black md:hidden md:right-12";
+// Fixed height instead of padding, so the toggle button below (which shares
+// this same height) can center itself with flexbox no matter the value.
+const NAVBAR_ROW_HEIGHT_CLASSNAME = "h-12 lg:h-16";
+
+const MOBILE_MENU_BUTTON_CLASSNAME = `fixed right-6 top-0 z-[80] w-8 ${NAVBAR_ROW_HEIGHT_CLASSNAME} inline-flex items-center justify-center pointer-events-auto text-black transition-opacity duration-200 hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black lg:hidden lg:right-12`;
 
 const DESKTOP_LINK_CLASSNAME = `
   relative inline-block py-3 leading-none
@@ -32,11 +35,15 @@ const DESKTOP_LINK_CLASSNAME = `
   hover:after:scale-x-100
 `;
 
+const DESKTOP_LINK_ACTIVE_CLASSNAME = "after:scale-x-100";
+
 export function Navbar({ locale, items }: NavbarProps) {
   const {
     isMobileMenuOpen,
     setIsMobileMenuOpen,
     skipMobileMenuEnterAnimation,
+    activeSectionId,
+    setActiveSectionId,
     logo,
     resumeHref,
     portfolioHref,
@@ -49,13 +56,10 @@ export function Navbar({ locale, items }: NavbarProps) {
     <>
       <nav
         data-portfolio-navbar="true"
-        className="fixed inset-x-0 top-0 z-30 bg-white px-6 md:px-12"
+        className="fixed inset-x-0 top-0 z-30 bg-white px-6 lg:px-12"
       >
         <div
-          className="
-            flex w-full items-center justify-between
-            border-b border-neutral-200 py-3
-          "
+          className={`flex w-full items-center justify-between border-b border-neutral-200 ${NAVBAR_ROW_HEIGHT_CLASSNAME}`}
         >
           <div className="flex items-center gap-4">
             <Link
@@ -96,11 +100,17 @@ export function Navbar({ locale, items }: NavbarProps) {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             <ul className="flex items-center gap-8">
               {items.map((item) => (
                 <li key={item.id}>
-                  <NavbarLink item={item} className={DESKTOP_LINK_CLASSNAME} />
+                  <NavbarLink
+                    item={item}
+                    className={DESKTOP_LINK_CLASSNAME}
+                    activeClassName={DESKTOP_LINK_ACTIVE_CLASSNAME}
+                    isActive={item.id === activeSectionId}
+                    onNavigate={() => setActiveSectionId(item.id)}
+                  />
                 </li>
               ))}
             </ul>
@@ -118,6 +128,14 @@ export function Navbar({ locale, items }: NavbarProps) {
           </div>
         </div>
       </nav>
+
+      {/*
+        The nav above is `fixed` (no space in the flow), so this reserves its
+        exact height instead of leaving content to sit underneath it.
+        -mb-16 cancels out the gap-16 the page's flex layout (see layout.tsx)
+        would otherwise also add right after this spacer.
+      */}
+      <div aria-hidden="true" className={`${NAVBAR_ROW_HEIGHT_CLASSNAME}`} />
 
       <button
         type="button"
@@ -156,6 +174,8 @@ export function Navbar({ locale, items }: NavbarProps) {
         open={isMobileMenuOpen}
         onOpenChange={setIsMobileMenuOpen}
         items={items}
+        activeSectionId={activeSectionId}
+        setActiveSectionId={setActiveSectionId}
         resumeHref={resumeHref}
         labels={labels}
         locale={locale}

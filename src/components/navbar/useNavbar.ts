@@ -1,18 +1,20 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import {
   getSectionIdFromSlug,
   getSectionSlug,
+  sectionOrder,
 } from "@/components/navbar/navigation";
 import {
   consumeShouldReopenMobileMenu,
   prepareLocaleSwitch,
 } from "@/components/navbar/localeSwitchState";
+import { getActiveSectionId } from "@/components/navbar/scrollToSection";
 import { getTranslatedProjectSlug } from "@/components/projects/projectRoutes";
-import { navbarLabels, switchLocaleLabel } from "@/content/navbar";
+import { navbarLabels, switchLocaleLabel, type SectionId } from "@/content/navbar";
 import { commonContent } from "@/content/common";
 import {
   defaultLocale,
@@ -105,6 +107,70 @@ export function useNavbar(locale: Locale) {
     }
   }, []);
 
+  const [activeSectionId, setActiveSectionIdState] = useState<SectionId | null>(
+    null,
+  );
+
+  // Set while a click's own scroll-to animation is still moving: clicking a
+  // link marks it active right away (see setActiveSectionId below), but the
+  // resulting smooth scroll passes through other sections' zones on the way
+  // to its target, and live scroll-spy updates would otherwise flip the
+  // active link back and forth before settling on the right one.
+  const suppressScrollSpyRef = useRef(false);
+  const scrollFrameRef = useRef<number | null>(null);
+  const scrollIdleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+
+  // Highlights the navbar link for whichever section is currently in view.
+  useEffect(() => {
+    function recomputeActiveSection() {
+      scrollFrameRef.current = null;
+      setActiveSectionIdState(getActiveSectionId(sectionOrder));
+    }
+
+    function handleScroll() {
+      if (scrollIdleTimeoutRef.current !== null) {
+        clearTimeout(scrollIdleTimeoutRef.current);
+      }
+      // Once scrolling actually settles, resume following the real scroll
+      // position — this is what lifts the suppression above.
+      scrollIdleTimeoutRef.current = setTimeout(() => {
+        suppressScrollSpyRef.current = false;
+        recomputeActiveSection();
+      }, 150);
+
+      if (suppressScrollSpyRef.current) {
+        return;
+      }
+
+      if (scrollFrameRef.current === null) {
+        scrollFrameRef.current = requestAnimationFrame(recomputeActiveSection);
+      }
+    }
+
+    recomputeActiveSection();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      if (scrollFrameRef.current !== null) {
+        cancelAnimationFrame(scrollFrameRef.current);
+      }
+      if (scrollIdleTimeoutRef.current !== null) {
+        clearTimeout(scrollIdleTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  /** Marks a section active right away (e.g. when its navbar link is clicked), holding that state until the resulting scroll settles. */
+  function setActiveSectionId(sectionId: SectionId) {
+    suppressScrollSpyRef.current = true;
+    setActiveSectionIdState(sectionId);
+  }
+
   const nav = navbarLabels[locale];
 
   const labels = {
@@ -121,6 +187,8 @@ export function useNavbar(locale: Locale) {
     isMobileMenuOpen: isMobileMenuOpenState,
     setIsMobileMenuOpen,
     skipMobileMenuEnterAnimation,
+    activeSectionId,
+    setActiveSectionId,
     logo: nav.logo,
     resumeHref: nav.resumeUrl,
     portfolioHref: getLocalizedPath(locale, "portfolio"),

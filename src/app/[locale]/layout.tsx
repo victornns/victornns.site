@@ -41,7 +41,9 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  const mainClasses = "flex flex-col gap-16 pt-28 pb-16 px-6 md:px-12";
+  // No top padding here: pages with a fixed navbar (see PortfolioPage) reserve
+  // its exact height themselves instead of guessing a value globally.
+  const mainClasses = "flex flex-col gap-16 pb-16 px-6 md:px-12";
 
   return (
     <html lang={localeToHtmlLang[locale]} className="antialiased">

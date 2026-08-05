@@ -9,6 +9,10 @@ import type { NavbarItem } from "@/components/navbar/Navbar";
 interface NavbarLinkProps {
   item: NavbarItem;
   className?: string;
+  /** Extra classes applied on top of `className` while `isActive` is true. */
+  activeClassName?: string;
+  /** Whether the reader is currently scrolled to this item's section. */
+  isActive?: boolean;
   onNavigate?: () => void;
 }
 
@@ -19,6 +23,8 @@ function isModifiedEvent(event: MouseEvent<HTMLAnchorElement>) {
 export function NavbarLink({
   item,
   className = "",
+  activeClassName = "",
+  isActive = false,
   onNavigate,
 }: NavbarLinkProps) {
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
@@ -46,7 +52,8 @@ export function NavbarLink({
     <Link
       href={item.href}
       scroll={false}
-      className={className}
+      aria-current={isActive ? "location" : undefined}
+      className={isActive ? `${className} ${activeClassName}`.trim() : className}
       onClick={handleClick}
     >
       {item.label}

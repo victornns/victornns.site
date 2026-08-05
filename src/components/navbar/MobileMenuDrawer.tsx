@@ -6,8 +6,10 @@ import { Drawer } from "@/components/drawer/Drawer";
 import { LocaleSwitchLinks } from "@/components/LocaleSwitchLinks";
 import { NavbarLink } from "@/components/navbar/NavbarLink";
 
-import type { NavbarItem } from "@/components/navbar/Navbar";
+import type { NavbarItem, SectionId } from "@/components/navbar/Navbar";
 import type { Locale } from "@/i18n/config";
+
+const MOBILE_LINK_ACTIVE_CLASSNAME = "font-semibold text-black";
 
 interface MobileMenuDrawerLabels {
   close: string;
@@ -22,6 +24,8 @@ interface MobileMenuDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   items: NavbarItem[];
+  activeSectionId: SectionId | null;
+  setActiveSectionId: (sectionId: SectionId) => void;
   resumeHref: string;
   labels: MobileMenuDrawerLabels;
   locale: Locale;
@@ -33,6 +37,8 @@ export function MobileMenuDrawer({
   open,
   onOpenChange,
   items,
+  activeSectionId,
+  setActiveSectionId,
   resumeHref,
   labels,
   locale,
@@ -78,7 +84,12 @@ export function MobileMenuDrawer({
               <li key={item.id}>
                 <NavbarLink
                   item={item}
-                  onNavigate={closeDrawer}
+                  onNavigate={() => {
+                    closeDrawer();
+                    setActiveSectionId(item.id);
+                  }}
+                  isActive={item.id === activeSectionId}
+                  activeClassName={MOBILE_LINK_ACTIVE_CLASSNAME}
                   className="flex items-center justify-between border-b border-neutral-200 py-4 text-lg leading-none transition hover:text-neutral-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
                 />
               </li>

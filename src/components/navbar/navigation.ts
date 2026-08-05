@@ -3,7 +3,7 @@ import { sectionRoutes, type SectionId } from "@/content/navbar";
 import { getLocalizedPath, type Locale } from "@/i18n/config";
 import type { NavbarItem } from "@/components/navbar/Navbar";
 
-const sectionOrder: SectionId[] = ["projects", "stack", "experience", "contact"];
+export const sectionOrder: SectionId[] = ["projects", "stack", "experience", "contact"];
 
 const sectionSlugById: Record<
   Locale,
