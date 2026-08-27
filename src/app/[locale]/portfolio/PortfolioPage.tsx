@@ -35,10 +35,10 @@ export function PortfolioPage({
       <SectionScrollTarget sectionId={activeSectionId} identity={scrollIdentity} />
 
       <AboutSection locale={locale} />
-      <ContactsSection locale={locale} />
-      <ExperienceSection locale={locale} />
       <TechStackSection locale={locale} />
+      <ExperienceSection locale={locale} />
       <ProjectsSection locale={locale} activeProjectId={activeProjectId} />
+      <ContactsSection locale={locale} />
     </>
   );
 }

@@ -132,7 +132,7 @@ export function Navbar({ locale, items }: NavbarProps) {
       {/*
         The nav above is `fixed` (no space in the flow), so this reserves its
         exact height instead of leaving content to sit underneath it.
-        -mb-16 cancels out the gap-16 the page's flex layout (see layout.tsx)
+        -mb-16 cancels out the gap-20 the page's flex layout (see layout.tsx)
         would otherwise also add right after this spacer.
       */}
       <div aria-hidden="true" className={`${NAVBAR_ROW_HEIGHT_CLASSNAME}`} />
