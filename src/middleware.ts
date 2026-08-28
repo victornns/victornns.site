@@ -9,15 +9,31 @@ function findCanonicalSlug(locale: Locale, internalSlug: string) {
   const aliases = routeAliases[locale];
   if (!aliases) return undefined;
 
-  return Object.entries(aliases).find(([, internal]) => internal === internalSlug)?.[0];
+  return Object.entries(aliases).find(
+    ([, internal]) => internal === internalSlug,
+  )?.[0];
+}
+
+/** Forwards the request, tagging it with the resolved locale so pages (notably `not-found`) can read it. */
+function forward(request: NextRequest, locale: Locale, rewriteTo?: URL) {
+  const headers = new Headers(request.headers);
+  headers.set("x-locale", locale);
+
+  return rewriteTo
+    ? NextResponse.rewrite(rewriteTo, { request: { headers } })
+    : NextResponse.next({ request: { headers } });
 }
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const segments = pathname.split("/").filter(Boolean);
-  const hasLocalePrefix = (locales as readonly string[]).includes(segments[0] ?? "");
-  const locale: Locale = hasLocalePrefix ? (segments[0] as Locale) : defaultLocale;
+  const hasLocalePrefix = (locales as readonly string[]).includes(
+    segments[0] ?? "",
+  );
+  const locale: Locale = hasLocalePrefix
+    ? (segments[0] as Locale)
+    : defaultLocale;
   const [slug, ...rest] = hasLocalePrefix ? segments.slice(1) : segments;
 
   if (slug) {
@@ -25,7 +41,9 @@ export function middleware(request: NextRequest) {
 
     if (canonicalSlug && canonicalSlug !== slug) {
       const url = request.nextUrl.clone();
-      const newSegments = hasLocalePrefix ? [locale, canonicalSlug, ...rest] : [canonicalSlug, ...rest];
+      const newSegments = hasLocalePrefix
+        ? [locale, canonicalSlug, ...rest]
+        : [canonicalSlug, ...rest];
       url.pathname = `/${newSegments.join("/")}`;
 
       return NextResponse.redirect(url, 308);
@@ -33,23 +51,32 @@ export function middleware(request: NextRequest) {
   }
 
   if (hasLocalePrefix) {
+    // The default locale is canonical without a prefix: /pt/x -> /x, /pt -> /.
+    if (locale === defaultLocale) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/${[slug, ...rest].filter(Boolean).join("/")}`;
+      return NextResponse.redirect(url, 308);
+    }
+
     const internalSlug = slug ? routeAliases[locale]?.[slug] : undefined;
 
     if (!internalSlug) {
-      return NextResponse.next();
+      return forward(request, locale);
     }
 
     const url = request.nextUrl.clone();
     url.pathname = `/${[locale, internalSlug, ...rest].join("/")}`;
 
-    return NextResponse.rewrite(url);
+    return forward(request, locale, url);
   }
 
-  const internalSlug = slug ? (routeAliases[defaultLocale]?.[slug] ?? slug) : undefined;
+  const internalSlug = slug
+    ? (routeAliases[defaultLocale]?.[slug] ?? slug)
+    : undefined;
   const url = request.nextUrl.clone();
   url.pathname = `/${defaultLocale}${internalSlug ? `/${[internalSlug, ...rest].join("/")}` : ""}`;
 
-  return NextResponse.rewrite(url);
+  return forward(request, locale, url);
 }
 
 export const config = {

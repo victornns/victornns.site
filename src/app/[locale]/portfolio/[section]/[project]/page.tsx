@@ -1,28 +1,30 @@
 import { notFound, redirect } from "next/navigation";
 
-import { getLocale, getLocalizedPath, locales } from "@/i18n/config";
+import { getLocalizedPath, locales, type Locale } from "@/i18n/config";
 import { getSectionIdFromSlug } from "@/components/navbar";
 import { getProjectBySlug } from "@/components/projects/projectRoutes";
 import { getContent } from "@/content";
 
-import { PortfolioPage } from "../../PortfolioPage";
+import { PortfolioView } from "../../PortfolioView";
 
 type PortfolioProjectPageProps = {
-  params: Promise<{ locale: string; section: string; project: string }>;
+  params: Promise<{ locale: Locale; section: string; project: string }>;
 };
 
 export default async function PortfolioProjectPage({
   params,
 }: PortfolioProjectPageProps) {
-  const { locale: rawLocale, section, project: projectSlug } = await params;
-  const locale = getLocale(rawLocale);
+  const { locale, section, project: projectSlug } = await params;
 
   const sectionId = getSectionIdFromSlug(locale, section);
   if (sectionId === "projects") {
-    const project = getProjectBySlug(getContent(locale).projects.items, projectSlug);
+    const project = getProjectBySlug(
+      getContent(locale).projects.items,
+      projectSlug,
+    );
     if (project) {
       return (
-        <PortfolioPage
+        <PortfolioView
           locale={locale}
           activeSectionId={sectionId}
           activeProjectId={project.id}
@@ -31,10 +33,8 @@ export default async function PortfolioProjectPage({
     }
   }
 
-  // The section and/or project slug might belong to another locale (e.g. the
-  // URL dropped its locale prefix but kept that locale's own words) —
-  // redirect to the fully-qualified URL if we can resolve the same project
-  // there.
+  // The slugs may belong to another locale — if the same project resolves
+  // there, redirect to that locale's URL.
   const matchedLocale = locales.find((candidate) => {
     if (candidate === locale) {
       return false;
@@ -42,11 +42,15 @@ export default async function PortfolioProjectPage({
     if (getSectionIdFromSlug(candidate, section) !== "projects") {
       return false;
     }
-    return Boolean(getProjectBySlug(getContent(candidate).projects.items, projectSlug));
+    return Boolean(
+      getProjectBySlug(getContent(candidate).projects.items, projectSlug),
+    );
   });
 
   if (matchedLocale) {
-    redirect(getLocalizedPath(matchedLocale, `portfolio/${section}/${projectSlug}`));
+    redirect(
+      getLocalizedPath(matchedLocale, `portfolio/${section}/${projectSlug}`),
+    );
   }
 
   notFound();

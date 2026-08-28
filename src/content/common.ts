@@ -14,6 +14,11 @@ export interface CommonContent {
   design: string;
   /** Public URL slug for the resume/curriculo route (external word, not the internal folder name). */
   resumeSlug: string;
+  notFound: {
+    title: string;
+    description: string;
+    backHome: string;
+  };
 }
 
 export const commonContent: Record<Locale, CommonContent> = {
@@ -30,6 +35,11 @@ export const commonContent: Record<Locale, CommonContent> = {
     stack: "Stack",
     design: "Design",
     resumeSlug: "curriculo",
+    notFound: {
+      title: "Página não encontrada",
+      description: "O endereço acessado não existe ou foi movido.",
+      backHome: "Voltar ao início",
+    },
   },
   en: {
     viewProject: "View project",
@@ -44,5 +54,10 @@ export const commonContent: Record<Locale, CommonContent> = {
     stack: "Stack",
     design: "Design",
     resumeSlug: "resume",
+    notFound: {
+      title: "Page not found",
+      description: "The page you requested doesn't exist or has moved.",
+      backHome: "Back to home",
+    },
   },
 };

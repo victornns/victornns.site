@@ -1,13 +1,15 @@
 import { redirect } from "next/navigation";
 
-import { getLocale } from "@/i18n/config";
+import { getLocalizedPath, type Locale } from "@/i18n/config";
 
 type LocaleIndexPageProps = {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: Locale }>;
 };
 
-export default async function LocaleIndexPage({ params }: LocaleIndexPageProps) {
+export default async function LocaleIndexPage({
+  params,
+}: LocaleIndexPageProps) {
   const { locale } = await params;
 
-  redirect(`/${getLocale(locale)}/portfolio`);
+  redirect(getLocalizedPath(locale, "portfolio"));
 }

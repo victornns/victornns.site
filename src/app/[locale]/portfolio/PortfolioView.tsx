@@ -1,11 +1,6 @@
 import type { Locale } from "@/i18n/config";
 
-import {
-  getNavbarItems,
-  Navbar,
-  SectionScrollTarget,
-  type SectionId,
-} from "@/components/navbar";
+import { SectionScrollTarget, type SectionId } from "@/components/navbar";
 
 import { AboutSection } from "@/views/AboutSection";
 import { ContactsSection } from "@/views/ContactsSection";
@@ -14,7 +9,7 @@ import { EducationSection } from "@/views/EducationSection";
 import { ProjectsSection } from "@/views/ProjectsSection";
 import { TechStackSection } from "@/views/TechStackSection";
 
-type PortfolioPageProps = {
+type PortfolioViewProps = {
   locale: Locale;
   /** When set, smoothly scrolls to this section on load (used by friendly section routes). */
   activeSectionId?: SectionId;
@@ -22,22 +17,19 @@ type PortfolioPageProps = {
   activeProjectId?: string;
 };
 
-export function PortfolioPage({
+export function PortfolioView({
   locale,
   activeSectionId,
   activeProjectId,
-}: PortfolioPageProps) {
-  const navbarItems = getNavbarItems(locale);
+}: PortfolioViewProps) {
   const scrollIdentity = activeProjectId ?? activeSectionId ?? "portfolio";
 
   return (
     <>
-      <Navbar locale={locale} items={navbarItems} />
       <SectionScrollTarget
         sectionId={activeSectionId}
         identity={scrollIdentity}
       />
-
       <AboutSection locale={locale} />
       <TechStackSection locale={locale} />
       <ExperienceSection locale={locale} />

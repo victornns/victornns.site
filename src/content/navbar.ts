@@ -47,7 +47,7 @@ export const navbarLabels: Record<Locale, NavbarLabels> = {
     openMenu: "Abrir menu",
     closeMenu: "Fechar menu",
     menu: "Menu",
-    navigation: "Navegacao",
+    navigation: "Navegação",
     resume: "Currículo",
     resumeUrl: "https://www.victornns.com/pdf/victor-nascimento-curriculo.pdf",
   },

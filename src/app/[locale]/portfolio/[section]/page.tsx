@@ -1,28 +1,29 @@
 import { notFound, redirect } from "next/navigation";
 
-import { getLocale, getLocalizedPath, locales } from "@/i18n/config";
+import { getLocalizedPath, locales, type Locale } from "@/i18n/config";
 import { getSectionIdFromSlug } from "@/components/navbar";
 
-import { PortfolioPage } from "../PortfolioPage";
+import { PortfolioView } from "../PortfolioView";
 
 type PortfolioSectionPageProps = {
-  params: Promise<{ locale: string; section: string }>;
+  params: Promise<{ locale: Locale; section: string }>;
 };
 
-export default async function PortfolioSectionPage({ params }: PortfolioSectionPageProps) {
-  const { locale: rawLocale, section } = await params;
-  const locale = getLocale(rawLocale);
+export default async function PortfolioSectionPage({
+  params,
+}: PortfolioSectionPageProps) {
+  const { locale, section } = await params;
 
   const sectionId = getSectionIdFromSlug(locale, section);
   if (sectionId) {
-    return <PortfolioPage locale={locale} activeSectionId={sectionId} />;
+    return <PortfolioView locale={locale} activeSectionId={sectionId} />;
   }
 
-  // `section` might be another locale's own word for it (e.g. the URL
-  // dropped its locale prefix but kept that locale's section slug) — redirect
-  // to the fully-qualified URL for the locale it actually belongs to.
+  // `section` may be another locale's slug — if it resolves there, redirect
+  // to that locale's URL.
   const matchedLocale = locales.find(
-    (candidate) => candidate !== locale && getSectionIdFromSlug(candidate, section),
+    (candidate) =>
+      candidate !== locale && getSectionIdFromSlug(candidate, section),
   );
 
   if (matchedLocale) {

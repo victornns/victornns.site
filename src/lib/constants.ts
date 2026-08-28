@@ -5,7 +5,4 @@ export const TOKENS = {
     list: ", ",
     dash: " - ",
   },
-  layout: {
-    maxWidth: "1440px",
-  },
 } as const;

@@ -25,7 +25,7 @@ export interface NavbarProps {
 // this same height) can center itself with flexbox no matter the value.
 const NAVBAR_ROW_HEIGHT_CLASSNAME = "h-12 lg:h-16";
 
-const MOBILE_MENU_BUTTON_CLASSNAME = `fixed lg:hidden right-6 top-0 z-[80] w-8 ${NAVBAR_ROW_HEIGHT_CLASSNAME} inline-flex items-center justify-center pointer-events-auto text-black transition-opacity duration-200 hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black lg:hidden lg:right-12`;
+const MOBILE_MENU_BUTTON_CLASSNAME = `fixed xl:hidden right-5 lg:right-12 top-0 z-[80] w-8 ${NAVBAR_ROW_HEIGHT_CLASSNAME} inline-flex items-center justify-center pointer-events-auto text-black transition-opacity duration-200 hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`;
 
 const DESKTOP_LINK_CLASSNAME = `
   relative inline-block py-3 leading-none
@@ -53,9 +53,10 @@ export function Navbar({ locale, items }: NavbarProps) {
   } = useNavbar(locale);
 
   return (
-    <>
+    <header>
       <nav
         data-portfolio-navbar="true"
+        aria-label={labels.navigation}
         className="fixed inset-x-0 top-0 z-30 bg-white px-6 lg:px-12"
       >
         <div
@@ -64,7 +65,7 @@ export function Navbar({ locale, items }: NavbarProps) {
           <div className="flex items-center gap-4">
             <Link
               href={portfolioHref}
-              className="shrink-0 font-semibold uppercase leading-none"
+              className="shrink-0 font-semibold text-wide-tracking leading-none text-xs sm:text-base"
             >
               {logo}
             </Link>
@@ -100,7 +101,7 @@ export function Navbar({ locale, items }: NavbarProps) {
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden xl:flex items-center gap-8">
             <ul className="flex items-center gap-8">
               {items.map((item) => (
                 <li key={item.id}>
@@ -182,6 +183,6 @@ export function Navbar({ locale, items }: NavbarProps) {
         localeHref={localeHref}
         skipEnterAnimation={skipMobileMenuEnterAnimation}
       />
-    </>
+    </header>
   );
 }

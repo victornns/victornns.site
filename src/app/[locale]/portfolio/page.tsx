@@ -1,14 +1,13 @@
-import { getLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 
-import { PortfolioPage } from "./PortfolioPage";
+import { PortfolioView } from "./PortfolioView";
 
 type PortfolioPageProps = {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: Locale }>;
 };
 
-export default async function Portfolio({ params }: PortfolioPageProps) {
-  const { locale: rawLocale } = await params;
-  const locale = getLocale(rawLocale);
+export default async function PortfolioPage({ params }: PortfolioPageProps) {
+  const { locale } = await params;
 
-  return <PortfolioPage locale={locale} />;
+  return <PortfolioView locale={locale} />;
 }
