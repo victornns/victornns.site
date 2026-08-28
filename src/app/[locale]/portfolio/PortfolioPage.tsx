@@ -10,6 +10,7 @@ import {
 import { AboutSection } from "@/views/AboutSection";
 import { ContactsSection } from "@/views/ContactsSection";
 import { ExperienceSection } from "@/views/ExperienceSection";
+import { EducationSection } from "@/views/EducationSection";
 import { ProjectsSection } from "@/views/ProjectsSection";
 import { TechStackSection } from "@/views/TechStackSection";
 
@@ -40,6 +41,7 @@ export function PortfolioPage({
       <AboutSection locale={locale} />
       <TechStackSection locale={locale} />
       <ExperienceSection locale={locale} />
+      <EducationSection locale={locale} />
       <ProjectsSection locale={locale} activeProjectId={activeProjectId} />
       <ContactsSection locale={locale} />
     </>

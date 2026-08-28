@@ -64,6 +64,22 @@ export const organizations = [
     },
     link: "https://www.l4u.com.br/",
   },
+  {
+    id: "impacta-tecnologia",
+    name: {
+      full: "Faculdade Impacta Tecnologia",
+      display: "Faculdade Impacta Tecnologia",
+    },
+    link: "https://www.impacta.edu.br/",
+  },
+  {
+    id: "sao-judas-tadeu",
+    name: {
+      full: "Universidade São Judas Tadeu",
+      display: "Universidade São Judas Tadeu",
+    },
+    link: "https://www.usjt.br/",
+  },
 ] as const satisfies readonly OrganizationType[];
 
 export type Organization = (typeof organizations)[number];
