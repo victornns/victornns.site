@@ -25,7 +25,7 @@ export interface NavbarProps {
 // this same height) can center itself with flexbox no matter the value.
 const NAVBAR_ROW_HEIGHT_CLASSNAME = "h-12 lg:h-16";
 
-const MOBILE_MENU_BUTTON_CLASSNAME = `fixed right-6 top-0 z-[80] w-8 ${NAVBAR_ROW_HEIGHT_CLASSNAME} inline-flex items-center justify-center pointer-events-auto text-black transition-opacity duration-200 hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black lg:hidden lg:right-12`;
+const MOBILE_MENU_BUTTON_CLASSNAME = `fixed lg:hidden right-6 top-0 z-[80] w-8 ${NAVBAR_ROW_HEIGHT_CLASSNAME} inline-flex items-center justify-center pointer-events-auto text-black transition-opacity duration-200 hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black lg:hidden lg:right-12`;
 
 const DESKTOP_LINK_CLASSNAME = `
   relative inline-block py-3 leading-none

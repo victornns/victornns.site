@@ -6,6 +6,7 @@ import type { Experience } from "@/content/experiences";
 
 import { UISection } from "@/components/ui/UISection";
 import { UICard } from "@/components/ui/UICard";
+import { UISplitColumns } from "@/components/ui/UISplitColumns";
 import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
 
 type ExperienceSectionProps = {
@@ -20,7 +21,10 @@ const formatPeriod = (period: Experience["period"], present: string) => {
   return `${startDate}${separator}${endDate}`;
 };
 
-const renderTechnologies = (technologies: Experience["technologies"], label: string) => {
+const renderTechnologies = (
+  technologies: Experience["technologies"],
+  label: string,
+) => {
   const technologiesList = technologies.join(TOKENS.separator.list);
   return (
     <p className="text-xs mt-6">
@@ -42,16 +46,26 @@ export function ExperienceSection({ locale }: ExperienceSectionProps) {
         {experiences.items.map((experience) => (
           <li key={experience.id}>
             <UICard.Root>
-              <UICard.Label>{formatPeriod(experience.period, common.present)}</UICard.Label>
-              <UICard.Title>
-                {experience.role} @{" "}
-                <OrganizationDisplayName
-                  id={experience.organizationId}
-                  className="italic"
-                />
-              </UICard.Title>
-              <UICard.Paragraphs data={experience.summary} />
-              {renderTechnologies(experience.technologies, common.mainTechnologies)}
+              <UISplitColumns
+                aside={
+                  <UICard.Label>
+                    {formatPeriod(experience.period, common.present)}
+                  </UICard.Label>
+                }
+              >
+                <UICard.Title>
+                  {experience.role} @{" "}
+                  <OrganizationDisplayName
+                    id={experience.organizationId}
+                    className="italic"
+                  />
+                </UICard.Title>
+                <UICard.Paragraphs data={experience.summary} />
+                {renderTechnologies(
+                  experience.technologies,
+                  common.mainTechnologies,
+                )}
+              </UISplitColumns>
             </UICard.Root>
           </li>
         ))}

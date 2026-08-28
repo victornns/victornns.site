@@ -19,11 +19,11 @@ export const aboutContent: Record<Locale, About> = {
   pt: {
     title: "Sobre",
     description: [
-      "Atibaia - SP, Brasil",
       "10+ anos em Web",
-      "TypeScript & Node.js",
       "React & Next.js",
-      "Arquitetura & Performance",
+      "TypeScript & Node.js",
+      "Arquitetura & Web Performance",
+      "Atibaia - SP, Brasil",
       "Remoto",
     ],
     summary: [
@@ -39,11 +39,11 @@ export const aboutContent: Record<Locale, About> = {
   en: {
     title: "About",
     description: [
-      "Atibaia - SP, Brazil",
       "10+ years in Web",
-      "TypeScript & Node.js",
       "React & Next.js",
-      "Architecture & Performance",
+      "TypeScript & Node.js",
+      "Architecture & Web Performance",
+      "Atibaia - SP, Brazil",
       "Remote",
     ],
     summary: [
