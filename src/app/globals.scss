@@ -26,3 +26,9 @@
     }
   }
 }
+
+@layer components {
+  .text-wide-tracking {
+    @apply tracking-widest uppercase;
+  }
+}

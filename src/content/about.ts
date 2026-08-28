@@ -3,26 +3,57 @@ import type { Locale } from "@/i18n/config";
 export interface About {
   title: string;
   description: string[];
-  paragraphs: string[];
+  /** Short, concise bio — used on the portfolio page. */
+  summary: string[];
+  /** Longer, resume-focused bio — used on the curriculo page. */
+  resumeSummary: string[];
 }
 
-export const DEV_NAME = "Victor Nascimento N. Silva";
+export const PROFILE_NAME = {
+  first: "Victor",
+  last: "Nascimento N. S.",
+  full: "Victor Nascimento N. Silva",
+};
 
 export const aboutContent: Record<Locale, About> = {
   pt: {
     title: "Sobre",
-    description: [DEV_NAME, "Desde 1995", "São Paulo, Brasil", "Full-Stack Web Developer", "10+ anos em Web", "Remoto"],
-    paragraphs: [
+    description: [
+      "Atibaia - SP, Brasil",
+      "10+ anos em Web",
+      "TypeScript & Node.js",
+      "React & Next.js",
+      "Arquitetura & Performance",
+      "Remoto",
+    ],
+    summary: [
       "Desenvolvedor front-end com 10+ anos de experiência em interfaces, performance e arquitetura web.",
       "Também atuo como freelancer full-stack, conduzindo projetos end-to-end sob demanda.",
+    ],
+    resumeSummary: [
+      "Desenvolvedor front-end com mais de 10 anos de experiência, especializado em interfaces, performance e arquitetura de aplicações web modernas com React, Next.js, TypeScript e Node.js.",
+      "Atuo também como freelancer full-stack, conduzindo projetos end-to-end — do levantamento de requisitos à entrega em produção — para clientes remotos no Brasil e no exterior.",
+      "Tenho foco em código limpo, boas práticas de arquitetura e performance, buscando sempre entregar produtos escaláveis e de fácil manutenção.",
     ],
   },
   en: {
     title: "About",
-    description: [DEV_NAME, "Since 1995", "São Paulo, Brazil", "Full-Stack Web Developer", "10+ years in Web", "Remote"],
-    paragraphs: [
+    description: [
+      "Atibaia - SP, Brazil",
+      "10+ years in Web",
+      "TypeScript & Node.js",
+      "React & Next.js",
+      "Architecture & Performance",
+      "Remote",
+    ],
+    summary: [
       "Front-end developer with 10+ years of experience in interfaces, performance, and web architecture.",
       "I also work as a full-stack freelancer, leading end-to-end projects on demand.",
+    ],
+    resumeSummary: [
+      "Front-end developer with 10+ years of experience, specialized in interfaces, performance, and architecture of modern web applications with React, Next.js, TypeScript, and Node.js.",
+      "I also work as a full-stack freelancer, leading end-to-end projects — from gathering requirements to shipping to production — for remote clients in Brazil and abroad.",
+      "I focus on clean code and solid architecture and performance practices, always aiming to deliver scalable, easy-to-maintain products.",
     ],
   },
 };

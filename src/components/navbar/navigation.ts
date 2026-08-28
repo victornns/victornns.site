@@ -3,7 +3,7 @@ import { sectionRoutes, type SectionId } from "@/content/navbar";
 import { getLocalizedPath, type Locale } from "@/i18n/config";
 import type { NavbarItem } from "@/components/navbar/Navbar";
 
-export const sectionOrder: SectionId[] = ["projects", "stack", "experience", "contact"];
+export const sectionOrder: SectionId[] = ["about", "stack", "experience", "projects", "contact"];
 
 const sectionSlugById: Record<
   Locale,
@@ -29,9 +29,10 @@ export function getSectionIdFromSlug(
 }
 
 export function getNavbarItems(locale: Locale): NavbarItem[] {
-  const { experiences, projects, contacts, techStack } = getContent(locale);
+  const { about, experiences, projects, contacts, techStack } = getContent(locale);
 
   const labelById: Record<SectionId, string> = {
+    about: about.title,
     projects: projects.title,
     stack: techStack.title,
     experience: experiences.title,

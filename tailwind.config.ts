@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        muted: "#737373",
+      },
       fontFamily: {
         sans: ["Verdana", "sans-serif"],
       },

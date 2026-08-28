@@ -17,7 +17,7 @@ interface LocaleSwitchLinksProps {
 function linkClassName(active: boolean) {
   return active
     ? "text-black"
-    : "text-neutral-400 transition-colors hover:text-black";
+    : "text-muted transition-colors hover:text-black";
 }
 
 /**
@@ -38,7 +38,7 @@ export function LocaleSwitchLinks({
 
   return (
     <div
-      className={`flex items-center gap-3 text-xs font-medium uppercase tracking-[0.18em] ${className ?? ""}`}
+      className={`flex items-center gap-3 text-xs text-wide-tracking ${className ?? ""}`}
     >
       <Link
         href={localeHref.pt}

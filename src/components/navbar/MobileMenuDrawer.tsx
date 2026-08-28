@@ -63,7 +63,7 @@ export function MobileMenuDrawer({
       <div className="flex min-h-full flex-col gap-10">
         <header className="space-y-2">
           <div className="flex items-center justify-between gap-4">
-            <p className="text-xs uppercase tracking-[0.24em] text-neutral-500">
+            <p className="text-xs text-wide-tracking text-muted">
               {labels.navigation}
             </p>
 
@@ -79,7 +79,7 @@ export function MobileMenuDrawer({
         </header>
 
         <nav aria-label={labels.menu}>
-          <ul className="flex flex-col border-t border-neutral-200">
+          <ul className="flex flex-col border-t">
             {items.map((item) => (
               <li key={item.id}>
                 <NavbarLink
@@ -90,7 +90,7 @@ export function MobileMenuDrawer({
                   }}
                   isActive={item.id === activeSectionId}
                   activeClassName={MOBILE_LINK_ACTIVE_CLASSNAME}
-                  className="flex items-center justify-between border-b border-neutral-200 py-4 text-lg leading-none transition hover:text-neutral-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+                  className="flex items-center justify-between border-b py-4 text-lg leading-none transition hover:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
                 />
               </li>
             ))}
@@ -101,7 +101,7 @@ export function MobileMenuDrawer({
           href={resumeHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex w-full items-center justify-center bg-black px-5 py-4 text-sm font-medium uppercase tracking-[0.18em] text-white transition hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+          className="inline-flex w-full items-center justify-center bg-black px-5 py-4 text-sm text-wide-tracking text-white transition hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
           onClick={closeDrawer}
         >
           {labels.resume}

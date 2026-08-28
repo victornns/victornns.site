@@ -13,10 +13,10 @@ export default async function CurriculoPage({ params }: CurriculoPageProps) {
   const locale = getLocale(rawLocale);
 
   return (
-    <div className="flex flex-col gap-20 pt-16">
-      <AboutSection locale={locale} />
-      <ContactsSection locale={locale} />
+    <div className="flex flex-col gap-24 pt-24">
+      <AboutSection locale={locale} variant="resume" />
       <ExperienceSection locale={locale} />
+      <ContactsSection locale={locale} />
     </div>
   );
 }

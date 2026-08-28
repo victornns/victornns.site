@@ -59,7 +59,7 @@ export function Navbar({ locale, items }: NavbarProps) {
         className="fixed inset-x-0 top-0 z-30 bg-white px-6 lg:px-12"
       >
         <div
-          className={`flex w-full items-center justify-between border-b border-neutral-200 ${NAVBAR_ROW_HEIGHT_CLASSNAME}`}
+          className={`flex w-full items-center justify-between border-b ${NAVBAR_ROW_HEIGHT_CLASSNAME}`}
         >
           <div className="flex items-center gap-4">
             <Link
@@ -77,8 +77,8 @@ export function Navbar({ locale, items }: NavbarProps) {
                 scroll={false}
                 className={
                   locale === "pt"
-                    ? "inline-flex min-w-9 items-center justify-center border border-black bg-black px-2 py-1 text-xs font-medium leading-none text-white"
-                    : "inline-flex min-w-9 items-center justify-center border border-neutral-300 px-2 py-1 text-xs font-medium leading-none text-black transition-colors hover:border-black"
+                    ? "inline-flex min-w-9 items-center justify-center border border-black bg-black px-2 py-1 text-xs leading-none text-white"
+                    : "inline-flex min-w-9 items-center justify-center border px-2 py-1 text-xs leading-none text-black transition-colors hover:border-black"
                 }
               >
                 PT
@@ -91,8 +91,8 @@ export function Navbar({ locale, items }: NavbarProps) {
                 scroll={false}
                 className={
                   locale === "en"
-                    ? "inline-flex min-w-9 items-center justify-center border border-black bg-black px-2 py-1 text-xs font-medium leading-none text-white"
-                    : "inline-flex min-w-9 items-center justify-center border border-neutral-300 px-2 py-1 text-xs font-medium leading-none text-black transition-colors hover:border-black"
+                    ? "inline-flex min-w-9 items-center justify-center border border-black bg-black px-2 py-1 text-xs leading-none text-white"
+                    : "inline-flex min-w-9 items-center justify-center border px-2 py-1 text-xs leading-none text-black transition-colors hover:border-black"
                 }
               >
                 EN
@@ -132,7 +132,7 @@ export function Navbar({ locale, items }: NavbarProps) {
       {/*
         The nav above is `fixed` (no space in the flow), so this reserves its
         exact height instead of leaving content to sit underneath it.
-        -mb-16 cancels out the gap-20 the page's flex layout (see layout.tsx)
+        -mb-16 cancels out the gap-24 the page's flex layout (see layout.tsx)
         would otherwise also add right after this spacer.
       */}
       <div aria-hidden="true" className={`${NAVBAR_ROW_HEIGHT_CLASSNAME}`} />

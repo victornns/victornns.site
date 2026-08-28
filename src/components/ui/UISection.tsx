@@ -12,7 +12,7 @@ function HeadingSection({ level, children }: HeadingSectionProps) {
   const prefix = "//";
 
   return (
-    <Tag className="text-3xl font-medium mb-2">
+    <Tag className="text-xl sm:text-3xl mb-2 text-wide-tracking font-bold">
       {prefix} {children}
     </Tag>
   );
@@ -20,22 +20,31 @@ function HeadingSection({ level, children }: HeadingSectionProps) {
 
 interface UISectionProps {
   id?: string;
-  title: string;
+  title?: string;
   headingLevel?: HeadingLevel;
   description?: ReactNode;
   children?: ReactNode;
 }
 
-export function UISection({ id, title, headingLevel = 2, description, children }: UISectionProps) {
+export function UISection({
+  id,
+  title,
+  headingLevel = 2,
+  description,
+  children,
+}: UISectionProps) {
+  const hasHeader = Boolean(title || description);
+
   return (
-    <section
-      id={id}
-      className={id ? "scroll-mt-24" : undefined}
-    >
-      <header className={children ? "mb-8" : ""}>
-        <HeadingSection level={headingLevel}>{title}</HeadingSection>
-        {description && <p>{description}</p>}
-      </header>
+    <section id={id} className={id ? "scroll-mt-24" : undefined}>
+      {hasHeader && (
+        <header className={children ? "mb-8" : undefined}>
+          {title && (
+            <HeadingSection level={headingLevel}>{title}</HeadingSection>
+          )}
+          {description && <p>{description}</p>}
+        </header>
+      )}
       {children}
     </section>
   );

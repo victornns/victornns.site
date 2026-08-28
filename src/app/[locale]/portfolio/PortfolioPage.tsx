@@ -32,7 +32,10 @@ export function PortfolioPage({
   return (
     <>
       <Navbar locale={locale} items={navbarItems} />
-      <SectionScrollTarget sectionId={activeSectionId} identity={scrollIdentity} />
+      <SectionScrollTarget
+        sectionId={activeSectionId}
+        identity={scrollIdentity}
+      />
 
       <AboutSection locale={locale} />
       <TechStackSection locale={locale} />

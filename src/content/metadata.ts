@@ -1,4 +1,4 @@
-import { aboutContent, DEV_NAME } from "@/content/about";
+import { aboutContent, PROFILE_NAME } from "@/content/about";
 import { TOKENS } from "@/lib/constants";
 
 import type { Locale } from "@/i18n/config";
@@ -10,7 +10,7 @@ export function getMetadata(locale: Locale): Metadata {
   const about = aboutContent[locale];
 
   return {
-    title: DEV_NAME,
+    title: PROFILE_NAME.full,
     description: about.description.join(TOKENS.separator.bullet),
     metadataBase: new URL(APP_DOMAIN),
   };
