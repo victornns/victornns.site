@@ -27,8 +27,8 @@ const renderTechnologies = (
 ) => {
   const technologiesList = technologies.join(TOKENS.separator.list);
   return (
-    <p className="text-xs mt-6">
-      {label}: {technologiesList}
+    <p className="text-xs mt-6 italic">
+      <b>{label}:</b> {technologiesList}
     </p>
   );
 };
@@ -48,9 +48,14 @@ export function ExperienceSection({ locale }: ExperienceSectionProps) {
             <UICard.Root>
               <UISplitColumns
                 aside={
-                  <UICard.Label>
-                    {formatPeriod(experience.period, common.present)}
-                  </UICard.Label>
+                  <>
+                    <UICard.Label>
+                      {formatPeriod(experience.period, common.present)}
+                    </UICard.Label>
+                    <UICard.Label className="text-muted mt-1 italic">
+                      {experience.period.total} _
+                    </UICard.Label>
+                  </>
                 }
               >
                 <UICard.Title>
