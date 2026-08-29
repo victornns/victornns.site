@@ -1,13 +1,19 @@
 import { notFound, redirect } from "next/navigation";
 
 import { getLocalizedPath, locales, type Locale } from "@/i18n/config";
-import { getSectionIdFromSlug } from "@/components/navbar";
+import { getSectionIdFromSlug, getSectionSlugs } from "@/components/navbar";
 
 import { PortfolioView } from "../PortfolioView";
 
 type PortfolioSectionPageProps = {
   params: Promise<{ locale: Locale; section: string }>;
 };
+
+export function generateStaticParams() {
+  return locales.flatMap((locale) =>
+    getSectionSlugs(locale).map((section) => ({ locale, section })),
+  );
+}
 
 export default async function PortfolioSectionPage({
   params,

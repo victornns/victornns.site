@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 
 import { getLocalizedPath, locales, type Locale } from "@/i18n/config";
-import { getSectionIdFromSlug } from "@/components/navbar";
+import { getSectionIdFromSlug, getSectionSlug } from "@/components/navbar";
 import { getProjectBySlug } from "@/components/projects/projectRoutes";
 import { getContent } from "@/content";
 
@@ -10,6 +10,17 @@ import { PortfolioView } from "../../PortfolioView";
 type PortfolioProjectPageProps = {
   params: Promise<{ locale: Locale; section: string; project: string }>;
 };
+
+export function generateStaticParams() {
+  return locales.flatMap((locale) => {
+    const section = getSectionSlug(locale, "projects");
+    return getContent(locale).projects.items.map((project) => ({
+      locale,
+      section,
+      project: project.slug,
+    }));
+  });
+}
 
 export default async function PortfolioProjectPage({
   params,

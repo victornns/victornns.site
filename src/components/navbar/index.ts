@@ -9,6 +9,7 @@ export {
   getNavbarItems,
   getSectionIdFromSlug,
   getSectionSlug,
+  getSectionSlugs,
 } from "@/components/navbar/navigation";
 export { SectionScrollTarget } from "@/components/navbar/SectionScrollTarget";
 export { scrollToSection } from "@/components/navbar/scrollToSection";

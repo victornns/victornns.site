@@ -21,6 +21,10 @@ export function getSectionSlug(locale: Locale, sectionId: SectionId): string {
   return sectionSlugById[locale][sectionId];
 }
 
+export function getSectionSlugs(locale: Locale): string[] {
+  return Object.keys(sectionRoutes[locale]);
+}
+
 export function getSectionIdFromSlug(
   locale: Locale,
   slug: string,
