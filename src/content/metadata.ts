@@ -11,7 +11,7 @@ export function getMetadata(locale: Locale): Metadata {
 
   return {
     title: PROFILE_NAME.full,
-    description: about.description.join(TOKENS.separator.bullet),
+    description: about.highlights.join(TOKENS.separator.bullet),
     metadataBase: new URL(APP_DOMAIN),
   };
 }

@@ -2,11 +2,15 @@ import type { Locale } from "@/i18n/config";
 
 export interface About {
   title: string;
-  description: string[];
-  /** Short, concise bio — used on the portfolio page. */
+  /** Professional role shown under the name, on two lines. */
+  role: {
+    title: string;
+    subtitle: string;
+  };
+  /** Short skill/experience tags shown under the name. */
+  highlights: string[];
+  /** Bio shown on both the portfolio and curriculo pages. */
   summary: string[];
-  /** Longer, resume-focused bio — used on the curriculo page. */
-  resumeSummary: string[];
 }
 
 export const PROFILE_NAME = {
@@ -18,42 +22,48 @@ export const PROFILE_NAME = {
 export const aboutContent: Record<Locale, About> = {
   pt: {
     title: "Sobre",
-    description: [
-      "10+ anos em Web",
+    role: {
+      title: "Front-End Engineer",
+      subtitle: "com experiência full-stack",
+    },
+    highlights: [
+      "10+ anos em web",
+      "TypeScript",
       "React & Next.js",
-      "TypeScript & Node.js",
-      "Arquitetura & Web Performance",
-      "Atibaia - SP, Brasil",
-      "Remoto",
+      "Node.js & APIs",
+      "SSR/SSG/ISR",
+      "Arquitetura Web",
+      "Performance",
+      "Acessibilidade",
     ],
     summary: [
-      "Desenvolvedor front-end com 10+ anos de experiência em interfaces, performance e arquitetura web.",
-      "Também atuo como freelancer full-stack, conduzindo projetos end-to-end sob demanda.",
-    ],
-    resumeSummary: [
-      "Desenvolvedor front-end com mais de 10 anos de experiência, especializado em interfaces, performance e arquitetura de aplicações web modernas com React, Next.js, TypeScript e Node.js.",
-      "Atuo também como freelancer full-stack, conduzindo projetos end-to-end — do levantamento de requisitos à entrega em produção — para clientes remotos no Brasil e no exterior.",
-      "Tenho foco em código limpo, boas práticas de arquitetura e performance, buscando sempre entregar produtos escaláveis e de fácil manutenção.",
+      "Front-end engineer com 10+ anos de experiência em desenvolvimento web, com forte atuação em TypeScript, React e Next.js.",
+      "Trabalho com arquitetura front-end, Design Systems e estratégias de renderização com SSR/SSG/ISR, além de arquitetura de componentes, Design-to-Code, SEO técnico, acessibilidade, performance e testes.",
+      "Atuo de forma integrada nas diferentes etapas e áreas envolvidas nos projetos, participando do levantamento de requisitos, das definições técnicas e dos alinhamentos entre clientes, design e desenvolvimento. Também já organizei pequenas equipes e frentes de trabalho, gerenciando tarefas e apoiando decisões técnicas.",
+      "Como full-stack, conduzo projetos end-to-end sob demanda, atuando principalmente com Node.js, APIs, CMS headless e integrações.",
     ],
   },
   en: {
     title: "About",
-    description: [
-      "10+ years in Web",
+    role: {
+      title: "Front-End Engineer",
+      subtitle: "with full-stack experience",
+    },
+    highlights: [
+      "10+ years in web",
+      "TypeScript",
       "React & Next.js",
-      "TypeScript & Node.js",
-      "Architecture & Web Performance",
-      "Atibaia - SP, Brazil",
-      "Remote",
+      "Node.js & APIs",
+      "SSR/SSG/ISR",
+      "Web Architecture",
+      "Performance",
+      "Accessibility",
     ],
     summary: [
-      "Front-end developer with 10+ years of experience in interfaces, performance, and web architecture.",
-      "I also work as a full-stack freelancer, leading end-to-end projects on demand.",
-    ],
-    resumeSummary: [
-      "Front-end developer with 10+ years of experience, specialized in interfaces, performance, and architecture of modern web applications with React, Next.js, TypeScript, and Node.js.",
-      "I also work as a full-stack freelancer, leading end-to-end projects — from gathering requirements to shipping to production — for remote clients in Brazil and abroad.",
-      "I focus on clean code and solid architecture and performance practices, always aiming to deliver scalable, easy-to-maintain products.",
+      "Front-end engineer with 10+ years of experience in web development, with a strong focus on TypeScript, React, and Next.js.",
+      "Experienced in front-end architecture, design systems, SSR/SSG/ISR rendering strategies, component architecture, design-to-code workflows, technical SEO, accessibility, performance, and testing.",
+      "Comfortable working across different stages of the development lifecycle, from requirements gathering and technical planning to cross-functional collaboration with clients, design, and engineering teams. Also experienced in coordinating small teams and workstreams, managing tasks, and supporting technical decision-making.",
+      "For full-stack projects, I can own end-to-end development when needed, working primarily with Node.js, APIs, headless CMS platforms, and integrations.",
     ],
   },
 };
