@@ -44,7 +44,7 @@ function Tagline({ role }: { role: About["role"] }) {
 
 function Highlights({ items }: { items: string[] }) {
   return (
-    <p className="text-wide-tracking text-bold mb-16 mt-8 flex flex-wrap gap-x-5 gap-y-2 border-y py-4 text-xs text-muted md:text-sm 2xl:justify-between">
+    <p className="text-wide-tracking text-bold mb-16 mt-8 flex flex-wrap gap-x-5 gap-y-2 border-y py-4 text-xs text-muted md:text-sm xl:justify-between">
       {items.map((item, index) => (
         <Fragment key={item}>
           {index > 0 && <span>{TOKENS.separator.bullet}</span>}

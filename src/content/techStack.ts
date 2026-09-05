@@ -30,6 +30,7 @@ const techStackColumns: TechStackCategory[][] = [
         "Sass",
         "React Server Components",
         "SSR/SSG/ISR",
+        "i18n",
       ],
     },
     {
@@ -45,9 +46,13 @@ const techStackColumns: TechStackCategory[][] = [
       ],
     },
     {
-      id: "testing",
-      title: "Testing",
-      items: ["Playwright (E2E)"],
+      id: "web-quality",
+      title: "Web Quality",
+      items: [
+        "Web Performance (Core Web Vitals)",
+        "Web Accessibility (WCAG)",
+        "Technical SEO",
+      ],
     },
   ],
   [
@@ -60,7 +65,7 @@ const techStackColumns: TechStackCategory[][] = [
         "Docker",
         "Docker Compose",
         "Vercel",
-        "AWS (S3, CloudFront, Route 53, EC2)",
+        "AWS (S3, EC2, Route 53, CloudFront)",
         "Nginx",
         "Linux",
       ],
@@ -68,7 +73,7 @@ const techStackColumns: TechStackCategory[][] = [
     {
       id: "design-tools",
       title: "Design & Tools",
-      items: ["Figma", "AI-assisted Development (Claude)"],
+      items: ["Figma", "Playwright (E2E)", "AI-assisted Development (Claude)"],
     },
     {
       id: "web-fundamentals",
