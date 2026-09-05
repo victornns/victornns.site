@@ -12,7 +12,7 @@ function HeadingSection({ level, children }: HeadingSectionProps) {
   const prefix = "//";
 
   return (
-    <Tag className="text-xl sm:text-3xl mb-2 text-wide-tracking font-bold">
+    <Tag className="text-wide-tracking mb-2 text-xl font-bold sm:text-3xl">
       {prefix} {children}
     </Tag>
   );

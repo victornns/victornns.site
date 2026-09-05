@@ -63,7 +63,7 @@ export function MobileMenuDrawer({
       <div className="flex min-h-full flex-col gap-10">
         <header className="space-y-2">
           <div className="flex items-center justify-between gap-4">
-            <p className="text-xs text-wide-tracking text-muted">
+            <p className="text-wide-tracking text-xs text-muted">
               {labels.navigation}
             </p>
 
@@ -101,7 +101,7 @@ export function MobileMenuDrawer({
           href={resumeHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex w-full items-center justify-center bg-black px-5 py-4 text-sm text-wide-tracking text-white transition hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+          className="text-wide-tracking inline-flex w-full items-center justify-center bg-black px-5 py-4 text-sm text-white transition hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
           onClick={closeDrawer}
         >
           {labels.resume}

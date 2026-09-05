@@ -23,7 +23,7 @@ function Headline() {
 
 function Tagline({ role }: { role: About["role"] }) {
   return (
-    <div className="flex items-start gap-5 mt-4 sm:gap-6">
+    <div className="mt-4 flex items-start gap-5 sm:gap-6">
       <span
         aria-hidden="true"
         className="mt-4 h-1 w-12 shrink-0 bg-black sm:w-14"
@@ -44,7 +44,7 @@ function Tagline({ role }: { role: About["role"] }) {
 
 function Highlights({ items }: { items: string[] }) {
   return (
-    <p className="mt-8 mb-16 border-y py-4 text-xs md:text-sm text-muted text-wide-tracking text-bold flex gap-x-5 gap-y-2 flex-wrap 2xl:justify-between">
+    <p className="text-wide-tracking text-bold mb-16 mt-8 flex flex-wrap gap-x-5 gap-y-2 border-y py-4 text-xs text-muted md:text-sm 2xl:justify-between">
       {items.map((item, index) => (
         <Fragment key={item}>
           {index > 0 && <span>{TOKENS.separator.bullet}</span>}
@@ -61,7 +61,7 @@ function Bio({ title, paragraphs }: { title: string; paragraphs: string[] }) {
       aside={<h2 className="text-wide-tracking font-bold">{title}</h2>}
     >
       {paragraphs.map((paragraph) => (
-        <p key={paragraph} className="mb-4 last:mb-0 max-w-screen-md">
+        <p key={paragraph} className="mb-4 max-w-screen-md last:mb-0">
           {paragraph}
         </p>
       ))}

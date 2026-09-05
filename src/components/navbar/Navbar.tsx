@@ -65,7 +65,7 @@ export function Navbar({ locale, items }: NavbarProps) {
           <div className="flex items-center gap-4">
             <Link
               href={portfolioHref}
-              className="shrink-0 font-semibold text-wide-tracking leading-none text-xs sm:text-base"
+              className="text-wide-tracking shrink-0 text-xs font-semibold leading-none sm:text-base"
             >
               {logo}
             </Link>
@@ -101,7 +101,7 @@ export function Navbar({ locale, items }: NavbarProps) {
             </div>
           </div>
 
-          <div className="hidden xl:flex items-center gap-8">
+          <div className="hidden items-center gap-8 xl:flex">
             <ul className="flex items-center gap-8">
               {items.map((item) => (
                 <li key={item.id}>
@@ -164,8 +164,8 @@ export function Navbar({ locale, items }: NavbarProps) {
           <span
             className={
               isMobileMenuOpen
-                ? "absolute left-0 bottom-0 block h-px w-5 bg-current opacity-0 transition-opacity duration-150"
-                : "absolute left-0 bottom-0 block h-px w-5 bg-current transition-opacity duration-150"
+                ? "absolute bottom-0 left-0 block h-px w-5 bg-current opacity-0 transition-opacity duration-150"
+                : "absolute bottom-0 left-0 block h-px w-5 bg-current transition-opacity duration-150"
             }
           />
         </span>

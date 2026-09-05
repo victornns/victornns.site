@@ -34,7 +34,9 @@ function waitForServer(url, timeoutMs = 60000) {
     const check = async () => {
       if (await pingServer(url)) return resolve();
       if (Date.now() - start > timeoutMs) {
-        return reject(new Error(`Tempo esgotado aguardando o servidor em ${url}`));
+        return reject(
+          new Error(`Tempo esgotado aguardando o servidor em ${url}`),
+        );
       }
       setTimeout(check, 500);
     };
@@ -51,7 +53,9 @@ async function generatePdf(browser, target) {
   });
   const page = await context.newPage();
   await page.goto(targetUrl, { waitUntil: "networkidle" });
-  const contentHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+  const contentHeight = await page.evaluate(
+    () => document.documentElement.scrollHeight,
+  );
   await page.pdf({
     path: outputPath,
     printBackground: true,
@@ -102,4 +106,3 @@ main().catch((error) => {
   console.error("❌ Erro ao gerar PDF do currículo:", error);
   process.exitCode = 1;
 });
-

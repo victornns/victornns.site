@@ -5,5 +5,5 @@ interface UICardTitleProps {
 }
 
 export const UICardTitle = function ({ children }: UICardTitleProps) {
-  return <h3 className="font-semibold text-lg mb-2">{children}</h3>;
+  return <h3 className="mb-2 text-lg font-semibold">{children}</h3>;
 };

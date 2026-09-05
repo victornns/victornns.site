@@ -86,7 +86,7 @@ function ProjectItem({
 
   return (
     <div className="group relative">
-      <UICard.Root className="transition-colors group-hover:bg-neutral-50 group-focus-within:bg-neutral-50">
+      <UICard.Root className="transition-colors group-focus-within:bg-neutral-50 group-hover:bg-neutral-50">
         <UICard.Label>
           {date}
           <DesignCredit organizationId={organizationId} label={designLabel} />

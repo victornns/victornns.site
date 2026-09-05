@@ -85,4 +85,6 @@ export const organizations = [
 export type Organization = (typeof organizations)[number];
 export type OrganizationId = Organization["id"];
 
-export const organizationsById = Object.fromEntries(organizations.map((org) => [org.id, org])) as Record<OrganizationId, Organization>;
+export const organizationsById = Object.fromEntries(
+  organizations.map((org) => [org.id, org]),
+) as Record<OrganizationId, Organization>;

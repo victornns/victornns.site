@@ -53,7 +53,9 @@ export function NavbarLink({
       href={item.href}
       scroll={false}
       aria-current={isActive ? "location" : undefined}
-      className={isActive ? `${className} ${activeClassName}`.trim() : className}
+      className={
+        isActive ? `${className} ${activeClassName}`.trim() : className
+      }
       onClick={handleClick}
     >
       {item.label}

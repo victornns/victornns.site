@@ -121,7 +121,7 @@ export function ProjectDetailsDrawer({
               />
             </div>
 
-            <p className="text-xs text-wide-tracking text-muted">
+            <p className="text-wide-tracking text-xs text-muted">
               {currentIndex + 1}/{totalProjects}
             </p>
           </div>
@@ -137,9 +137,7 @@ export function ProjectDetailsDrawer({
         <div className="space-y-8">
           <div className="space-y-4">
             {eyebrow && (
-              <p className="text-xs text-wide-tracking text-muted">
-                {eyebrow}
-              </p>
+              <p className="text-wide-tracking text-xs text-muted">{eyebrow}</p>
             )}
 
             <div className="space-y-3">
@@ -167,7 +165,7 @@ export function ProjectDetailsDrawer({
 
           {previewUrl && (
             <div className="border bg-neutral-50 p-6 md:p-8">
-              <p className="mb-3 text-xs text-wide-tracking text-muted">
+              <p className="text-wide-tracking mb-3 text-xs text-muted">
                 {common.preview}
               </p>
               <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -190,7 +188,7 @@ export function ProjectDetailsDrawer({
 
           <div className="grid gap-10 md:grid-cols-[minmax(0,1.8fr)_minmax(260px,0.9fr)]">
             <div className="space-y-4">
-              <h3 className="text-xs text-wide-tracking text-muted">
+              <h3 className="text-wide-tracking text-xs text-muted">
                 {common.aboutProject}
               </h3>
 
@@ -203,7 +201,7 @@ export function ProjectDetailsDrawer({
 
             {project.technologies?.length ? (
               <aside className="space-y-4">
-                <h3 className="text-xs text-wide-tracking text-muted">
+                <h3 className="text-wide-tracking text-xs text-muted">
                   {common.stack}
                 </h3>
 

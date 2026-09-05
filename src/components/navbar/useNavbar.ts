@@ -14,7 +14,11 @@ import {
 } from "@/components/navbar/localeSwitchState";
 import { getActiveSectionId } from "@/components/navbar/scrollToSection";
 import { getTranslatedProjectSlug } from "@/components/projects/projectRoutes";
-import { navbarLabels, switchLocaleLabel, type SectionId } from "@/content/navbar";
+import {
+  navbarLabels,
+  switchLocaleLabel,
+  type SectionId,
+} from "@/content/navbar";
 import { commonContent } from "@/content/common";
 import {
   defaultLocale,
@@ -74,7 +78,10 @@ function toTargetLocalePath(
     root === commonContent.pt.resumeSlug ||
     root === commonContent.en.resumeSlug
   ) {
-    return getLocalizedPath(targetLocale, commonContent[targetLocale].resumeSlug);
+    return getLocalizedPath(
+      targetLocale,
+      commonContent[targetLocale].resumeSlug,
+    );
   }
 
   const fallbackPath = pathWithoutLocale.join("/");
@@ -91,7 +98,9 @@ export function useNavbar(locale: Locale) {
 
   // Any deliberate open/close (hamburger button, close button, nav link)
   // should always animate normally — only the one-time reopen below skips it.
-  function setIsMobileMenuOpen(next: boolean | ((current: boolean) => boolean)) {
+  function setIsMobileMenuOpen(
+    next: boolean | ((current: boolean) => boolean),
+  ) {
     setSkipMobileMenuEnterAnimation(false);
     setIsMobileMenuOpenState(next);
   }

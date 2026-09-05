@@ -38,7 +38,7 @@ export function LocaleSwitchLinks({
 
   return (
     <div
-      className={`flex items-center gap-3 text-xs text-wide-tracking ${className ?? ""}`}
+      className={`text-wide-tracking flex items-center gap-3 text-xs ${className ?? ""}`}
     >
       <Link
         href={localeHref.pt}

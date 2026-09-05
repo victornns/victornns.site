@@ -59,7 +59,9 @@ export function saveScrollStateBeforeUnload(identity: string) {
  * saved identity matches, so a genuine navigation to different content isn't
  * mistakenly pinned to the old scroll position.
  */
-export function consumeSavedScrollPosition(currentIdentity: string): number | null {
+export function consumeSavedScrollPosition(
+  currentIdentity: string,
+): number | null {
   const clickScrollY = window.sessionStorage.getItem(CLICK_SCROLL_KEY);
   window.sessionStorage.removeItem(CLICK_SCROLL_KEY);
   if (clickScrollY !== null) {

@@ -5,7 +5,8 @@ import type { Locale } from "@/i18n/config";
  * DOM element (for scrolling) and the folder name of the corresponding
  * route under `src/app/[locale]/` (e.g. `src/app/[locale]/projects/`).
  */
-export type SectionId = "about" | "experience" | "education" | "projects" | "contact" | "stack";
+export type SectionId =
+  "about" | "experience" | "education" | "projects" | "contact" | "stack";
 
 /**
  * Maps the localized public URL slug for a section to its stable internal

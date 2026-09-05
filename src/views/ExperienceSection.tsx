@@ -27,7 +27,7 @@ const renderTechnologies = (
 ) => {
   const technologiesList = technologies.join(TOKENS.separator.list);
   return (
-    <p className="text-xs mt-6 italic">
+    <p className="mt-6 text-xs italic">
       <b>{label}:</b> {technologiesList}
     </p>
   );
@@ -52,7 +52,7 @@ export function ExperienceSection({ locale }: ExperienceSectionProps) {
                     <UICard.Label>
                       {formatPeriod(experience.period, common.present)}
                     </UICard.Label>
-                    <UICard.Label className="text-muted mt-1 italic">
+                    <UICard.Label className="mt-1 italic text-muted">
                       {experience.period.total} _
                     </UICard.Label>
                   </>

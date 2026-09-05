@@ -13,7 +13,7 @@ export default async function NotFound() {
   return (
     <UIPageMain>
       <section className="flex flex-col items-start gap-3">
-        <p className="text-xs text-wide-tracking text-muted">404</p>
+        <p className="text-wide-tracking text-xs text-muted">404</p>
         <h1 className="text-3xl font-bold uppercase sm:text-5xl">
           {notFound.title}
         </h1>

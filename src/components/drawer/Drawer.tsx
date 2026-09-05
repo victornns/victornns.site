@@ -61,7 +61,7 @@ export function Drawer({
         <Dialog.Content
           id={id}
           className={joinClassNames(
-            "fixed inset-y-0 right-0 w-[var(--drawer-panel-width,100vw)] max-w-full overflow-y-auto border-l bg-white px-6 pb-8 pt-16 shadow-2xl outline-none transform-gpu will-change-transform [backface-visibility:hidden] [contain:paint] data-[state=closed]:animate-drawer-slide-out",
+            "fixed inset-y-0 right-0 w-[var(--drawer-panel-width,100vw)] max-w-full transform-gpu overflow-y-auto border-l bg-white px-6 pb-8 pt-16 shadow-2xl outline-none will-change-transform [backface-visibility:hidden] [contain:paint] data-[state=closed]:animate-drawer-slide-out",
             contentZIndexClassName,
             !skipEnterAnimation && "data-[state=open]:animate-drawer-slide-in",
             contentClassName,
