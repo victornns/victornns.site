@@ -17,7 +17,7 @@ function CategoryBlock({ category }: CategoryBlockProps) {
   const { title, items } = category;
 
   return (
-    <li className="py-6">
+    <li className="py-6 last:pb-0">
       <h3 className="text-wide-tracking mb-1 font-bold">{title}</h3>
       <p className="text-sm text-muted">{items.join(", ")}</p>
     </li>
@@ -26,7 +26,6 @@ function CategoryBlock({ category }: CategoryBlockProps) {
 
 type TechStackColumnProps = {
   categories: TechStackCategory[];
-  /** Only non-first columns need a mobile-only top divider; side by side on desktop they don't. */
   isFirstColumn: boolean;
 };
 
@@ -48,7 +47,7 @@ export function TechStackSection({ locale }: TechStackSectionProps) {
 
   return (
     <UISection id="stack" title={title} description={description}>
-      <div className="grid grid-cols-1 gap-x-12 border-t pt-10 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-12 gap-y-6 border-t pt-10 sm:grid-cols-2 sm:gap-y-0">
         {columns.map((categories, columnIndex) => (
           <TechStackColumn
             key={columnIndex}

@@ -28,7 +28,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
     items: [
       {
         id: "one-bra-frontend-developer",
-        role: "Front-end Developer | UI Architecture, Design Systems e Performance Web",
+        role: "Frontend Developer | UI Architecture, Design Systems e Performance Web",
         organizationId: "one-bra-agency",
         period: {
           start: "Out.2023",
@@ -36,7 +36,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "2 anos e 5 meses",
         },
         summary: [
-          "Atuação no time de front-end da Bespoke One.bra (Leo Burnett), alocado diretamente no Bradesco, com foco na padronização técnica, definição de padrões de codificação e desenvolvimento de páginas e e-mails das campanhas do banco.",
+          "Atuação no time de frontend da Bespoke One.bra (Leo Burnett), alocado diretamente no Bradesco, com foco na padronização técnica, definição de padrões de codificação e desenvolvimento de páginas e e-mails das campanhas do banco.",
         ],
         technologies: [
           "SSR/SSG",
@@ -57,7 +57,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
       },
       {
         id: "one-digital-frontend-developer",
-        role: "Front-end Developer | Projetos Web, CMS e Performance",
+        role: "Frontend Developer | Projetos Web, CMS e Performance",
         organizationId: "one-digital-agency",
         period: {
           start: "Jun.2019",
@@ -88,7 +88,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
       },
       {
         id: "cave-digital-frontend-developer",
-        role: "Front-end Developer | Aplicações híbridas e CMS customizados",
+        role: "Frontend Developer | Aplicações híbridas e CMS customizados",
         organizationId: "cave-digital-agency",
         period: {
           start: "Ago.2018",
@@ -110,7 +110,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
       },
       {
         id: "profit-e-frontend-developer",
-        role: "Front-end Developer | E-commerce em VTEX",
+        role: "Frontend Developer | E-commerce em VTEX",
         organizationId: "profit-e-agency",
         period: {
           start: "Jun.2018",
@@ -124,7 +124,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
       },
       {
         id: "l4u-frontend-developer",
-        role: "Front-end Developer | Sites, E-mails e Plataforma Web",
+        role: "Frontend Developer | Sites, E-mails e Plataforma Web",
         organizationId: "l4u-agency",
         period: {
           start: "Set.2016",
@@ -160,7 +160,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
     items: [
       {
         id: "one-bra-frontend-developer",
-        role: "Front-end Developer | UI Architecture, Design Systems, and Web Performance",
+        role: "Frontend Developer | UI Architecture, Design Systems, and Web Performance",
         organizationId: "one-bra-agency",
         period: {
           start: "Oct.2023",
@@ -168,7 +168,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "2 years and 5 months",
         },
         summary: [
-          "Worked on the front-end team at Bespoke One.bra (Leo Burnett), allocated directly to Bradesco, focusing on technical standardization, coding guidelines, and development of pages and emails for the bank's campaigns.",
+          "Worked on the frontend team at Bespoke One.bra (Leo Burnett), allocated directly to Bradesco, focusing on technical standardization, coding guidelines, and development of pages and emails for the bank's campaigns.",
         ],
         technologies: [
           "SSR/SSG",
@@ -189,7 +189,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
       },
       {
         id: "one-digital-frontend-developer",
-        role: "Front-end Developer | Web Projects, CMS, and Performance",
+        role: "Frontend Developer | Web Projects, CMS, and Performance",
         organizationId: "one-digital-agency",
         period: {
           start: "Jun.2019",
@@ -220,7 +220,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
       },
       {
         id: "cave-digital-frontend-developer",
-        role: "Front-end Developer | Hybrid Applications and Custom CMS",
+        role: "Frontend Developer | Hybrid Applications and Custom CMS",
         organizationId: "cave-digital-agency",
         period: {
           start: "Aug.2018",
@@ -242,7 +242,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
       },
       {
         id: "profit-e-frontend-developer",
-        role: "Front-end Developer | E-commerce on VTEX",
+        role: "Frontend Developer | E-commerce on VTEX",
         organizationId: "profit-e-agency",
         period: {
           start: "Jun.2018",
@@ -256,7 +256,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
       },
       {
         id: "l4u-frontend-developer",
-        role: "Front-end Developer | Websites, Emails, and Web Platform",
+        role: "Frontend Developer | Websites, Emails, and Web Platform",
         organizationId: "l4u-agency",
         period: {
           start: "Sep.2016",
