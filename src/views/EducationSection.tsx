@@ -50,14 +50,12 @@ export function EducationSection({ locale }: EducationSectionProps) {
                 {formatPeriod(item.period, common.present)}
                 {renderStatus(item.status)}
               </UICard.Label>
-              <UICard.Title>
-                {item.degree} @{" "}
-                <OrganizationDisplayName
-                  id={item.organizationId}
-                  className="italic"
-                />
-              </UICard.Title>
-              <UICard.Paragraphs data={item.summary} />
+              <UICard.Title>{item.degree}</UICard.Title>
+              <OrganizationDisplayName
+                as="p"
+                id={item.organizationId}
+                className="italic"
+              />
             </UICard.Root>
           </li>
         ))}

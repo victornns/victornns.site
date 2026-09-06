@@ -67,16 +67,16 @@ export const organizations = [
   {
     id: "impacta-tecnologia",
     name: {
-      full: "Faculdade Impacta Tecnologia",
-      display: "Faculdade Impacta Tecnologia",
+      full: "Faculdade Impacta de Tecnologia (FIT)",
+      display: "Faculdade Impacta de Tecnologia (FIT)",
     },
     link: "https://www.impacta.edu.br/",
   },
   {
     id: "sao-judas-tadeu",
     name: {
-      full: "Universidade São Judas Tadeu",
-      display: "Universidade São Judas Tadeu",
+      full: "Universidade São Judas Tadeu (USJT)",
+      display: "Universidade São Judas Tadeu (USJT)",
     },
     link: "https://www.usjt.br/",
   },

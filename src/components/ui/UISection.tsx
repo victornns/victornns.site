@@ -12,7 +12,7 @@ function HeadingSection({ level, children }: HeadingSectionProps) {
   const prefix = "//";
 
   return (
-    <Tag className="text-wide-tracking mb-2 text-xl font-bold sm:text-3xl">
+    <Tag className="text-wide-tracking text-xl font-bold sm:text-3xl">
       {prefix} {children}
     </Tag>
   );
@@ -42,7 +42,7 @@ export function UISection({
           {title && (
             <HeadingSection level={headingLevel}>{title}</HeadingSection>
           )}
-          {description && <p>{description}</p>}
+          {description && <p className="mt-2">{description}</p>}
         </header>
       )}
       {children}

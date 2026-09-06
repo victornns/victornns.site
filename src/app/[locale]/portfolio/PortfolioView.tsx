@@ -33,8 +33,8 @@ export function PortfolioView({
       <AboutSection locale={locale} />
       <TechStackSection locale={locale} />
       <ExperienceSection locale={locale} />
-      <EducationSection locale={locale} />
       <ProjectsSection locale={locale} activeProjectId={activeProjectId} />
+      <EducationSection locale={locale} />
       <ContactsSection locale={locale} />
     </>
   );

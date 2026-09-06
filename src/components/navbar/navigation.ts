@@ -7,8 +7,8 @@ export const sectionOrder: SectionId[] = [
   "about",
   "stack",
   "experience",
-  "education",
   "projects",
+  "education",
   "contact",
 ];
 
