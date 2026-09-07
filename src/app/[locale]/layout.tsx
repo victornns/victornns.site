@@ -9,6 +9,7 @@ import {
   localeToHtmlLang,
 } from "@/i18n/config";
 import { getMetadata } from "@/content/metadata";
+import { font, fontStyle } from "../fonts";
 
 import "../globals.scss";
 
@@ -41,7 +42,11 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={localeToHtmlLang[locale]} className="antialiased">
+    <html
+      lang={localeToHtmlLang[locale]}
+      className={`${font.variable} antialiased`}
+      style={fontStyle}
+    >
       <body>{children}</body>
     </html>
   );

@@ -12,7 +12,7 @@ export default {
         muted: "#737373",
       },
       fontFamily: {
-        sans: ["Verdana", "sans-serif"],
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       keyframes: {
         "drawer-slide-in": {
