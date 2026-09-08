@@ -2,7 +2,7 @@ interface UICardParagraphsProps {
   data: string[];
 }
 
-export const UICardParagraphs = function ({ data }: UICardParagraphsProps) {
+export function UICardParagraphs({ data }: UICardParagraphsProps) {
   return (
     <div className="flex flex-col gap-2">
       {data.map((paragraph, index) => (
@@ -10,4 +10,4 @@ export const UICardParagraphs = function ({ data }: UICardParagraphsProps) {
       ))}
     </div>
   );
-};
+}

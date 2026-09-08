@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import { scrollToSection } from "@/components/navbar/scrollToSection";
+import { isPlainLeftClick } from "@/lib/navigation";
+import { joinClassNames } from "@/lib/tailwind";
 
 import type { MouseEvent } from "react";
 
@@ -16,10 +18,6 @@ interface NavbarLinkProps {
   onNavigate?: () => void;
 }
 
-function isModifiedEvent(event: MouseEvent<HTMLAnchorElement>) {
-  return event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-}
-
 export function NavbarLink({
   item,
   className = "",
@@ -28,11 +26,7 @@ export function NavbarLink({
   onNavigate,
 }: NavbarLinkProps) {
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
-    if (
-      event.defaultPrevented ||
-      event.button !== 0 ||
-      isModifiedEvent(event)
-    ) {
+    if (!isPlainLeftClick(event)) {
       return;
     }
 
@@ -53,9 +47,7 @@ export function NavbarLink({
       href={item.href}
       scroll={false}
       aria-current={isActive ? "location" : undefined}
-      className={
-        isActive ? `${className} ${activeClassName}`.trim() : className
-      }
+      className={joinClassNames(className, isActive && activeClassName)}
       onClick={handleClick}
     >
       {item.label}

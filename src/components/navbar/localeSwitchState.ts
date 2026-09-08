@@ -1,19 +1,10 @@
 import type { MouseEvent } from "react";
 
+import { isPlainLeftClick } from "@/lib/navigation";
+
 const CLICK_SCROLL_KEY = "localeSwitch:scrollY";
 const UNLOAD_SCROLL_KEY = "localeSwitch:unloadScrollState";
 const REOPEN_MOBILE_MENU_KEY = "localeSwitch:reopenMobileMenu";
-
-function isPlainLeftClick(event: MouseEvent<HTMLAnchorElement>): boolean {
-  return !(
-    event.defaultPrevented ||
-    event.button !== 0 ||
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey ||
-    event.altKey
-  );
-}
 
 /**
  * Call from a locale-switch link's onClick. Switching locale is a full page

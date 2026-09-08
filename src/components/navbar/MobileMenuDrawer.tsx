@@ -8,8 +8,9 @@ import { NavbarLink } from "@/components/navbar/NavbarLink";
 
 import type { NavbarItem, SectionId } from "@/components/navbar/Navbar";
 import type { Locale } from "@/i18n/config";
+import { tw } from "@/lib/tailwind";
 
-const MOBILE_LINK_ACTIVE_CLASSNAME = "font-semibold text-black";
+const MOBILE_LINK_ACTIVE_CLASSNAME = tw`font-semibold text-black`;
 
 interface MobileMenuDrawerLabels {
   close: string;
@@ -31,6 +32,60 @@ interface MobileMenuDrawerProps {
   locale: Locale;
   localeHref: Record<Locale, string>;
   skipEnterAnimation?: boolean;
+}
+
+type MenuHeaderProps = {
+  labels: MobileMenuDrawerLabels;
+  locale: Locale;
+  localeHref: Record<Locale, string>;
+};
+
+function MenuHeader({ labels, locale, localeHref }: MenuHeaderProps) {
+  return (
+    <header className="space-y-2">
+      <div className="flex items-center justify-between gap-4">
+        <p className="text-wide-tracking text-xs text-muted">
+          {labels.navigation}
+        </p>
+
+        <LocaleSwitchLinks
+          locale={locale}
+          localeHref={localeHref}
+          switchToPortuguese={labels.switchToPortuguese}
+          switchToEnglish={labels.switchToEnglish}
+          reopenMobileMenu
+        />
+      </div>
+      <h2 className="text-3xl font-semibold leading-none">{labels.menu}</h2>
+    </header>
+  );
+}
+
+type MenuNavProps = {
+  label: string;
+  items: NavbarItem[];
+  activeSectionId: SectionId | null;
+  onNavigate: (sectionId: SectionId) => void;
+};
+
+function MenuNav({ label, items, activeSectionId, onNavigate }: MenuNavProps) {
+  return (
+    <nav aria-label={label}>
+      <ul className="flex flex-col border-t">
+        {items.map((item) => (
+          <li key={item.id}>
+            <NavbarLink
+              item={item}
+              onNavigate={() => onNavigate(item.id)}
+              isActive={item.id === activeSectionId}
+              activeClassName={MOBILE_LINK_ACTIVE_CLASSNAME}
+              className="flex items-center justify-between border-b py-4 text-lg leading-none transition hover:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+            />
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
 }
 
 export function MobileMenuDrawer({
@@ -56,46 +111,22 @@ export function MobileMenuDrawer({
       onOpenChange={onOpenChange}
       title={labels.menu}
       closeLabel={labels.close}
-      contentClassName="[--drawer-panel-width:82vw] max-w-sm pt-20"
+      contentClassName={tw`max-w-sm pt-20 [--drawer-panel-width:82vw]`}
       showCloseButton={false}
       skipEnterAnimation={skipEnterAnimation}
     >
       <div className="flex min-h-full flex-col gap-10">
-        <header className="space-y-2">
-          <div className="flex items-center justify-between gap-4">
-            <p className="text-wide-tracking text-xs text-muted">
-              {labels.navigation}
-            </p>
+        <MenuHeader labels={labels} locale={locale} localeHref={localeHref} />
 
-            <LocaleSwitchLinks
-              locale={locale}
-              localeHref={localeHref}
-              switchToPortuguese={labels.switchToPortuguese}
-              switchToEnglish={labels.switchToEnglish}
-              reopenMobileMenu
-            />
-          </div>
-          <h2 className="text-3xl font-semibold leading-none">{labels.menu}</h2>
-        </header>
-
-        <nav aria-label={labels.menu}>
-          <ul className="flex flex-col border-t">
-            {items.map((item) => (
-              <li key={item.id}>
-                <NavbarLink
-                  item={item}
-                  onNavigate={() => {
-                    closeDrawer();
-                    setActiveSectionId(item.id);
-                  }}
-                  isActive={item.id === activeSectionId}
-                  activeClassName={MOBILE_LINK_ACTIVE_CLASSNAME}
-                  className="flex items-center justify-between border-b py-4 text-lg leading-none transition hover:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
-                />
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <MenuNav
+          label={labels.menu}
+          items={items}
+          activeSectionId={activeSectionId}
+          onNavigate={(sectionId) => {
+            closeDrawer();
+            setActiveSectionId(sectionId);
+          }}
+        />
 
         <Link
           href={resumeHref}

@@ -2,8 +2,9 @@ import type { Locale } from "@/i18n/config";
 
 /**
  * Stable internal section ids. These match the `id` set on each section's
- * DOM element (for scrolling) and the folder name of the corresponding
- * route under `src/app/[locale]/` (e.g. `src/app/[locale]/projects/`).
+ * DOM element (for scrolling) and are resolved from a locale's public URL
+ * slug via `sectionRoutes` below, e.g. by the `[section]` route under
+ * `src/app/[locale]/portfolio/`.
  */
 export type SectionId =
   "about" | "experience" | "education" | "projects" | "contact" | "stack";

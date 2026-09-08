@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { MouseEvent } from "react";
 
 import { prepareLocaleSwitch } from "@/components/navbar/localeSwitchState";
+import { joinClassNames } from "@/lib/tailwind";
 import type { Locale } from "@/i18n/config";
 
 interface LocaleSwitchLinksProps {
@@ -38,7 +39,10 @@ export function LocaleSwitchLinks({
 
   return (
     <div
-      className={`text-wide-tracking flex items-center gap-3 text-xs ${className ?? ""}`}
+      className={joinClassNames(
+        "text-wide-tracking flex items-center gap-3 text-xs",
+        className,
+      )}
     >
       <Link
         href={localeHref.pt}

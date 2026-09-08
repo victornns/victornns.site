@@ -1,7 +1,7 @@
-import { UICardLabel } from "./UICardLabel";
-import { UICardTitle } from "./UICardTitle";
-import { UICardParagraphs } from "./UICardParagraphs";
-import { UICardRoot } from "./UICardRoot";
+import { UICardLabel } from "@/components/ui/UICard/UICardLabel";
+import { UICardTitle } from "@/components/ui/UICard/UICardTitle";
+import { UICardParagraphs } from "@/components/ui/UICard/UICardParagraphs";
+import { UICardRoot } from "@/components/ui/UICard/UICardRoot";
 
 export const UICard = {
   Label: UICardLabel,

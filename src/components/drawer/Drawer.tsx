@@ -2,6 +2,8 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 
+import { joinClassNames } from "@/lib/tailwind";
+
 import type { ReactNode } from "react";
 
 interface DrawerProps {
@@ -15,20 +17,39 @@ interface DrawerProps {
   closeLabel: string;
   closeButtonClassName?: string;
   showCloseButton?: boolean;
-  /** Skip the entrance animation for this open (e.g. it was already open on load, so there's nothing "opening" from the reader's perspective). The close animation is unaffected. */
+  /** Skips the entrance animation only (e.g. the drawer was already open on load). The close animation is unaffected. */
   skipEnterAnimation?: boolean;
   /**
-   * Raises this drawer above the mobile menu toggle button (z-[80] in
-   * Navbar.tsx). That button normally sits above every drawer's default
-   * z-index so it keeps working as the mobile menu's own close control, but
-   * a drawer with its own close button (like project details) doesn't need
-   * the toggle showing through on top of it.
+   * Raises this drawer above the mobile menu toggle button, which otherwise
+   * sits on top of every drawer so it keeps working as the mobile menu's own
+   * close control. A drawer with its own close button doesn't need it.
    */
   elevated?: boolean;
 }
 
-function joinClassNames(...parts: Array<string | undefined | false>) {
-  return parts.filter(Boolean).join(" ");
+type CloseButtonProps = {
+  label: string;
+  className?: string;
+};
+
+function CloseButton({ label, className }: CloseButtonProps) {
+  return (
+    <Dialog.Close asChild>
+      <button
+        type="button"
+        aria-label={label}
+        className={joinClassNames(
+          "absolute right-[var(--drawer-close-right,1.5rem)] top-[var(--drawer-close-top,1.25rem)] inline-flex h-8 w-8 items-center justify-center text-muted transition-opacity duration-200 hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black",
+          className,
+        )}
+      >
+        <span className="relative block h-4 w-4" aria-hidden="true">
+          <span className="absolute left-1/2 top-1/2 block h-px w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
+          <span className="absolute left-1/2 top-1/2 block h-px w-4 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-current" />
+        </span>
+      </button>
+    </Dialog.Close>
+  );
 }
 
 export function Drawer({
@@ -44,8 +65,10 @@ export function Drawer({
   skipEnterAnimation = false,
   elevated = false,
 }: DrawerProps) {
-  const overlayZIndexClassName = elevated ? "z-[85]" : "z-[60]";
-  const contentZIndexClassName = elevated ? "z-[90]" : "z-[70]";
+  const overlayZIndexClassName = elevated ? "z-drawer-elevated" : "z-drawer";
+  const contentZIndexClassName = elevated
+    ? "z-drawer-content-elevated"
+    : "z-drawer-content";
 
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -70,21 +93,7 @@ export function Drawer({
           <Dialog.Title className="sr-only">{title}</Dialog.Title>
 
           {showCloseButton && (
-            <Dialog.Close asChild>
-              <button
-                type="button"
-                aria-label={closeLabel}
-                className={joinClassNames(
-                  "absolute right-[var(--drawer-close-right,1.5rem)] top-[var(--drawer-close-top,1.25rem)] inline-flex h-8 w-8 items-center justify-center text-muted transition-opacity duration-200 hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black",
-                  closeButtonClassName,
-                )}
-              >
-                <span className="relative block h-4 w-4" aria-hidden="true">
-                  <span className="absolute left-1/2 top-1/2 block h-px w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current" />
-                  <span className="absolute left-1/2 top-1/2 block h-px w-4 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-current" />
-                </span>
-              </button>
-            </Dialog.Close>
+            <CloseButton label={closeLabel} className={closeButtonClassName} />
           )}
 
           {children}

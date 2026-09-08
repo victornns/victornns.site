@@ -1,4 +1,5 @@
 import { getContent } from "@/content";
+import { SEPARATORS } from "@/lib/format";
 
 import type { Locale } from "@/i18n/config";
 import type { TechStackCategory } from "@/content/techStack";
@@ -19,7 +20,7 @@ function CategoryBlock({ category }: CategoryBlockProps) {
   return (
     <li className="py-6 last:pb-0">
       <h3 className="text-wide-tracking mb-1 font-bold">{title}</h3>
-      <p className="text-sm text-muted">{items.join(", ")}</p>
+      <p className="text-sm text-muted">{items.join(SEPARATORS.list)}</p>
     </li>
   );
 }

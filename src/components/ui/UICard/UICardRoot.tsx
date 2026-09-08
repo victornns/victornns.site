@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+
+import { joinClassNames } from "@/lib/tailwind";
 
 interface UICardRootProps {
   children: ReactNode;
@@ -6,19 +8,21 @@ interface UICardRootProps {
   spacing?: "compact" | "default";
 }
 
-export const UICardRoot = function ({
+const spacingClasses = {
+  compact: "py-4",
+  default: "py-6",
+};
+
+export function UICardRoot({
   children,
-  className = "",
+  className,
   spacing = "default",
 }: UICardRootProps) {
-  const spacingClasses = {
-    compact: "py-4",
-    default: "py-6",
-  };
-
   return (
-    <div className={`border-b ${spacingClasses[spacing]} ${className}`}>
+    <div
+      className={joinClassNames("border-b", spacingClasses[spacing], className)}
+    >
       {children}
     </div>
   );
-};
+}

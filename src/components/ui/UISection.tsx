@@ -1,4 +1,4 @@
-import { ReactNode, ElementType } from "react";
+import type { ReactNode, ElementType } from "react";
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -9,11 +9,11 @@ interface HeadingSectionProps {
 
 function HeadingSection({ level, children }: HeadingSectionProps) {
   const Tag = `h${level}` as ElementType;
-  const prefix = "//";
 
   return (
     <Tag className="text-wide-tracking text-xl font-bold sm:text-3xl">
-      {prefix} {children}
+      {/* Decorative prefix, hidden from screen readers so they read the heading text alone. */}
+      <span aria-hidden="true">{"//"}</span> {children}
     </Tag>
   );
 }

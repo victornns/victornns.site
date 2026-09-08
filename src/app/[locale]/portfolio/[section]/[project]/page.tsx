@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 
 import { getLocalizedPath, locales, type Locale } from "@/i18n/config";
 import { getSectionIdFromSlug, getSectionSlug } from "@/components/navbar";
-import { getProjectBySlug } from "@/components/projects/projectRoutes";
+import { getProjectBySlug } from "@/views/projects/projectRoutes";
 import { getContent } from "@/content";
 
 import { PortfolioView } from "../../PortfolioView";

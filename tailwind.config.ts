@@ -14,6 +14,20 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
+      zIndex: {
+        // Stacking order (low to high): fixed navbar, then a drawer's
+        // overlay/content, then the mobile menu toggle button (so it stays
+        // usable as the menu's own close control above the drawer it
+        // opens), then an "elevated" drawer (one with its own close
+        // button, e.g. project details) that doesn't need the toggle
+        // showing through on top of it.
+        navbar: "30",
+        drawer: "60",
+        "drawer-content": "70",
+        "menu-toggle": "80",
+        "drawer-elevated": "85",
+        "drawer-content-elevated": "90",
+      },
       keyframes: {
         "drawer-slide-in": {
           from: { transform: "translate3d(100%, 0, 0)" },

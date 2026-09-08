@@ -13,7 +13,7 @@ import {
   prepareLocaleSwitch,
 } from "@/components/navbar/localeSwitchState";
 import { getActiveSectionId } from "@/components/navbar/scrollToSection";
-import { getTranslatedProjectSlug } from "@/components/projects/projectRoutes";
+import { projectSlugTranslations } from "@/content/projects";
 import {
   navbarLabels,
   switchLocaleLabel,
@@ -64,7 +64,7 @@ function toTargetLocalePath(
 
     const translatedProjectSlug =
       sectionId === "projects" && projectSlug
-        ? getTranslatedProjectSlug(sourceLocale, targetLocale, projectSlug)
+        ? projectSlugTranslations[sourceLocale][projectSlug]
         : undefined;
 
     const targetSlug = translatedProjectSlug

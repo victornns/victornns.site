@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 import { getContent } from "@/content";
 import { PROFILE_NAME, type About } from "@/content/about";
-import { TOKENS } from "@/lib/constants";
+import { SEPARATORS } from "@/lib/format";
 
 import type { Locale } from "@/i18n/config";
 import { UISection } from "@/components/ui/UISection";
@@ -44,10 +44,10 @@ function Tagline({ role }: { role: About["role"] }) {
 
 function Highlights({ items }: { items: string[] }) {
   return (
-    <p className="text-wide-tracking text-bold mb-16 mt-8 flex flex-wrap gap-x-5 gap-y-2 border-y py-4 text-xs text-muted md:text-sm xl:justify-between">
+    <p className="text-wide-tracking mb-16 mt-8 flex flex-wrap gap-x-5 gap-y-2 border-y py-4 text-xs text-muted md:text-sm xl:justify-between">
       {items.map((item, index) => (
         <Fragment key={item}>
-          {index > 0 && <span>{TOKENS.separator.bullet}</span>}
+          {index > 0 && <span>{SEPARATORS.bullet}</span>}
           <span>{item}</span>
         </Fragment>
       ))}

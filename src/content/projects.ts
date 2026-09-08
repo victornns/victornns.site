@@ -1,4 +1,4 @@
-import type { OrganizationId } from "./organizations";
+import type { OrganizationId } from "@/content/organizations";
 import type { Locale } from "@/i18n/config";
 
 export type ProjectKind =
@@ -919,17 +919,41 @@ const enItems: ProjectInput[] = [
   },
 ];
 
+const ptProjects = withUniqueSlugs(ptItems);
+const enProjects = withUniqueSlugs(enItems);
+
 export const projectsContent: Record<Locale, ProjectsContent> = {
   pt: {
     title: "Projetos",
     description:
       "Seleção de blogs, websites, campanhas, CMS e soluções web desenvolvidas",
-    items: withUniqueSlugs(ptItems),
+    items: ptProjects,
   },
   en: {
     title: "Projects",
     description:
       "Selection of blogs, websites, campaigns, CMS and web solutions developed",
-    items: withUniqueSlugs(enItems),
+    items: enProjects,
   },
+};
+
+function crossLocaleSlugMap(
+  items: Project[],
+  counterparts: Project[],
+): Record<string, string> {
+  const counterpartSlugById = new Map(
+    counterparts.map((project) => [project.id, project.slug]),
+  );
+
+  return Object.fromEntries(
+    items
+      .map((project) => [project.slug, counterpartSlugById.get(project.id)])
+      .filter((entry): entry is [string, string] => Boolean(entry[1])),
+  );
+}
+
+/** Maps a project's slug in one locale to its counterpart's slug in the other, matched by the stable `id` shared across locales. */
+export const projectSlugTranslations: Record<Locale, Record<string, string>> = {
+  pt: crossLocaleSlugMap(ptProjects, enProjects),
+  en: crossLocaleSlugMap(enProjects, ptProjects),
 };

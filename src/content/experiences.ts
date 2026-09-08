@@ -1,4 +1,4 @@
-import type { OrganizationId } from "./organizations";
+import type { OrganizationId } from "@/content/organizations";
 import type { Locale } from "@/i18n/config";
 
 export interface Experience {

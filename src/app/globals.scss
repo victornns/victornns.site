@@ -17,14 +17,6 @@
     color: var(--foreground);
     background: var(--background);
   }
-
-  /* Remove dark mode preference */
-  @media (prefers-color-scheme: dark) {
-    body {
-      color: var(--foreground) !important;
-      background: var(--background) !important;
-    }
-  }
 }
 
 @layer components {

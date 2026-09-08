@@ -1,5 +1,5 @@
 import { aboutContent, PROFILE_NAME } from "@/content/about";
-import { TOKENS } from "@/lib/constants";
+import { SEPARATORS } from "@/lib/format";
 
 import type { Locale } from "@/i18n/config";
 import type { Metadata } from "next";
@@ -11,7 +11,7 @@ export function getMetadata(locale: Locale): Metadata {
 
   return {
     title: PROFILE_NAME.full,
-    description: about.highlights.join(TOKENS.separator.bullet),
+    description: about.highlights.join(SEPARATORS.bullet),
     metadataBase: new URL(APP_DOMAIN),
   };
 }

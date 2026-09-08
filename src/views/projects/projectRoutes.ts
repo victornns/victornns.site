@@ -1,6 +1,6 @@
 import { getLocalizedPath, type Locale } from "@/i18n/config";
 import { getSectionSlug } from "@/components/navbar/navigation";
-import { getContent } from "@/content";
+import { projectSlugTranslations } from "@/content/projects";
 
 import type { Project } from "@/content/projects";
 
@@ -26,30 +26,23 @@ export function getProjectBySlug(
   return projects.find((project) => project.slug === slug);
 }
 
-/**
- * Resolves the same project's slug in another locale, matched by its stable
- * `id` (slugs themselves are derived per-locale from the title and can
- * differ). Returns `undefined` when the slug or its counterpart can't be
- * resolved, so callers can fall back to a safe URL.
- */
+/** Extracts the project slug from a portfolio pathname, e.g. `/projetos/foo` -> `"foo"`. Returns `null` outside the projects section. */
+export function getProjectSlugFromPath(
+  locale: Locale,
+  pathname: string,
+): string | null {
+  const sectionPath = getProjectsSectionPath(locale);
+  return pathname.startsWith(`${sectionPath}/`)
+    ? pathname.slice(sectionPath.length + 1)
+    : null;
+}
+
 export function getTranslatedProjectSlug(
   sourceLocale: Locale,
   targetLocale: Locale,
   slug: string,
 ): string | undefined {
-  const sourceProject = getProjectBySlug(
-    getContent(sourceLocale).projects.items,
-    slug,
-  );
-  if (!sourceProject) {
-    return undefined;
-  }
-
-  const targetProject = getContent(targetLocale).projects.items.find(
-    (project) => project.id === sourceProject.id,
-  );
-
-  return targetProject?.slug;
+  return projectSlugTranslations[sourceLocale][slug];
 }
 
 /**
@@ -106,4 +99,14 @@ export function getAdjacentProject(
   const nextIndex = (currentIndex + offset + projects.length) % projects.length;
 
   return projects[nextIndex];
+}
+
+export function getPrimaryProjectUrl(project: Project): string | null {
+  const officialLink = project.links?.official;
+
+  if (officialLink && !officialLink.expired) {
+    return officialLink.url;
+  }
+
+  return project.links?.preview?.url ?? null;
 }

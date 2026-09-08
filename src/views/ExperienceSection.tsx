@@ -1,5 +1,5 @@
 import { getContent } from "@/content";
-import { TOKENS } from "@/lib/constants";
+import { formatPeriod, SEPARATORS } from "@/lib/format";
 
 import type { Locale } from "@/i18n/config";
 import type { Experience } from "@/content/experiences";
@@ -13,25 +13,63 @@ type ExperienceSectionProps = {
   locale: Locale;
 };
 
-const formatPeriod = (period: Experience["period"], present: string) => {
-  const startDate = period.start;
-  const endDate = period.end || present;
-  const separator = TOKENS.separator.dash;
+function Period({
+  period,
+  present,
+}: {
+  period: Experience["period"];
+  present: string;
+}) {
+  return (
+    <>
+      <UICard.Label>{formatPeriod(period, present)}</UICard.Label>
+      <UICard.Label className="mt-1 italic text-muted">
+        {period.total} _
+      </UICard.Label>
+    </>
+  );
+}
 
-  return `${startDate}${separator}${endDate}`;
-};
-
-const renderTechnologies = (
-  technologies: Experience["technologies"],
-  label: string,
-) => {
-  const technologiesList = technologies.join(TOKENS.separator.list);
+function Technologies({ items, label }: { items: string[]; label: string }) {
   return (
     <p className="mt-6 text-xs italic">
-      <b>{label}:</b> {technologiesList}
+      <b>{label}:</b> {items.join(SEPARATORS.list)}
     </p>
   );
+}
+
+type ExperienceItemProps = {
+  experience: Experience;
+  present: string;
+  technologiesLabel: string;
 };
+
+function ExperienceItem({
+  experience,
+  present,
+  technologiesLabel,
+}: ExperienceItemProps) {
+  return (
+    <UICard.Root>
+      <UISplitColumns
+        aside={<Period period={experience.period} present={present} />}
+      >
+        <UICard.Title>
+          {experience.role} @{" "}
+          <OrganizationDisplayName
+            id={experience.organizationId}
+            className="italic"
+          />
+        </UICard.Title>
+        <UICard.Paragraphs data={experience.summary} />
+        <Technologies
+          items={experience.technologies}
+          label={technologiesLabel}
+        />
+      </UISplitColumns>
+    </UICard.Root>
+  );
+}
 
 export function ExperienceSection({ locale }: ExperienceSectionProps) {
   const { experiences, common } = getContent(locale);
@@ -45,33 +83,11 @@ export function ExperienceSection({ locale }: ExperienceSectionProps) {
       <ul>
         {experiences.items.map((experience) => (
           <li key={experience.id}>
-            <UICard.Root>
-              <UISplitColumns
-                aside={
-                  <>
-                    <UICard.Label>
-                      {formatPeriod(experience.period, common.present)}
-                    </UICard.Label>
-                    <UICard.Label className="mt-1 italic text-muted">
-                      {experience.period.total} _
-                    </UICard.Label>
-                  </>
-                }
-              >
-                <UICard.Title>
-                  {experience.role} @{" "}
-                  <OrganizationDisplayName
-                    id={experience.organizationId}
-                    className="italic"
-                  />
-                </UICard.Title>
-                <UICard.Paragraphs data={experience.summary} />
-                {renderTechnologies(
-                  experience.technologies,
-                  common.mainTechnologies,
-                )}
-              </UISplitColumns>
-            </UICard.Root>
+            <ExperienceItem
+              experience={experience}
+              present={common.present}
+              technologiesLabel={common.mainTechnologies}
+            />
           </li>
         ))}
       </ul>
