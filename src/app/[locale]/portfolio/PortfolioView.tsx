@@ -4,7 +4,6 @@ import type { Locale } from "@/i18n/config";
 import { SectionScrollTarget, type SectionId } from "@/components/navbar";
 
 import { AboutSection } from "@/views/AboutSection";
-import { ContactsSection } from "@/views/ContactsSection";
 import { ExperienceSection } from "@/views/ExperienceSection";
 import { EducationSection } from "@/views/EducationSection";
 import { ProjectsSection } from "@/views/projects/ProjectsSection";
@@ -42,7 +41,6 @@ export function PortfolioView({
         activeProjectId={activeProjectId}
       />
       <EducationSection locale={locale} />
-      <ContactsSection locale={locale} />
     </>
   );
 }

@@ -7,7 +7,7 @@ import type { Locale } from "@/i18n/config";
  * `src/app/[locale]/portfolio/`.
  */
 export type SectionId =
-  "about" | "experience" | "education" | "projects" | "contact" | "stack";
+  "about" | "experience" | "education" | "projects" | "stack";
 
 /**
  * Maps the localized public URL slug for a section to its stable internal
@@ -20,7 +20,6 @@ export const sectionRoutes: Record<Locale, Record<string, SectionId>> = {
     projetos: "projects",
     experiencia: "experience",
     formacao: "education",
-    contato: "contact",
     tecnologias: "stack",
   },
   en: {
@@ -28,7 +27,6 @@ export const sectionRoutes: Record<Locale, Record<string, SectionId>> = {
     projects: "projects",
     experience: "experience",
     education: "education",
-    contact: "contact",
     stack: "stack",
   },
 };
@@ -39,8 +37,6 @@ export interface NavbarLabels {
   closeMenu: string;
   menu: string;
   navigation: string;
-  resume: string;
-  resumeUrl: string;
 }
 
 export const navbarLabels: Record<Locale, NavbarLabels> = {
@@ -50,8 +46,6 @@ export const navbarLabels: Record<Locale, NavbarLabels> = {
     closeMenu: "Fechar menu",
     menu: "Menu",
     navigation: "Navegação",
-    resume: "Currículo",
-    resumeUrl: "https://www.victornns.com/pdf/victor-nascimento-curriculo.pdf",
   },
   en: {
     logo: "Portfolio",
@@ -59,8 +53,6 @@ export const navbarLabels: Record<Locale, NavbarLabels> = {
     closeMenu: "Close menu",
     menu: "Menu",
     navigation: "Navigation",
-    resume: "Resume",
-    resumeUrl: "https://www.victornns.com/pdf/victor-nascimento-resume.pdf",
   },
 };
 

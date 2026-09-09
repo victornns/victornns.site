@@ -11,6 +11,8 @@ export const localeToHtmlLang: Record<Locale, string> = {
   en: "en-US",
 };
 
+export const SITE_URL = "https://www.victornns.com";
+
 export function isValidLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }
@@ -27,6 +29,10 @@ export function getLocale(value?: string | null): Locale {
  */
 export function getLocalizedPath(locale: Locale, slug: string): string {
   return locale === defaultLocale ? `/${slug}` : `/${locale}/${slug}`;
+}
+
+export function getLocalizedUrl(locale: Locale, slug: string): string {
+  return `${SITE_URL}${getLocalizedPath(locale, slug)}`;
 }
 
 /**

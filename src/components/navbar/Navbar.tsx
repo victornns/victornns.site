@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { MobileMenuDrawer } from "@/components/navbar/MobileMenuDrawer";
 import { NavbarLink } from "@/components/navbar/NavbarLink";
+import { ResumeButton } from "@/components/navbar/ResumeButton";
 import { useNavbar } from "@/components/navbar/useNavbar";
 import type { SectionId } from "@/content/navbar";
 import type { Locale } from "@/i18n/config";
@@ -86,19 +87,17 @@ function LocaleToggle({
 }
 
 type DesktopNavProps = {
+  locale: Locale;
   items: NavbarItem[];
   activeSectionId: SectionId | null;
   setActiveSectionId: (sectionId: SectionId) => void;
-  resumeHref: string;
-  resumeLabel: string;
 };
 
 function DesktopNav({
+  locale,
   items,
   activeSectionId,
   setActiveSectionId,
-  resumeHref,
-  resumeLabel,
 }: DesktopNavProps) {
   return (
     <div className="hidden items-center gap-8 xl:flex">
@@ -118,14 +117,7 @@ function DesktopNav({
 
       <div className="h-8 w-px bg-neutral-300" />
 
-      <Link
-        href={resumeHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="shrink-0 bg-black px-5 py-3 leading-none text-white"
-      >
-        {resumeLabel}
-      </Link>
+      <ResumeButton locale={locale} />
     </div>
   );
 }
@@ -181,7 +173,6 @@ export function Navbar({ locale, items }: NavbarProps) {
     activeSectionId,
     setActiveSectionId,
     logo,
-    resumeHref,
     portfolioHref,
     localeHref,
     labels,
@@ -216,11 +207,10 @@ export function Navbar({ locale, items }: NavbarProps) {
           </div>
 
           <DesktopNav
+            locale={locale}
             items={items}
             activeSectionId={activeSectionId}
             setActiveSectionId={setActiveSectionId}
-            resumeHref={resumeHref}
-            resumeLabel={labels.resume}
           />
         </div>
       </nav>
@@ -240,7 +230,6 @@ export function Navbar({ locale, items }: NavbarProps) {
         items={items}
         activeSectionId={activeSectionId}
         setActiveSectionId={setActiveSectionId}
-        resumeHref={resumeHref}
         labels={labels}
         locale={locale}
         localeHref={localeHref}

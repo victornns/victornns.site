@@ -9,7 +9,6 @@ export const sectionOrder: SectionId[] = [
   "experience",
   "projects",
   "education",
-  "contact",
 ];
 
 const sectionSlugById: Record<
@@ -40,7 +39,7 @@ export function getSectionIdFromSlug(
 }
 
 export function getNavbarItems(locale: Locale): NavbarItem[] {
-  const { about, experiences, education, projects, contacts, techStack } =
+  const { about, experiences, education, projects, techStack } =
     getContent(locale);
 
   const labelById: Record<SectionId, string> = {
@@ -49,7 +48,6 @@ export function getNavbarItems(locale: Locale): NavbarItem[] {
     stack: techStack.title,
     experience: experiences.title,
     education: education.title,
-    contact: contacts.title,
   };
 
   return sectionOrder.map((sectionId) => ({

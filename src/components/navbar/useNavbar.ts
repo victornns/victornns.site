@@ -186,7 +186,6 @@ export function useNavbar(locale: Locale) {
     close: nav.closeMenu,
     menu: nav.menu,
     navigation: nav.navigation,
-    resume: nav.resume,
     openMenu: nav.openMenu,
     switchToEnglish: switchLocaleLabel.en,
     switchToPortuguese: switchLocaleLabel.pt,
@@ -199,7 +198,6 @@ export function useNavbar(locale: Locale) {
     activeSectionId,
     setActiveSectionId,
     logo: nav.logo,
-    resumeHref: nav.resumeUrl,
     portfolioHref: getLocalizedPath(locale, "portfolio"),
     localeHref: {
       pt: toTargetLocalePath(pathname, locale, "pt"),

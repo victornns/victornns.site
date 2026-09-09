@@ -9,15 +9,14 @@ export interface Contact {
   };
 }
 
-export interface ContactsContent {
-  title: string;
-  items: Contact[];
-}
-
 const contactLinks = {
   email: {
-    display: "victor.nascimento.ns@gmail.com",
-    href: "mailto:victor.nascimento.ns@gmail.com",
+    display: "contato@victornns.com",
+    href: "mailto:contato@victornns.com",
+  },
+  phone: {
+    display: "+55 11 96739-5380",
+    href: "tel:+5511967395380",
   },
   linkedin: {
     display: "linkedin.com/in/victor-nascimento-ns",
@@ -29,21 +28,22 @@ const contactLinks = {
   },
 };
 
-export const contactsContent: Record<Locale, ContactsContent> = {
-  pt: {
-    title: "Contato",
-    items: [
-      { id: "email", label: "E-mail", link: contactLinks.email },
-      { id: "linkedin", label: "LinkedIn", link: contactLinks.linkedin },
-      { id: "github", label: "GitHub", link: contactLinks.github },
-    ],
-  },
-  en: {
-    title: "Contact",
-    items: [
-      { id: "email", label: "Email", link: contactLinks.email },
-      { id: "linkedin", label: "LinkedIn", link: contactLinks.linkedin },
-      { id: "github", label: "GitHub", link: contactLinks.github },
-    ],
-  },
+export const contactsContent: Record<Locale, Contact[]> = {
+  pt: [
+    { id: "email", label: "E-mail", link: contactLinks.email },
+    { id: "phone", label: "Telefone", link: contactLinks.phone },
+    { id: "linkedin", label: "LinkedIn", link: contactLinks.linkedin },
+    { id: "github", label: "GitHub", link: contactLinks.github },
+  ],
+  en: [
+    { id: "email", label: "Email", link: contactLinks.email },
+    { id: "phone", label: "Phone", link: contactLinks.phone },
+    { id: "linkedin", label: "LinkedIn", link: contactLinks.linkedin },
+    { id: "github", label: "GitHub", link: contactLinks.github },
+  ],
+};
+
+export const locationContent: Record<Locale, string> = {
+  pt: "Atibaia, SP, Brasil / Remoto",
+  en: "Atibaia, SP, Brazil / Remote",
 };

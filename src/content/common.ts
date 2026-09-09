@@ -14,6 +14,7 @@ export interface CommonContent {
   design: string;
   /** Public URL slug for the resume/curriculo route (external word, not the internal folder name). */
   resumeSlug: string;
+  resumeOnline: string;
   notFound: {
     title: string;
     description: string;
@@ -35,6 +36,7 @@ export const commonContent: Record<Locale, CommonContent> = {
     stack: "Stack",
     design: "Design",
     resumeSlug: "curriculo",
+    resumeOnline: "Versão online",
     notFound: {
       title: "Página não encontrada",
       description: "O endereço acessado não existe ou foi movido.",
@@ -54,6 +56,7 @@ export const commonContent: Record<Locale, CommonContent> = {
     stack: "Stack",
     design: "Design",
     resumeSlug: "resume",
+    resumeOnline: "Online version",
     notFound: {
       title: "Page not found",
       description: "The page you requested doesn't exist or has moved.",

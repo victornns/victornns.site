@@ -1,10 +1,10 @@
-# Developer site & resume
+# Resume
 
 [![Generate CV PDF](https://github.com/victornns/victornns.site/actions/workflows/generate-cv-pdf.yml/badge.svg?branch=main)](https://github.com/victornns/victornns.site/actions/workflows/generate-cv-pdf.yml)
 
-Personal site built with Next.js.
+Built with Next.js.
 
-You can preview my resume here:
+You can view my resume here:
 
 - pt-BR: [victor-nascimento-curriculo.pdf](https://www.victornns.com/pdf/victor-nascimento-curriculo.pdf)
 - en-US: [victor-nascimento-resume.pdf](https://www.victornns.com/pdf/victor-nascimento-resume.pdf)

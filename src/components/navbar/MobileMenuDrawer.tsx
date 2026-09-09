@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
-
 import { Drawer } from "@/components/drawer/Drawer";
 import { LocaleSwitchLinks } from "@/components/LocaleSwitchLinks";
 import { NavbarLink } from "@/components/navbar/NavbarLink";
+import { ResumeButton } from "@/components/navbar/ResumeButton";
 
 import type { NavbarItem, SectionId } from "@/components/navbar/Navbar";
 import type { Locale } from "@/i18n/config";
@@ -16,7 +15,6 @@ interface MobileMenuDrawerLabels {
   close: string;
   menu: string;
   navigation: string;
-  resume: string;
   switchToPortuguese: string;
   switchToEnglish: string;
 }
@@ -27,7 +25,6 @@ interface MobileMenuDrawerProps {
   items: NavbarItem[];
   activeSectionId: SectionId | null;
   setActiveSectionId: (sectionId: SectionId) => void;
-  resumeHref: string;
   labels: MobileMenuDrawerLabels;
   locale: Locale;
   localeHref: Record<Locale, string>;
@@ -94,7 +91,6 @@ export function MobileMenuDrawer({
   items,
   activeSectionId,
   setActiveSectionId,
-  resumeHref,
   labels,
   locale,
   localeHref,
@@ -128,15 +124,7 @@ export function MobileMenuDrawer({
           }}
         />
 
-        <Link
-          href={resumeHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-wide-tracking inline-flex w-full items-center justify-center bg-black px-5 py-4 text-sm text-white transition hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
-          onClick={closeDrawer}
-        >
-          {labels.resume}
-        </Link>
+        <ResumeButton locale={locale} onClick={closeDrawer} />
       </div>
     </Drawer>
   );

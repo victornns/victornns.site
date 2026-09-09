@@ -27,7 +27,8 @@ export function ProjectActions({
       {primaryUrl && (
         <UILink
           href={primaryUrl}
-          className="inline-flex items-center justify-center bg-black px-5 py-3 text-sm text-white no-underline transition hover:bg-neutral-800"
+          underline={false}
+          className="inline-flex items-center justify-center bg-black px-5 py-3 text-sm text-white transition hover:bg-neutral-800"
         >
           {viewProjectLabel}
         </UILink>
@@ -36,7 +37,8 @@ export function ProjectActions({
       {officialUrl && officialUrl !== primaryUrl && (
         <UILink
           href={officialUrl}
-          className="inline-flex items-center justify-center border px-5 py-3 text-sm no-underline transition hover:border-black"
+          underline={false}
+          className="inline-flex items-center justify-center border px-5 py-3 text-sm transition hover:border-black"
         >
           {sanitizeUrlForDisplay(officialUrl)}
         </UILink>
@@ -45,7 +47,8 @@ export function ProjectActions({
       {showPreviewAction && previewUrl && (
         <UILink
           href={previewUrl}
-          className="inline-flex items-center justify-center px-2 py-3 text-sm no-underline transition hover:text-muted"
+          underline={false}
+          className="inline-flex items-center justify-center px-2 py-3 text-sm transition hover:text-muted"
         >
           {previewLabel}
         </UILink>

@@ -1,25 +1,38 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
-import { joinClassNames } from "@/lib/tailwind";
+import { joinClassNames, tw } from "@/lib/tailwind";
+
+const DEFAULT_ASIDE_WIDTH = tw`md:w-40 lg:w-72`;
 
 interface UISplitColumnsProps extends PropsWithChildren {
   aside: ReactNode;
+  asidePosition?: "left" | "right";
+  asideWidth?: string;
   className?: string;
 }
 
 export function UISplitColumns({
   aside,
+  asidePosition = "left",
+  asideWidth = DEFAULT_ASIDE_WIDTH,
   children,
   className,
 }: UISplitColumnsProps) {
+  const isAsideRight = asidePosition === "right";
+
   return (
     <div
       className={joinClassNames(
-        "grid gap-2 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-10",
+        "grid gap-2 md:gap-10",
+        isAsideRight
+          ? "md:grid-cols-[minmax(0,1fr)_auto]"
+          : "md:grid-cols-[auto_minmax(0,1fr)]",
         className,
       )}
     >
-      <div className="sm:w-40 lg:w-72">{aside}</div>
+      <div className={joinClassNames(asideWidth, isAsideRight && "order-last")}>
+        {aside}
+      </div>
       <div>{children}</div>
     </div>
   );

@@ -18,7 +18,8 @@ export function PreviewCard({ url, label }: PreviewCardProps) {
 
         <UILink
           href={url}
-          className="inline-flex items-center justify-center border border-black px-4 py-3 text-sm no-underline transition hover:bg-black hover:text-white"
+          underline={false}
+          className="inline-flex items-center justify-center border border-black px-4 py-3 text-sm transition hover:bg-black hover:text-white"
         >
           {label}
         </UILink>
