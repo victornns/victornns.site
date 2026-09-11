@@ -1,7 +1,7 @@
 import type { OrganizationId } from "@/content/organizations";
 import type { Locale } from "@/i18n/config";
 
-export interface Experience {
+export type Experience = {
   id: string;
   role: string;
   organizationId: OrganizationId;
@@ -13,18 +13,20 @@ export interface Experience {
   };
   summary: string[];
   technologies: string[];
-}
+};
 
-export interface ExperiencesContent {
+export type ExperiencesContent = {
   title: string;
   description: string;
+  technologiesLabel: string;
   items: Experience[];
-}
+};
 
 export const experiencesContent: Record<Locale, ExperiencesContent> = {
   pt: {
     title: "Experiência",
     description: "Histórico profissional",
+    technologiesLabel: "Principais tecnologias",
     items: [
       {
         id: "one-bra-frontend-developer",
@@ -157,6 +159,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
   en: {
     title: "Experience",
     description: "Professional history",
+    technologiesLabel: "Main technologies",
     items: [
       {
         id: "one-bra-frontend-developer",

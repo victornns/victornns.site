@@ -1,9 +1,9 @@
-import type { ElementType } from "react";
-
 import {
   organizationsById,
   type OrganizationId,
 } from "@/content/organizations";
+
+import type { ElementType } from "react";
 
 type OrganizationDisplayNameProps = {
   id: OrganizationId;

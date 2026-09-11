@@ -1,7 +1,8 @@
 import Link from "next/link";
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 import { joinClassNames, tw } from "@/lib/tailwind";
+
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 const UI_BUTTON_CLASSNAME = tw`inline-flex items-center justify-center gap-2 bg-black px-4 py-3 leading-none text-white no-underline`;
 

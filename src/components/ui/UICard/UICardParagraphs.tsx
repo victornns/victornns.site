@@ -1,6 +1,6 @@
-interface UICardParagraphsProps {
+type UICardParagraphsProps = {
   data: string[];
-}
+};
 
 export function UICardParagraphs({ data }: UICardParagraphsProps) {
   return (

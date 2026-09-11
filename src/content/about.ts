@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n/config";
 
-export interface About {
+export type About = {
   title: string;
   /** Professional role shown under the name, on two lines. */
   role: {
@@ -11,7 +11,9 @@ export interface About {
   highlights: string[];
   /** Bio shown on both the portfolio and curriculo pages. */
   summary: string[];
-}
+  /** Label of the link from the curriculo page to its online (portfolio) version. */
+  onlineVersionLabel: string;
+};
 
 export const PROFILE_NAME = {
   first: "Victor",
@@ -41,6 +43,7 @@ export const aboutContent: Record<Locale, About> = {
       "Participo do levantamento de requisitos e dos alinhamentos entre clientes, design e desenvolvimento. Também coordeno frentes de trabalho, com gestão de tarefas, tomada de decisões técnicas e acompanhamento de parceiros e colaboradores.",
       "Como full-stack, conduzo projetos end-to-end sob demanda, atuando principalmente com Node.js, APIs, CMS headless e integrações.",
     ],
+    onlineVersionLabel: "Versão online",
   },
   en: {
     title: "About",
@@ -63,5 +66,6 @@ export const aboutContent: Record<Locale, About> = {
       "I contribute to requirements gathering and cross-functional alignment across clients, design, and development. I also coordinate workstreams, manage tasks, make technical decisions, and work closely with partners and collaborators.",
       "As a full-stack developer, I lead end-to-end projects as needed, primarily working with Node.js, APIs, headless CMS, and integrations.",
     ],
+    onlineVersionLabel: "Online version",
   },
 };

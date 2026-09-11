@@ -1,15 +1,15 @@
-import type { PropsWithChildren, ReactNode } from "react";
-
 import { joinClassNames, tw } from "@/lib/tailwind";
+
+import type { PropsWithChildren, ReactNode } from "react";
 
 const DEFAULT_ASIDE_WIDTH = tw`md:w-40 lg:w-72`;
 
-interface UISplitColumnsProps extends PropsWithChildren {
+type UISplitColumnsProps = PropsWithChildren & {
   aside: ReactNode;
   asidePosition?: "left" | "right";
   asideWidth?: string;
   className?: string;
-}
+};
 
 export function UISplitColumns({
   aside,

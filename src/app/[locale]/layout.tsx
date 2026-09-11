@@ -1,15 +1,17 @@
-import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 
+import { getMetadata } from "@/content/metadata";
 import {
   locales,
   defaultLocale,
   isValidLocale,
   localeToHtmlLang,
 } from "@/i18n/config";
-import { getMetadata } from "@/content/metadata";
+
 import { font, fontStyle } from "../fonts";
+
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
 import "../globals.scss";
 

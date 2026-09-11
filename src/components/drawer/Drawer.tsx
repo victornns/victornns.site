@@ -6,7 +6,7 @@ import { joinClassNames } from "@/lib/tailwind";
 
 import type { ReactNode } from "react";
 
-interface DrawerProps {
+type DrawerProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title: string;
@@ -25,7 +25,7 @@ interface DrawerProps {
    * close control. A drawer with its own close button doesn't need it.
    */
   elevated?: boolean;
-}
+};
 
 type CloseButtonProps = {
   label: string;

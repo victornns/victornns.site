@@ -1,15 +1,16 @@
-import type { LinkProps } from "next/link";
 import Link from "next/link";
-import type { ReactNode } from "react";
 
 import { joinClassNames } from "@/lib/tailwind";
 
-interface UILinkProps extends LinkProps {
+import type { LinkProps } from "next/link";
+import type { ReactNode } from "react";
+
+type UILinkProps = LinkProps & {
   children: ReactNode;
   target?: string;
   className?: string;
   underline?: boolean;
-}
+};
 
 export function UILink({
   children,

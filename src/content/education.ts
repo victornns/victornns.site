@@ -1,7 +1,7 @@
 import type { OrganizationId } from "@/content/organizations";
 import type { Locale } from "@/i18n/config";
 
-export interface Education {
+export type Education = {
   id: string;
   degree: string;
   organizationId: OrganizationId;
@@ -11,13 +11,13 @@ export interface Education {
   };
   /** Optional note shown next to the period (e.g. completion status). */
   status?: string;
-}
+};
 
-export interface EducationContent {
+export type EducationContent = {
   title: string;
   description?: string;
   items: Education[];
-}
+};
 
 export const educationContent: Record<Locale, EducationContent> = {
   pt: {

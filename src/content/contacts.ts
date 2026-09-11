@@ -1,13 +1,13 @@
 import type { Locale } from "@/i18n/config";
 
-export interface Contact {
+export type Contact = {
   id: string;
   label: string;
   link: {
     display: string;
     href: string;
   };
-}
+};
 
 const contactLinks = {
   email: {

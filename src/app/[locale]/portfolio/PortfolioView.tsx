@@ -1,13 +1,11 @@
-import { getContent } from "@/content";
+import { AboutSection } from "@/features/about/AboutSection";
+import { EducationSection } from "@/features/education/EducationSection";
+import { ExperienceSection } from "@/features/experience/ExperienceSection";
+import { SectionScrollTarget } from "@/features/navbar/SectionScrollTarget";
+import { ProjectsSection } from "@/features/projects/ProjectsSection";
+import { TechStackSection } from "@/features/techStack/TechStackSection";
 import type { Locale } from "@/i18n/config";
-
-import { SectionScrollTarget, type SectionId } from "@/components/navbar";
-
-import { AboutSection } from "@/views/AboutSection";
-import { ExperienceSection } from "@/views/ExperienceSection";
-import { EducationSection } from "@/views/EducationSection";
-import { ProjectsSection } from "@/views/projects/ProjectsSection";
-import { TechStackSection } from "@/views/TechStackSection";
+import type { SectionId } from "@/i18n/sections";
 
 type PortfolioViewProps = {
   locale: Locale;
@@ -22,7 +20,6 @@ export function PortfolioView({
   activeSectionId,
   activeProjectId,
 }: PortfolioViewProps) {
-  const { projects, common } = getContent(locale);
   const scrollIdentity = activeProjectId ?? activeSectionId ?? "portfolio";
 
   return (
@@ -34,12 +31,7 @@ export function PortfolioView({
       <AboutSection locale={locale} />
       <TechStackSection locale={locale} />
       <ExperienceSection locale={locale} />
-      <ProjectsSection
-        locale={locale}
-        projects={projects}
-        common={common}
-        activeProjectId={activeProjectId}
-      />
+      <ProjectsSection locale={locale} activeProjectId={activeProjectId} />
       <EducationSection locale={locale} />
     </>
   );

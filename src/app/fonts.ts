@@ -1,4 +1,5 @@
 import { Roboto_Flex } from "next/font/google";
+
 import type { CSSProperties } from "react";
 
 // Exposed as `--font-sans`, which tailwind.config.ts maps `font-sans` to.

@@ -1,5 +1,3 @@
-import { commonContent } from "@/content/common";
-
 export const locales = ["pt", "en"] as const;
 
 export type Locale = (typeof locales)[number];
@@ -13,8 +11,8 @@ export const localeToHtmlLang: Record<Locale, string> = {
 
 export const SITE_URL = "https://www.victornns.com";
 
-export function isValidLocale(value: string): value is Locale {
-  return (locales as readonly string[]).includes(value);
+export function isValidLocale(value: string | undefined): value is Locale {
+  return (locales as readonly string[]).includes(value ?? "");
 }
 
 export function getLocale(value?: string | null): Locale {
@@ -34,15 +32,3 @@ export function getLocalizedPath(locale: Locale, slug: string): string {
 export function getLocalizedUrl(locale: Locale, slug: string): string {
   return `${SITE_URL}${getLocalizedPath(locale, slug)}`;
 }
-
-/**
- * Maps a locale-specific external path segment to the internal route segment
- * (the folder name under `src/app/[locale]/`). Only needed when a locale uses
- * a different external name than the internal folder, e.g. English
- * `commonContent.en.resumeSlug` ("resume") instead of "curriculo".
- */
-export const routeAliases: Partial<Record<Locale, Record<string, string>>> = {
-  en: {
-    [commonContent.en.resumeSlug]: "curriculo",
-  },
-};

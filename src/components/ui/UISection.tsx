@@ -2,10 +2,10 @@ import type { ReactNode, ElementType } from "react";
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
-interface HeadingSectionProps {
+type HeadingSectionProps = {
   level: HeadingLevel;
   children?: ReactNode;
-}
+};
 
 function HeadingSection({ level, children }: HeadingSectionProps) {
   const Tag = `h${level}` as ElementType;
@@ -18,13 +18,13 @@ function HeadingSection({ level, children }: HeadingSectionProps) {
   );
 }
 
-interface UISectionProps {
+type UISectionProps = {
   id?: string;
   title?: string;
   headingLevel?: HeadingLevel;
   description?: ReactNode;
   children?: ReactNode;
-}
+};
 
 export function UISection({
   id,

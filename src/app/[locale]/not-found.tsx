@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { headers } from "next/headers";
-
-import { commonContent } from "@/content/common";
-import { getLocale, getLocalizedPath } from "@/i18n/config";
+import Link from "next/link";
 
 import { UIPageMain } from "@/components/ui/UIPageMain";
+import { commonContent } from "@/content/common";
+import { getLocale } from "@/i18n/config";
+import { getPortfolioPath } from "@/i18n/sections";
 
 export default async function NotFound() {
   const locale = getLocale((await headers()).get("x-locale"));
@@ -19,7 +19,7 @@ export default async function NotFound() {
         </h1>
         <p className="text-muted">{notFound.description}</p>
         <Link
-          href={getLocalizedPath(locale, "portfolio")}
+          href={getPortfolioPath(locale)}
           className="mt-4 underline underline-offset-4"
         >
           {notFound.backHome}

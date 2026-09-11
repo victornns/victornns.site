@@ -1,12 +1,11 @@
-import { commonContent } from "@/content/common";
 import { aboutContent } from "@/content/about";
+import { commonContent } from "@/content/common";
 import { contactsContent, locationContent } from "@/content/contacts";
-import { experiencesContent } from "@/content/experiences";
 import { educationContent } from "@/content/education";
+import { experiencesContent } from "@/content/experiences";
 import { projectsContent } from "@/content/projects";
 import { resumeContent } from "@/content/resume";
 import { techStackContent } from "@/content/techStack";
-
 import type { Locale } from "@/i18n/config";
 
 export function getContent(locale: Locale) {

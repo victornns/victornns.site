@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 
-import { locales, defaultLocale, routeAliases } from "@/i18n/config";
+import { locales, defaultLocale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
+import { routeAliases } from "@/i18n/routes";
 
 import type { NextRequest } from "next/server";
-import type { Locale } from "@/i18n/config";
 
 function findCanonicalSlug(locale: Locale, internalSlug: string) {
   const aliases = routeAliases[locale];

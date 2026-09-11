@@ -1,7 +1,7 @@
 import { aboutContent, PROFILE_NAME } from "@/content/about";
+import { SITE_URL, type Locale } from "@/i18n/config";
 import { SEPARATORS } from "@/lib/format";
 
-import { SITE_URL, type Locale } from "@/i18n/config";
 import type { Metadata } from "next";
 
 export function getMetadata(locale: Locale): Metadata {

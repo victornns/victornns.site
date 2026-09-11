@@ -1,12 +1,12 @@
-import type { ReactNode } from "react";
-
 import { joinClassNames } from "@/lib/tailwind";
 
-interface UICardRootProps {
+import type { ReactNode } from "react";
+
+type UICardRootProps = {
   children: ReactNode;
   className?: string;
   spacing?: "compact" | "default";
-}
+};
 
 const spacingClasses = {
   compact: "py-4",

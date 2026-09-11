@@ -1,9 +1,10 @@
 import { notFound, redirect } from "next/navigation";
 
-import { getLocalizedPath, locales, type Locale } from "@/i18n/config";
-import { getSectionIdFromSlug, getSectionSlug } from "@/components/navbar";
-import { getProjectBySlug } from "@/views/projects/projectRoutes";
 import { getContent } from "@/content";
+import { getProjectBySlug } from "@/features/projects/lib/projectList";
+import { getProjectPath } from "@/features/projects/lib/projectPaths";
+import { locales, type Locale } from "@/i18n/config";
+import { getSectionIdFromSlug, getSectionSlug } from "@/i18n/sections";
 
 import { PortfolioView } from "../../PortfolioView";
 
@@ -22,46 +23,38 @@ export function generateStaticParams() {
   });
 }
 
+function findProject(locale: Locale, section: string, projectSlug: string) {
+  if (getSectionIdFromSlug(locale, section) !== "projects") {
+    return undefined;
+  }
+  return getProjectBySlug(getContent(locale).projects.items, projectSlug);
+}
+
 export default async function PortfolioProjectPage({
   params,
 }: PortfolioProjectPageProps) {
   const { locale, section, project: projectSlug } = await params;
 
-  const sectionId = getSectionIdFromSlug(locale, section);
-  if (sectionId === "projects") {
-    const project = getProjectBySlug(
-      getContent(locale).projects.items,
-      projectSlug,
+  const project = findProject(locale, section, projectSlug);
+  if (project) {
+    return (
+      <PortfolioView
+        locale={locale}
+        activeSectionId="projects"
+        activeProjectId={project.id}
+      />
     );
-    if (project) {
-      return (
-        <PortfolioView
-          locale={locale}
-          activeSectionId={sectionId}
-          activeProjectId={project.id}
-        />
-      );
-    }
   }
 
   // The slugs may belong to another locale — if the same project resolves
   // there, redirect to that locale's URL.
-  const matchedLocale = locales.find((candidate) => {
-    if (candidate === locale) {
-      return false;
-    }
-    if (getSectionIdFromSlug(candidate, section) !== "projects") {
-      return false;
-    }
-    return Boolean(
-      getProjectBySlug(getContent(candidate).projects.items, projectSlug),
-    );
-  });
+  for (const candidate of locales) {
+    if (candidate === locale) continue;
 
-  if (matchedLocale) {
-    redirect(
-      getLocalizedPath(matchedLocale, `portfolio/${section}/${projectSlug}`),
-    );
+    const matchedProject = findProject(candidate, section, projectSlug);
+    if (matchedProject) {
+      redirect(getProjectPath(candidate, matchedProject));
+    }
   }
 
   notFound();

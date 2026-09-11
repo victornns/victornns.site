@@ -1,9 +1,9 @@
 import type { Locale } from "@/i18n/config";
 
-export interface ResumeContent {
+export type ResumeContent = {
   label: string;
   url: string;
-}
+};
 
 export const resumeContent: Record<Locale, ResumeContent> = {
   pt: {

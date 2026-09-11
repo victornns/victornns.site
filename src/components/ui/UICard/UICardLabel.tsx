@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
-
 import { joinClassNames } from "@/lib/tailwind";
 
-interface UICardLabelProps {
+import type { ReactNode } from "react";
+
+type UICardLabelProps = {
   children: ReactNode;
   className?: string;
-}
+};
 
 export function UICardLabel({ children, className }: UICardLabelProps) {
   return (

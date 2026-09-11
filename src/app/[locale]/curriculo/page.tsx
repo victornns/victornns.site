@@ -1,10 +1,9 @@
-import type { Locale } from "@/i18n/config";
-
 import { UIPageMain } from "@/components/ui/UIPageMain";
-import { AboutSection } from "@/views/AboutSection";
-import { ExperienceSection } from "@/views/ExperienceSection";
-import { EducationSection } from "@/views/EducationSection";
-import { TechStackSection } from "@/views/TechStackSection";
+import { AboutSection } from "@/features/about/AboutSection";
+import { EducationSection } from "@/features/education/EducationSection";
+import { ExperienceSection } from "@/features/experience/ExperienceSection";
+import { TechStackSection } from "@/features/techStack/TechStackSection";
+import type { Locale } from "@/i18n/config";
 
 type CurriculoPageProps = {
   params: Promise<{ locale: Locale }>;

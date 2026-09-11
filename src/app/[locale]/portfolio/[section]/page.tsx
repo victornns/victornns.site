@@ -1,7 +1,11 @@
 import { notFound, redirect } from "next/navigation";
 
-import { getLocalizedPath, locales, type Locale } from "@/i18n/config";
-import { getSectionIdFromSlug, getSectionSlugs } from "@/components/navbar";
+import { locales, type Locale } from "@/i18n/config";
+import {
+  getSectionIdFromSlug,
+  getSectionPath,
+  getSectionSlugs,
+} from "@/i18n/sections";
 
 import { PortfolioView } from "../PortfolioView";
 
@@ -15,6 +19,20 @@ export function generateStaticParams() {
   );
 }
 
+/** Resolves `section` as another locale's slug, so a mislocalized URL can redirect to that locale. */
+function findSectionInOtherLocale(locale: Locale, section: string) {
+  for (const candidate of locales) {
+    if (candidate === locale) continue;
+
+    const sectionId = getSectionIdFromSlug(candidate, section);
+    if (sectionId) {
+      return { locale: candidate, sectionId };
+    }
+  }
+
+  return undefined;
+}
+
 export default async function PortfolioSectionPage({
   params,
 }: PortfolioSectionPageProps) {
@@ -25,15 +43,9 @@ export default async function PortfolioSectionPage({
     return <PortfolioView locale={locale} activeSectionId={sectionId} />;
   }
 
-  // `section` may be another locale's slug — if it resolves there, redirect
-  // to that locale's URL.
-  const matchedLocale = locales.find(
-    (candidate) =>
-      candidate !== locale && getSectionIdFromSlug(candidate, section),
-  );
-
-  if (matchedLocale) {
-    redirect(getLocalizedPath(matchedLocale, `portfolio/${section}`));
+  const match = findSectionInOtherLocale(locale, section);
+  if (match) {
+    redirect(getSectionPath(match.locale, match.sectionId));
   }
 
   notFound();

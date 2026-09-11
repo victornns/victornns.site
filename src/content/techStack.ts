@@ -1,17 +1,17 @@
 import type { Locale } from "@/i18n/config";
 
-export interface TechStackCategory {
+export type TechStackCategory = {
   id: string;
   title: string;
   items: string[];
-}
+};
 
-export interface TechStackContent {
+export type TechStackContent = {
   title: string;
   description: string;
   /** Categories grouped by column: each inner array renders as one column, top to bottom. */
   columns: TechStackCategory[][];
-}
+};
 
 // The stack itself isn't localized — same list, in English, for every locale.
 const techStackColumns: TechStackCategory[][] = [
