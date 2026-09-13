@@ -23,7 +23,7 @@ export function ResumeButton({
       target="_blank"
       icon={<ExternalLinkIcon />}
       onClick={onClick}
-      className={joinClassNames("font-semibold", className)}
+      className={joinClassNames("px-3 py-2 font-semibold text-sm", className)}
     >
       {label}
       <span className="rounded-sm bg-neutral-800 px-2 py-1 text-xs text-neutral-300">

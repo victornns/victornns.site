@@ -34,8 +34,8 @@ export const aboutContent: Record<Locale, About> = {
       "React & Next.js",
       "Node.js & APIs",
       "SSR/SSG/ISR",
-      "Arquitetura Frontend",
       "Web Performance",
+      "Arquitetura Frontend",
     ],
     summary: [
       "Senior Frontend Engineer com 10+ anos de experiência em desenvolvimento web, com foco em TypeScript, React e Next.js.",
@@ -43,7 +43,7 @@ export const aboutContent: Record<Locale, About> = {
       "Participo do levantamento de requisitos e dos alinhamentos entre clientes, design e desenvolvimento. Também coordeno frentes de trabalho, com gestão de tarefas, tomada de decisões técnicas e acompanhamento de parceiros e colaboradores.",
       "Como full-stack, conduzo projetos end-to-end sob demanda, atuando principalmente com Node.js, APIs, CMS headless e integrações.",
     ],
-    onlineVersionLabel: "Versão online",
+    onlineVersionLabel: "Acessar online",
   },
   en: {
     title: "About",
@@ -57,8 +57,8 @@ export const aboutContent: Record<Locale, About> = {
       "React & Next.js",
       "Node.js & APIs",
       "SSR/SSG/ISR",
-      "Frontend Architecture",
       "Web Performance",
+      "Frontend Architecture",
     ],
     summary: [
       "Senior Frontend Engineer with 10+ years of experience in web development, focused on TypeScript, React, and Next.js.",
@@ -66,6 +66,6 @@ export const aboutContent: Record<Locale, About> = {
       "I contribute to requirements gathering and cross-functional alignment across clients, design, and development. I also coordinate workstreams, manage tasks, make technical decisions, and work closely with partners and collaborators.",
       "As a full-stack developer, I lead end-to-end projects as needed, primarily working with Node.js, APIs, headless CMS, and integrations.",
     ],
-    onlineVersionLabel: "Online version",
+    onlineVersionLabel: "View online",
   },
 };

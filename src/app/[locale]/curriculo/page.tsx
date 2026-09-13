@@ -14,7 +14,7 @@ export default async function CurriculoPage({ params }: CurriculoPageProps) {
 
   return (
     <UIPageMain>
-      <AboutSection locale={locale} />
+      <AboutSection locale={locale} showOnlineVersionLink />
       <TechStackSection locale={locale} />
       <ExperienceSection locale={locale} />
       <EducationSection locale={locale} />

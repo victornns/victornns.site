@@ -14,9 +14,9 @@ const contactLinks = {
     display: "contato@victornns.com",
     href: "mailto:contato@victornns.com",
   },
-  phone: {
+  whatsapp: {
     display: "+55 11 96739-5380",
-    href: "tel:+5511967395380",
+    href: "https://wa.me/5511967395380",
   },
   linkedin: {
     display: "linkedin.com/in/victor-nascimento-ns",
@@ -31,13 +31,13 @@ const contactLinks = {
 export const contactsContent: Record<Locale, Contact[]> = {
   pt: [
     { id: "email", label: "E-mail", link: contactLinks.email },
-    { id: "phone", label: "Telefone", link: contactLinks.phone },
+    { id: "whatsapp", label: "WhatsApp", link: contactLinks.whatsapp },
     { id: "linkedin", label: "LinkedIn", link: contactLinks.linkedin },
     { id: "github", label: "GitHub", link: contactLinks.github },
   ],
   en: [
     { id: "email", label: "Email", link: contactLinks.email },
-    { id: "phone", label: "Phone", link: contactLinks.phone },
+    { id: "whatsapp", label: "WhatsApp", link: contactLinks.whatsapp },
     { id: "linkedin", label: "LinkedIn", link: contactLinks.linkedin },
     { id: "github", label: "GitHub", link: contactLinks.github },
   ],

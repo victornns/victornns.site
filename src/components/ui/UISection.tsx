@@ -1,3 +1,5 @@
+import { joinClassNames } from "@/lib/tailwind";
+
 import type { ReactNode, ElementType } from "react";
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
@@ -24,6 +26,7 @@ type UISectionProps = {
   headingLevel?: HeadingLevel;
   description?: ReactNode;
   children?: ReactNode;
+  className?: string;
 };
 
 export function UISection({
@@ -32,11 +35,15 @@ export function UISection({
   headingLevel = 2,
   description,
   children,
+  className,
 }: UISectionProps) {
   const hasHeader = Boolean(title || description);
 
   return (
-    <section id={id} className={id ? "scroll-mt-24" : undefined}>
+    <section
+      id={id}
+      className={joinClassNames(id && "scroll-mt-24", className)}
+    >
       {hasHeader && (
         <header className={children ? "mb-8" : undefined}>
           {title && (
