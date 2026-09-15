@@ -33,6 +33,14 @@ export const organizations = [
     link: "https://www.mpsp.mp.br/",
   },
   {
+    id: "banco-digimais",
+    name: {
+      full: "Banco Digimais",
+      display: "Banco Digimais",
+    },
+    link: "https://www.bancodigimais.com.br/",
+  },
+  {
     id: "one-digital-agency",
     name: {
       full: "Agência One Digital",

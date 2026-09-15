@@ -32,7 +32,7 @@ function EducationItem({
       <OrganizationDisplayName
         as="p"
         id={item.organizationId}
-        className="italic"
+        className="italic text-sm"
       />
     </UICard.Root>
   );

@@ -28,9 +28,42 @@ function Period({
   );
 }
 
+function OrganizationMeta({
+  organizationId,
+  contractType,
+}: {
+  organizationId: Experience["organizationId"];
+  contractType?: string;
+}) {
+  return (
+    <p className="-mt-2 mb-4 text-sm italic text-muted">
+      <OrganizationDisplayName id={organizationId} />
+      {contractType && `${SEPARATORS.bullet}${contractType}`}
+    </p>
+  );
+}
+
+function EngagementMeta({
+  mainClient,
+  mainClientLabel,
+}: {
+  mainClient?: string;
+  mainClientLabel: string;
+}) {
+  if (!mainClient) {
+    return null;
+  }
+
+  return (
+    <UICard.Label className="mb-3 italic text-muted">
+      <b>{mainClientLabel}:</b> {mainClient}
+    </UICard.Label>
+  );
+}
+
 function Technologies({ items, label }: { items: string[]; label: string }) {
   return (
-    <p className="mt-6 text-xs italic">
+    <p className="mt-8 text-xs italic text-muted">
       <b>{label}:</b> {items.join(SEPARATORS.list)}
     </p>
   );
@@ -40,30 +73,39 @@ type ExperienceItemProps = {
   experience: Experience;
   present: string;
   technologiesLabel: string;
+  mainClientLabel: string;
 };
 
 function ExperienceItem({
   experience,
   present,
   technologiesLabel,
+  mainClientLabel,
 }: ExperienceItemProps) {
   return (
-    <UICard.Root>
+    <UICard.Root className="py-8 md:py-10">
       <UISplitColumns
         aside={<Period period={experience.period} present={present} />}
       >
-        <UICard.Title>
-          {experience.role} @{" "}
-          <OrganizationDisplayName
-            id={experience.organizationId}
-            className="italic"
+        <div className="max-w-screen-lg md:border-l md:pl-8">
+          <UICard.Title>{experience.role}</UICard.Title>
+          <OrganizationMeta
+            organizationId={experience.organizationId}
+            contractType={experience.contractType}
           />
-        </UICard.Title>
-        <UICard.Paragraphs data={experience.summary} />
-        <Technologies
-          items={experience.technologies}
-          label={technologiesLabel}
-        />
+          <EngagementMeta
+            mainClient={experience.mainClient}
+            mainClientLabel={mainClientLabel}
+          />
+          <UICard.Paragraphs data={experience.summary} />
+          {experience.highlights && (
+            <UICard.Highlights items={experience.highlights} />
+          )}
+          <Technologies
+            items={experience.technologies}
+            label={technologiesLabel}
+          />
+        </div>
       </UISplitColumns>
     </UICard.Root>
   );
@@ -85,6 +127,7 @@ export function ExperienceSection({ locale }: ExperienceSectionProps) {
               experience={experience}
               present={common.present}
               technologiesLabel={experiences.technologiesLabel}
+              mainClientLabel={experiences.mainClientLabel}
             />
           </li>
         ))}
