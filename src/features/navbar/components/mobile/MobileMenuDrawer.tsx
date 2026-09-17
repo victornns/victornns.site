@@ -12,7 +12,7 @@ import { tw } from "@/lib/tailwind";
 
 export const MOBILE_MENU_DRAWER_ID = "mobile-menu-drawer";
 
-const MOBILE_LINK_CLASSNAME = tw`flex items-center justify-between border-b py-4 text-lg leading-none transition hover:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black`;
+const MOBILE_LINK_CLASSNAME = tw`flex items-center justify-between border-b py-4 leading-none transition hover:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black`;
 
 const MOBILE_LINK_ACTIVE_CLASSNAME = tw`font-semibold text-black`;
 
@@ -67,7 +67,7 @@ export function MobileMenuDrawer({
               reopenMobileMenu
             />
           </div>
-          <h2 className="text-3xl font-semibold leading-none">{labels.menu}</h2>
+          <h2 className="text-2xl font-semibold leading-none">{labels.menu}</h2>
         </header>
 
         <nav aria-label={labels.menu}>
