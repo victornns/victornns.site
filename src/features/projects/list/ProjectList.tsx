@@ -1,5 +1,6 @@
 import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
 import { UICard } from "@/components/ui/UICard";
+import { UIParagraphs } from "@/components/ui/UIParagraphs";
 import type { Project } from "@/content/projects";
 import { getProjectPath } from "@/features/projects/lib/projectPaths";
 import { ProjectLink } from "@/features/projects/list/ProjectLink";
@@ -71,7 +72,7 @@ function ProjectItem({
             {project.title}
           </ProjectLink>
         </UICard.Title>
-        <UICard.Paragraphs data={summary} />
+        <UIParagraphs data={summary} />
       </UICard.Root>
     </div>
   );

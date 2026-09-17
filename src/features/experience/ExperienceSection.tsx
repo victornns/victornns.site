@@ -1,11 +1,13 @@
 import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
+import { UIBulletList } from "@/components/ui/UIBulletList";
 import { UICard } from "@/components/ui/UICard";
+import { UIParagraphs } from "@/components/ui/UIParagraphs";
 import { UISection } from "@/components/ui/UISection";
 import { UISplitColumns } from "@/components/ui/UISplitColumns";
 import { getContent } from "@/content";
 import type { Experience } from "@/content/experiences";
 import type { Locale } from "@/i18n/config";
-import { formatPeriod, SEPARATORS } from "@/lib/format";
+import { formatPeriod } from "@/lib/format";
 
 type ExperienceSectionProps = {
   locale: Locale;
@@ -28,52 +30,12 @@ function Period({
   );
 }
 
-function OrganizationMeta({
-  organizationId,
-  contractType,
-}: {
-  organizationId: Experience["organizationId"];
-  contractType?: string;
-}) {
-  return (
-    <p className="-mt-2 mb-4 text-sm italic text-muted">
-      <OrganizationDisplayName id={organizationId} />
-      {contractType && `${SEPARATORS.bullet}${contractType}`}
-    </p>
-  );
-}
-
-function EngagementMeta({
-  mainClient,
-  mainClientLabel,
-}: {
-  mainClient?: string;
-  mainClientLabel: string;
-}) {
-  if (!mainClient) {
-    return null;
-  }
-
-  return (
-    <UICard.Label className="mb-3 italic text-muted">
-      <b>{mainClientLabel}:</b> {mainClient}
-    </UICard.Label>
-  );
-}
-
-function Technologies({ items, label }: { items: string[]; label: string }) {
-  return (
-    <p className="mt-8 text-xs italic text-muted">
-      <b>{label}:</b> {items.join(SEPARATORS.list)}
-    </p>
-  );
-}
-
 type ExperienceItemProps = {
   experience: Experience;
   present: string;
   technologiesLabel: string;
   mainClientLabel: string;
+  contractTypeLabel: string;
 };
 
 function ExperienceItem({
@@ -81,30 +43,44 @@ function ExperienceItem({
   present,
   technologiesLabel,
   mainClientLabel,
+  contractTypeLabel,
 }: ExperienceItemProps) {
   return (
     <UICard.Root className="py-8 md:py-10">
       <UISplitColumns
         aside={<Period period={experience.period} present={present} />}
       >
-        <div className="max-w-screen-lg md:border-l md:pl-8">
-          <UICard.Title>{experience.role}</UICard.Title>
-          <OrganizationMeta
-            organizationId={experience.organizationId}
-            contractType={experience.contractType}
-          />
-          <EngagementMeta
-            mainClient={experience.mainClient}
-            mainClientLabel={mainClientLabel}
-          />
-          <UICard.Paragraphs data={experience.summary} />
+        <div className="flex max-w-screen-lg flex-col gap-5 md:border-l md:pl-8">
+          <div>
+            <UICard.Title className="mb-0 font-bold">{experience.role}</UICard.Title>
+            <OrganizationDisplayName
+              id={experience.organizationId}
+              as="p"
+              className="text-sm italic text-muted"
+            />
+          </div>
+
+          <UIParagraphs data={experience.summary} />
           {experience.highlights && (
-            <UICard.Highlights items={experience.highlights} />
+            <UIBulletList items={experience.highlights} />
           )}
-          <Technologies
-            items={experience.technologies}
-            label={technologiesLabel}
-          />
+
+          <div className="mt-2">
+            {experience.mainClient && (
+              <UICard.Meta
+                label={mainClientLabel}
+                items={[experience.mainClient]}
+              />
+            )}
+            <UICard.Meta
+              label={contractTypeLabel}
+              items={[experience.contractType]}
+            />
+            <UICard.Meta
+              label={technologiesLabel}
+              items={experience.technologies}
+            />
+          </div>
         </div>
       </UISplitColumns>
     </UICard.Root>
@@ -128,6 +104,7 @@ export function ExperienceSection({ locale }: ExperienceSectionProps) {
               present={common.present}
               technologiesLabel={experiences.technologiesLabel}
               mainClientLabel={experiences.mainClientLabel}
+              contractTypeLabel={experiences.contractTypeLabel}
             />
           </li>
         ))}

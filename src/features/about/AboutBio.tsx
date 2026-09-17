@@ -1,3 +1,4 @@
+import { UIParagraphs } from "@/components/ui/UIParagraphs";
 import { UISplitColumns } from "@/components/ui/UISplitColumns";
 
 type AboutBioProps = {
@@ -11,11 +12,7 @@ export function AboutBio({ title, paragraphs }: AboutBioProps) {
       aside={<h2 className="text-wide-tracking font-bold">{title}</h2>}
       className="gap-4 md:mt-4"
     >
-      {paragraphs.map((paragraph) => (
-        <p key={paragraph} className="mb-4 max-w-screen-md last:mb-0">
-          {paragraph}
-        </p>
-      ))}
+      <UIParagraphs data={paragraphs} className="max-w-screen-md" />
     </UISplitColumns>
   );
 }

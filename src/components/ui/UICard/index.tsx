@@ -1,13 +1,11 @@
-import { UICardHighlights } from "@/components/ui/UICard/UICardHighlights";
 import { UICardLabel } from "@/components/ui/UICard/UICardLabel";
-import { UICardParagraphs } from "@/components/ui/UICard/UICardParagraphs";
+import { UICardMeta } from "@/components/ui/UICard/UICardMeta";
 import { UICardRoot } from "@/components/ui/UICard/UICardRoot";
 import { UICardTitle } from "@/components/ui/UICard/UICardTitle";
 
 export const UICard = {
   Label: UICardLabel,
   Title: UICardTitle,
-  Paragraphs: UICardParagraphs,
-  Highlights: UICardHighlights,
+  Meta: UICardMeta,
   Root: UICardRoot,
 };
