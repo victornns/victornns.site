@@ -71,9 +71,9 @@ const techStackColumns: TechStackCategory[][] = [
       ],
     },
     {
-      id: "design-tools",
-      title: "Design & Tools",
-      items: ["Figma", "Playwright (E2E)", "AI-assisted Development (Claude)"],
+      id: "testing-tools",
+      title: "Testing & Tools",
+      items: ["Playwright (E2E)", "Figma", "AI-assisted Development (Claude)"],
     },
     {
       id: "web-fundamentals",

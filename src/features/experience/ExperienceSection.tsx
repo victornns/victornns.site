@@ -24,7 +24,7 @@ function Period({
     <>
       <UICard.Label>{formatPeriod(period, present)}</UICard.Label>
       <UICard.Label className="mt-1 italic text-muted">
-        {period.total} _
+        {period.total}
       </UICard.Label>
     </>
   );
@@ -36,6 +36,7 @@ type ExperienceItemProps = {
   technologiesLabel: string;
   mainClientLabel: string;
   contractTypeLabel: string;
+  contractTypeLabels: Record<Experience["contractType"], string>;
 };
 
 function ExperienceItem({
@@ -44,6 +45,7 @@ function ExperienceItem({
   technologiesLabel,
   mainClientLabel,
   contractTypeLabel,
+  contractTypeLabels,
 }: ExperienceItemProps) {
   return (
     <UICard.Root className="py-8 md:py-10">
@@ -52,7 +54,9 @@ function ExperienceItem({
       >
         <div className="flex max-w-screen-lg flex-col gap-5 md:border-l md:pl-8">
           <div>
-            <UICard.Title className="mb-0 font-bold">{experience.role}</UICard.Title>
+            <UICard.Title className="mb-0 font-bold">
+              {experience.role}
+            </UICard.Title>
             <OrganizationDisplayName
               id={experience.organizationId}
               as="p"
@@ -74,7 +78,7 @@ function ExperienceItem({
             )}
             <UICard.Meta
               label={contractTypeLabel}
-              items={[experience.contractType]}
+              items={[contractTypeLabels[experience.contractType]]}
             />
             <UICard.Meta
               label={technologiesLabel}
@@ -105,6 +109,7 @@ export function ExperienceSection({ locale }: ExperienceSectionProps) {
               technologiesLabel={experiences.technologiesLabel}
               mainClientLabel={experiences.mainClientLabel}
               contractTypeLabel={experiences.contractTypeLabel}
+              contractTypeLabels={experiences.contractTypeLabels}
             />
           </li>
         ))}
