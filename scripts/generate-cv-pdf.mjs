@@ -7,7 +7,10 @@ import path from "node:path";
 const PORT = process.env.PORT || 3000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 const OUTPUT_DIR = path.join(process.cwd(), "public", "pdf");
-const SITE_WIDTH = 1440;
+// Wide enough that the resume's own A4-width container (see Resume.tsx)
+// never falls back to its mobile layout while rendering for print.
+const VIEWPORT_WIDTH = 960;
+const PDF_MARGIN = { top: "14mm", right: "14mm", bottom: "14mm", left: "14mm" };
 
 const CV_TARGETS = [
   { route: "/curriculo", filename: "victor-nascimento-curriculo.pdf" },
@@ -49,24 +52,15 @@ async function generatePdf(browser, target) {
   const outputPath = path.join(OUTPUT_DIR, target.filename);
 
   const context = await browser.newContext({
-    viewport: { width: SITE_WIDTH, height: 1080 },
+    viewport: { width: VIEWPORT_WIDTH, height: 1280 },
   });
   const page = await context.newPage();
   await page.goto(targetUrl, { waitUntil: "networkidle" });
-  const contentHeight = await page.evaluate(
-    () => document.documentElement.scrollHeight,
-  );
   await page.pdf({
     path: outputPath,
     printBackground: true,
-    width: `${SITE_WIDTH}px`,
-    height: `${contentHeight}px`,
-    margin: {
-      top: "0px",
-      right: "0px",
-      bottom: "0px",
-      left: "0px",
-    },
+    format: "A4",
+    margin: PDF_MARGIN,
   });
   await context.close();
   console.log(`✅ PDF gerado com sucesso em: ${outputPath}`);

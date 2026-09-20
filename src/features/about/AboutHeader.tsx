@@ -1,4 +1,3 @@
-import { ExternalLinkIcon } from "@/components/icons/ExternalLinkIcon";
 import { LocationPinIcon } from "@/components/icons/LocationPinIcon";
 import { UILink } from "@/components/ui/UILink";
 import { UISplitColumns } from "@/components/ui/UISplitColumns";
@@ -6,29 +5,7 @@ import { PROFILE_NAME, type About } from "@/content/about";
 import type { Contact } from "@/content/contacts";
 import { tw } from "@/lib/tailwind";
 
-function OnlineVersionLink({ href, label }: { href: string; label: string }) {
-  return (
-    <UILink
-      href={href}
-      className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold md:mt-8"
-    >
-      {label}
-      <ExternalLinkIcon />
-    </UILink>
-  );
-}
-
-function Headline({
-  role,
-  resumeHref,
-  resumeLabel,
-  showOnlineVersionLink,
-}: {
-  role: About["role"];
-  resumeHref: string;
-  resumeLabel: string;
-  showOnlineVersionLink: boolean;
-}) {
+function Headline({ role }: { role: About["role"] }) {
   return (
     <>
       <h1 className="text-3xl uppercase sm:text-6xl">
@@ -42,21 +19,15 @@ function Headline({
           className="mt-4 h-1 w-12 shrink-0 bg-black sm:w-14"
         />
 
-        <div>
-          <p>
-            <span className="block text-lg font-medium leading-none sm:text-2xl">
-              {role.title}
-            </span>
+        <p>
+          <span className="block text-lg font-medium leading-none sm:text-2xl">
+            {role.title}
+          </span>
 
-            <span className="mt-1 block italic leading-none text-muted max-sm:text-xs">
-              {role.subtitle}
-            </span>
-          </p>
-
-          {showOnlineVersionLink && (
-            <OnlineVersionLink href={resumeHref} label={resumeLabel} />
-          )}
-        </div>
+          <span className="mt-1 block italic leading-none text-muted max-sm:text-xs">
+            {role.subtitle}
+          </span>
+        </p>
       </div>
     </>
   );
@@ -88,19 +59,9 @@ type AboutHeaderProps = {
   role: About["role"];
   contacts: Contact[];
   location: string;
-  resumeHref: string;
-  resumeLabel: string;
-  showOnlineVersionLink: boolean;
 };
 
-export function AboutHeader({
-  role,
-  contacts,
-  location,
-  resumeHref,
-  resumeLabel,
-  showOnlineVersionLink,
-}: AboutHeaderProps) {
+export function AboutHeader({ role, contacts, location }: AboutHeaderProps) {
   return (
     <UISplitColumns
       asidePosition="right"
@@ -108,12 +69,7 @@ export function AboutHeader({
       aside={<Contacts items={contacts} location={location} />}
       className="gap-12"
     >
-      <Headline
-        role={role}
-        resumeHref={resumeHref}
-        resumeLabel={resumeLabel}
-        showOnlineVersionLink={showOnlineVersionLink}
-      />
+      <Headline role={role} />
     </UISplitColumns>
   );
 }

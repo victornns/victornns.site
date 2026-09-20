@@ -1,0 +1,50 @@
+import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
+import { UICard } from "@/components/ui/UICard";
+import { getContent } from "@/content";
+import type { Education } from "@/content/education";
+import { ResumeSection } from "@/features/resume/components/ResumeSection";
+import type { Locale } from "@/i18n/config";
+import { formatPeriod } from "@/lib/format";
+
+type EducationEntryProps = {
+  item: Education;
+  present: string;
+};
+
+function EducationEntry({ item, present }: EducationEntryProps) {
+  return (
+    <li className="break-inside-avoid-page py-3 first:pt-0">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+        <UICard.Title className="mb-0">{item.degree}</UICard.Title>
+        <UICard.Label className="whitespace-nowrap">
+          {formatPeriod(item.period, present)}
+          {item.status && ` · ${item.status}`}
+        </UICard.Label>
+      </div>
+
+      <OrganizationDisplayName
+        id={item.organizationId}
+        as="p"
+        className="text-sm italic text-muted"
+      />
+    </li>
+  );
+}
+
+type ResumeEducationProps = {
+  locale: Locale;
+};
+
+export function ResumeEducation({ locale }: ResumeEducationProps) {
+  const { education, common } = getContent(locale);
+
+  return (
+    <ResumeSection title={education.title} description={education.description}>
+      <ol className="divide-y">
+        {education.items.map((item) => (
+          <EducationEntry key={item.id} item={item} present={common.present} />
+        ))}
+      </ol>
+    </ResumeSection>
+  );
+}
