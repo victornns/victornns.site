@@ -6,7 +6,7 @@ import { PROFILE_NAME } from "@/content/about";
 import type { Contact } from "@/content/contacts";
 import type { Locale } from "@/i18n/config";
 import { getPortfolioUrl } from "@/i18n/sections";
-import { SEPARATORS } from "@/lib/format";
+import { sanitizeUrlForDisplay, SEPARATORS } from "@/lib/format";
 
 type ContactListProps = {
   contacts: Contact[];
@@ -27,13 +27,7 @@ function ContactList({ contacts, location }: ContactListProps) {
           )}
           <li>
             {"link" in contact ? (
-              <UILink
-                href={contact.link.href}
-                underline={false}
-                className="text-inherit hover:underline"
-              >
-                {contact.link.display}
-              </UILink>
+              <UILink href={contact.link.href}>{contact.link.display}</UILink>
             ) : (
               contact.label
             )}
@@ -50,24 +44,20 @@ type ResumeHeaderProps = {
 
 export function ResumeHeader({ locale }: ResumeHeaderProps) {
   const { about, contacts, location } = getContent(locale);
+  const portfolioUrl = getPortfolioUrl(locale);
 
   return (
     <header className="break-after-avoid-page">
       <h1 className="text-2xl font-bold">{PROFILE_NAME.full}</h1>
 
-      <p className="mt-1 text-base">
-        {about.role.title}{" "}
-        <span className="italic text-muted">{about.role.subtitle}</span>
-      </p>
-
       <ContactList contacts={contacts} location={location} />
 
-      <UILink
-        href={getPortfolioUrl(locale)}
-        className="mt-2 inline-block text-xs text-inherit"
-      >
-        {about.onlineVersionLabel}
-      </UILink>
+      <p className="mt-2 text-sm">
+        {about.onlineVersionLabel}:{" "}
+        <UILink href={portfolioUrl} className="text-inherit">
+          {sanitizeUrlForDisplay(portfolioUrl)}
+        </UILink>
+      </p>
     </header>
   );
 }

@@ -37,19 +37,21 @@ function ExperienceEntry({
   } = experience;
 
   return (
-    <li className="break-inside-avoid-page py-4 first:pt-0">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-        <UICard.Title className="mb-0">{role}</UICard.Title>
-        <UICard.Label className="whitespace-nowrap">
-          {formatPeriod(period, present)} · {period.total}
-        </UICard.Label>
-      </div>
+    <li className="py-4 first:pt-0">
+      <div className="break-inside-avoid-page break-after-avoid-page">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4">
+          <UICard.Title className="mb-0 text-base">{role}</UICard.Title>
+          <UICard.Label className="whitespace-nowrap">
+            {formatPeriod(period, present)} · {period.total}
+          </UICard.Label>
+        </div>
 
-      <OrganizationDisplayName
-        id={organizationId}
-        as="p"
-        className="text-sm italic text-muted"
-      />
+        <OrganizationDisplayName
+          id={organizationId}
+          as="p"
+          className="text-sm italic text-muted"
+        />
+      </div>
 
       <UIParagraphs data={summary} className="mt-2 gap-2 text-sm" />
 

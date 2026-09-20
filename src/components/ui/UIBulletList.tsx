@@ -14,7 +14,7 @@ export function UIBulletList({ items, className }: UIBulletListProps) {
       )}
     >
       {items.map((item, index) => (
-        <li key={index} className="pl-2">
+        <li key={index} className="break-inside-avoid-page pl-2">
           {item}
         </li>
       ))}

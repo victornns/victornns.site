@@ -98,8 +98,6 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           "REST APIs",
           "Docker",
           "AWS",
-          "DigitalOcean",
-          "Vue/Nuxt.js",
         ],
       },
       {
@@ -130,7 +128,6 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           "PostgreSQL",
           "REST APIs",
           "Docker",
-          "PHP/Laravel",
         ],
       },
       {
@@ -185,7 +182,6 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           "Sage 9",
           "Understrap",
           "Vue.js",
-          "Ionic",
           "Webpack",
         ],
       },
@@ -301,8 +297,6 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           "REST APIs",
           "Docker",
           "AWS",
-          "DigitalOcean",
-          "Vue/Nuxt.js",
         ],
       },
       {
@@ -333,7 +327,6 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           "PostgreSQL",
           "REST APIs",
           "Docker",
-          "PHP/Laravel",
         ],
       },
       {
@@ -388,7 +381,6 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           "Sage 9",
           "Understrap",
           "Vue.js",
-          "Ionic",
           "Webpack",
         ],
       },

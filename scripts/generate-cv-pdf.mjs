@@ -61,6 +61,7 @@ async function generatePdf(browser, target) {
     printBackground: true,
     format: "A4",
     margin: PDF_MARGIN,
+    tagged: true,
   });
   await context.close();
   console.log(`✅ PDF gerado com sucesso em: ${outputPath}`);

@@ -30,9 +30,9 @@ export function Resume({ locale }: ResumeProps) {
         <UIParagraphs data={about.summary} className="gap-3" />
       </ResumeSection>
 
-      <ResumeSkills locale={locale} />
       <ResumeExperience locale={locale} />
       <ResumeEducation locale={locale} />
+      <ResumeSkills locale={locale} />
     </main>
   );
 }

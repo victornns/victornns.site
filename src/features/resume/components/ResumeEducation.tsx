@@ -14,8 +14,8 @@ type EducationEntryProps = {
 function EducationEntry({ item, present }: EducationEntryProps) {
   return (
     <li className="break-inside-avoid-page py-3 first:pt-0">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4">
-        <UICard.Title className="mb-0">{item.degree}</UICard.Title>
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4">
+        <UICard.Title className="mb-0 text-base">{item.degree}</UICard.Title>
         <UICard.Label className="whitespace-nowrap">
           {formatPeriod(item.period, present)}
           {item.status && ` · ${item.status}`}
@@ -40,11 +40,11 @@ export function ResumeEducation({ locale }: ResumeEducationProps) {
 
   return (
     <ResumeSection title={education.title} description={education.description}>
-      <ol className="divide-y">
+      <ul className="divide-y">
         {education.items.map((item) => (
           <EducationEntry key={item.id} item={item} present={common.present} />
         ))}
-      </ol>
+      </ul>
     </ResumeSection>
   );
 }
