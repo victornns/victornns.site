@@ -32,3 +32,8 @@ export function getLocalizedPath(locale: Locale, slug: string): string {
 export function getLocalizedUrl(locale: Locale, slug: string): string {
   return `${SITE_URL}${getLocalizedPath(locale, slug)}`;
 }
+
+/** The site's locale-aware root path, independent of whatever page currently lives there. */
+export function getHomePath(locale: Locale): string {
+  return locale === defaultLocale ? "/" : `/${locale}`;
+}

@@ -1,8 +1,8 @@
 import { notFound, redirect } from "next/navigation";
 
 import { getContent } from "@/content";
-import { getProjectBySlug } from "@/features/projects/lib/projectList";
-import { getProjectPath } from "@/features/projects/lib/projectPaths";
+import { getProjectBySlug } from "@/features/portfolio/sections/projects/lib/projectList";
+import { getProjectPath } from "@/features/portfolio/sections/projects/lib/projectPaths";
 import { locales, type Locale } from "@/i18n/config";
 import { getSectionIdFromSlug, getSectionSlug } from "@/i18n/sections";
 

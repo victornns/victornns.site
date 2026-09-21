@@ -42,6 +42,36 @@ const featureIsolationZones = featureNames.map((name) => ({
   except: [`./${name}`],
 }));
 
+const portfolioSectionNames = readdirSync(
+  join(__dirname, "src/features/portfolio/sections"),
+  { withFileTypes: true },
+)
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => entry.name);
+
+/**
+ * Within `portfolio`, sections and navbar may not import each other directly —
+ * anything they need to share belongs in `portfolio/ui` instead.
+ */
+const portfolioSectionIsolationZones = portfolioSectionNames.map((name) => ({
+  target: `./src/features/portfolio/sections/${name}`,
+  from: "./src/features/portfolio",
+  except: [`./sections/${name}`, "./ui"],
+}));
+
+const portfolioNavbarIsolationZone = {
+  target: "./src/features/portfolio/navbar",
+  from: "./src/features/portfolio",
+  except: ["./navbar", "./ui"],
+};
+
+/** portfolio/ui is portfolio's shared layer — it must not depend on sections or navbar. */
+const portfolioUiIsolationZone = {
+  target: "./src/features/portfolio/ui",
+  from: "./src/features/portfolio",
+  except: ["./ui"],
+};
+
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
@@ -106,11 +136,28 @@ const eslintConfig = [
       "import/no-restricted-paths": [
         "error",
         {
-          zones: featureIsolationZones.map((zone) => ({
-            ...zone,
-            message:
-              "A feature must not import another feature directly — coordinate them from app instead.",
-          })),
+          zones: [
+            ...featureIsolationZones.map((zone) => ({
+              ...zone,
+              message:
+                "A feature must not import another feature directly — coordinate them from app instead.",
+            })),
+            ...portfolioSectionIsolationZones.map((zone) => ({
+              ...zone,
+              message:
+                "A portfolio section must not import another section or the navbar directly — share through portfolio/ui instead.",
+            })),
+            {
+              ...portfolioNavbarIsolationZone,
+              message:
+                "The navbar must not import portfolio sections directly — share through portfolio/ui instead.",
+            },
+            {
+              ...portfolioUiIsolationZone,
+              message:
+                "portfolio/ui is portfolio's shared layer and must not depend on its sections or navbar.",
+            },
+          ],
         },
       ],
     },

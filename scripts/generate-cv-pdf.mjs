@@ -1,8 +1,9 @@
-import { chromium } from "playwright";
 import { spawn } from "node:child_process";
 import { mkdirSync } from "node:fs";
 import http from "node:http";
 import path from "node:path";
+
+import { chromium } from "playwright";
 
 const PORT = process.env.PORT || 3000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;

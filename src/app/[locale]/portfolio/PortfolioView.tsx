@@ -1,9 +1,9 @@
-import { AboutSection } from "@/features/about/AboutSection";
-import { EducationSection } from "@/features/education/EducationSection";
-import { ExperienceSection } from "@/features/experience/ExperienceSection";
-import { SectionScrollTarget } from "@/features/navbar/SectionScrollTarget";
-import { ProjectsSection } from "@/features/projects/ProjectsSection";
-import { TechStackSection } from "@/features/techStack/TechStackSection";
+import { SectionScrollTarget } from "@/features/portfolio/navbar/SectionScrollTarget";
+import { AboutSection } from "@/features/portfolio/sections/about/AboutSection";
+import { EducationSection } from "@/features/portfolio/sections/education/EducationSection";
+import { ExperienceSection } from "@/features/portfolio/sections/experience/ExperienceSection";
+import { ProjectsSection } from "@/features/portfolio/sections/projects/ProjectsSection";
+import { TechStackSection } from "@/features/portfolio/sections/techStack/TechStackSection";
 import type { Locale } from "@/i18n/config";
 import type { SectionId } from "@/i18n/sections";
 
