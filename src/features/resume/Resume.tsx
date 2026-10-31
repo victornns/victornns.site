@@ -11,7 +11,7 @@ import { tw } from "@/lib/tailwind";
 // screen; print (both the browser's own printing and the Playwright-rendered
 // PDF, which uses the print media type) gets its margins from `@page` in
 // globals.scss instead, so it isn't doubled up with this padding.
-const RESUME_MAIN_CLASSNAME = tw`mx-auto max-w-[210mm] px-8 py-10 text-sm leading-relaxed text-black sm:px-14 sm:py-14 print:max-w-none print:p-0`;
+const RESUME_MAIN_CLASSNAME = tw`mx-auto max-w-[210mm] px-8 py-10 text-sm leading-relaxed sm:px-14 sm:py-14 print:max-w-none print:p-0`;
 
 type ResumeProps = {
   locale: Locale;

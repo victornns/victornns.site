@@ -1,28 +1,30 @@
-import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
 import { UIParagraphs } from "@/components/ui/UIParagraphs";
 import { getContent } from "@/content";
-import type { ContractType, Experience } from "@/content/experiences";
+import type { Experience, ExperiencesContent } from "@/content/experiences";
+import { ResumeEntryHeader } from "@/features/resume/ui/ResumeEntryHeader";
 import { ResumeMeta } from "@/features/resume/ui/ResumeMeta";
 import { ResumeSection } from "@/features/resume/ui/ResumeSection";
 import type { Locale } from "@/i18n/config";
 import { formatPeriod } from "@/lib/format";
 
+type ExperienceLabels = Pick<
+  ExperiencesContent,
+  | "technologiesLabel"
+  | "mainClientLabel"
+  | "contractTypeLabel"
+  | "contractTypeLabels"
+>;
+
 type ExperienceEntryProps = {
   experience: Experience;
   present: string;
-  technologiesLabel: string;
-  mainClientLabel: string;
-  contractTypeLabel: string;
-  contractTypeLabels: Record<ContractType, string>;
+  labels: ExperienceLabels;
 };
 
 function ExperienceEntry({
   experience,
   present,
-  technologiesLabel,
-  mainClientLabel,
-  contractTypeLabel,
-  contractTypeLabels,
+  labels,
 }: ExperienceEntryProps) {
   const {
     role,
@@ -36,27 +38,22 @@ function ExperienceEntry({
   } = experience;
 
   return (
-    <li className="py-4 first:pt-0">
+    <li className="py-4 first:pt-0 last:pb-0">
       <article>
-        <header className="break-inside-avoid-page break-after-avoid-page">
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4">
-            <h3 className="text-base font-semibold">{role}</h3>
-            <time className="whitespace-nowrap text-xs font-light">
+        <ResumeEntryHeader
+          title={role}
+          period={
+            <>
               {formatPeriod(period, present)} · {period.total}
-            </time>
-          </div>
+            </>
+          }
+          organizationId={organizationId}
+        />
 
-          <OrganizationDisplayName
-            id={organizationId}
-            as="p"
-            className="text-sm italic text-muted"
-          />
-        </header>
-
-        <UIParagraphs data={summary} className="mt-2 gap-2 text-sm" />
+        <UIParagraphs data={summary} className="mt-2 gap-2" />
 
         {highlights && (
-          <ul className="mt-2">
+          <ul className="mt-2 list-disc space-y-1 pl-6">
             {highlights.map((highlight, index) => (
               <li key={index} className="break-inside-avoid-page">
                 {highlight}
@@ -67,13 +64,13 @@ function ExperienceEntry({
 
         <dl className="mt-2 space-y-0.5 text-xs text-muted">
           {mainClient && (
-            <ResumeMeta label={mainClientLabel} items={[mainClient]} />
+            <ResumeMeta label={labels.mainClientLabel} items={[mainClient]} />
           )}
           <ResumeMeta
-            label={contractTypeLabel}
-            items={[contractTypeLabels[contractType]]}
+            label={labels.contractTypeLabel}
+            items={[labels.contractTypeLabels[contractType]]}
           />
-          <ResumeMeta label={technologiesLabel} items={technologies} />
+          <ResumeMeta label={labels.technologiesLabel} items={technologies} />
         </dl>
       </article>
     </li>
@@ -95,10 +92,7 @@ export function ResumeExperience({ locale }: ResumeExperienceProps) {
             key={experience.id}
             experience={experience}
             present={common.present}
-            technologiesLabel={experiences.technologiesLabel}
-            mainClientLabel={experiences.mainClientLabel}
-            contractTypeLabel={experiences.contractTypeLabel}
-            contractTypeLabels={experiences.contractTypeLabels}
+            labels={experiences}
           />
         ))}
       </ol>

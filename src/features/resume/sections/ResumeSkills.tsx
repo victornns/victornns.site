@@ -12,17 +12,13 @@ export function ResumeSkills({ locale }: ResumeSkillsProps) {
 
   return (
     <ResumeSection title={techStack.title}>
-      <dl className="grid grid-cols-1 gap-2 text-sm">
-        {techStack.columns.map((categories, columnIndex) => (
-          <div key={columnIndex} className="flex flex-col gap-2">
-            {categories.map((category) => (
-              <ResumeMeta
-                key={category.id}
-                label={category.title}
-                items={category.items}
-              />
-            ))}
-          </div>
+      <dl className="flex flex-col gap-2">
+        {techStack.columns.flat().map((category) => (
+          <ResumeMeta
+            key={category.id}
+            label={category.title}
+            items={category.items}
+          />
         ))}
       </dl>
     </ResumeSection>

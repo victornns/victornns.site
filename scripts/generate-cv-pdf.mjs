@@ -11,7 +11,18 @@ const OUTPUT_DIR = path.join(process.cwd(), "public", "pdf");
 // Wide enough that the resume's own A4-width container (see Resume.tsx)
 // never falls back to its mobile layout while rendering for print.
 const VIEWPORT_WIDTH = 960;
-const PDF_MARGIN = { top: "14mm", right: "14mm", bottom: "14mm", left: "14mm" };
+const PDF_MARGIN = { top: "14mm", right: "14mm", bottom: "18mm", left: "14mm" };
+
+// Shown bottom-center of every page, e.g. "1/2". Rendered by Chromium's own
+// print engine in an isolated document that can't see the page's own CSS
+// (so `var(--font-sans)` from tailwind.config.ts isn't reachable here) —
+// this mirrors that same font stack by name instead, swapping in "Roboto"
+// for the unreachable variable (see src/app/fonts.ts).
+const FOOTER_TEMPLATE = `
+  <div style="width: 100%; font-size: 10px; text-align: center; color: #737373; font-family: Roboto, ui-sans-serif, system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact;">
+    <span class="pageNumber"></span>/<span class="totalPages"></span>
+  </div>
+`;
 
 const CV_TARGETS = [
   { route: "/curriculo", filename: "victor-nascimento-curriculo.pdf" },
@@ -63,6 +74,9 @@ async function generatePdf(browser, target) {
     format: "A4",
     margin: PDF_MARGIN,
     tagged: true,
+    displayHeaderFooter: true,
+    headerTemplate: "<span></span>",
+    footerTemplate: FOOTER_TEMPLATE,
   });
   await context.close();
   console.log(`✅ PDF gerado com sucesso em: ${outputPath}`);

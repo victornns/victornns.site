@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 import { UILink } from "@/components/ui/UILink";
 import { getContent } from "@/content";
 import { PROFILE_NAME } from "@/content/about";
@@ -17,22 +15,20 @@ function ContactList({ contacts, location }: ContactListProps) {
   const items = [...contacts, { id: "location", label: location }];
 
   return (
-    <ul className="mt-2 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm">
+    <ul className="mt-2">
       {items.map((contact, index) => (
-        <Fragment key={contact.id}>
+        <li key={contact.id} className="inline">
           {index > 0 && (
             <span aria-hidden="true" className="text-muted">
               {SEPARATORS.bullet}
             </span>
           )}
-          <li>
-            {"link" in contact ? (
-              <UILink href={contact.link.href}>{contact.link.display}</UILink>
-            ) : (
-              contact.label
-            )}
-          </li>
-        </Fragment>
+          {"link" in contact ? (
+            <UILink href={contact.link.href}>{contact.link.display}</UILink>
+          ) : (
+            contact.label
+          )}
+        </li>
       ))}
     </ul>
   );
@@ -52,8 +48,8 @@ export function ResumeHeader({ locale }: ResumeHeaderProps) {
 
       <ContactList contacts={contacts} location={location} />
 
-      <p className="mt-2 text-sm">
-        {about.onlineVersionLabel}:{" "}
+      <p className="mt-2">
+        <span className="font-semibold">{about.onlineVersionLabel}:</span>{" "}
         <UILink href={portfolioUrl} className="text-inherit">
           {sanitizeUrlForDisplay(portfolioUrl)}
         </UILink>
