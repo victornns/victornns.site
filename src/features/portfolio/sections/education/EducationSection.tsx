@@ -4,6 +4,7 @@ import type { Education } from "@/content/education";
 import { UICard } from "@/features/portfolio/ui/UICard";
 import { UISection } from "@/features/portfolio/ui/UISection";
 import type { Locale } from "@/i18n/config";
+import { getSectionFragment } from "@/i18n/sections";
 import { formatPeriod, SEPARATORS } from "@/lib/format";
 
 type EducationSectionProps = {
@@ -43,7 +44,7 @@ export function EducationSection({ locale }: EducationSectionProps) {
 
   return (
     <UISection
-      id="education"
+      id={getSectionFragment(locale, "education")}
       title={education.title}
       description={education.description}
     >

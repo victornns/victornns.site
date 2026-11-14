@@ -8,12 +8,16 @@ import { DesktopNav } from "@/features/portfolio/navbar/components/DesktopNav";
 import { MenuToggleButton } from "@/features/portfolio/navbar/components/mobile/MenuToggleButton";
 import { MobileMenuDrawer } from "@/features/portfolio/navbar/components/mobile/MobileMenuDrawer";
 import { useMobileMenu } from "@/features/portfolio/navbar/components/mobile/useMobileMenu";
-import type { NavbarItem } from "@/features/portfolio/navbar/model";
+import type {
+  NavbarItem,
+  NavbarItemId,
+} from "@/features/portfolio/navbar/model";
 import { useActiveSection } from "@/features/portfolio/navbar/useActiveSection";
+import { useLocationHash } from "@/features/portfolio/navbar/useLocationHash";
 import { LocaleSwitchLinks } from "@/features/portfolio/ui/LocaleSwitchLinks";
 import type { Locale } from "@/i18n/config";
-import { getLocaleSwitchHrefs } from "@/i18n/routes";
-import { getPortfolioPath } from "@/i18n/sections";
+import { getLocaleSwitchHrefs } from "@/i18n/localeSwitch";
+import { getPagePath } from "@/i18n/routes";
 import { joinClassNames, tw } from "@/lib/tailwind";
 
 // Fixed height instead of padding, so the toggle button (which shares this
@@ -28,14 +32,28 @@ type NavbarProps = {
 
 export function Navbar({ locale, items, labels }: NavbarProps) {
   const pathname = usePathname();
-  const localeHref = getLocaleSwitchHrefs(pathname, locale);
+  const [hash, setHash] = useLocationHash();
+  const localeHref = getLocaleSwitchHrefs(pathname, hash, locale);
   const mobileMenu = useMobileMenu();
-  const { activeSectionId, markActive } = useActiveSection();
+  const { activeSectionId, markActive } = useActiveSection(locale);
+
+  const projectsPath = getPagePath(locale, "projects");
+  const isProjectsPage =
+    pathname === projectsPath || pathname.startsWith(`${projectsPath}/`);
+  const activeItemId: NavbarItemId | null = isProjectsPage
+    ? "projects"
+    : activeSectionId;
+
+  function handleNavigate(item: NavbarItem) {
+    if (item.id !== "projects") {
+      markActive(item.id);
+    }
+    setHash(new URL(item.href, window.location.href).hash);
+  }
 
   return (
     <header>
       <nav
-        data-portfolio-navbar="true"
         aria-label={labels.navigation}
         className="fixed inset-x-0 top-0 z-navbar bg-white px-6 lg:px-12"
       >
@@ -47,7 +65,7 @@ export function Navbar({ locale, items, labels }: NavbarProps) {
         >
           <div className="flex items-center gap-4">
             <Link
-              href={getPortfolioPath(locale)}
+              href={getPagePath(locale, "about")}
               className="text-wide-tracking shrink-0 text-xs font-semibold leading-none sm:text-base"
             >
               {labels.logo}
@@ -63,8 +81,8 @@ export function Navbar({ locale, items, labels }: NavbarProps) {
           <DesktopNav
             locale={locale}
             items={items}
-            activeSectionId={activeSectionId}
-            onNavigate={markActive}
+            activeItemId={activeItemId}
+            onNavigate={handleNavigate}
           />
         </div>
       </nav>
@@ -83,8 +101,8 @@ export function Navbar({ locale, items, labels }: NavbarProps) {
         open={mobileMenu.isOpen}
         onOpenChange={mobileMenu.setIsOpen}
         items={items}
-        activeSectionId={activeSectionId}
-        onNavigate={markActive}
+        activeItemId={activeItemId}
+        onNavigate={handleNavigate}
         labels={labels}
         locale={locale}
         localeHref={localeHref}

@@ -8,7 +8,10 @@ export function getMetadata(locale: Locale): Metadata {
   const about = aboutContent[locale];
 
   return {
-    title: PROFILE_NAME.full,
+    title: {
+      default: PROFILE_NAME.full,
+      template: `%s${SEPARATORS.default}${PROFILE_NAME.full}`,
+    },
     description: about.highlights.join(SEPARATORS.bullet),
     metadataBase: new URL(SITE_URL),
   };

@@ -4,6 +4,7 @@ import { AboutHeader } from "@/features/portfolio/sections/about/AboutHeader";
 import { AboutHighlights } from "@/features/portfolio/sections/about/AboutHighlights";
 import { UISection } from "@/features/portfolio/ui/UISection";
 import type { Locale } from "@/i18n/config";
+import { getSectionFragment } from "@/i18n/sections";
 
 type AboutSectionProps = {
   locale: Locale;
@@ -13,7 +14,7 @@ export function AboutSection({ locale }: AboutSectionProps) {
   const { about, contacts, location } = getContent(locale);
 
   return (
-    <UISection id="about" className="grid gap-12">
+    <UISection id={getSectionFragment(locale, "about")} className="grid gap-12">
       <AboutHeader role={about.role} contacts={contacts} location={location} />
       <AboutHighlights items={about.highlights} />
       <AboutBio title={about.title} paragraphs={about.summary} />

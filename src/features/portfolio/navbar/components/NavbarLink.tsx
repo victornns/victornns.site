@@ -2,9 +2,7 @@
 
 import Link from "next/link";
 
-import { scrollToSection } from "@/features/portfolio/navbar/lib/sectionScroll";
 import type { NavbarItem } from "@/features/portfolio/navbar/model";
-import { pushPathname } from "@/lib/history";
 import { isPlainLeftClick } from "@/lib/navigation";
 import { joinClassNames } from "@/lib/tailwind";
 
@@ -15,7 +13,7 @@ type NavbarLinkProps = {
   className?: string;
   /** Extra classes applied on top of `className` while `isActive` is true. */
   activeClassName?: string;
-  /** Whether the reader is currently scrolled to this item's section. */
+  /** Whether the reader is currently on this item's page or section. */
   isActive?: boolean;
   onNavigate?: () => void;
 };
@@ -28,20 +26,14 @@ export function NavbarLink({
   onNavigate,
 }: NavbarLinkProps) {
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
-    if (!isPlainLeftClick(event)) {
-      return;
+    if (isPlainLeftClick(event)) {
+      onNavigate?.();
     }
-
-    event.preventDefault();
-    pushPathname(new URL(item.href, window.location.origin).pathname);
-    scrollToSection(item.id, "smooth");
-    onNavigate?.();
   }
 
   return (
     <Link
       href={item.href}
-      scroll={false}
       aria-current={isActive ? "location" : undefined}
       className={joinClassNames(className, isActive && activeClassName)}
       onClick={handleClick}

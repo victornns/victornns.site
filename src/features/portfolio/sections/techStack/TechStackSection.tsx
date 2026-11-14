@@ -2,6 +2,7 @@ import { getContent } from "@/content";
 import type { TechStackCategory } from "@/content/techStack";
 import { UISection } from "@/features/portfolio/ui/UISection";
 import type { Locale } from "@/i18n/config";
+import { getSectionFragment } from "@/i18n/sections";
 import { SEPARATORS } from "@/lib/format";
 
 type TechStackSectionProps = {
@@ -45,7 +46,11 @@ export function TechStackSection({ locale }: TechStackSectionProps) {
   const { title, description, columns } = techStack;
 
   return (
-    <UISection id="stack" title={title} description={description}>
+    <UISection
+      id={getSectionFragment(locale, "stack")}
+      title={title}
+      description={description}
+    >
       <div className="grid grid-cols-1 gap-x-12 gap-y-6 border-t pt-10 sm:grid-cols-2 sm:gap-y-0">
         {columns.map((categories, columnIndex) => (
           <TechStackColumn

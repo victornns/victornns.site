@@ -3,11 +3,13 @@
 import type { NavbarLabels } from "@/content/navbar";
 import { NavbarLink } from "@/features/portfolio/navbar/components/NavbarLink";
 import { ResumeButton } from "@/features/portfolio/navbar/components/ResumeButton";
-import type { NavbarItem } from "@/features/portfolio/navbar/model";
+import type {
+  NavbarItem,
+  NavbarItemId,
+} from "@/features/portfolio/navbar/model";
 import { Drawer } from "@/features/portfolio/ui/drawer/Drawer";
 import { LocaleSwitchLinks } from "@/features/portfolio/ui/LocaleSwitchLinks";
 import type { Locale } from "@/i18n/config";
-import type { SectionId } from "@/i18n/sections";
 import { tw } from "@/lib/tailwind";
 
 export const MOBILE_MENU_DRAWER_ID = "mobile-menu-drawer";
@@ -20,8 +22,8 @@ type MobileMenuDrawerProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   items: NavbarItem[];
-  activeSectionId: SectionId | null;
-  onNavigate: (sectionId: SectionId) => void;
+  activeItemId: NavbarItemId | null;
+  onNavigate: (item: NavbarItem) => void;
   labels: NavbarLabels;
   locale: Locale;
   localeHref: Record<Locale, string>;
@@ -32,7 +34,7 @@ export function MobileMenuDrawer({
   open,
   onOpenChange,
   items,
-  activeSectionId,
+  activeItemId,
   onNavigate,
   labels,
   locale,
@@ -78,10 +80,10 @@ export function MobileMenuDrawer({
                   item={item}
                   className={MOBILE_LINK_CLASSNAME}
                   activeClassName={MOBILE_LINK_ACTIVE_CLASSNAME}
-                  isActive={item.id === activeSectionId}
+                  isActive={item.id === activeItemId}
                   onNavigate={() => {
                     closeDrawer();
-                    onNavigate(item.id);
+                    onNavigate(item);
                   }}
                 />
               </li>

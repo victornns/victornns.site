@@ -11,7 +11,7 @@ export type About = {
   highlights: string[];
   /** Bio shown on both the portfolio and curriculo pages. */
   summary: string[];
-  /** Label shown before the portfolio URL on the curriculo page, e.g. "Portfólio: victornns.com/portfolio". */
+  /** Label shown before the portfolio URL on the curriculo page, e.g. "Portfólio: victornns.com/sobre". */
   onlineVersionLabel: string;
 };
 

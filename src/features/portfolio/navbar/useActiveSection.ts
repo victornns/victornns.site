@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 
 import { getActiveSectionId } from "@/features/portfolio/navbar/lib/sectionScroll";
-import { sectionOrder, type SectionId } from "@/i18n/sections";
+import type { Locale } from "@/i18n/config";
+import type { SectionId } from "@/i18n/sections";
 
 const SCROLL_IDLE_MS = 150;
 
 /** Highlights whichever section is currently in view, following the scroll position. */
-export function useActiveSection() {
+export function useActiveSection(locale: Locale) {
   const [activeSectionId, setActiveSectionId] = useState<SectionId | null>(
     null,
   );
@@ -27,7 +28,7 @@ export function useActiveSection() {
   useEffect(() => {
     function recomputeActiveSection() {
       scrollFrameRef.current = null;
-      setActiveSectionId(getActiveSectionId(sectionOrder));
+      setActiveSectionId(getActiveSectionId(locale));
     }
 
     function handleScroll() {
@@ -64,7 +65,7 @@ export function useActiveSection() {
         clearTimeout(scrollIdleTimeoutRef.current);
       }
     };
-  }, []);
+  }, [locale]);
 
   /** Marks a section active right away (e.g. when its navbar link is clicked), holding that state until the resulting scroll settles. */
   function markActive(sectionId: SectionId) {

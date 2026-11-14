@@ -12,7 +12,7 @@ import { subscribeToProjectOpen } from "@/features/portfolio/sections/projects/l
 import {
   getProjectPath,
   getProjectSlugFromPath,
-  getProjectsSectionPath,
+  getProjectsPath,
 } from "@/features/portfolio/sections/projects/lib/projectPaths";
 import type { Locale } from "@/i18n/config";
 import { pushPathname, replacePathname } from "@/lib/history";
@@ -69,7 +69,7 @@ export function useActiveProject(
 
   function close() {
     setOpen(false);
-    pushPathname(getProjectsSectionPath(locale));
+    pushPathname(getProjectsPath(locale));
   }
 
   // Stable across renders (unless the project/list/locale actually change) so

@@ -1,33 +1,33 @@
 import type { Project } from "@/content/projects";
 import { locales, type Locale } from "@/i18n/config";
-import { getSectionPath } from "@/i18n/sections";
+import { getPagePath } from "@/i18n/routes";
 
-export function getProjectsSectionPath(locale: Locale): string {
-  return getSectionPath(locale, "projects");
+export function getProjectsPath(locale: Locale): string {
+  return getPagePath(locale, "projects");
 }
 
 export function getProjectPathBySlug(locale: Locale, slug: string): string {
-  return `${getProjectsSectionPath(locale)}/${slug}`;
+  return `${getProjectsPath(locale)}/${slug}`;
 }
 
 export function getProjectPath(locale: Locale, project: Project): string {
   return getProjectPathBySlug(locale, project.slugs[locale]);
 }
 
-/** Extracts the project slug from a portfolio pathname, e.g. `/projetos/foo` -> `"foo"`. Returns `null` outside the projects section. */
+/** Extracts the project slug from a pathname, e.g. `/projetos/foo` -> `"foo"`. Returns `null` outside a project page. */
 export function getProjectSlugFromPath(
   locale: Locale,
   pathname: string,
 ): string | null {
-  const sectionPath = getProjectsSectionPath(locale);
-  return pathname.startsWith(`${sectionPath}/`)
-    ? pathname.slice(sectionPath.length + 1)
+  const projectsPath = getProjectsPath(locale);
+  return pathname.startsWith(`${projectsPath}/`)
+    ? pathname.slice(projectsPath.length + 1)
     : null;
 }
 
 /**
  * Builds the pt/en hrefs for the currently active project (or the bare
- * projects section when none is active), so the drawer's own locale switch
+ * projects page when none is active), so the drawer's own locale switch
  * keeps pointing at the same project.
  */
 export function getProjectLocaleLinks(
@@ -38,7 +38,7 @@ export function getProjectLocaleLinks(
       locale,
       activeProject
         ? getProjectPath(locale, activeProject)
-        : getProjectsSectionPath(locale),
+        : getProjectsPath(locale),
     ]),
   ) as Record<Locale, string>;
 }

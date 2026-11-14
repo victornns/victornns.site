@@ -1,13 +1,29 @@
 import { getContent } from "@/content";
-import type { NavbarItem } from "@/features/portfolio/navbar/model";
+import {
+  navbarItemOrder,
+  type NavbarItem,
+  type NavbarItemId,
+} from "@/features/portfolio/navbar/model";
 import type { Locale } from "@/i18n/config";
-import { getSectionPath, sectionOrder, type SectionId } from "@/i18n/sections";
+import { getPagePath } from "@/i18n/routes";
+import { getSectionHref } from "@/i18n/sections";
+
+function getNavbarItemHref(locale: Locale, itemId: NavbarItemId): string {
+  switch (itemId) {
+    case "about":
+      return getPagePath(locale, "about");
+    case "projects":
+      return getPagePath(locale, "projects");
+    default:
+      return getSectionHref(locale, itemId);
+  }
+}
 
 export function getNavbarItems(locale: Locale): NavbarItem[] {
   const { about, experiences, education, projects, techStack } =
     getContent(locale);
 
-  const labelById: Record<SectionId, string> = {
+  const labelById: Record<NavbarItemId, string> = {
     about: about.title,
     stack: techStack.title,
     experience: experiences.title,
@@ -15,9 +31,9 @@ export function getNavbarItems(locale: Locale): NavbarItem[] {
     education: education.title,
   };
 
-  return sectionOrder.map((sectionId) => ({
-    id: sectionId,
-    label: labelById[sectionId],
-    href: getSectionPath(locale, sectionId),
+  return navbarItemOrder.map((itemId) => ({
+    id: itemId,
+    label: labelById[itemId],
+    href: getNavbarItemHref(locale, itemId),
   }));
 }

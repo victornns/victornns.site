@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 import type { Locale } from "@/i18n/config";
-import { getPortfolioPath } from "@/i18n/sections";
+import { getPagePath } from "@/i18n/routes";
 
 type LocaleIndexPageProps = {
   params: Promise<{ locale: Locale }>;
@@ -12,5 +12,5 @@ export default async function LocaleIndexPage({
 }: LocaleIndexPageProps) {
   const { locale } = await params;
 
-  redirect(getPortfolioPath(locale));
+  redirect(getPagePath(locale, "about"));
 }

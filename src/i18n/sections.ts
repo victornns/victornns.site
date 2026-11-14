@@ -1,69 +1,61 @@
-import { getLocalizedPath, getLocalizedUrl, type Locale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
+import { getPagePath } from "@/i18n/routes";
 
 /**
- * Stable internal section ids. These match the `id` set on each section's
- * DOM element (for scrolling) and are resolved from a locale's public URL
- * slug via `sectionSlugs` below, e.g. by the `[section]` route under
- * `src/app/[locale]/portfolio/`.
+ * Stable internal ids for the sections of the About page. Each locale exposes
+ * them through its own URL fragment (see `sectionFragments`), which is also
+ * the `id` of the section's DOM element so native `#` navigation lands on it.
  */
-export type SectionId =
-  "about" | "stack" | "experience" | "projects" | "education";
-
-export const PORTFOLIO_SEGMENT = "portfolio";
+export type SectionId = "about" | "stack" | "experience" | "education";
 
 export const sectionOrder: SectionId[] = [
   "about",
   "stack",
   "experience",
-  "projects",
   "education",
 ];
 
-const sectionSlugs: Record<Locale, Record<SectionId, string>> = {
+const sectionFragments: Record<Locale, Record<SectionId, string>> = {
   pt: {
     about: "sobre",
     stack: "tecnologias",
     experience: "experiencia",
-    projects: "projetos",
     education: "formacao",
   },
   en: {
     about: "about",
-    stack: "stack",
+    stack: "technologies",
     experience: "experience",
-    projects: "projects",
     education: "education",
   },
 };
 
-export function getSectionSlug(locale: Locale, sectionId: SectionId): string {
-  return sectionSlugs[locale][sectionId];
-}
-
-export function getSectionSlugs(locale: Locale): string[] {
-  return Object.values(sectionSlugs[locale]);
-}
-
-export function getSectionIdFromSlug(
+export function getSectionFragment(
   locale: Locale,
-  slug: string,
+  sectionId: SectionId,
+): string {
+  return sectionFragments[locale][sectionId];
+}
+
+export function getSectionIdFromFragment(
+  locale: Locale,
+  fragment: string,
 ): SectionId | undefined {
   return sectionOrder.find(
-    (sectionId) => sectionSlugs[locale][sectionId] === slug,
+    (sectionId) => sectionFragments[locale][sectionId] === fragment,
   );
 }
 
-export function getPortfolioPath(locale: Locale): string {
-  return getLocalizedPath(locale, PORTFOLIO_SEGMENT);
+export function getSectionHref(locale: Locale, sectionId: SectionId): string {
+  return `${getPagePath(locale, "about")}#${getSectionFragment(locale, sectionId)}`;
 }
 
-export function getPortfolioUrl(locale: Locale): string {
-  return getLocalizedUrl(locale, PORTFOLIO_SEGMENT);
-}
-
-export function getSectionPath(locale: Locale, sectionId: SectionId): string {
-  return getLocalizedPath(
-    locale,
-    `${PORTFOLIO_SEGMENT}/${getSectionSlug(locale, sectionId)}`,
-  );
+/** Re-expresses a section `#fragment` in another locale; anything that isn't a known section fragment is dropped. */
+export function translateSectionHash(
+  hash: string,
+  sourceLocale: Locale,
+  targetLocale: Locale,
+): string {
+  const sectionId = getSectionIdFromFragment(sourceLocale, hash.slice(1));
+  return sectionId ? `#${getSectionFragment(targetLocale, sectionId)}` : "";
 }

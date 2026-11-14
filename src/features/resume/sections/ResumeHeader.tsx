@@ -3,7 +3,7 @@ import { getContent } from "@/content";
 import { PROFILE_NAME } from "@/content/about";
 import type { Contact } from "@/content/contacts";
 import type { Locale } from "@/i18n/config";
-import { getPortfolioUrl } from "@/i18n/sections";
+import { getPageUrl } from "@/i18n/routes";
 import { sanitizeUrlForDisplay, SEPARATORS } from "@/lib/format";
 
 type ContactListProps = {
@@ -40,7 +40,7 @@ type ResumeHeaderProps = {
 
 export function ResumeHeader({ locale }: ResumeHeaderProps) {
   const { about, contacts, location } = getContent(locale);
-  const portfolioUrl = getPortfolioUrl(locale);
+  const portfolioUrl = getPageUrl(locale, "projects");
 
   return (
     <header className="break-after-avoid-page">

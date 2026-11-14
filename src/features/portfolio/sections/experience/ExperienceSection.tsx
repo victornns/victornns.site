@@ -6,6 +6,7 @@ import { UICard } from "@/features/portfolio/ui/UICard";
 import { UISection } from "@/features/portfolio/ui/UISection";
 import { UISplitColumns } from "@/features/portfolio/ui/UISplitColumns";
 import type { Locale } from "@/i18n/config";
+import { getSectionFragment } from "@/i18n/sections";
 import { formatPeriod } from "@/lib/format";
 
 type ExperienceSectionProps = {
@@ -95,7 +96,7 @@ export function ExperienceSection({ locale }: ExperienceSectionProps) {
 
   return (
     <UISection
-      id="experience"
+      id={getSectionFragment(locale, "experience")}
       title={experiences.title}
       description={experiences.description}
     >

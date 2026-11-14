@@ -19,8 +19,8 @@ export function ProjectsSection({
   return (
     <>
       <UISection
-        id="projects"
         title={projects.title}
+        headingLevel={1}
         description={projects.description}
       >
         <ProjectList

@@ -1,6 +1,10 @@
-import { joinClassNames } from "@/lib/tailwind";
+import { joinClassNames, tw } from "@/lib/tailwind";
 
 import type { ReactNode, ElementType } from "react";
+
+// Clears the fixed navbar (h-12 lg:h-16) plus some breathing room when a
+// section is reached through its `#fragment`.
+const SECTION_SCROLL_MARGIN_CLASSNAME = tw`scroll-mt-20 lg:scroll-mt-24`;
 
 type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -42,7 +46,10 @@ export function UISection({
   return (
     <section
       id={id}
-      className={joinClassNames(id && "scroll-mt-24", className)}
+      className={joinClassNames(
+        id && SECTION_SCROLL_MARGIN_CLASSNAME,
+        className,
+      )}
     >
       {hasHeader && (
         <header className={children ? "mb-8" : undefined}>

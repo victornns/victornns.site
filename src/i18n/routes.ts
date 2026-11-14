@@ -1,105 +1,101 @@
 import {
+  defaultLocale,
   getLocalizedPath,
-  isValidLocale,
+  getLocalizedUrl,
+  localeToHtmlLang,
   locales,
   type Locale,
 } from "@/i18n/config";
-import {
-  getPortfolioPath,
-  getSectionIdFromSlug,
-  getSectionPath,
-  PORTFOLIO_SEGMENT,
-} from "@/i18n/sections";
 
-/** Internal folder name under `src/app/[locale]/` for the resume page. */
-const RESUME_ROUTE_SEGMENT = "curriculo";
+import type { Metadata } from "next";
 
-/** Public URL slug for the resume page in each locale. */
-export const resumeSlugs: Record<Locale, string> = {
-  pt: RESUME_ROUTE_SEGMENT,
-  en: "resume",
+export type PageId = "about" | "projects" | "resume";
+
+/** Internal folder name of each page under `src/app/[locale]/`. */
+const pageRouteSegments: Record<PageId, string> = {
+  about: "sobre",
+  projects: "projetos",
+  resume: "curriculo",
 };
 
-/**
- * Maps a locale-specific external path segment to the internal route segment
- * (the folder name under `src/app/[locale]/`). Only needed when a locale uses
- * a different external name than the internal folder.
- */
-export const routeAliases: Partial<Record<Locale, Record<string, string>>> = {
+/** Public URL slug of each page in each locale. */
+const pageSlugs: Record<Locale, Record<PageId, string>> = {
+  pt: {
+    about: "sobre",
+    projects: "projetos",
+    resume: "curriculo",
+  },
   en: {
-    [resumeSlugs.en]: RESUME_ROUTE_SEGMENT,
+    about: "about",
+    projects: "projects",
+    resume: "resume",
   },
 };
 
-export function getResumePath(locale: Locale): string {
-  return getLocalizedPath(locale, resumeSlugs[locale]);
-}
+const pageIds = Object.keys(pageRouteSegments) as PageId[];
 
-function isResumeSlug(segment: string): boolean {
-  return Object.values(resumeSlugs).includes(segment);
-}
-
-function translatePortfolioPath(
-  sourceLocale: Locale,
-  targetLocale: Locale,
-  [sectionSlug, ...rest]: string[],
-): string {
-  if (!sectionSlug) {
-    return getPortfolioPath(targetLocale);
-  }
-
-  const sectionId = getSectionIdFromSlug(sourceLocale, sectionSlug);
-  if (!sectionId) {
-    return getLocalizedPath(
-      targetLocale,
-      [PORTFOLIO_SEGMENT, sectionSlug, ...rest].join("/"),
-    );
-  }
-
-  return getSectionPath(targetLocale, sectionId);
+function getLocaleRouteAliases(locale: Locale): Record<string, string> {
+  return Object.fromEntries(
+    pageIds
+      .filter(
+        (pageId) => pageSlugs[locale][pageId] !== pageRouteSegments[pageId],
+      )
+      .map((pageId) => [pageSlugs[locale][pageId], pageRouteSegments[pageId]]),
+  );
 }
 
 /**
- * Resolves the path that shows the same page as `pathname` in `targetLocale`.
- * Project slugs are dropped down to their section: a project URL is only ever
- * reachable while the project drawer is open, and that drawer carries its own
- * locale switch with the translated project slug.
+ * Maps a locale-specific external path segment to the internal route segment
+ * (the folder name under `src/app/[locale]/`). Only lists the slugs that
+ * differ from the internal folder.
  */
-export function translatePathname(
-  pathname: string,
-  currentLocale: Locale,
-  targetLocale: Locale,
-): string {
-  const segments = pathname.split("/").filter(Boolean);
-  const hasLocalePrefix = isValidLocale(segments[0]);
-  const sourceLocale = hasLocalePrefix
-    ? (segments[0] as Locale)
-    : currentLocale;
-  const [root, ...rest] = hasLocalePrefix ? segments.slice(1) : segments;
+export const routeAliases: Partial<Record<Locale, Record<string, string>>> =
+  Object.fromEntries(
+    locales.map((locale) => [locale, getLocaleRouteAliases(locale)]),
+  );
 
-  if (!root) {
-    return getPortfolioPath(targetLocale);
-  }
-
-  if (root === PORTFOLIO_SEGMENT) {
-    return translatePortfolioPath(sourceLocale, targetLocale, rest);
-  }
-
-  if (isResumeSlug(root)) {
-    return getResumePath(targetLocale);
-  }
-
-  return getLocalizedPath(targetLocale, [root, ...rest].join("/"));
+export function getPagePath(locale: Locale, pageId: PageId): string {
+  return getLocalizedPath(locale, pageSlugs[locale][pageId]);
 }
 
-export function getLocaleSwitchHrefs(
-  pathname: string,
-  currentLocale: Locale,
-): Record<Locale, string> {
-  return Object.fromEntries(
-    locales.map((targetLocale) => [
-      targetLocale,
-      translatePathname(pathname, currentLocale, targetLocale),
-    ]),
-  ) as Record<Locale, string>;
+export function getPageUrl(locale: Locale, pageId: PageId): string {
+  return getLocalizedUrl(locale, pageSlugs[locale][pageId]);
+}
+
+/** Resolves a page from its public slug in any locale. */
+export function getPageIdFromSlug(slug: string): PageId | undefined {
+  return pageIds.find((pageId) =>
+    locales.some((locale) => pageSlugs[locale][pageId] === slug),
+  );
+}
+
+/** Canonical and hreflang alternates for a page available at `pathByLocale`. */
+export function getAlternates(
+  locale: Locale,
+  pathByLocale: Record<Locale, string>,
+): NonNullable<Metadata["alternates"]> {
+  return {
+    canonical: pathByLocale[locale],
+    languages: {
+      ...Object.fromEntries(
+        locales.map((target) => [
+          localeToHtmlLang[target],
+          pathByLocale[target],
+        ]),
+      ),
+      "x-default": pathByLocale[defaultLocale],
+    },
+  };
+}
+
+export function getPageAlternates(
+  locale: Locale,
+  pageId: PageId,
+): NonNullable<Metadata["alternates"]> {
+  return getAlternates(
+    locale,
+    Object.fromEntries(
+      locales.map((target) => [target, getPagePath(target, pageId)]),
+    ) as Record<Locale, string>,
+  );
 }
