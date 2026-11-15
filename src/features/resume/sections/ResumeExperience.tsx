@@ -38,7 +38,7 @@ function ExperienceEntry({
   } = experience;
 
   return (
-    <li className="py-4 first:pt-0 last:pb-0">
+    <li className="py-4 first:pt-0 last:pb-0 print:py-3 print:first:pt-0 print:last:pb-0">
       <article>
         <ResumeEntryHeader
           title={role}
@@ -50,7 +50,10 @@ function ExperienceEntry({
           organizationId={organizationId}
         />
 
-        <UIParagraphs data={summary} className="mt-2 gap-2" />
+        <UIParagraphs
+          data={summary}
+          className="mt-2 gap-2"
+        />
 
         {highlights && (
           <ul className="mt-2 list-disc space-y-1 pl-6">
@@ -62,7 +65,7 @@ function ExperienceEntry({
           </ul>
         )}
 
-        <dl className="mt-2 space-y-0.5 text-xs text-muted">
+        <dl className="mt-2 break-before-avoid-page break-inside-avoid-page space-y-0.5 text-xs text-muted">
           {mainClient && (
             <ResumeMeta label={labels.mainClientLabel} items={[mainClient]} />
           )}

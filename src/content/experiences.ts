@@ -192,7 +192,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "3 meses",
         },
         summary: [
-          "Desenvolvimento e manutenção de lojas VTEX, com implementação de funcionalidades e melhorias de interface.",
+          "Desenvolvimento e manutenção frontend de lojas VTEX, com implementação de funcionalidades e melhorias de interface para projetos de e-commerce.",
         ],
         technologies: ["VTEX", "JavaScript", "jQuery"],
       },
@@ -383,7 +383,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "3 mos",
         },
         summary: [
-          "Developed and maintained VTEX e-commerce stores, implementing new features and user interface improvements.",
+          "Frontend development and maintenance of VTEX-based online stores, implementing new features and UI improvements for e-commerce projects.",
         ],
         technologies: ["VTEX", "JavaScript", "jQuery"],
       },
