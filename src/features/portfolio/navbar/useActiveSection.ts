@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { getActiveSectionId } from "@/features/portfolio/navbar/lib/sectionScroll";
@@ -10,6 +11,7 @@ const SCROLL_IDLE_MS = 150;
 
 /** Highlights whichever section is currently in view, following the scroll position. */
 export function useActiveSection(locale: Locale) {
+  const pathname = usePathname();
   const [activeSectionId, setActiveSectionId] = useState<SectionId | null>(
     null,
   );
@@ -65,7 +67,7 @@ export function useActiveSection(locale: Locale) {
         clearTimeout(scrollIdleTimeoutRef.current);
       }
     };
-  }, [locale]);
+  }, [locale, pathname]);
 
   /** Marks a section active right away (e.g. when its navbar link is clicked), holding that state until the resulting scroll settles. */
   function markActive(sectionId: SectionId) {

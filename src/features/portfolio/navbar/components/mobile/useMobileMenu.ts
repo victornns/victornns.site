@@ -1,8 +1,11 @@
 "use client";
 
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 import { consumeShouldReopenMobileMenu } from "@/lib/localeSwitchState";
+
+// Matches Tailwind's `xl` breakpoint, where the desktop nav replaces the menu.
+const DESKTOP_NAV_MEDIA_QUERY = "(min-width: 1280px)";
 
 export function useMobileMenu() {
   const [isOpen, setIsOpenState] = useState(false);
@@ -24,6 +27,20 @@ export function useMobileMenu() {
       setSkipEnterAnimation(true);
       setIsOpenState(true);
     }
+  }, []);
+
+  useEffect(() => {
+    const desktopNav = window.matchMedia(DESKTOP_NAV_MEDIA_QUERY);
+
+    function closeWhenDesktopNavAppears(event: MediaQueryListEvent) {
+      if (event.matches) {
+        setIsOpenState(false);
+      }
+    }
+
+    desktopNav.addEventListener("change", closeWhenDesktopNavAppears);
+    return () =>
+      desktopNav.removeEventListener("change", closeWhenDesktopNavAppears);
   }, []);
 
   return {

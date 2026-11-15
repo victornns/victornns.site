@@ -2,11 +2,18 @@ import { getContent } from "@/content";
 import {
   navbarItemOrder,
   type NavbarItem,
+  type NavbarItemLevel,
   type NavbarItemId,
 } from "@/features/portfolio/navbar/model";
 import type { Locale } from "@/i18n/config";
 import { getPagePath } from "@/i18n/routes";
 import { getSectionHref } from "@/i18n/sections";
+
+const PRIMARY_ITEM_IDS: NavbarItemId[] = ["about", "projects"];
+
+function getNavbarItemLevel(itemId: NavbarItemId): NavbarItemLevel {
+  return PRIMARY_ITEM_IDS.includes(itemId) ? "primary" : "secondary";
+}
 
 function getNavbarItemHref(locale: Locale, itemId: NavbarItemId): string {
   switch (itemId) {
@@ -33,6 +40,7 @@ export function getNavbarItems(locale: Locale): NavbarItem[] {
 
   return navbarItemOrder.map((itemId) => ({
     id: itemId,
+    level: getNavbarItemLevel(itemId),
     label: labelById[itemId],
     href: getNavbarItemHref(locale, itemId),
   }));

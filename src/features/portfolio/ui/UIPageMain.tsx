@@ -2,7 +2,7 @@ import { tw, joinClassNames } from "@/lib/tailwind";
 
 import type { PropsWithChildren } from "react";
 
-const PAGE_MAIN_CLASSNAME = tw`grid max-w-screen-2xl grid-cols-1 gap-24 px-6 py-16 sm:py-24 lg:px-12`;
+const PAGE_MAIN_CLASSNAME = tw`mx-auto grid max-w-screen-3xl grid-cols-1 gap-24 px-6 py-16 sm:py-24 lg:px-12`;
 
 type UIPageMainProps = PropsWithChildren & {
   className?: string;

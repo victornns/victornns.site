@@ -49,10 +49,9 @@ function getLocaleRouteAliases(locale: Locale): Record<string, string> {
  * (the folder name under `src/app/[locale]/`). Only lists the slugs that
  * differ from the internal folder.
  */
-export const routeAliases: Partial<Record<Locale, Record<string, string>>> =
-  Object.fromEntries(
-    locales.map((locale) => [locale, getLocaleRouteAliases(locale)]),
-  );
+export const routeAliases = Object.fromEntries(
+  locales.map((locale) => [locale, getLocaleRouteAliases(locale)]),
+) as Record<Locale, Partial<Record<string, string>>>;
 
 export function getPagePath(locale: Locale, pageId: PageId): string {
   return getLocalizedPath(locale, pageSlugs[locale][pageId]);

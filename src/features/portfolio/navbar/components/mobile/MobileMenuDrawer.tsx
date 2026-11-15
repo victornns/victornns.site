@@ -16,6 +16,8 @@ export const MOBILE_MENU_DRAWER_ID = "mobile-menu-drawer";
 
 const MOBILE_LINK_CLASSNAME = tw`flex items-center justify-between border-b py-4 leading-none transition hover:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black`;
 
+const MOBILE_SECONDARY_LINK_CLASSNAME = tw`flex items-center justify-between border-b py-3.5 pl-4 text-sm leading-none text-muted transition hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black`;
+
 const MOBILE_LINK_ACTIVE_CLASSNAME = tw`font-semibold text-black`;
 
 type MobileMenuDrawerProps = {
@@ -78,7 +80,11 @@ export function MobileMenuDrawer({
               <li key={item.id}>
                 <NavbarLink
                   item={item}
-                  className={MOBILE_LINK_CLASSNAME}
+                  className={
+                    item.level === "primary"
+                      ? MOBILE_LINK_CLASSNAME
+                      : MOBILE_SECONDARY_LINK_CLASSNAME
+                  }
                   activeClassName={MOBILE_LINK_ACTIVE_CLASSNAME}
                   isActive={item.id === activeItemId}
                   onNavigate={() => {

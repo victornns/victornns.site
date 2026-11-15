@@ -8,6 +8,19 @@ import { joinClassNames } from "@/lib/tailwind";
 
 import type { MouseEvent } from "react";
 
+/** A link to the current page without a `#fragment`: Next.js would jump to the top instantly instead of scrolling there like the fragment links do. */
+function isSamePageTopLink(href: string): boolean {
+  const { pathname, hash } = new URL(href, window.location.href);
+  return pathname === window.location.pathname && hash === "";
+}
+
+function scrollToTopOfPage(href: string) {
+  if (window.location.hash) {
+    window.history.pushState(null, "", href);
+  }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 type NavbarLinkProps = {
   item: NavbarItem;
   className?: string;
@@ -26,9 +39,16 @@ export function NavbarLink({
   onNavigate,
 }: NavbarLinkProps) {
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
-    if (isPlainLeftClick(event)) {
-      onNavigate?.();
+    if (!isPlainLeftClick(event)) {
+      return;
     }
+
+    if (isSamePageTopLink(item.href)) {
+      event.preventDefault();
+      scrollToTopOfPage(item.href);
+    }
+
+    onNavigate?.();
   }
 
   return (

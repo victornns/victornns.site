@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        "3xl": "1760px",
+      },
       colors: {
         muted: "#737373",
       },
@@ -41,6 +44,10 @@ export default {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
+        "page-enter": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
         "overlay-fade-out": {
           from: { opacity: "1" },
           to: { opacity: "0" },
@@ -53,6 +60,7 @@ export default {
           "drawer-slide-out 240ms cubic-bezier(0.4, 0, 1, 1) forwards",
         "overlay-fade-in": "overlay-fade-in 200ms ease-out forwards",
         "overlay-fade-out": "overlay-fade-out 200ms ease-out forwards",
+        "page-enter": "page-enter 280ms ease-out",
       },
     },
   },
