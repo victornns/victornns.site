@@ -44,7 +44,7 @@ function ExperienceEntry({
           title={role}
           period={
             <>
-              {formatPeriod(period, present)} · {period.total}
+              {formatPeriod(period, present)} ({period.total})
             </>
           }
           organizationId={organizationId}

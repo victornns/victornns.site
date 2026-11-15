@@ -3,6 +3,7 @@ import { commonContent } from "@/content/common";
 import { contactsContent, locationContent } from "@/content/contacts";
 import { educationContent } from "@/content/education";
 import { experiencesContent } from "@/content/experiences";
+import { languagesContent } from "@/content/languages";
 import { projectsContent } from "@/content/projects";
 import { resumeContent } from "@/content/resume";
 import { techStackContent } from "@/content/techStack";
@@ -16,6 +17,7 @@ export function getContent(locale: Locale) {
     location: locationContent[locale],
     experiences: experiencesContent[locale],
     education: educationContent[locale],
+    languages: languagesContent[locale],
     projects: projectsContent[locale],
     resume: resumeContent[locale],
     techStack: techStackContent[locale],

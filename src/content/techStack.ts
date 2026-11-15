@@ -31,6 +31,7 @@ const techStackColumns: TechStackCategory[][] = [
         "React Server Components",
         "SSR/SSG/ISR",
         "i18n",
+        "Design Systems",
       ],
     },
     {
@@ -38,7 +39,7 @@ const techStackColumns: TechStackCategory[][] = [
       title: "Backend & APIs",
       items: [
         "Node.js",
-        "APIs REST",
+        "REST APIs",
         "GraphQL",
         "Strapi (Headless CMS)",
         "WordPress",
@@ -52,6 +53,7 @@ const techStackColumns: TechStackCategory[][] = [
         "Web Performance (Core Web Vitals)",
         "Web Accessibility (WCAG)",
         "Technical SEO",
+        "Design-to-Code",
       ],
     },
   ],
@@ -73,12 +75,22 @@ const techStackColumns: TechStackCategory[][] = [
     {
       id: "testing-tools",
       title: "Testing & Tools",
-      items: ["Playwright (E2E)", "Figma", "AI-assisted Development (Claude)"],
+      items: [
+        "Playwright (E2E)",
+        "Lighthouse",
+        "Figma",
+        "AI-assisted Development (Claude)",
+      ],
     },
     {
       id: "web-fundamentals",
       title: "Web Fundamentals",
-      items: ["HTML5", "CSS3"],
+      items: [
+        "HTML5",
+        "CSS3",
+        "CSS Architecture",
+        "Cross-browser Compatibility",
+      ],
     },
   ],
 ];

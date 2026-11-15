@@ -22,8 +22,8 @@ export function Resume({ locale }: ResumeProps) {
     <main className={RESUME_MAIN_CLASSNAME}>
       <ResumeHeader locale={locale} />
       <ResumeAbout locale={locale} />
-      <ResumeSkills locale={locale} />
       <ResumeExperience locale={locale} />
+      <ResumeSkills locale={locale} />
       <ResumeEducation locale={locale} />
     </main>
   );

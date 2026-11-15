@@ -53,11 +53,12 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "2 anos e 5 meses",
         },
         summary: [
-          "Atuação em operação dedicada ao Bradesco, com responsabilidade por arquitetura frontend, padrões de implementação, code review e qualidade técnica de projetos dos canais digitais.",
+          "Atuação técnica na operação Bradesco, com responsabilidade por arquitetura frontend, padrões de implementação, code review e qualidade dos projetos digitais.",
         ],
         highlights: [
-          "Evolução e consolidação do Design System de e-mails do Bradesco, com mais de 30 componentes HTML reutilizáveis, responsivos e acessíveis, utilizados nas comunicações de produtos, campanhas e demais iniciativas do banco.",
-          "Condução técnica do frontend do site Onboarding Classic, experiência de boas-vindas de alto tráfego para clientes da conta digital, com decisões de arquitetura e ajustes decorrentes de pentests junto ao time de segurança até a homologação do projeto.",
+          "Evolução do Design System de e-mails do Bradesco, com mais de 30 componentes HTML reutilizáveis, reduzindo retrabalho, acelerando implementações e simplificando a manutenção.",
+          "Participação na arquitetura e desenvolvimento dos componentes, incluindo testes de responsividade e compatibilidade entre clientes de e-mail.",
+          "Definição da arquitetura frontend do Onboarding Classic, experiência de boas-vindas de alto tráfego para clientes da conta digital, incluindo organização de componentes, requisitos de performance e adequações de segurança decorrentes de pentests até a homologação.",
         ],
         technologies: [
           "TypeScript",
@@ -80,13 +81,12 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "4 anos e 8 meses",
         },
         summary: [
-          "Responsável técnico pela área de tecnologia da agência, conduzindo arquitetura, definição de soluções, requisitos e coordenação das frentes de desenvolvimento.",
+          "Responsável técnico pela área de tecnologia, com atuação direta junto a clientes em discovery, levantamento de requisitos, definição de soluções e estimativas para propostas comerciais.",
         ],
         highlights: [
           "Condução end-to-end de sites, plataformas e aplicações, da definição técnica à publicação e manutenção.",
-          "Coordenação de colaboradores, com gestão de tarefas, code review, acompanhamento de entregas, onboarding e suporte técnico.",
-          "Atuação em discovery e pré-venda técnica, traduzindo requisitos em soluções e estimativas para propostas comerciais.",
-          "Estruturação de ambientes com Docker e consolidação da infraestrutura em AWS, unificando aplicação, storage, CDN, bancos de dados, DNS e permissões em um ambiente padronizado.",
+          "Gestão de profissionais e fornecedores externos, incluindo contratação, distribuição de tarefas, code review, onboarding e acompanhamento de entregas.",
+          "Padronização da infraestrutura com Docker e AWS, consolidando aplicações, armazenamento, CDN, bancos de dados, DNS e permissões, com deploys mais consistentes e menor complexidade operacional.",
         ],
         technologies: [
           "TypeScript",
@@ -112,12 +112,12 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "1 ano e 8 meses",
         },
         summary: [
-          "Parceiro técnico no rebranding digital do Banco Digimais, responsável pela arquitetura e implementação end-to-end do novo site e pelos alinhamentos com marketing, design, infraestrutura e segurança.",
+          "Atuação técnica no rebranding digital do Banco Digimais, com responsabilidade pelo novo site institucional e alinhamentos com marketing, design, infraestrutura e segurança.",
         ],
         highlights: [
-          "Definição e implementação da arquitetura headless com React/Next.js, Strapi e PostgreSQL, incluindo modelagem de conteúdo e áreas gerenciáveis.",
-          "Remediação do site legado em PHP/Laravel após pentest, com correção de vulnerabilidades críticas e documentação técnica junto ao time de segurança.",
-          "Estruturação da aplicação com Docker e definição dos requisitos de publicação, acompanhando pentests e homologação até a entrada em produção.",
+          "Implementação end-to-end do novo site com Next.js, Strapi e PostgreSQL, desde a definição da arquitetura até a entrada em produção.",
+          "Adoção de arquitetura headless e CMS gerenciável, ampliando a autonomia na atualização de conteúdos, a flexibilidade na criação de páginas e a facilidade de manutenção.",
+          "Correção de vulnerabilidades críticas no sistema legado em PHP/Laravel, além da estruturação de ambientes com Docker e acompanhamento de pentests e homologação do novo site.",
         ],
         technologies: [
           "TypeScript",
@@ -142,13 +142,13 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "4 anos e 5 meses",
         },
         summary: [
-          "Atuação no time de interface da operação Bradesco, responsável por campanhas digitais, landing pages e páginas do portal seguindo os padrões técnicos e visuais do banco.",
+          "Desenvolvimento de campanhas, landing pages e interfaces do portal Bradesco, seguindo os padrões técnicos e visuais do banco.",
         ],
         highlights: [
-          "Implementação pixel-perfect e instrumentação de tracking, incluindo events, tags e data layer para consumo pelos times de BI.",
-          "Validação das entregas com Lighthouse, Core Web Vitals e critérios WCAG de acessibilidade.",
-          "Criação do Template Bradesco 1.0, migrando e-mails baseados em imagens para componentes HTML responsivos e compatíveis, base do Design System consolidado posteriormente.",
-          "Configuração e republicação do Blog Saber para Crescer em ambiente Linux nos servidores do Bradesco, restabelecendo o serviço após uma indisponibilidade.",
+          "Criação do Template Bradesco 1.0, substituindo e-mails baseados em imagens por componentes HTML responsivos, posteriormente utilizados como base para o Design System.",
+          "Implementação de interfaces pixel-perfect e instrumentação de tracking com eventos, tags e data layer para análise pelos times de BI.",
+          "Validação de performance e acessibilidade com Lighthouse, Core Web Vitals e critérios WCAG.",
+          "Restabelecimento do Blog Saber para Crescer após indisponibilidade, com configuração e republicação da aplicação em ambiente Linux nos servidores do Bradesco.",
         ],
         technologies: [
           "JavaScript",
@@ -170,11 +170,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "7 meses",
         },
         summary: [
-          "Desenvolvimento frontend de sites, landing pages e CMSs para diferentes clientes da agência.",
-        ],
-        highlights: [
-          "Condução do frontend do e-commerce da Galápagos Jogos, desenvolvido do zero em conjunto com o time de backend, incluindo interfaces e integrações.",
-          "Desenvolvimento de páginas e templates em WordPress para o portal da Galeria do Rock, voltado à apresentação das lojas e conteúdos do espaço.",
+          "Desenvolvimento frontend de sites, blogs, landing pages e CMSs para diferentes clientes, incluindo o e-commerce Galápagos Jogos, em colaboração com o backend, e o portal da Galeria do Rock, com páginas e templates WordPress.",
         ],
         technologies: [
           "JavaScript",
@@ -196,7 +192,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "3 meses",
         },
         summary: [
-          "Desenvolvimento e manutenção frontend de e-commerces em VTEX, com implementação de funcionalidades e melhorias de interface, performance e funcionamento contínuo das lojas.",
+          "Desenvolvimento e manutenção de lojas VTEX, com implementação de funcionalidades e melhorias de interface.",
         ],
         technologies: ["VTEX", "JavaScript", "jQuery"],
       },
@@ -204,18 +200,14 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
         id: "l4u-frontend-developer",
         role: "Junior Web Developer",
         organizationId: "l4u-agency",
-        contractType: "CLT",
+        contractType: "PJ",
         period: {
           start: "Set.2016",
           end: "Abr.2018",
           total: "1 ano e 8 meses",
         },
         summary: [
-          "Desenvolvimento frontend de sites, portais e projetos em WordPress.",
-        ],
-        highlights: [
-          "Desenvolvimento do Portal Franquia Dia, plataforma de conteúdo e cadastro para interessados em se tornar franqueados, com informações sobre produtos, operação e oportunidades de franquia.",
-          "Colaboração na Metlycs, plataforma própria de automação de marketing da agência, dando suporte a testes e ao desenvolvimento.",
+          "Desenvolvimento de sites e portais WordPress, incluindo o Portal Franquia Dia, plataforma de conteúdo e cadastro de interessados em franquias.",
         ],
         technologies: [
           "JavaScript",
@@ -232,12 +224,12 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
   en: {
     title: "Experience",
     description: "Professional Experience",
-    technologiesLabel: "Core stack",
+    technologiesLabel: "Core Technologies",
     mainClientLabel: "Client",
     contractTypeLabel: "Employment",
     contractTypeLabels: {
-      CLT: "Full-time",
-      PJ: "Contractor",
+      CLT: "Full-time Employee",
+      PJ: "Independent Contractor",
     },
     items: [
       {
@@ -252,11 +244,12 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "2 yrs 5 mos",
         },
         summary: [
-          "Worked on a dedicated team supporting Bradesco, with ownership of frontend architecture, implementation standards, code reviews, and technical quality across digital-channel projects.",
+          "Frontend engineering for Bradesco's digital channels, with responsibility for frontend architecture, implementation standards, code reviews, and technical quality.",
         ],
         highlights: [
-          "Evolved and consolidated Bradesco's Email Design System, with 30+ reusable, responsive, and accessible HTML components used across product, campaign, and other bank communications.",
-          "Led the frontend of Onboarding Classic, a high-traffic onboarding experience for digital banking customers, covering architecture decisions and pentest remediation with the security team through project approval.",
+          "Enhanced Bradesco's email Design System, comprising 30+ reusable HTML components, reducing rework, accelerating development, and simplifying maintenance.",
+          "Contributed to component architecture and development, including responsive design testing and compatibility validation across email clients.",
+          "Defined the frontend architecture for Onboarding Classic, a high-traffic digital banking onboarding experience, addressing component organization, performance requirements, and security findings from penetration testing through project approval.",
         ],
         technologies: [
           "TypeScript",
@@ -264,7 +257,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           "Vue/Nuxt.js",
           "Node.js",
           "Tailwind CSS",
-          "HTML email",
+          "HTML Email",
           "Figma",
         ],
       },
@@ -279,13 +272,12 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "4 yrs 8 mos",
         },
         summary: [
-          "Technical lead for the agency's technology practice, overseeing architecture, solution design, requirements, and development workstreams.",
+          "Technical lead for the agency's engineering operations, working directly with clients on discovery, requirements gathering, solution design, and technical estimates for commercial proposals.",
         ],
         highlights: [
-          "Led end-to-end delivery of websites, platforms, and applications, from technical definition through deployment and ongoing maintenance.",
-          "Coordinated contributors across development workstreams, including task management, code reviews, delivery oversight, onboarding, and technical support.",
-          "Contributed to discovery and technical pre-sales, translating requirements into technical solutions and effort estimates for client proposals.",
-          "Standardized project environments with Docker and consolidated infrastructure on AWS, bringing application services, storage, CDN, databases, DNS, and permissions into a consistent environment.",
+          "Led end-to-end delivery of websites, platforms, and applications, from technical planning through deployment and maintenance.",
+          "Managed engineers and external vendors, including hiring, task allocation, code reviews, onboarding, and delivery oversight.",
+          "Standardized infrastructure using Docker and AWS, consolidating applications, storage, CDN, databases, DNS, and access permissions, resulting in more consistent deployments and reduced operational complexity.",
         ],
         technologies: [
           "TypeScript",
@@ -311,12 +303,12 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "1 yr 8 mos",
         },
         summary: [
-          "Technical partner on Banco Digimais' digital rebrand, owning the architecture and end-to-end implementation of the new website while working across marketing, design, infrastructure, and security teams.",
+          "Technical contributor to Banco Digimais' digital rebranding, responsible for the new corporate website and cross-functional coordination with marketing, design, infrastructure, and security teams.",
         ],
         highlights: [
-          "Designed and implemented a headless architecture with React/Next.js, Strapi, and PostgreSQL, including content modeling and CMS-managed areas.",
-          "Remediated the legacy PHP/Laravel website following a pentest, fixing critical vulnerabilities and documenting technical decisions with the security team.",
-          "Structured the application with Docker and defined deployment requirements, supporting pentests and security review through production launch.",
+          "Delivered the new website end-to-end using Next.js, Strapi, and PostgreSQL, from architecture design through production launch.",
+          "Implemented a headless architecture and content management system, enabling greater content management autonomy, more flexible page creation, and easier maintenance.",
+          "Remediated critical security vulnerabilities in the legacy PHP/Laravel website, configured Docker environments, and supported penetration testing and security approval through the new site's launch.",
         ],
         technologies: [
           "TypeScript",
@@ -341,13 +333,13 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "4 yrs 5 mos",
         },
         summary: [
-          "Worked on the frontend team supporting Bradesco's digital operation, delivering campaigns, landing pages, and portal pages under the bank's technical and visual standards.",
+          "Developed digital campaigns, landing pages, and web interfaces for Bradesco, following the bank's technical and design standards.",
         ],
         highlights: [
-          "Built pixel-perfect interfaces and implemented tracking instrumentation, including events, tags, and data layers consumed by BI teams.",
-          "Validated releases against Lighthouse, Core Web Vitals, and WCAG accessibility criteria.",
-          "Created Bradesco Template 1.0, migrating email communications from image-based layouts to responsive, cross-client HTML components that later became the foundation of the Email Design System.",
-          "Reconfigured and republished the Saber para Crescer Blog in a Linux environment on Bradesco servers, restoring service after an outage.",
+          "Created Bradesco Template 1.0, replacing image-based emails with responsive HTML components that later became the foundation of the email Design System.",
+          "Developed pixel-perfect interfaces and implemented analytics tracking using events, tags, and data layers for business intelligence teams.",
+          "Validated web performance and accessibility using Lighthouse, Core Web Vitals, and WCAG guidelines.",
+          "Restored the Saber para Crescer blog after a service outage by configuring and redeploying the application on Bradesco's Linux servers.",
         ],
         technologies: [
           "JavaScript",
@@ -369,11 +361,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "7 mos",
         },
         summary: [
-          "Developed frontend solutions for websites, landing pages, and CMS-based projects across multiple agency clients.",
-        ],
-        highlights: [
-          "Led frontend development for the Galápagos Jogos e-commerce platform, built from the ground up alongside the client's backend team, covering interfaces and integrations.",
-          "Built WordPress pages and templates for the Galeria do Rock portal, supporting store listings and editorial content.",
+          "Frontend development of websites, blogs, landing pages, and CMS-based solutions for various clients, including the Galápagos Jogos e-commerce platform, built in collaboration with the backend team, and the Galeria do Rock portal, featuring custom WordPress pages and templates.",
         ],
         technologies: [
           "JavaScript",
@@ -395,7 +383,7 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
           total: "3 mos",
         },
         summary: [
-          "Developed and maintained VTEX e-commerce storefronts, implementing features and improving interfaces, performance, and storefront reliability.",
+          "Developed and maintained VTEX e-commerce stores, implementing new features and user interface improvements.",
         ],
         technologies: ["VTEX", "JavaScript", "jQuery"],
       },
@@ -403,16 +391,14 @@ export const experiencesContent: Record<Locale, ExperiencesContent> = {
         id: "l4u-frontend-developer",
         role: "Junior Web Developer",
         organizationId: "l4u-agency",
-        contractType: "CLT",
+        contractType: "PJ",
         period: {
           start: "Sep.2016",
           end: "Apr.2018",
           total: "1 yr 8 mos",
         },
-        summary: ["Developed websites, portals, and WordPress-based projects."],
-        highlights: [
-          "Built Portal Franquia Dia, a content and registration platform for prospective franchisees, providing information on products, operations, and franchise opportunities.",
-          "Contributed to Metlycs, the agency's marketing automation platform, supporting testing and development activities.",
+        summary: [
+          "Developed WordPress websites and content portals, including Portal Franquia Dia, a platform providing franchise information and prospect registration.",
         ],
         technologies: [
           "JavaScript",

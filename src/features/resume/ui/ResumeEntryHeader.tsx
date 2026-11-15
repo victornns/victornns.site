@@ -18,7 +18,7 @@ export function ResumeEntryHeader({
   return (
     <header className="break-inside-avoid-page break-after-avoid-page">
       <div className="grid grid-cols-1 items-baseline gap-x-4 sm:grid-cols-[minmax(0,1fr)_auto]">
-        <h3 className="text-base font-semibold">{title}</h3>
+        <h3 className="text-base font-bold">{title}</h3>
         <span className="mt-0.5 text-xs font-light sm:mt-0 sm:whitespace-nowrap">
           {period}
         </span>
