@@ -16,6 +16,16 @@ export function ProjectsSection({
 }: ProjectsSectionProps) {
   const { projects, common } = getContent(locale);
 
+  if (!false) {
+    return (
+      <UISection
+        title={projects.title}
+        headingLevel={1}
+        description={projects.underConstruction}
+      />
+    );
+  }
+
   return (
     <>
       <UISection

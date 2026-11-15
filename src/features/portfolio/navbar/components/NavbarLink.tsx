@@ -2,24 +2,15 @@
 
 import Link from "next/link";
 
+import {
+  isSamePageTopLink,
+  scrollToTopOfPage,
+} from "@/features/portfolio/navbar/lib/pageTopScroll";
 import type { NavbarItem } from "@/features/portfolio/navbar/model";
 import { isPlainLeftClick } from "@/lib/navigation";
 import { joinClassNames } from "@/lib/tailwind";
 
 import type { MouseEvent } from "react";
-
-/** A link to the current page without a `#fragment`: Next.js would jump to the top instantly instead of scrolling there like the fragment links do. */
-function isSamePageTopLink(href: string): boolean {
-  const { pathname, hash } = new URL(href, window.location.href);
-  return pathname === window.location.pathname && hash === "";
-}
-
-function scrollToTopOfPage(href: string) {
-  if (window.location.hash) {
-    window.history.pushState(null, "", href);
-  }
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
 
 type NavbarLinkProps = {
   item: NavbarItem;

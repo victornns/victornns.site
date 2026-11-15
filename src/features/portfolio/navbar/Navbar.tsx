@@ -8,6 +8,10 @@ import { DesktopNav } from "@/features/portfolio/navbar/components/DesktopNav";
 import { MenuToggleButton } from "@/features/portfolio/navbar/components/mobile/MenuToggleButton";
 import { MobileMenuDrawer } from "@/features/portfolio/navbar/components/mobile/MobileMenuDrawer";
 import { useMobileMenu } from "@/features/portfolio/navbar/components/mobile/useMobileMenu";
+import {
+  isSamePageTopLink,
+  scrollToTopOfPage,
+} from "@/features/portfolio/navbar/lib/pageTopScroll";
 import type {
   NavbarItem,
   NavbarItemId,
@@ -18,7 +22,10 @@ import { LocaleSwitchLinks } from "@/features/portfolio/ui/LocaleSwitchLinks";
 import type { Locale } from "@/i18n/config";
 import { getLocaleSwitchHrefs } from "@/i18n/localeSwitch";
 import { getPagePath } from "@/i18n/routes";
+import { isPlainLeftClick } from "@/lib/navigation";
 import { joinClassNames, tw } from "@/lib/tailwind";
+
+import type { MouseEvent } from "react";
 
 // Fixed height instead of padding, so the toggle button (which shares this
 // same height) can center itself with flexbox no matter the value.
@@ -51,6 +58,17 @@ export function Navbar({ locale, items, labels }: NavbarProps) {
     setHash(new URL(item.href, window.location.href).hash);
   }
 
+  function handleLogoClick(event: MouseEvent<HTMLAnchorElement>) {
+    const logoHref = getPagePath(locale, "about");
+    if (!isPlainLeftClick(event) || !isSamePageTopLink(logoHref)) {
+      return;
+    }
+
+    event.preventDefault();
+    scrollToTopOfPage(logoHref);
+    setHash("");
+  }
+
   return (
     <header>
       <nav
@@ -66,6 +84,7 @@ export function Navbar({ locale, items, labels }: NavbarProps) {
           <div className="flex items-center gap-4">
             <Link
               href={getPagePath(locale, "about")}
+              onClick={handleLogoClick}
               className="text-wide-tracking shrink-0 text-xs font-semibold leading-none sm:text-base"
             >
               {labels.logo}

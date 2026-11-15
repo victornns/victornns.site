@@ -53,6 +53,8 @@ export type ProjectsLabels = {
 export type ProjectsContent = {
   title: string;
   description: string;
+  /** Shown in place of the project list while projects are hidden. */
+  underConstruction: string;
   labels: ProjectsLabels;
   items: Project[];
 };

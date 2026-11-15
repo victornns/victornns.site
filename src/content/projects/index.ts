@@ -87,6 +87,7 @@ export const projectsContent: Record<Locale, ProjectsContent> = {
     title: "Projetos",
     description:
       "Seleção de blogs, websites, campanhas, CMS e soluções web desenvolvidas",
+    underConstruction: "Página em construção.",
     labels: {
       viewProject: "Ver projeto",
       aboutProject: "Sobre o projeto",
@@ -103,6 +104,7 @@ export const projectsContent: Record<Locale, ProjectsContent> = {
     title: "Projects",
     description:
       "Selection of blogs, websites, campaigns, CMS and web solutions developed",
+    underConstruction: "Page under construction.",
     labels: {
       viewProject: "View project",
       aboutProject: "About the project",
