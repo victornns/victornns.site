@@ -19,7 +19,9 @@ function CategoryBlock({ category }: CategoryBlockProps) {
   return (
     <li className="py-6 last:pb-0">
       <h3 className="text-wide-tracking mb-1 font-bold">{title}</h3>
-      <p className="text-sm text-muted max-w-2xl">{items.join(SEPARATORS.list)}</p>
+      <p className="max-w-2xl text-sm text-muted">
+        {items.join(SEPARATORS.list)}
+      </p>
     </li>
   );
 }

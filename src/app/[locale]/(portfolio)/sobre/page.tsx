@@ -1,8 +1,8 @@
+import { AboutSection } from "@/features/portfolio/about/sections/about/AboutSection";
+import { EducationSection } from "@/features/portfolio/about/sections/education/EducationSection";
+import { ExperienceSection } from "@/features/portfolio/about/sections/experience/ExperienceSection";
+import { TechStackSection } from "@/features/portfolio/about/sections/techStack/TechStackSection";
 import { LocaleSwitchScrollRestoration } from "@/features/portfolio/navbar/LocaleSwitchScrollRestoration";
-import { AboutSection } from "@/features/portfolio/sections/about/AboutSection";
-import { EducationSection } from "@/features/portfolio/sections/education/EducationSection";
-import { ExperienceSection } from "@/features/portfolio/sections/experience/ExperienceSection";
-import { TechStackSection } from "@/features/portfolio/sections/techStack/TechStackSection";
 import type { Locale } from "@/i18n/config";
 import { getPageAlternates } from "@/i18n/routes";
 

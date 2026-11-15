@@ -1,4 +1,4 @@
-import { UIPageMain } from "@/features/portfolio/ui/UIPageMain";
+import { PageTransition } from "@/features/portfolio/ui/PageTransition";
 
 import type { ReactNode } from "react";
 
@@ -7,9 +7,5 @@ export default function PortfolioTemplate({
 }: {
   children: ReactNode;
 }) {
-  return (
-    <UIPageMain className="motion-safe:animate-page-enter">
-      {children}
-    </UIPageMain>
-  );
+  return <PageTransition>{children}</PageTransition>;
 }

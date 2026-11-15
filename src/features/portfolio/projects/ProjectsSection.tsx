@@ -1,6 +1,6 @@
 import { getContent } from "@/content";
-import { ProjectDetailsDrawer } from "@/features/portfolio/sections/projects/drawer/ProjectDetailsDrawer";
-import { ProjectList } from "@/features/portfolio/sections/projects/list/ProjectList";
+import { ProjectDetailsDrawer } from "@/features/portfolio/projects/drawer/ProjectDetailsDrawer";
+import { ProjectList } from "@/features/portfolio/projects/list/ProjectList";
 import { UISection } from "@/features/portfolio/ui/UISection";
 import type { Locale } from "@/i18n/config";
 

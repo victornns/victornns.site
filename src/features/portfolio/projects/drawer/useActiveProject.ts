@@ -7,13 +7,13 @@ import {
   getAdjacentProject,
   getProjectBySlug,
   getProjectIndex,
-} from "@/features/portfolio/sections/projects/lib/projectList";
-import { subscribeToProjectOpen } from "@/features/portfolio/sections/projects/lib/projectOpenEvent";
+} from "@/features/portfolio/projects/lib/projectList";
+import { subscribeToProjectOpen } from "@/features/portfolio/projects/lib/projectOpenEvent";
 import {
   getProjectPath,
   getProjectSlugFromPath,
   getProjectsPath,
-} from "@/features/portfolio/sections/projects/lib/projectPaths";
+} from "@/features/portfolio/projects/lib/projectPaths";
 import type { Locale } from "@/i18n/config";
 import { pushPathname, replacePathname } from "@/lib/history";
 

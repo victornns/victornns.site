@@ -1,6 +1,6 @@
 import { getContent } from "@/content";
 import { LocaleSwitchScrollRestoration } from "@/features/portfolio/navbar/LocaleSwitchScrollRestoration";
-import { ProjectsSection } from "@/features/portfolio/sections/projects/ProjectsSection";
+import { ProjectsSection } from "@/features/portfolio/projects/ProjectsSection";
 import type { Locale } from "@/i18n/config";
 import { getPageAlternates } from "@/i18n/routes";
 

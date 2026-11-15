@@ -2,12 +2,12 @@ import { notFound, permanentRedirect } from "next/navigation";
 
 import { getContent } from "@/content";
 import { LocaleSwitchScrollRestoration } from "@/features/portfolio/navbar/LocaleSwitchScrollRestoration";
-import { getProjectBySlug } from "@/features/portfolio/sections/projects/lib/projectList";
+import { getProjectBySlug } from "@/features/portfolio/projects/lib/projectList";
 import {
   getProjectLocaleLinks,
   getProjectPath,
-} from "@/features/portfolio/sections/projects/lib/projectPaths";
-import { ProjectsSection } from "@/features/portfolio/sections/projects/ProjectsSection";
+} from "@/features/portfolio/projects/lib/projectPaths";
+import { ProjectsSection } from "@/features/portfolio/projects/ProjectsSection";
 import { locales, type Locale } from "@/i18n/config";
 import { getAlternates } from "@/i18n/routes";
 

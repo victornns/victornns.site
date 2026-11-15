@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { dispatchProjectOpen } from "@/features/portfolio/sections/projects/lib/projectOpenEvent";
+import { dispatchProjectOpen } from "@/features/portfolio/projects/lib/projectOpenEvent";
 import { isPlainLeftClick } from "@/lib/navigation";
 
 import type { MouseEvent, ReactNode } from "react";

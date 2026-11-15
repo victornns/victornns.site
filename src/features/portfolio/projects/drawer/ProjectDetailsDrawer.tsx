@@ -1,15 +1,15 @@
 "use client";
 
 import type { Project, ProjectsLabels } from "@/content/projects";
-import { AboutProject } from "@/features/portfolio/sections/projects/drawer/AboutProject";
-import { PreviewCard } from "@/features/portfolio/sections/projects/drawer/PreviewCard";
-import { ProjectActions } from "@/features/portfolio/sections/projects/drawer/ProjectActions";
-import { ProjectHeading } from "@/features/portfolio/sections/projects/drawer/ProjectHeading";
-import { ProjectPager } from "@/features/portfolio/sections/projects/drawer/ProjectPager";
-import { ProjectStack } from "@/features/portfolio/sections/projects/drawer/ProjectStack";
-import { useActiveProject } from "@/features/portfolio/sections/projects/drawer/useActiveProject";
-import { getProjectActionLinks } from "@/features/portfolio/sections/projects/lib/projectLinks";
-import { getProjectLocaleLinks } from "@/features/portfolio/sections/projects/lib/projectPaths";
+import { AboutProject } from "@/features/portfolio/projects/drawer/AboutProject";
+import { PreviewCard } from "@/features/portfolio/projects/drawer/PreviewCard";
+import { ProjectActions } from "@/features/portfolio/projects/drawer/ProjectActions";
+import { ProjectHeading } from "@/features/portfolio/projects/drawer/ProjectHeading";
+import { ProjectPager } from "@/features/portfolio/projects/drawer/ProjectPager";
+import { ProjectStack } from "@/features/portfolio/projects/drawer/ProjectStack";
+import { useActiveProject } from "@/features/portfolio/projects/drawer/useActiveProject";
+import { getProjectActionLinks } from "@/features/portfolio/projects/lib/projectLinks";
+import { getProjectLocaleLinks } from "@/features/portfolio/projects/lib/projectPaths";
 import { Drawer } from "@/features/portfolio/ui/drawer/Drawer";
 import { LocaleSwitchLinks } from "@/features/portfolio/ui/LocaleSwitchLinks";
 import type { Locale } from "@/i18n/config";

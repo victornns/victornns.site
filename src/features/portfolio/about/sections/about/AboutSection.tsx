@@ -1,7 +1,7 @@
 import { getContent } from "@/content";
-import { AboutBio } from "@/features/portfolio/sections/about/AboutBio";
-import { AboutHeader } from "@/features/portfolio/sections/about/AboutHeader";
-import { AboutHighlights } from "@/features/portfolio/sections/about/AboutHighlights";
+import { AboutBio } from "@/features/portfolio/about/sections/about/AboutBio";
+import { AboutHeader } from "@/features/portfolio/about/sections/about/AboutHeader";
+import { AboutHighlights } from "@/features/portfolio/about/sections/about/AboutHighlights";
 import { UISection } from "@/features/portfolio/ui/UISection";
 import type { Locale } from "@/i18n/config";
 import { getSectionFragment } from "@/i18n/sections";

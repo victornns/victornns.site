@@ -1,5 +1,5 @@
 import { UILink } from "@/components/ui/UILink";
-import type { ProjectActionLinks } from "@/features/portfolio/sections/projects/lib/projectLinks";
+import type { ProjectActionLinks } from "@/features/portfolio/projects/lib/projectLinks";
 import { sanitizeUrlForDisplay } from "@/lib/format";
 
 type ProjectActionsProps = {
