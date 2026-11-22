@@ -2,13 +2,16 @@ import { UIParagraphs } from "@/components/ui/UIParagraphs";
 import type { Project } from "@/content/projects";
 import { ProjectArrowCircle } from "@/features/portfolio/projects/components/ProjectArrowCircle";
 import { ProjectLink } from "@/features/portfolio/projects/components/ProjectLink";
-import { ProjectMockup } from "@/features/portfolio/projects/components/ProjectMockup";
+import { ProjectPreview } from "@/features/portfolio/projects/components/ProjectPreview";
 import { ProjectTechnologies } from "@/features/portfolio/projects/components/ProjectTechnologies";
 import { getProjectPath } from "@/features/portfolio/projects/lib/projectPaths";
 import { ArrowRightIcon } from "@/features/portfolio/ui/icons/ArrowRightIcon";
 import type { Locale } from "@/i18n/config";
 import { padNumber, SEPARATORS } from "@/lib/format";
 import { tw } from "@/lib/tailwind";
+
+const CARD_IMAGE_SIZES =
+  "(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw";
 
 const STAGE_CLASSNAME = tw`relative flex aspect-square items-center justify-center overflow-hidden bg-neutral-100`;
 
@@ -37,6 +40,12 @@ export function ProjectCard({
   return (
     <article className="group relative flex flex-col gap-6">
       <div className={STAGE_CLASSNAME}>
+        <ProjectPreview
+          project={project}
+          sizes={CARD_IMAGE_SIZES}
+          mockupClassName="w-11/12"
+        />
+
         <span
           aria-hidden="true"
           className="text-wide-tracking absolute right-4 top-4 text-xs text-muted"
@@ -45,8 +54,6 @@ export function ProjectCard({
           {SEPARATORS.default}
           {padNumber(total)}
         </span>
-
-        <ProjectMockup project={project} className="w-4/5" />
 
         <span aria-hidden="true" className={VIEW_PROJECT_BADGE_CLASSNAME}>
           {viewProjectLabel}

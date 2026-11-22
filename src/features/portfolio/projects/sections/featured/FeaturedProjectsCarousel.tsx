@@ -13,7 +13,7 @@ import type {
 } from "@/content/projects";
 import { ProjectArrowCircle } from "@/features/portfolio/projects/components/ProjectArrowCircle";
 import { ProjectLink } from "@/features/portfolio/projects/components/ProjectLink";
-import { ProjectMockup } from "@/features/portfolio/projects/components/ProjectMockup";
+import { ProjectPreview } from "@/features/portfolio/projects/components/ProjectPreview";
 import { ProjectTechnologies } from "@/features/portfolio/projects/components/ProjectTechnologies";
 import { getProjectPath } from "@/features/portfolio/projects/lib/projectPaths";
 import { ArrowRightIcon } from "@/features/portfolio/ui/icons/ArrowRightIcon";
@@ -28,6 +28,8 @@ import type { KeyboardEvent, MouseEvent } from "react";
 const SECTION_CLASSNAME = tw`-mx-6 overflow-x-clip px-6 lg:-mx-12 lg:px-12`;
 
 const NAV_BUTTON_CLASSNAME = tw`flex size-[52px] shrink-0 items-center justify-center rounded-full border border-black transition-colors duration-500 hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black`;
+
+const SLIDE_IMAGE_SIZES = "(min-width: 1024px) 70vw, 86vw";
 
 const SLIDE_CLASSNAME = tw`group relative min-w-0 flex-[0_0_86%] transition-opacity duration-500 ease-out-expo motion-reduce:transition-none lg:flex-[0_0_72%]`;
 
@@ -205,15 +207,17 @@ export function FeaturedProjectsCarousel({
                     !isSelected && "scale-[.92]",
                   )}
                 >
+                  <ProjectPreview
+                    project={project}
+                    sizes={SLIDE_IMAGE_SIZES}
+                    mockupClassName="mt-[3%] w-11/12 lg:w-2/3"
+                    priority={index === 0}
+                  />
                   <span className="text-wide-tracking absolute right-[18px] top-4 text-xs text-muted">
                     {categoryLabels[project.category]}
                     {SEPARATORS.bullet}
                     {project.date}
                   </span>
-                  <ProjectMockup
-                    project={project}
-                    className="mt-[3%] w-4/5 lg:w-3/5"
-                  />
                 </div>
 
                 <div className="flex flex-col gap-6 pt-6 lg:flex-row lg:items-end lg:justify-between lg:gap-8">

@@ -5,10 +5,11 @@ import type {
   ProjectCategory,
   ProjectsLabels,
 } from "@/content/projects";
-import { ProjectMockup } from "@/features/portfolio/projects/components/ProjectMockup";
+import { ProjectPreview } from "@/features/portfolio/projects/components/ProjectPreview";
 import { AboutProject } from "@/features/portfolio/projects/drawer/AboutProject";
 import { PreviewCard } from "@/features/portfolio/projects/drawer/PreviewCard";
 import { ProjectActions } from "@/features/portfolio/projects/drawer/ProjectActions";
+import { ProjectGallery } from "@/features/portfolio/projects/drawer/ProjectGallery";
 import { ProjectHeading } from "@/features/portfolio/projects/drawer/ProjectHeading";
 import { ProjectPager } from "@/features/portfolio/projects/drawer/ProjectPager";
 import { ProjectStack } from "@/features/portfolio/projects/drawer/ProjectStack";
@@ -19,6 +20,12 @@ import { Drawer } from "@/features/portfolio/ui/drawer/Drawer";
 import { LocaleSwitchLinks } from "@/features/portfolio/ui/LocaleSwitchLinks";
 import type { Locale } from "@/i18n/config";
 import { tw } from "@/lib/tailwind";
+
+const PREVIEW_STAGE_CLASSNAME = tw`relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-neutral-100 md:aspect-video`;
+
+// The drawer panel is 90vw, then 70vw from `md` and 50vw from `lg`.
+const PREVIEW_IMAGE_SIZES =
+  "(min-width: 1024px) 50vw, (min-width: 768px) 70vw, 90vw";
 
 type ProjectDetailsDrawerProps = {
   locale: Locale;
@@ -87,11 +94,12 @@ export function ProjectDetailsDrawer({
             categoryLabel={categoryLabels[activeProject.category]}
           />
 
-          <div className="flex aspect-[4/3] items-center justify-center bg-neutral-100 md:aspect-video">
-            <ProjectMockup
+          <div className={PREVIEW_STAGE_CLASSNAME}>
+            <ProjectPreview
               project={activeProject}
+              sizes={PREVIEW_IMAGE_SIZES}
+              mockupClassName="w-11/12 md:w-2/3"
               linked
-              className="w-3/4 md:w-3/5"
             />
           </div>
 
@@ -109,6 +117,12 @@ export function ProjectDetailsDrawer({
               technologies={activeProject.technologies}
             />
           </div>
+
+          <ProjectGallery
+            label={labels.gallery}
+            projectTitle={activeProject.title}
+            images={activeProject.images?.gallery}
+          />
         </div>
 
         <ProjectActions

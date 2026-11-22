@@ -354,6 +354,9 @@ export const ptProjectItems: ProjectInput[] = [
       "Performance",
       "Accessibility",
     ],
+    images: {
+      desktop: "/images/projects/site-oficial-galeria-do-rock/desktop.png",
+    },
     device: "laptop",
     category: "website",
     tags: [

@@ -23,7 +23,7 @@ export type {
   ProjectsFeaturedLabels,
   ProjectsLabels,
   ProjectsListingLabels,
-  ProjectScreenshots,
+  ProjectImages,
 } from "@/content/projects/types";
 
 function slugify(value: string): string {
@@ -120,6 +120,7 @@ export const projectsContent: Record<Locale, ProjectsContent> = {
       projectDetails: "Detalhes do projeto",
       stack: "Stack",
       design: "Design",
+      gallery: "Galeria",
     },
     listing: {
       title: "Todos os projetos",
@@ -160,6 +161,7 @@ export const projectsContent: Record<Locale, ProjectsContent> = {
       projectDetails: "Project details",
       stack: "Stack",
       design: "Design",
+      gallery: "Gallery",
     },
     listing: {
       title: "All projects",

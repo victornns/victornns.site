@@ -7,10 +7,16 @@ import type { Locale } from "@/i18n/config";
 
 export type DesktopDevice = "browser" | "laptop" | "monitor";
 
-export type ProjectScreenshots = {
-  /** Image path under `public/`, e.g. `/projects/<id>/desktop.webp`. */
+/**
+ * Paths under `public/`, one folder per project named after its `id`, e.g.
+ * `/images/projects/<id>/cover.png` or `/images/projects/<id>/gallery/01.webp`.
+ */
+export type ProjectImages = {
+  /** Main image for cards and highlights; falls back to `desktop`, then `mobile`. */
+  cover?: string;
   desktop?: string;
   mobile?: string;
+  gallery?: string[];
 };
 
 export type Project = {
@@ -33,7 +39,7 @@ export type Project = {
   };
   summary: string[];
   technologies?: string[];
-  screenshots?: ProjectScreenshots;
+  images?: ProjectImages;
   /** Frame around the desktop view, with or without a screenshot; a browser window by default. */
   device?: DesktopDevice;
   category: ProjectCategory;
@@ -54,6 +60,7 @@ export type ProjectsLabels = {
   projectDetails: string;
   stack: string;
   design: string;
+  gallery: string;
 };
 
 export type ProjectsListingLabels = {

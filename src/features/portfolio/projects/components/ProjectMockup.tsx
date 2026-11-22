@@ -23,29 +23,37 @@ const DESKTOP_FRAMES = {
   monitor: MonitorFrame,
 } satisfies Record<DesktopDevice, ComponentType<DesktopFrameProps>>;
 
-const DESKTOP_SCREENSHOT_SIZES = "(min-width: 1024px) 50vw, 90vw";
-const MOBILE_SCREENSHOT_SIZES = "(min-width: 1024px) 15vw, 40vw";
+// The phone takes up a fraction of the mockup, so it needs far fewer pixels.
+const PHONE_SCREENSHOT_SIZES = "(min-width: 1024px) 15vw, 40vw";
 
 // Lifts while the surrounding `group` (the project's card or slide, or the
-// mockup's own link) is hovered or its link has keyboard focus.
+// preview's own link) is hovered or its link has keyboard focus.
 const MOCKUP_CLASSNAME = tw`relative transition-transform duration-1000 ease-out-expo group-hover:-translate-y-2 group-hover:scale-[1.02] group-has-[a:focus-visible]:-translate-y-2 group-has-[a:focus-visible]:scale-[1.02] motion-reduce:transition-none`;
 
 const PLACEHOLDER_LINE_CLASSNAME = tw`h-[0.8cqw] rounded-full bg-neutral-200`;
 
 type ProjectMockupProps = {
   project: Project;
-  /** Links the mockup to the project's public address, when it has one. */
-  linked?: boolean;
+  /** `next/image` sizes of the space the mockup sits in. */
+  sizes: string;
+  priority?: boolean;
   className?: string;
 };
 
-function Screenshot({ src, sizes }: { src: string; sizes: string }) {
+type ScreenshotProps = {
+  src: string;
+  sizes: string;
+  priority?: boolean;
+};
+
+function Screenshot({ src, sizes, priority }: ScreenshotProps) {
   return (
     <Image
       src={src}
       alt=""
       fill
       sizes={sizes}
+      priority={priority}
       className="object-cover object-top"
     />
   );
@@ -65,34 +73,35 @@ function ScreenPlaceholder({ title }: { title: string }) {
 }
 
 /**
- * The project shown on devices: its desktop screenshot in the chosen desktop
- * frame, its mobile screenshot on a phone, or both side by side. Without a
- * desktop screenshot the desktop frame shows a placeholder, so every project
- * gets a mockup.
+ * The project shown on devices: its desktop screenshot in its desktop frame,
+ * its mobile screenshot on a phone, or both side by side. Without a desktop
+ * screenshot the desktop frame shows a placeholder, so every project gets a
+ * mockup. Decorative: the project's title and link carry its meaning.
  */
 export function ProjectMockup({
   project,
-  linked = false,
+  sizes,
+  priority,
   className,
 }: ProjectMockupProps) {
-  const { desktop, mobile } = project.screenshots ?? {};
+  const { desktop, mobile } = project.images ?? {};
   const url = getPrimaryProjectUrl(project);
+  const address = url ? sanitizeUrlForDisplay(url) : undefined;
   const DesktopFrame = DESKTOP_FRAMES[project.device ?? "browser"];
   const showsDesktop = Boolean(desktop) || !mobile;
-  const isLinked = linked && url !== null;
 
-  const mockup = (
+  return (
     <div
       aria-hidden="true"
-      className={joinClassNames(MOCKUP_CLASSNAME, !isLinked && className)}
+      className={joinClassNames(MOCKUP_CLASSNAME, className)}
     >
       {showsDesktop && (
         <DesktopFrame
-          address={url ? sanitizeUrlForDisplay(url) : undefined}
+          address={address}
           className={mobile ? "w-[88%]" : undefined}
         >
           {desktop ? (
-            <Screenshot src={desktop} sizes={DESKTOP_SCREENSHOT_SIZES} />
+            <Screenshot src={desktop} sizes={sizes} priority={priority} />
           ) : (
             <ScreenPlaceholder title={project.title} />
           )}
@@ -101,32 +110,20 @@ export function ProjectMockup({
 
       {mobile && (
         <PhoneFrame
+          address={address}
           className={
             showsDesktop
               ? "absolute bottom-0 right-0 w-[22%]"
-              : "mx-auto w-[36%]"
+              : "mx-auto w-[30%]"
           }
         >
-          <Screenshot src={mobile} sizes={MOBILE_SCREENSHOT_SIZES} />
+          <Screenshot
+            src={mobile}
+            sizes={PHONE_SCREENSHOT_SIZES}
+            priority={priority}
+          />
         </PhoneFrame>
       )}
     </div>
-  );
-
-  if (!isLinked) return mockup;
-
-  return (
-    // Same destination as the drawer's "view project" action, which is the
-    // accessible one, so this pointer shortcut stays out of the tab order.
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      tabIndex={-1}
-      aria-hidden="true"
-      className={joinClassNames("group block", className)}
-    >
-      {mockup}
-    </a>
   );
 }
