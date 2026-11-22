@@ -1,4 +1,5 @@
 import { navbarLabels } from "@/content/navbar";
+import { PortfolioFooter } from "@/features/portfolio/footer/PortfolioFooter";
 import { Navbar } from "@/features/portfolio/navbar/Navbar";
 import { getNavbarItems } from "@/features/portfolio/navbar/server/navbarItems";
 import type { Locale } from "@/i18n/config";
@@ -24,6 +25,7 @@ export default async function PortfolioLayout({
         labels={navbarLabels[locale]}
       />
       {children}
+      <PortfolioFooter locale={locale} />
     </>
   );
 }

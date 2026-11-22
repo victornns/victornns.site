@@ -33,6 +33,10 @@ const VARIANT_CLASSNAMES: Record<
   },
 };
 
+const CLEAR_FILTERS_BUTTON_CLASSNAME = tw`text-sm underline decoration-neutral-300 underline-offset-4 transition-colors hover:decoration-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`;
+
+const STATUS_CLASSNAME = tw`text-wide-tracking flex items-center pb-5 text-xs text-neutral-600 lg:border-l lg:py-5 lg:pl-12`;
+
 type FilterButtonProps = {
   variant: FilterButtonVariant;
   pressed: boolean;
@@ -125,10 +129,7 @@ export function ProjectFilterControls({
           ))}
         </div>
 
-        <p
-          role="status"
-          className="text-wide-tracking flex items-center pb-5 text-xs text-neutral-600 lg:border-l lg:py-5 lg:pl-12"
-        >
+        <p role="status" className={STATUS_CLASSNAME}>
           {labels.showing} {padNumber(visibleCount)} / {padNumber(totalCount)}
         </p>
       </div>
@@ -166,7 +167,7 @@ export function ProjectFilterControls({
           <button
             type="button"
             onClick={() => onChange(DEFAULT_PROJECT_FILTERS)}
-            className="text-sm underline decoration-neutral-300 underline-offset-4 transition-colors hover:decoration-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            className={CLEAR_FILTERS_BUTTON_CLASSNAME}
           >
             {labels.clearFilters}
           </button>

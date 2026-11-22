@@ -9,7 +9,7 @@ export type Contact = {
   };
 };
 
-const contactLinks = {
+export const contactLinks = {
   email: {
     display: "contato@victornns.com",
     href: "mailto:contato@victornns.com",

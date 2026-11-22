@@ -1,6 +1,18 @@
 import type { Project } from "@/content/projects";
 import { sanitizeUrlForDisplay } from "@/lib/format";
-import { joinClassNames } from "@/lib/tailwind";
+import { joinClassNames, tw } from "@/lib/tailwind";
+
+const MOCKUP_CLASSNAME = tw`overflow-hidden rounded-lg bg-white shadow-xl ring-1 ring-black/5`;
+
+const TOOLBAR_CLASSNAME = tw`flex items-center gap-1.5 border-b border-neutral-200 bg-neutral-100 px-3 py-2`;
+
+const TOOLBAR_DOT_CLASSNAME = tw`size-1.5 rounded-full bg-neutral-300`;
+
+const URL_BAR_CLASSNAME = tw`mx-auto max-w-[60%] truncate rounded-full bg-neutral-200 px-3 text-[10px] leading-4 text-neutral-500`;
+
+const SCREEN_CLASSNAME = tw`flex aspect-[16/10] flex-col justify-center gap-3 p-5`;
+
+const TEXT_LINE_CLASSNAME = tw`h-1 rounded-full bg-neutral-200`;
 
 type ProjectBrowserMockupProps = {
   project: Project;
@@ -22,28 +34,21 @@ export function ProjectBrowserMockup({
   return (
     <div
       aria-hidden="true"
-      className={joinClassNames(
-        "overflow-hidden rounded-lg bg-white shadow-xl ring-1 ring-black/5",
-        className,
-      )}
+      className={joinClassNames(MOCKUP_CLASSNAME, className)}
     >
-      <div className="flex items-center gap-1.5 border-b border-neutral-200 bg-neutral-100 px-3 py-2">
-        <span className="size-1.5 rounded-full bg-neutral-300" />
-        <span className="size-1.5 rounded-full bg-neutral-300" />
-        <span className="size-1.5 rounded-full bg-neutral-300" />
-        {displayUrl && (
-          <span className="mx-auto max-w-[60%] truncate rounded-full bg-neutral-200 px-3 text-[10px] leading-4 text-neutral-500">
-            {displayUrl}
-          </span>
-        )}
+      <div className={TOOLBAR_CLASSNAME}>
+        <span className={TOOLBAR_DOT_CLASSNAME} />
+        <span className={TOOLBAR_DOT_CLASSNAME} />
+        <span className={TOOLBAR_DOT_CLASSNAME} />
+        {displayUrl && <span className={URL_BAR_CLASSNAME}>{displayUrl}</span>}
       </div>
 
-      <div className="flex aspect-[16/10] flex-col justify-center gap-3 p-5">
+      <div className={SCREEN_CLASSNAME}>
         <p className="line-clamp-3 text-lg font-light leading-tight">
           {project.title}
         </p>
-        <span className="h-1 w-2/3 rounded-full bg-neutral-200" />
-        <span className="h-1 w-1/2 rounded-full bg-neutral-200" />
+        <span className={joinClassNames(TEXT_LINE_CLASSNAME, "w-2/3")} />
+        <span className={joinClassNames(TEXT_LINE_CLASSNAME, "w-1/2")} />
       </div>
     </div>
   );
