@@ -1,6 +1,10 @@
 "use client";
 
-import type { Project, ProjectsLabels } from "@/content/projects";
+import type {
+  Project,
+  ProjectCategory,
+  ProjectsLabels,
+} from "@/content/projects";
 import { AboutProject } from "@/features/portfolio/projects/drawer/AboutProject";
 import { PreviewCard } from "@/features/portfolio/projects/drawer/PreviewCard";
 import { ProjectActions } from "@/features/portfolio/projects/drawer/ProjectActions";
@@ -19,6 +23,7 @@ type ProjectDetailsDrawerProps = {
   locale: Locale;
   projects: Project[];
   labels: ProjectsLabels;
+  categoryLabels: Record<ProjectCategory, string>;
   closeLabel: string;
   initialProjectId?: string;
 };
@@ -27,6 +32,7 @@ export function ProjectDetailsDrawer({
   locale,
   projects,
   labels,
+  categoryLabels,
   closeLabel,
   initialProjectId,
 }: ProjectDetailsDrawerProps) {
@@ -75,7 +81,10 @@ export function ProjectDetailsDrawer({
         </header>
 
         <div className="space-y-8">
-          <ProjectHeading project={activeProject} />
+          <ProjectHeading
+            project={activeProject}
+            categoryLabel={categoryLabels[activeProject.category]}
+          />
 
           {links.previewUrl && (
             <PreviewCard url={links.previewUrl} label={labels.preview} />

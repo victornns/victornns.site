@@ -1,3 +1,7 @@
+import {
+  PROJECT_CATEGORIES,
+  PROJECT_TAGS,
+} from "@/content/projects/classifications";
 import { enProjectItems } from "@/content/projects/en";
 import { ptProjectItems } from "@/content/projects/pt";
 import type {
@@ -8,11 +12,15 @@ import type {
 import { locales, type Locale } from "@/i18n/config";
 
 export type {
+  ProjectCategory,
+  ProjectTag,
+} from "@/content/projects/classifications";
+export type {
   Project,
   ProjectInput,
-  ProjectKind,
   ProjectsContent,
   ProjectsLabels,
+  ProjectsListingLabels,
 } from "@/content/projects/types";
 
 function slugify(value: string): string {
@@ -82,12 +90,24 @@ function buildProjects(locale: Locale): Project[] {
   });
 }
 
+function getLocalizedLabels<Id extends string>(
+  labels: Record<Id, Record<Locale, string>>,
+  locale: Locale,
+): Record<Id, string> {
+  return Object.fromEntries(
+    (Object.keys(labels) as Id[]).map((id) => [id, labels[id][locale]]),
+  ) as Record<Id, string>;
+}
+
 export const projectsContent: Record<Locale, ProjectsContent> = {
   pt: {
     title: "Projetos",
     description:
       "Seleção de blogs, websites, campanhas, CMS e soluções web desenvolvidas",
-    underConstruction: "Página em construção.",
+    hero: {
+      description:
+        "Websites, landing pages e aplicações web para marcas, bancos e produtos digitais.",
+    },
     labels: {
       viewProject: "Ver projeto",
       aboutProject: "Sobre o projeto",
@@ -98,13 +118,27 @@ export const projectsContent: Record<Locale, ProjectsContent> = {
       stack: "Stack",
       design: "Design",
     },
+    listing: {
+      title: "Todos os projetos",
+      categories: "Categorias",
+      allCategories: "Todos",
+      tags: "Filtrar por tags",
+      showing: "Exibindo",
+      clearFilters: "Limpar filtros",
+      noResults: "Nenhum projeto encontrado com os filtros selecionados.",
+    },
+    categoryLabels: getLocalizedLabels(PROJECT_CATEGORIES, "pt"),
+    tagLabels: getLocalizedLabels(PROJECT_TAGS, "pt"),
     items: buildProjects("pt"),
   },
   en: {
     title: "Projects",
     description:
       "Selection of blogs, websites, campaigns, CMS and web solutions developed",
-    underConstruction: "Page under construction.",
+    hero: {
+      description:
+        "Websites, landing pages and web applications for brands, banks and digital products.",
+    },
     labels: {
       viewProject: "View project",
       aboutProject: "About the project",
@@ -115,6 +149,17 @@ export const projectsContent: Record<Locale, ProjectsContent> = {
       stack: "Stack",
       design: "Design",
     },
+    listing: {
+      title: "All projects",
+      categories: "Categories",
+      allCategories: "All",
+      tags: "Filter by tags",
+      showing: "Showing",
+      clearFilters: "Clear filters",
+      noResults: "No projects match the selected filters.",
+    },
+    categoryLabels: getLocalizedLabels(PROJECT_CATEGORIES, "en"),
+    tagLabels: getLocalizedLabels(PROJECT_TAGS, "en"),
     items: buildProjects("en"),
   },
 };

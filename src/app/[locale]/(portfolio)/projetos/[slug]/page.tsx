@@ -7,7 +7,7 @@ import {
   getProjectLocaleLinks,
   getProjectPath,
 } from "@/features/portfolio/projects/lib/projectPaths";
-import { ProjectsSection } from "@/features/portfolio/projects/ProjectsSection";
+import { ProjectsPage } from "@/features/portfolio/projects/ProjectsPage";
 import { locales, type Locale } from "@/i18n/config";
 import { getAlternates } from "@/i18n/routes";
 
@@ -55,7 +55,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     return (
       <>
         <LocaleSwitchScrollRestoration identity={project.id} />
-        <ProjectsSection locale={locale} activeProjectId={project.id} />
+        <ProjectsPage locale={locale} activeProjectId={project.id} />
       </>
     );
   }

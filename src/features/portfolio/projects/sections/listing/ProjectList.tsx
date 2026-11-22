@@ -2,7 +2,7 @@ import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
 import { UIParagraphs } from "@/components/ui/UIParagraphs";
 import type { Project } from "@/content/projects";
 import { getProjectPath } from "@/features/portfolio/projects/lib/projectPaths";
-import { ProjectLink } from "@/features/portfolio/projects/list/ProjectLink";
+import { ProjectLink } from "@/features/portfolio/projects/sections/listing/ProjectLink";
 import { UICard } from "@/features/portfolio/ui/UICard";
 import type { Locale } from "@/i18n/config";
 import { sanitizeUrlForDisplay, SEPARATORS } from "@/lib/format";

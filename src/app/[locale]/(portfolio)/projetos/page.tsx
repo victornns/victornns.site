@@ -1,18 +1,18 @@
 import { getContent } from "@/content";
 import { LocaleSwitchScrollRestoration } from "@/features/portfolio/navbar/LocaleSwitchScrollRestoration";
-import { ProjectsSection } from "@/features/portfolio/projects/ProjectsSection";
+import { ProjectsPage } from "@/features/portfolio/projects/ProjectsPage";
 import type { Locale } from "@/i18n/config";
 import { getPageAlternates } from "@/i18n/routes";
 
 import type { Metadata } from "next";
 
-type ProjectsPageProps = {
+type ProjectsIndexPageProps = {
   params: Promise<{ locale: Locale }>;
 };
 
 export async function generateMetadata({
   params,
-}: ProjectsPageProps): Promise<Metadata> {
+}: ProjectsIndexPageProps): Promise<Metadata> {
   const { locale } = await params;
   const { projects } = getContent(locale);
 
@@ -23,13 +23,15 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectsPage({ params }: ProjectsPageProps) {
+export default async function ProjectsIndexPage({
+  params,
+}: ProjectsIndexPageProps) {
   const { locale } = await params;
 
   return (
     <>
       <LocaleSwitchScrollRestoration identity="projects" />
-      <ProjectsSection locale={locale} />
+      <ProjectsPage locale={locale} />
     </>
   );
 }

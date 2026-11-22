@@ -13,6 +13,12 @@ export type About = {
   summary: string[];
   /** Label shown before the portfolio URL on the curriculo page, e.g. "Portfólio: victornns.com/sobre". */
   onlineVersionLabel: string;
+  /** Call to action closing the About section, pointing to the projects page. */
+  projectsCta: {
+    title: string;
+    description: string;
+    linkLabel: string;
+  };
 };
 
 export const PROFILE_NAME = {
@@ -44,6 +50,12 @@ export const aboutContent: Record<Locale, About> = {
       "Atuação full-stack complementar, com desenvolvimento end-to-end de projetos utilizando Node.js, APIs, CMS headless e integrações.",
     ],
     onlineVersionLabel: "Portfólio",
+    projectsCta: {
+      title: "Um pouco do que construí.",
+      description:
+        "Uma seleção de sites, landing pages e plataformas que desenvolvi, com o contexto e as tecnologias de cada projeto.",
+      linkLabel: "Ver projetos",
+    },
   },
   en: {
     title: "About",
@@ -67,5 +79,11 @@ export const aboutContent: Record<Locale, About> = {
       "Additional full-stack experience, delivering end-to-end projects with Node.js, APIs, headless CMS platforms, and third-party integrations.",
     ],
     onlineVersionLabel: "Portfolio",
+    projectsCta: {
+      title: "A bit of what I've built.",
+      description:
+        "A selection of websites, landing pages and platforms I've developed, with the context and technologies behind each project.",
+      linkLabel: "View projects",
+    },
   },
 };

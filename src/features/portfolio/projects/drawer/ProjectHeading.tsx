@@ -2,14 +2,18 @@ import { OrganizationDisplayName } from "@/components/OrganizationDisplayName";
 import type { Project } from "@/content/projects";
 import { SEPARATORS } from "@/lib/format";
 
-export function ProjectHeading({ project }: { project: Project }) {
-  const eyebrow = project.type?.join(SEPARATORS.bullet);
+type ProjectHeadingProps = {
+  project: Project;
+  categoryLabel: string;
+};
 
+export function ProjectHeading({
+  project,
+  categoryLabel,
+}: ProjectHeadingProps) {
   return (
     <div className="space-y-3">
-      {eyebrow && (
-        <p className="text-wide-tracking text-xs text-muted">{eyebrow}</p>
-      )}
+      <p className="text-wide-tracking text-xs text-muted">{categoryLabel}</p>
 
       <h2 className="max-w-3xl text-4xl font-semibold leading-tight md:text-5xl">
         {project.title}

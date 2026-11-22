@@ -1,15 +1,9 @@
 import type { OrganizationId } from "@/content/organizations";
+import type {
+  ProjectCategory,
+  ProjectTag,
+} from "@/content/projects/classifications";
 import type { Locale } from "@/i18n/config";
-
-export type ProjectKind =
-  | "Site Institucional"
-  | "Site Corporativo"
-  | "Landing Page"
-  | "One Page"
-  | "Portal"
-  | "Blog"
-  | "CMS"
-  | "Headless CMS";
 
 export type Project = {
   id: string;
@@ -31,7 +25,8 @@ export type Project = {
   };
   summary: string[];
   technologies?: string[];
-  type?: ProjectKind[];
+  category: ProjectCategory;
+  tags: ProjectTag[];
   featured?: boolean;
   highlight?: boolean;
 };
@@ -50,11 +45,29 @@ export type ProjectsLabels = {
   design: string;
 };
 
+export type ProjectsListingLabels = {
+  /** Visually hidden heading of the listing section. */
+  title: string;
+  /** Accessible name of the category tabs. */
+  categories: string;
+  allCategories: string;
+  tags: string;
+  /** Precedes the "visible / total" project count, e.g. "Exibindo 06 / 18". */
+  showing: string;
+  clearFilters: string;
+  noResults: string;
+};
+
 export type ProjectsContent = {
   title: string;
   description: string;
-  /** Shown in place of the project list while projects are hidden. */
-  underConstruction: string;
+  hero: {
+    /** Short intro shown beside the page title. */
+    description: string;
+  };
   labels: ProjectsLabels;
+  listing: ProjectsListingLabels;
+  categoryLabels: Record<ProjectCategory, string>;
+  tagLabels: Record<ProjectTag, string>;
   items: Project[];
 };
