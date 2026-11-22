@@ -12,8 +12,8 @@ import type {
   ProjectsFeaturedLabels,
 } from "@/content/projects";
 import { ProjectArrowCircle } from "@/features/portfolio/projects/components/ProjectArrowCircle";
-import { ProjectBrowserMockup } from "@/features/portfolio/projects/components/ProjectBrowserMockup";
 import { ProjectLink } from "@/features/portfolio/projects/components/ProjectLink";
+import { ProjectMockup } from "@/features/portfolio/projects/components/ProjectMockup";
 import { ProjectTechnologies } from "@/features/portfolio/projects/components/ProjectTechnologies";
 import { getProjectPath } from "@/features/portfolio/projects/lib/projectPaths";
 import { ArrowRightIcon } from "@/features/portfolio/ui/icons/ArrowRightIcon";
@@ -210,7 +210,7 @@ export function FeaturedProjectsCarousel({
                     {SEPARATORS.bullet}
                     {project.date}
                   </span>
-                  <ProjectBrowserMockup
+                  <ProjectMockup
                     project={project}
                     className="mt-[3%] w-4/5 lg:w-3/5"
                   />

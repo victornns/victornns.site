@@ -5,6 +5,7 @@ import type {
   ProjectCategory,
   ProjectsLabels,
 } from "@/content/projects";
+import { ProjectMockup } from "@/features/portfolio/projects/components/ProjectMockup";
 import { AboutProject } from "@/features/portfolio/projects/drawer/AboutProject";
 import { PreviewCard } from "@/features/portfolio/projects/drawer/PreviewCard";
 import { ProjectActions } from "@/features/portfolio/projects/drawer/ProjectActions";
@@ -85,6 +86,14 @@ export function ProjectDetailsDrawer({
             project={activeProject}
             categoryLabel={categoryLabels[activeProject.category]}
           />
+
+          <div className="flex aspect-[4/3] items-center justify-center bg-neutral-100 md:aspect-video">
+            <ProjectMockup
+              project={activeProject}
+              linked
+              className="w-3/4 md:w-3/5"
+            />
+          </div>
 
           {links.previewUrl && (
             <PreviewCard url={links.previewUrl} label={labels.preview} />

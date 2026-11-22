@@ -9,7 +9,8 @@ export type ProjectActionLinks = {
   showPreviewAction: boolean;
 };
 
-function getPrimaryProjectUrl(project: Project): string | null {
+/** The project's public address: the official site while it's live, otherwise the preview; `null` when it has neither. */
+export function getPrimaryProjectUrl(project: Project): string | null {
   const officialLink = project.links?.official;
 
   if (officialLink && !officialLink.expired) {

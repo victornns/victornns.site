@@ -1,8 +1,8 @@
 import { UIParagraphs } from "@/components/ui/UIParagraphs";
 import type { Project } from "@/content/projects";
 import { ProjectArrowCircle } from "@/features/portfolio/projects/components/ProjectArrowCircle";
-import { ProjectBrowserMockup } from "@/features/portfolio/projects/components/ProjectBrowserMockup";
 import { ProjectLink } from "@/features/portfolio/projects/components/ProjectLink";
+import { ProjectMockup } from "@/features/portfolio/projects/components/ProjectMockup";
 import { ProjectTechnologies } from "@/features/portfolio/projects/components/ProjectTechnologies";
 import { getProjectPath } from "@/features/portfolio/projects/lib/projectPaths";
 import { ArrowRightIcon } from "@/features/portfolio/ui/icons/ArrowRightIcon";
@@ -46,7 +46,7 @@ export function ProjectCard({
           {padNumber(total)}
         </span>
 
-        <ProjectBrowserMockup project={project} className="w-4/5" />
+        <ProjectMockup project={project} className="w-4/5" />
 
         <span aria-hidden="true" className={VIEW_PROJECT_BADGE_CLASSNAME}>
           {viewProjectLabel}

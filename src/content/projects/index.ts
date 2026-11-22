@@ -16,12 +16,14 @@ export type {
   ProjectTag,
 } from "@/content/projects/classifications";
 export type {
+  DesktopDevice,
   Project,
   ProjectInput,
   ProjectsContent,
   ProjectsFeaturedLabels,
   ProjectsLabels,
   ProjectsListingLabels,
+  ProjectScreenshots,
 } from "@/content/projects/types";
 
 function slugify(value: string): string {

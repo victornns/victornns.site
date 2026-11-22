@@ -5,6 +5,14 @@ import type {
 } from "@/content/projects/classifications";
 import type { Locale } from "@/i18n/config";
 
+export type DesktopDevice = "browser" | "laptop" | "monitor";
+
+export type ProjectScreenshots = {
+  /** Image path under `public/`, e.g. `/projects/<id>/desktop.webp`. */
+  desktop?: string;
+  mobile?: string;
+};
+
 export type Project = {
   id: string;
   /** Public slug in this locale. */
@@ -25,6 +33,9 @@ export type Project = {
   };
   summary: string[];
   technologies?: string[];
+  screenshots?: ProjectScreenshots;
+  /** Frame around the desktop view, with or without a screenshot; a browser window by default. */
+  device?: DesktopDevice;
   category: ProjectCategory;
   tags: ProjectTag[];
   featured?: boolean;

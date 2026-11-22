@@ -19,7 +19,7 @@ export function ProjectList({
   viewProjectLabel,
 }: ProjectListProps) {
   return (
-    <ul className="grid gap-x-6 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-20">
+    <ul className="grid gap-x-10 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-20">
       {projects.map((project) => (
         <li key={project.id}>
           <ProjectCard
