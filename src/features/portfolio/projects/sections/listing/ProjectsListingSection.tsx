@@ -6,6 +6,7 @@ import {
   ProjectsListing,
   ProjectsListingFallback,
 } from "@/features/portfolio/projects/sections/listing/ProjectsListing";
+import { ProjectsScrollCue } from "@/features/portfolio/projects/sections/listing/ProjectsScrollCue";
 import type { Locale } from "@/i18n/config";
 
 type ProjectsListingSectionProps = {
@@ -32,6 +33,7 @@ export function ProjectsListingSection({
   return (
     <section>
       <h2 className="sr-only">{projects.listing.title}</h2>
+      <ProjectsScrollCue label={projects.listing.scrollCue} />
 
       {/* Reading the URL query would otherwise opt the whole page out of static rendering. */}
       <Suspense fallback={<ProjectsListingFallback {...listingProps} />}>

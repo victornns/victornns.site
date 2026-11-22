@@ -1,26 +1,20 @@
 import { UIParagraphs } from "@/components/ui/UIParagraphs";
 import type { Project } from "@/content/projects";
+import { ProjectArrowCircle } from "@/features/portfolio/projects/components/ProjectArrowCircle";
+import { ProjectBrowserMockup } from "@/features/portfolio/projects/components/ProjectBrowserMockup";
+import { ProjectLink } from "@/features/portfolio/projects/components/ProjectLink";
+import { ProjectTechnologies } from "@/features/portfolio/projects/components/ProjectTechnologies";
 import { getProjectPath } from "@/features/portfolio/projects/lib/projectPaths";
-import { ProjectBrowserMockup } from "@/features/portfolio/projects/sections/listing/ProjectBrowserMockup";
-import { ProjectLink } from "@/features/portfolio/projects/sections/listing/ProjectLink";
 import { ArrowRightIcon } from "@/features/portfolio/ui/icons/ArrowRightIcon";
 import type { Locale } from "@/i18n/config";
 import { padNumber, SEPARATORS } from "@/lib/format";
 import { tw } from "@/lib/tailwind";
 
-const CARD_TECHNOLOGIES_LIMIT = 3;
-
 const STAGE_CLASSNAME = tw`relative flex aspect-square items-center justify-center overflow-hidden bg-neutral-100`;
-
-const MOCKUP_CLASSNAME = tw`w-4/5 transition-transform duration-1000 ease-out-expo group-hover:-translate-y-2 group-hover:scale-[1.02] group-has-[a:focus-visible]:-translate-y-2 group-has-[a:focus-visible]:scale-[1.02] motion-reduce:transition-none`;
 
 const VIEW_PROJECT_BADGE_CLASSNAME = tw`text-wide-tracking pointer-events-none absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 scale-90 items-center gap-2 rounded-full bg-black px-5 py-3.5 text-xs text-white opacity-0 transition duration-700 ease-out-expo group-hover:scale-100 group-hover:opacity-100 group-has-[a:focus-visible]:scale-100 group-has-[a:focus-visible]:opacity-100 motion-reduce:transition-none`;
 
 const TITLE_LINK_CLASSNAME = tw`after:absolute after:inset-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`;
-
-const ARROW_BUTTON_CLASSNAME = tw`flex size-12 shrink-0 items-center justify-center rounded-full border border-black transition-colors duration-500 group-hover:bg-black group-hover:text-white group-has-[a:focus-visible]:bg-black group-has-[a:focus-visible]:text-white`;
-
-const ARROW_ICON_CLASSNAME = tw`-rotate-45 transition-transform duration-700 ease-out-expo group-hover:rotate-0 group-has-[a:focus-visible]:rotate-0 motion-reduce:transition-none`;
 
 type ProjectCardProps = {
   locale: Locale;
@@ -40,8 +34,6 @@ export function ProjectCard({
   categoryLabel,
   viewProjectLabel,
 }: ProjectCardProps) {
-  const technologies = project.technologies?.slice(0, CARD_TECHNOLOGIES_LIMIT);
-
   return (
     <article className="group relative flex flex-col gap-6">
       <div className={STAGE_CLASSNAME}>
@@ -54,7 +46,7 @@ export function ProjectCard({
           {padNumber(total)}
         </span>
 
-        <ProjectBrowserMockup project={project} className={MOCKUP_CLASSNAME} />
+        <ProjectBrowserMockup project={project} className="w-4/5" />
 
         <span aria-hidden="true" className={VIEW_PROJECT_BADGE_CLASSNAME}>
           {viewProjectLabel}
@@ -87,9 +79,7 @@ export function ProjectCard({
             </ProjectLink>
           </h3>
 
-          <span aria-hidden="true" className={ARROW_BUTTON_CLASSNAME}>
-            <ArrowRightIcon className={ARROW_ICON_CLASSNAME} />
-          </span>
+          <ProjectArrowCircle />
         </div>
 
         <UIParagraphs
@@ -97,11 +87,7 @@ export function ProjectCard({
           className="max-w-prose leading-relaxed text-neutral-700"
         />
 
-        {technologies && (
-          <p className="text-wide-tracking text-xs leading-loose text-muted">
-            {technologies.join(SEPARATORS.default)}
-          </p>
-        )}
+        <ProjectTechnologies technologies={project.technologies} />
       </div>
     </article>
   );

@@ -117,6 +117,7 @@ export const enProjectItems: ProjectInput[] = [
       "typescript",
       "tailwind",
     ],
+    featured: true,
     highlight: true,
   },
   {
@@ -155,6 +156,7 @@ export const enProjectItems: ProjectInput[] = [
       "tailwind",
       "strapi",
     ],
+    featured: true,
     highlight: true,
   },
   {
@@ -224,6 +226,7 @@ export const enProjectItems: ProjectInput[] = [
       "tailwind",
       "strapi",
     ],
+    featured: true,
     highlight: true,
   },
   {
@@ -353,6 +356,7 @@ export const enProjectItems: ProjectInput[] = [
       "accessibility",
       "wordpress",
     ],
+    featured: true,
     highlight: true,
   },
   {

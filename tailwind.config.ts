@@ -32,6 +32,11 @@ export default {
         "drawer-content-elevated": "90",
       },
       keyframes: {
+        "scroll-cue": {
+          "0%": { transform: "translateY(-0.375rem)", opacity: "0" },
+          "50%": { opacity: "1" },
+          "100%": { transform: "translateY(0.375rem)", opacity: "0" },
+        },
         "drawer-slide-in": {
           from: { transform: "translate3d(100%, 0, 0)" },
           to: { transform: "translate3d(0, 0, 0)" },
@@ -57,6 +62,7 @@ export default {
         "out-expo": "cubic-bezier(0.2, 0.7, 0.1, 1)",
       },
       animation: {
+        "scroll-cue": "scroll-cue 1.8s ease-in-out infinite",
         "drawer-slide-in":
           "drawer-slide-in 280ms cubic-bezier(0.22, 1, 0.36, 1) forwards",
         "drawer-slide-out":

@@ -1,5 +1,6 @@
 import { getContent } from "@/content";
 import { ProjectDetailsDrawer } from "@/features/portfolio/projects/drawer/ProjectDetailsDrawer";
+import { FeaturedProjectsSection } from "@/features/portfolio/projects/sections/featured/FeaturedProjectsSection";
 import { ProjectsHeroSection } from "@/features/portfolio/projects/sections/hero/ProjectsHeroSection";
 import { ProjectsListingSection } from "@/features/portfolio/projects/sections/listing/ProjectsListingSection";
 import type { Locale } from "@/i18n/config";
@@ -16,6 +17,7 @@ export function ProjectsPage({ locale, activeProjectId }: ProjectsPageProps) {
   return (
     <>
       <ProjectsHeroSection locale={locale} />
+      <FeaturedProjectsSection locale={locale} />
       <ProjectsListingSection locale={locale} />
 
       <ProjectDetailsDrawer

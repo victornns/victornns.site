@@ -58,6 +58,17 @@ export type ProjectsListingLabels = {
   noResults: string;
   /** Reveals the projects beyond the initial page of the listing. */
   showAll: string;
+  /** Invites scrolling from the featured carousel down to the full listing. */
+  scrollCue: string;
+};
+
+export type ProjectsFeaturedLabels = {
+  title: string;
+  /** Spoken roles (`aria-roledescription`) of the carousel and its slides. */
+  carousel: string;
+  slide: string;
+  previous: string;
+  next: string;
 };
 
 export type ProjectsContent = {
@@ -69,6 +80,7 @@ export type ProjectsContent = {
   };
   labels: ProjectsLabels;
   listing: ProjectsListingLabels;
+  featured: ProjectsFeaturedLabels;
   categoryLabels: Record<ProjectCategory, string>;
   tagLabels: Record<ProjectTag, string>;
   items: Project[];

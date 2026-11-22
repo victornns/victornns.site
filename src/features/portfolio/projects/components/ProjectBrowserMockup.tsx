@@ -2,7 +2,8 @@ import type { Project } from "@/content/projects";
 import { sanitizeUrlForDisplay } from "@/lib/format";
 import { joinClassNames, tw } from "@/lib/tailwind";
 
-const MOCKUP_CLASSNAME = tw`overflow-hidden rounded-lg bg-white shadow-xl ring-1 ring-black/5`;
+// Lifts while the surrounding `group` (the project's card or slide) is hovered or its link has keyboard focus.
+const MOCKUP_CLASSNAME = tw`overflow-hidden rounded-lg bg-white shadow-xl ring-1 ring-black/5 transition-transform duration-1000 ease-out-expo group-hover:-translate-y-2 group-hover:scale-[1.02] group-has-[a:focus-visible]:-translate-y-2 group-has-[a:focus-visible]:scale-[1.02] motion-reduce:transition-none`;
 
 const TOOLBAR_CLASSNAME = tw`flex items-center gap-1.5 border-b border-neutral-200 bg-neutral-100 px-3 py-2`;
 
