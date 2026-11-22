@@ -53,6 +53,9 @@ export default {
           to: { opacity: "0" },
         },
       },
+      transitionTimingFunction: {
+        "out-expo": "cubic-bezier(0.2, 0.7, 0.1, 1)",
+      },
       animation: {
         "drawer-slide-in":
           "drawer-slide-in 280ms cubic-bezier(0.22, 1, 0.36, 1) forwards",

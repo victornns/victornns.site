@@ -8,6 +8,7 @@ import {
   type ProjectFilterOptions,
   type ProjectFilters,
 } from "@/features/portfolio/projects/lib/projectFilters";
+import { padNumber } from "@/lib/format";
 import { joinClassNames, tw } from "@/lib/tailwind";
 
 import type { ReactNode } from "react";
@@ -31,10 +32,6 @@ const VARIANT_CLASSNAMES: Record<
     idle: tw`border-neutral-400 text-neutral-600 hover:border-black hover:text-black`,
   },
 };
-
-function formatCount(count: number): string {
-  return String(count).padStart(2, "0");
-}
 
 type FilterButtonProps = {
   variant: FilterButtonVariant;
@@ -112,7 +109,7 @@ export function ProjectFilterControls({
             onClick={() => selectCategory(ALL_CATEGORIES)}
           >
             {labels.allCategories}
-            <sup className="ml-1 text-xs">{formatCount(totalCount)}</sup>
+            <sup className="ml-1 text-xs">{padNumber(totalCount)}</sup>
           </FilterButton>
 
           {options.categories.map(({ id, label, count }) => (
@@ -123,7 +120,7 @@ export function ProjectFilterControls({
               onClick={() => selectCategory(id)}
             >
               {label}
-              <sup className="ml-1 text-xs">{formatCount(count)}</sup>
+              <sup className="ml-1 text-xs">{padNumber(count)}</sup>
             </FilterButton>
           ))}
         </div>
@@ -132,8 +129,7 @@ export function ProjectFilterControls({
           role="status"
           className="text-wide-tracking flex items-center pb-5 text-xs text-neutral-600 lg:border-l lg:py-5 lg:pl-12"
         >
-          {labels.showing} {formatCount(visibleCount)} /{" "}
-          {formatCount(totalCount)}
+          {labels.showing} {padNumber(visibleCount)} / {padNumber(totalCount)}
         </p>
       </div>
 

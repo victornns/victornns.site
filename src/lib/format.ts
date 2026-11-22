@@ -5,6 +5,11 @@ export const SEPARATORS = {
   dash: " - ",
 } as const;
 
+/** Pads to two digits, e.g. `6` → `"06"`, for counts and indexes. */
+export function padNumber(value: number): string {
+  return String(value).padStart(2, "0");
+}
+
 export function sanitizeUrlForDisplay(url: string): string {
   return url
     .replace(/^https?:\/\//, "")

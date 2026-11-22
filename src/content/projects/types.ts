@@ -56,6 +56,8 @@ export type ProjectsListingLabels = {
   showing: string;
   clearFilters: string;
   noResults: string;
+  /** Reveals the projects beyond the initial page of the listing. */
+  showAll: string;
 };
 
 export type ProjectsContent = {

@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projetos — victornns_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#111;font-family:'Roboto Flex',system-ui,sans-serif}
+a{color:#111;text-decoration:none}
+button{font-family:inherit}
+.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(20px,4vw,64px)}
+.lbl{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-variation-settings:'wdth' 115;font-feature-settings:'tnum'}
+.light{font-variation-settings:'wdth' 151,'opsz' 144;font-weight:200;letter-spacing:-.035em;line-height:.88}
+.ttl{font-weight:300;font-variation-settings:'opsz' 144;letter-spacing:-.035em;line-height:.98;margin:0}
+.muted{color:#6b6b6b}
+.g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px}
+.nav a{font-size:14px;color:#6b6b6b;padding:12px 0}.nav a:hover,.nav a[aria-current]{color:#111}
+.desc{font-size:15px;line-height:1.55;color:#4a4a4a;margin:0;max-width:42ch}
+.rule{flex:1;height:1px;background:#111}
+.idx{display:flex;gap:12px;align-items:center}
+.tech{color:#6b6b6b;margin:0;line-height:1.8}
+button:focus-visible,a:focus-visible{outline:2px solid #111;outline-offset:5px}
+
+/* logo do cliente */
+.logo-tile{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px 0 12px;background:#fff;border-radius:999px;box-shadow:0 1px 2px rgba(0,0,0,.06),0 8px 18px -10px rgba(0,0,0,.25);font-size:13px;font-weight:650;letter-spacing:-.01em;color:#111;white-space:nowrap}
+.logo-tile .mk{width:16px;height:16px;border-radius:50%;border:1.5px dashed #9a9a9a;flex:none}
+.logo-tile img{height:18px;width:auto;display:block;filter:grayscale(1) contrast(1.1);transition:filter .5s}
+.proj:hover .logo-tile img{filter:none}
+.logo-abs{position:absolute;left:16px;top:14px;z-index:4}
+.logo-lg{height:52px;padding:0 22px 0 16px;font-size:15px}
+.logo-lg .mk{width:20px;height:20px}
+.logo-lg img{height:24px}
+
+/* destaque — deck com espiada */
+.fs-head{display:flex;gap:16px;align-items:center;margin-bottom:32px}
+.track{display:flex;gap:24px;transition:transform 1.1s cubic-bezier(.2,.7,.1,1)}
+.ds{flex:0 0 72%;opacity:.38;transition:opacity .8s;cursor:pointer}
+.ds .stage{aspect-ratio:16/9;transform:scale(.92);transform-origin:left bottom;transition:transform 1.1s cubic-bezier(.2,.7,.1,1)}
+.ds.on{opacity:1}
+.ds.on .stage{transform:none}
+.ds-cap{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding-top:24px}
+.ds-ttl{font-size:calc(.9 * clamp(48px,5vw,80px))}
+.prog{height:1px;background:#d6d6d6;position:relative;margin-top:36px}
+.prog b{position:absolute;left:0;top:-1px;height:3px;background:#111;transition:width .8s cubic-bezier(.2,.7,.1,1)}
+.arw{width:52px;height:52px;border-radius:50%;border:1px solid #111;background:#fff;color:#111;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:none;transition:background .4s,color .4s}
+.arw:hover{background:#111;color:#fff}
+
+/* filtros */
+.fbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid #111;border-bottom:1px solid #e3e3e3}
+.fbar-in{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.flts{display:flex;gap:30px;align-items:center;overflow-x:auto}
+.flt{background:none;border:0;padding:0;min-height:56px;font-size:16px;font-weight:450;color:#6b6b6b;cursor:pointer;display:inline-flex;align-items:center;gap:5px;position:relative;white-space:nowrap;transition:color .4s}
+.flt sup{font-size:10px;font-weight:500;font-feature-settings:'tnum';align-self:flex-start;margin-top:15px}
+.flt::after{content:'';position:absolute;left:0;right:0;bottom:14px;height:1px;background:#111;transform:scaleX(0);transform-origin:right;transition:transform .6s cubic-bezier(.2,.7,.1,1)}
+.flt:hover{color:#111}.flt:hover::after,.flt.is-active::after{transform:scaleX(1);transform-origin:left}
+.flt.is-active{color:#111;font-weight:650}
+
+/* cards */
+.proj{display:block;color:#111}
+.stage{position:relative;overflow:hidden;container-type:inline-size;display:flex;align-items:center;justify-content:center;background:#EFEFEF}
+.dev{position:relative;transition:transform 1.1s cubic-bezier(.2,.7,.1,1)}
+.proj:hover .dev{transform:translateY(-2%) scale(1.02)}
+.tag{position:absolute;color:#6b6b6b;z-index:3}
+.tr{right:18px;top:16px}
+.peek{position:absolute;left:50%;top:50%;z-index:6;transform:translate(-50%,-50%) scale(.85);opacity:0;background:#111;color:#fff;padding:14px 20px;border-radius:999px;transition:opacity .5s,transform .7s cubic-bezier(.2,.7,.1,1);display:inline-flex;gap:10px;align-items:center;pointer-events:none}
+.proj:hover .peek{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.ttl-line{background-image:linear-gradient(#111,#111);background-size:0% 1px;background-repeat:no-repeat;background-position:0 94%;transition:background-size .8s cubic-bezier(.2,.7,.1,1)}
+.proj:hover .ttl-line{background-size:100% 1px}
+.cta-c{width:48px;height:48px;border:1px solid #111;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none;transition:background .5s,color .5s}
+.cta-c svg{transition:transform .6s cubic-bezier(.2,.7,.1,1)}
+.proj:hover .cta-c{background:#111;color:#fff}
+.proj:hover .cta-c svg{transform:rotate(45deg)}
+.sub{display:flex;flex-direction:column;gap:14px;padding-top:22px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px;row-gap:clamp(56px,6vw,88px)}
+.cards .stage{aspect-ratio:1/1}
+.c-ttl{font-size:calc(.9 * clamp(36px,3.4vw,52px))}
+.more-row{display:flex;align-items:center;gap:24px;margin-top:clamp(80px,9vw,130px)}
+.more{background:#fff;border:1px solid #111;border-radius:999px;min-height:56px;padding:0 28px;font-size:15px;font-weight:500;color:#111;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background .4s,color .4s}
+.more sup{font-size:10px;align-self:flex-start;margin-top:16px}
+.more:hover{background:#111;color:#fff}
+
+@media (max-width: 1100px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width: 960px){
+.nav{display:none !important}
+.g12{grid-template-columns:1fr;row-gap:24px}
+.g12 > *{grid-column:1/-1 !important}
+.ds{flex-basis:86%}
+.ds-cap{flex-direction:column;align-items:flex-start}
+.fbar-in{flex-wrap:wrap;gap:0 16px;padding-bottom:8px}
+}
+@media (max-width: 640px){.cards{grid-template-columns:1fr}}
+@media (prefers-reduced-motion: reduce){.track,.ds,.ds .stage,.dev,.peek,.prog b,.ttl-line,.cta-c,.cta-c svg,.flt::after{transition:none}}
+</style>
+</head>
+<body>
+<div id="top">
+
+<div class="wrap">
+<header style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;gap:24px">
+<a href="#top" style="font-size:19px;font-weight:650;letter-spacing:-.03em">victornns_</a>
+<nav class="nav" aria-label="Principal" style="display:flex;gap:40px"><a href="#">Início</a><a href="#">Sobre</a><a href="#top" aria-current="page">Projetos</a><a href="#">Contato</a></nav>
+<span class="lbl muted">Senior Frontend Engineer</span>
+</header>
+</div>
+
+<section class="wrap" style="padding-top:clamp(48px,7vw,120px);padding-bottom:clamp(56px,6vw,96px)">
+<div class="g12" style="align-items:end;row-gap:20px">
+<h1 class="light" style="grid-column:1/9;margin:0;font-size:clamp(64px,10.4vw,156px);white-space:nowrap;display:flex;align-items:flex-start;gap:.08em">Projetos<sup class="lbl muted" style="font-size:12px;margin-top:1.1em;letter-spacing:.06em" id="total-count"></sup></h1>
+<p class="desc" style="grid-column:9/13;padding-bottom:12px">Websites, landing pages e aplicações web para marcas, bancos e produtos digitais.</p>
+</div>
+</section>
+
+<section id="destaque" aria-roledescription="carrossel" aria-label="Projetos em destaque" style="padding-bottom:clamp(72px,8vw,120px);overflow:hidden">
+<div class="wrap">
+<div class="fs-head">
+<span class="lbl">Em destaque</span><span class="rule"></span><span class="lbl muted" id="deck-count"></span>
+<button type="button" class="arw" aria-label="Destaque anterior" id="deck-prev"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M13 8H3M7 4 3 8l4 4"/></svg></button>
+<button type="button" class="arw" aria-label="Próximo destaque" id="deck-next"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+</div>
+<div class="track" id="deck-track"></div>
+<div class="prog" aria-hidden="true"><b id="deck-prog"></b></div>
+</div>
+</section>
+
+<div class="fbar">
+<div class="wrap fbar-in">
+<div class="flts" role="group" aria-label="Filtrar projetos por categoria" id="filters"></div>
+<span class="lbl muted" id="shown-count"></span>
+</div>
+</div>
+
+<main class="wrap" style="padding-top:clamp(56px,6vw,96px)">
+<div class="cards" id="cards"></div>
+<div id="more-area"></div>
+
+<section style="padding:clamp(120px,12vw,180px) 0 clamp(48px,5vw,72px);display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+<a href="mailto:[SEU EMAIL]" class="light" style="font-size:clamp(56px,8.4vw,128px);color:#0a0a0a">Vamos conversar ↗</a>
+<p class="desc" style="max-width:30ch">Tem um projeto em mente ou quer conhecer os detalhes técnicos de algum destes trabalhos? Escreva.</p>
+</section>
+</main>
+
+<footer class="wrap">
+<div class="lbl muted" style="display:flex;justify-content:space-between;gap:16px;padding:22px 0 28px;border-top:1px solid #111">
+<span>© 2026 victornns_</span>
+<a href="#top" style="color:#111">Voltar ao topo ↑</a>
+</div>
+</footer>
+</div>
+
+<script>
+(function () {
+  // ---------------------------------------------------------------
+  // DADOS — um projeto por linha:
+  // [nome, categoria (web | lp | app | own), ano, dispositivo (imac | laptop | browser | browserDark),
+  //  tela (hero | dash | product | mag | type), fundo, texto, destaque, secundária, img1, img2,
+  //  título da tela, url, tecnologias, descrição, cliente, logo do cliente (url de imagem ou '')]
+  // ---------------------------------------------------------------
+  var D = [
+      ['Site Institucional Atelier Morro', 'web', '2025', 'imac', 'hero', '#E6E1D7', '#1c1a17', '#5d564c', '#d3cab9', '#a89a83', '#3f382f', 'Casas que escutam o terreno.', 'atelier-morro.com', 'Next.js / GSAP / Sanity', 'Website institucional para um estúdio de arquitetura, com navegação guiada por imagem e transições contínuas.', 'Atelier Morro', ''],
+      ['Bradesco Empresas — Gestão Financeira', 'app', '2024', 'laptop', 'dash', '#0D0F12', '#EDEFF2', '#C6F24E', '#14171B', '#262B32', '#0D0F12', 'R$ 284.910', 'empresas.bradesco', 'React / TypeScript / D3', 'Plataforma de gestão financeira com dashboard em tempo real e design system próprio.', 'Bradesco', ''],
+      ['Lançamento Sérum Marés', 'lp', '2025', 'browser', 'product', '#D9E5E4', '#1F3A3C', '#86A5A7', '#EFEAE0', '#BFD3D4', '#86A5A7', 'Pele em maré baixa.', 'mares.com.br', 'Astro / Three.js / Lenis', 'Lançamento de skincare com produto 3D interativo e narrativa por scroll.', 'Marés Cosméticos', ''],
+      ['Revista Ordem', 'web', '2023', 'imac', 'mag', '#F6F4EF', '#141414', '#D7381E', '#cfccc4', '#3a3a3a', '#111111', 'O ruído como matéria-prima', 'ordem.pub', 'Nuxt / Storyblok / PWA', 'Revista digital de ensaios com tipografia variável responsiva e leitura offline.', 'Revista Ordem', ''],
+      ['Kiln', 'own', '2026', 'browserDark', 'type', '#0B0B0B', '#F2F2F2', '#FFFFFF', '#333333', '#333333', '#0B0B0B', 'Aa', 'kiln.dev', 'Svelte / WebGL', 'Laboratório open source para explorar fontes variáveis e exportar design tokens.', 'Autoral', ''],
+      ['Verso: Leitura Lenta', 'lp', '2024', 'browser', 'hero', '#1D3A2B', '#EDE6D6', '#EDE6D6', '#2b4d3b', '#C9BE9F', '#6f8f6a', 'Leia devagar. Lembre mais.', 'verso.app', 'Next.js / Framer Motion', 'Lançamento de um app de leitura lenta, com animações ligadas ao scroll.', 'Verso', ''],
+      ['Portal de Terminais Porto Cais', 'web', '2024', 'laptop', 'hero', '#F1EEE8', '#16222E', '#2D5A7B', '#dfe6ec', '#7d9bb3', '#2D5A7B', 'Logística costeira, sem atrito.', 'cais.log.br', 'Next.js / Contentful', 'Site corporativo para operadora portuária, com mapa interativo de terminais.', 'Porto Cais', ''],
+      ['Painel Clínico Pulso', 'app', '2025', 'imac', 'dash', '#F7F7F5', '#121212', '#FF5A36', '#ECECEA', '#dddddd', '#F7F7F5', '72 bpm', 'pulso.health', 'Next.js / WebSockets', 'Painel de monitoramento clínico em tempo real para equipes de enfermagem.', 'Pulso Saúde', ''],
+      ['Configurador de Luminárias Lume', 'lp', '2023', 'browser', 'product', '#F4E9DD', '#3B2416', '#C98A55', '#FBF4EC', '#E9C29A', '#C98A55', 'Luz que aquece a casa.', 'lume.design', 'Astro / GSAP', 'Luminárias artesanais com configurador de produto em tempo real.', 'Lume', ''],
+      ['Relatório Anual Norte Coop 2022', 'web', '2022', 'imac', 'mag', '#FFFFFF', '#0E0E0E', '#1F5BFF', '#d9dce3', '#1F5BFF', '#0E2A7A', 'Relatório anual interativo', 'nortecoop.org', 'Eleventy / D3', 'Relatório anual de uma cooperativa, com visualizações de dados acessíveis.', 'Norte Coop', ''],
+      ['Tátil', 'own', '2025', 'browserDark', 'type', '#111111', '#EDEDED', '#B8FF5C', '#2a2a2a', '#2a2a2a', '#111111', 'Tt', 'tatil.dev', 'Canvas / Web Audio', 'Experimento de tipografia que reage ao som, com Canvas e Web Audio.', 'Autoral', ''],
+      ['Bairro — Gestão de Pedidos', 'app', '2024', 'laptop', 'dash', '#FBFAF7', '#1A1A1A', '#2E8B57', '#EFEDE7', '#dddddd', '#FBFAF7', '1.284 pedidos', 'bairro.app', 'Vue / Pinia / Supabase', 'Gestão de estoque e pedidos online para mercados de bairro.', 'Bairro', ''],
+      ['Safra de Altitude 2023', 'lp', '2023', 'browser', 'hero', '#2A1418', '#F3E7DA', '#C79A6B', '#3a1e23', '#7a2e3a', '#2A1418', 'Safra de altitude.', 'serravinhos.com', 'Next.js / Shopify', 'Lançamento de safra com loja integrada e verificação de idade.', 'Serra Vinhos', ''],
+      ['Acervo Digital Arquivo Vivo', 'web', '2022', 'imac', 'hero', '#ECECEC', '#111111', '#111111', '#d0d0d0', '#9a9a9a', '#2b2b2b', 'Memória em movimento.', 'arquivovivo.org', 'Gatsby / Algolia', 'Acervo digital de fotografia com busca facetada e imagens em alta resolução.', 'Instituto Arquivo Vivo', ''],
+      ['Rota Log — Roteirização de Entregas', 'app', '2025', 'imac', 'dash', '#0F1A2B', '#E8EEF7', '#4DA3FF', '#16243A', '#16243A', '#0F1A2B', '342 entregas', 'rota.app', 'React / Mapbox / tRPC', 'Roteirização de entregas com mapas e rastreamento em tempo real.', 'Rota Log', ''],
+      ['Brisa Air', 'lp', '2024', 'browser', 'product', '#E9F1F7', '#13314A', '#4C8DBF', '#FFFFFF', '#A9CBE4', '#4C8DBF', 'Ar puro, em silêncio.', 'brisa.home', 'Astro / Three.js', 'Purificador de ar apresentado em 3D, com comparativos interativos.', 'Brisa', ''],
+      ['Tipo Studio', 'web', '2023', 'laptop', 'mag', '#F5F2EA', '#151515', '#151515', '#d6d1c4', '#8c8576', '#2a2721', 'Estudos de caso', 'tipo.studio', 'Next.js / MDX', 'Portfólio de estúdio de design com estudos de caso em formato editorial.', 'Tipo Studio', ''],
+      ['Rede Campo', 'web', '2021', 'imac', 'hero', '#EEF0E6', '#1F2A17', '#5E7A3A', '#dfe3d2', '#9db27a', '#3e5426', 'Agricultura regenerativa.', 'campo.agr.br', 'Next.js / WordPress', 'Site institucional para uma rede de agricultura regenerativa.', 'Rede Campo', ''],
+      ['Clube de Assinatura Grão', 'lp', '2022', 'browser', 'hero', '#1E1410', '#F0E3D3', '#D99A5B', '#2c1e18', '#8c5a36', '#3b2619', 'Café de origem, torra lenta.', 'grao.cafe', 'Astro / Stripe', 'Assinatura de cafés especiais com checkout em uma etapa.', 'Grão Café', ''],
+      ['Conta Digital Digimais', 'app', '2023', 'laptop', 'dash', '#FFFFFF', '#111111', '#6E56CF', '#F1F0F5', '#dddddd', '#FFFFFF', 'Conta aberta', 'digimais.com.br', 'React / React Query', 'Abertura de conta e onboarding digital, com validação de documentos em tempo real.', 'Banco Digimais', ''],
+      ['Mira Grid Generator', 'own', '2024', 'browser', 'hero', '#F2F2F2', '#0A0A0A', '#0A0A0A', '#E0E0E0', '#bdbdbd', '#3c3c3c', 'Grids para pensar.', 'mira.dev', 'TypeScript / CSS Grid', 'Ferramenta open source para gerar e testar grids editoriais em CSS.', 'Autoral', ''],
+      ['Oca — E-commerce de Mobiliário Autoral', 'web', '2024', 'imac', 'hero', '#E8DCCB', '#2B1D12', '#A4552C', '#d9c6ad', '#c08a5b', '#6b3b1f', 'Design brasileiro, feito à mão.', 'oca.design', 'Next.js / Sanity / Shopify', 'E-commerce editorial de mobiliário autoral brasileiro.', 'Oca', ''],
+      ['Clara FPS 50', 'lp', '2025', 'browser', 'product', '#FFF4F0', '#3A1F1A', '#E07A5F', '#FFE3D8', '#F4B5A2', '#E07A5F', 'Proteção que some na pele.', 'clara.co', 'Next.js / Framer Motion', 'Protetor solar com narrativa por scroll e teste de tom de pele.', 'Clara', ''],
+      ['Digimais — Painel de Observabilidade', 'app', '2026', 'imac', 'dash', '#0B0B0E', '#F2F2F5', '#9B8CFF', '#16161C', '#16161C', '#0B0B0E', '99,98% uptime', 'observa.digimais.com.br', 'SvelteKit / Grafana', 'Painel de observabilidade para times de infraestrutura e produto.', 'Banco Digimais', ''],
+      ['Fôlego Run Festival', 'lp', '2022', 'browser', 'hero', '#F6F1E7', '#202020', '#E24E1B', '#e9e0cf', '#E24E1B', '#7a2a10', 'Corra a cidade.', 'folego.run', 'Next.js / Mapbox', 'Festival de corrida urbana com percurso interativo.', 'Fôlego', '']
+    ];
+  var FEATURED = [1, 0, 23, 2, 3];   // índices (base 0) dos projetos em destaque
+  var PER_PAGE = 12;
+
+  var CAT = { web: 'Website', lp: 'Landing Page', app: 'Aplicação', own: 'Pessoal' };
+  var FILTERS = [['all', 'Todos'], ['web', 'Websites'], ['lp', 'Landing Pages'], ['app', 'Aplicações'], ['own', 'Projetos Pessoais']];
+  var ARROW = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg>';
+  var pad = function (n) { return n < 10 ? '0' + n : '' + n; };
+  var esc = function (v) { return String(v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+
+  var P = D.map(function (r, i) {
+    return {
+      n: pad(i + 1), name: r[0], k: r[1], cat: CAT[r[1]], year: r[2], tech: r[13], desc: r[14], client: r[15], logo: r[16],
+      mk: { dev: r[3], scr: r[4], bg: r[5], fg: r[6], ac: r[7], sub: r[8], i1: r[9], i2: r[10], head: r[11], url: r[12], brand: r[15] === 'Autoral' ? r[0] : r[15] }
+    };
+  });
+
+  // ---------- mockup de dispositivo ----------
+  function screen(it) {
+    var line = function (w, op) { return '<div style="height:.6cqw;border-radius:1cqw;background:currentColor;opacity:' + op + ';width:' + w + '"></div>'; };
+    if (it.scr === 'dash') {
+      var bars = [34, 48, 40, 58, 52, 66, 72, 80].map(function (h) { return '<span style="flex:1;height:' + h + '%;background:currentColor;opacity:.14"></span>'; }).join('')
+        + '<span style="flex:1;height:88%;background:' + it.ac + '"></span><span style="flex:1;height:96%;background:' + it.ac + '"></span>';
+      var card = '<div style="background:' + it.sub + ';border-radius:1cqw;height:6cqw"></div>';
+      return '<div style="position:absolute;inset:0;display:flex">'
+        + '<div style="width:18%;background:' + it.sub + ';padding:3cqw 2cqw;display:flex;flex-direction:column;gap:2.4cqw">'
+        + '<div style="display:flex;align-items:center;gap:1cqw;font-weight:700;font-size:1.8cqw;letter-spacing:-.02em;white-space:nowrap;overflow:hidden"><span style="width:2cqw;height:2cqw;border-radius:50%;flex:none;background:' + it.ac + '"></span>' + esc(it.brand) + '</div>'
+        + line('86%', .22) + line('64%', .12) + line('74%', .12) + line('52%', .12) + '</div>'
+        + '<div style="flex:1;padding:3cqw 3.4cqw;display:flex;flex-direction:column;gap:2.4cqw">'
+        + '<span style="font-size:1.6cqw;opacity:.55">Visão geral</span>'
+        + '<div style="font-size:5.4cqw;font-weight:600;letter-spacing:-.03em;line-height:1">' + esc(it.head) + '</div>'
+        + '<div style="flex:1;display:flex;align-items:flex-end;gap:1cqw;border-bottom:1px solid rgba(127,127,127,.3)">' + bars + '</div>'
+        + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.4cqw">' + card + card + card + '</div></div></div>';
+    }
+    if (it.scr === 'product') {
+      return '<div style="position:absolute;inset:0">'
+        + '<div style="position:absolute;left:5cqw;right:5cqw;top:4cqw;display:flex;justify-content:space-between;align-items:center"><span style="font-size:3cqw;font-weight:300;letter-spacing:-.03em">' + esc(it.brand) + '</span><span style="font-size:1.4cqw;letter-spacing:.14em;text-transform:uppercase;display:flex;gap:3cqw;opacity:.75"><span>Loja</span><span>Sobre</span><span>Sacola</span></span></div>'
+        + '<div style="position:absolute;width:44cqw;aspect-ratio:1/1;border-radius:50%;background:' + it.sub + ';left:50cqw;top:9cqw"></div>'
+        + '<div style="position:absolute;width:6cqw;height:5cqw;left:69cqw;top:15cqw;background:currentColor;border-radius:1cqw 1cqw .4cqw .4cqw"></div>'
+        + '<div style="position:absolute;width:10cqw;height:27cqw;left:67cqw;top:19.5cqw;background:linear-gradient(90deg,' + it.ac + ',' + it.i1 + ' 45%,' + it.ac + ');border-radius:2cqw 2cqw 1.6cqw 1.6cqw"></div>'
+        + '<div style="position:absolute;left:5cqw;top:19cqw;width:42cqw;font-size:6.6cqw;line-height:.92;font-weight:250;letter-spacing:-.04em;font-variation-settings:\'wdth\' 115">' + esc(it.head) + '</div>'
+        + '<span style="position:absolute;left:5cqw;bottom:6cqw;background:' + it.fg + ';color:' + it.bg + ';font-size:1.4cqw;letter-spacing:.14em;text-transform:uppercase;padding:1.6cqw 3cqw;border-radius:4cqw">Descobrir</span></div>';
+    }
+    if (it.scr === 'mag') {
+      var len = String(it.brand).length || 5;
+      var mast = Math.min(19, 86 / (len * 0.82)).toFixed(2) + 'cqw';
+      var ln = function (w, mt) { return '<div style="height:.55cqw;width:' + w + ';background:' + it.sub + ';margin-top:' + mt + '"></div>'; };
+      return '<div style="position:absolute;inset:0;padding:2.6cqw 3.4cqw;display:flex;flex-direction:column">'
+        + '<div style="display:flex;justify-content:space-between;font-size:1.2cqw;letter-spacing:.14em;text-transform:uppercase;opacity:.65"><span>Edição 12</span><span>Ensaios</span><span>Assinar</span></div>'
+        + '<div style="font-variation-settings:\'wdth\' 151,\'opsz\' 144;font-weight:900;font-size:' + mast + ';line-height:.8;color:' + it.ac + ';letter-spacing:-.05em;margin-top:1.6cqw;white-space:nowrap;text-transform:uppercase">' + esc(it.brand) + '</div>'
+        + '<div style="height:1px;background:currentColor;margin:1.8cqw 0"></div>'
+        + '<div style="display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:2.4cqw;flex:1">'
+        + '<div style="background:linear-gradient(160deg,' + it.i1 + ',' + it.i2 + ')"></div>'
+        + '<div><div style="font-size:2.8cqw;line-height:1;font-weight:600;letter-spacing:-.03em">' + esc(it.head) + '</div>' + ln('100%', '1.6cqw') + ln('92%', '.9cqw') + ln('70%', '.9cqw') + '</div>'
+        + '<div><div style="font-size:1.1cqw;color:' + it.ac + ';letter-spacing:.14em">DESTAQUE</div>' + ln('100%', '1.2cqw') + ln('88%', '.9cqw') + ln('60%', '.9cqw') + '</div>'
+        + '</div></div>';
+    }
+    if (it.scr === 'type') {
+      var sl = function (lab, w, v) { return '<div style="display:flex;align-items:center;gap:2cqw"><span style="width:7cqw;opacity:.6">' + lab + '</span><span style="flex:1;height:2px;background:' + it.sub + ';position:relative"><span style="position:absolute;left:0;top:0;bottom:0;width:' + w + ';background:' + it.ac + '"></span></span><span style="width:5cqw;text-align:right">' + v + '</span></div>'; };
+      return '<div style="position:absolute;inset:0">'
+        + '<div style="position:absolute;left:5cqw;right:5cqw;top:4cqw;display:flex;justify-content:space-between;font-size:1.5cqw;letter-spacing:.14em;text-transform:uppercase;opacity:.55"><span>' + esc(it.brand) + ' / lab</span><span>v0.4</span></div>'
+        + '<div style="position:absolute;left:4cqw;top:10cqw;font-variation-settings:\'wdth\' 25,\'opsz\' 144;font-weight:900;font-size:40cqw;line-height:.86;letter-spacing:-.04em">' + esc(it.head) + '</div>'
+        + '<div style="position:absolute;left:54cqw;right:5cqw;top:22cqw;display:flex;flex-direction:column;gap:4cqw;font-size:1.5cqw;letter-spacing:.12em">' + sl('WGHT', '86%', '900') + sl('WDTH', '12%', '25') + sl('OPSZ', '100%', '144') + '</div></div>';
+    }
+    // hero
+    return '<div style="position:absolute;inset:0;padding:3.2cqw 4cqw">'
+      + '<div style="display:flex;justify-content:space-between;font-size:1.3cqw;font-weight:500;letter-spacing:.14em;text-transform:uppercase"><span>' + esc(it.brand) + '</span><span style="display:flex;gap:3cqw;opacity:.7"><span>Início</span><span>Sobre</span><span>Contato</span></span></div>'
+      + '<div style="font-size:6.6cqw;line-height:.94;margin-top:7cqw;width:48%;font-weight:250;letter-spacing:-.045em">' + esc(it.head) + '</div>'
+      + '<div style="margin-top:3cqw;width:30%;display:flex;flex-direction:column;gap:1cqw;opacity:.2">' + line('100%', 1) + line('84%', 1) + line('62%', 1) + '</div>'
+      + '<div style="position:absolute;right:4cqw;top:10cqw;width:40%;display:grid;grid-template-columns:1fr 1fr;gap:1.2cqw">'
+      + '<div style="aspect-ratio:3/4;background:linear-gradient(170deg,' + it.i1 + ',' + it.i2 + ')"></div>'
+      + '<div style="aspect-ratio:3/4;margin-top:7cqw;background:linear-gradient(200deg,' + it.sub + ',' + it.i1 + ')"></div></div>'
+      + '<span style="position:absolute;left:4cqw;bottom:3.4cqw;padding:1.2cqw 2.6cqw;border-radius:4cqw;background:' + it.ac + ';color:' + it.bg + ';font-size:1.2cqw;letter-spacing:.12em;text-transform:uppercase">Explorar</span></div>';
+  }
+
+  function mockup(it) {
+    var d = it.dev, dark = d === 'browserDark', isBrowser = d === 'browser' || dark, fr;
+    if (d === 'imac') fr = { bg: 'linear-gradient(#efefed,#d8d8d5)', r: '2cqw', pad: '1.4cqw 1.4cqw 0', sh: '0 5cqw 8cqw -4cqw rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.06)', sb: '1cqw solid #0b0b0b', sr: '.7cqw', ratio: '16/9' };
+    else if (d === 'laptop') fr = { bg: '#141414', r: '2.2cqw 2.2cqw 0 0', pad: '2cqw 2cqw 2.8cqw', sh: 'inset 0 0 0 1px #2c2c2c', sb: '0', sr: '.4cqw', ratio: '16/10' };
+    else fr = { bg: dark ? '#0b0b0b' : '#fff', r: '1.6cqw', pad: '0', sh: '0 6cqw 10cqw -5cqw rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.08)', sb: '0', sr: '0', ratio: '16/10' };
+    var bar = dark ? { bg: '#1a1a1a', line: '#262626', dot: '#3a3a3a', pill: '#242424', fg: '#7a7a7a' } : { bg: '#f4f4f3', line: '#e4e4e2', dot: '#cfcfcd', pill: '#e8e8e6', fg: '#8a8a88' };
+    var dot = '<span style="width:1.4cqw;height:1.4cqw;border-radius:50%;background:' + bar.dot + '"></span>';
+    var h = '<div style="width:100%;container-type:inline-size;position:relative" aria-hidden="true">'
+      + '<div style="background:' + fr.bg + ';border-radius:' + fr.r + ';padding:' + fr.pad + ';box-shadow:' + fr.sh + ';overflow:hidden">';
+    if (isBrowser) h += '<div style="height:5.6cqw;display:flex;align-items:center;gap:1.2cqw;padding:0 2.6cqw;background:' + bar.bg + ';border-bottom:1px solid ' + bar.line + '">' + dot + dot + dot
+      + '<span style="flex:0 1 46%;margin:0 auto;height:3cqw;border-radius:3cqw;background:' + bar.pill + ';color:' + bar.fg + ';font-size:1.6cqw;display:flex;align-items:center;justify-content:center">' + esc(it.url) + '</span></div>';
+    h += '<div style="position:relative;aspect-ratio:' + fr.ratio + ';overflow:hidden;container-type:inline-size;border:' + fr.sb + ';border-radius:' + fr.sr + ';background:' + it.bg + ';color:' + it.fg + '">' + screen(it) + '</div>';
+    if (d === 'imac') h += '<div style="height:6cqw"></div>';
+    h += '</div>';
+    if (d === 'imac') h += '<div style="width:17%;height:10cqw;margin:0 auto;background:linear-gradient(90deg,#c4c4c1,#e8e8e5 50%,#c0c0bd);clip-path:polygon(9% 0,91% 0,100% 100%,0 100%)"></div><div style="width:30%;height:1.3cqw;margin:0 auto;background:#d0d0cd;border-radius:0 0 .8cqw .8cqw;box-shadow:0 2.2cqw 2.8cqw -1.1cqw rgba(0,0,0,.4)"></div>';
+    if (d === 'laptop') h += '<div style="height:2.4cqw;margin:0 -8%;background:linear-gradient(#e6e6e4,#b4b4b1);border-radius:0 0 4cqw 4cqw;box-shadow:0 4cqw 5cqw -2.6cqw rgba(0,0,0,.45)"></div>';
+    return h + '</div>';
+  }
+
+  function logoTile(p, extra) {
+    var inner = p.logo ? '<img src="' + esc(p.logo) + '" alt="' + esc(p.client) + '">' : '<span class="mk" aria-hidden="true"></span>' + esc(p.client);
+    return '<span class="logo-tile logo-abs ' + (extra || '') + '">' + inner + '</span>';
+  }
+
+  // ---------- destaque (deck com espiada) ----------
+  var DWS = { imac: '62%', laptop: '66%', browser: '60%', browserDark: '60%' };
+  var deckIdx = 0;
+  var track = document.getElementById('deck-track');
+  var slides = FEATURED.map(function (i) { return P[i]; });
+  track.innerHTML = slides.map(function (p, j) {
+    return '<a href="#destaque" class="proj ds" data-j="' + j + '">'
+      + '<div class="stage">' + logoTile(p, 'logo-lg') + '<span class="tag tr lbl">' + esc(p.cat) + ' · ' + p.year + '</span>'
+      + '<div class="dev" style="width:' + DWS[p.mk.dev] + ';margin-top:3%">' + mockup(p.mk) + '</div></div>'
+      + '<div class="ds-cap"><div style="display:flex;flex-direction:column;gap:12px;min-width:0"><h2 class="ttl ds-ttl">' + esc(p.name) + '</h2><span class="lbl muted">' + esc(p.tech) + '</span></div>'
+      + '<div style="display:flex;align-items:flex-end;gap:28px;flex:none"><p class="desc" style="max-width:34ch">' + esc(p.desc) + '</p><span class="cta-c" aria-hidden="true">' + ARROW + '</span></div></div></a>';
+  }).join('');
+  var slideEls = track.querySelectorAll('.ds');
+  function setDeck(k) {
+    var N = slides.length;
+    deckIdx = (k + N) % N;
+    track.style.transform = 'translateX(calc(' + (-deckIdx) + ' * (72% + 24px)))';
+    slideEls.forEach(function (el, j) {
+      var on = j === deckIdx, p = slides[j];
+      el.classList.toggle('on', on);
+      el.setAttribute('aria-label', p.name + ' — ' + p.client + (on ? '. Abrir projeto' : '. Mostrar este destaque'));
+    });
+    document.getElementById('deck-count').textContent = pad(deckIdx + 1) + ' / ' + pad(N);
+    document.getElementById('deck-prog').style.width = Math.round(((deckIdx + 1) / N) * 100) + '%';
+  }
+  track.addEventListener('click', function (e) {
+    var el = e.target.closest('.ds');
+    if (!el) return;
+    var j = +el.getAttribute('data-j');
+    if (j !== deckIdx) { e.preventDefault(); setDeck(j); }
+  });
+  document.getElementById('deck-prev').addEventListener('click', function () { setDeck(deckIdx - 1); });
+  document.getElementById('deck-next').addEventListener('click', function () { setDeck(deckIdx + 1); });
+  setDeck(0);
+
+  // ---------- filtros + grade ----------
+  var DW = { imac: '82%', laptop: '84%', browser: '80%', browserDark: '80%' };
+  var state = { f: 'all', lim: PER_PAGE };
+  var count = function (k) { return P.filter(function (p) { return k === 'all' || p.k === k; }).length; };
+
+  function renderFilters() {
+    document.getElementById('filters').innerHTML = FILTERS.map(function (f) {
+      var on = f[0] === state.f;
+      return '<button type="button" class="flt' + (on ? ' is-active' : '') + '" data-f="' + f[0] + '" aria-pressed="' + on + '">' + f[1] + '<sup>' + pad(count(f[0])) + '</sup></button>';
+    }).join('');
+  }
+
+  function renderCards() {
+    var list = P.filter(function (p) { return state.f === 'all' || p.k === state.f; });
+    var shown = list.slice(0, state.lim);
+    document.getElementById('cards').innerHTML = shown.map(function (p) {
+      return '<a href="#" class="proj" aria-label="' + esc(p.name + ' — ' + p.cat + ' para ' + p.client + '. Abrir detalhes do projeto') + '">'
+        + '<div class="stage">' + logoTile(p) + '<span class="tag tr lbl">' + p.n + ' / ' + pad(P.length) + '</span>'
+        + '<span class="peek lbl">Ver projeto ' + ARROW.replace(/16/g, '12') + '</span>'
+        + '<div class="dev" style="width:' + DW[p.mk.dev] + '">' + mockup(p.mk) + '</div></div>'
+        + '<div class="sub"><div class="idx lbl"><span>' + p.n + '</span><span class="rule"></span><span>' + esc(p.cat) + ' · ' + p.year + '</span></div>'
+        + '<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px"><h3 class="ttl c-ttl" style="padding-top:6px"><span class="ttl-line">' + esc(p.name) + '</span></h3><span class="cta-c" aria-hidden="true">' + ARROW + '</span></div>'
+        + '<p class="desc">' + esc(p.desc) + '</p><p class="tech lbl">' + esc(p.tech) + '</p></div></a>';
+    }).join('');
+    var rem = list.length - shown.length;
+    document.getElementById('more-area').innerHTML = rem > 0
+      ? '<div class="more-row"><span class="rule" style="background:#d6d6d6"></span><button type="button" class="more" id="more-btn">Mostrar mais projetos<sup>' + pad(rem) + '</sup></button><span class="rule" style="background:#d6d6d6"></span></div>'
+      : '<div class="idx lbl muted" style="margin-top:clamp(80px,9vw,130px)"><span>Fim do arquivo</span><span class="rule" style="background:#d6d6d6"></span><span>' + pad(shown.length) + ' / ' + pad(list.length) + '</span></div>';
+    document.getElementById('shown-count').textContent = 'Exibindo ' + pad(shown.length) + ' / ' + pad(list.length);
+  }
+
+  document.getElementById('filters').addEventListener('click', function (e) {
+    var b = e.target.closest('.flt');
+    if (!b) return;
+    state.f = b.getAttribute('data-f');
+    state.lim = PER_PAGE;
+    renderFilters();
+    renderCards();
+  });
+  document.getElementById('more-area').addEventListener('click', function (e) {
+    if (e.target.closest('#more-btn')) { state.lim += PER_PAGE; renderCards(); }
+  });
+
+  document.getElementById('total-count').textContent = '(' + pad(P.length) + ')';
+  renderFilters();
+  renderCards();
+})();
+</script>
+</body>
+</html>

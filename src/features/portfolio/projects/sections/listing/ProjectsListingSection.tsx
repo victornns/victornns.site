@@ -25,7 +25,8 @@ export function ProjectsListingSection({
       projects.tagLabels,
     ),
     labels: projects.listing,
-    designLabel: projects.labels.design,
+    categoryLabels: projects.categoryLabels,
+    viewProjectLabel: projects.labels.viewProject,
   };
 
   return (
